@@ -1,0 +1,600 @@
+fileFormatVersion: 2
+guid: b421674d1a067724c9464a08923df43b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1001678756804698886
+    second: coyote_part2_0
+  - first:
+      213: -7667102296809908807
+    second: coyote_part2_1
+  - first:
+      213: -4149824303863691561
+    second: coyote_part2_2
+  - first:
+      213: 6097444737529923509
+    second: coyote_part2_3
+  - first:
+      213: -569622868824310352
+    second: coyote_part2_4
+  - first:
+      213: -7980596413861604343
+    second: coyote_part2_5
+  - first:
+      213: 6503401117721430176
+    second: coyote_part2_6
+  - first:
+      213: -2732262335918224473
+    second: coyote_part2_7
+  - first:
+      213: -1618751905931242847
+    second: coyote_part2_8
+  - first:
+      213: -7556529916313512014
+    second: coyote_part2_9
+  - first:
+      213: 7275084402843200402
+    second: coyote_part2_10
+  - first:
+      213: 2403457962270067743
+    second: coyote_part2_11
+  - first:
+      213: -8246169113157176898
+    second: coyote_part2_12
+  - first:
+      213: -2019268950299100690
+    second: coyote_part2_13
+  - first:
+      213: 3632208039618908050
+    second: coyote_part2_14
+  - first:
+      213: -3373943302565292981
+    second: coyote_part2_15
+  - first:
+      213: -3183316774342006052
+    second: coyote_part2_16
+  - first:
+      213: -5865533507659716671
+    second: coyote_part2_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: coyote_part2_0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 248
+        width: 95
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afcd9915a725912f0800000000000000
+      internalID: -1001678756804698886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_part2_1
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 247
+        width: 95
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b55016451bf89590800000000000000
+      internalID: -7667102296809908807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_part2_2
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 247
+        width: 93
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d60ce748ccd866c0800000000000000
+      internalID: -4149824303863691561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_part2_3
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 245
+        width: 88
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b7cb02eea97e9450800000000000000
+      internalID: 6097444737529923509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_part2_4
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 247
+        width: 86
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bdb9cfc40b4818f0800000000000000
+      internalID: -569622868824310352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_part2_5
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 248
+        width: 91
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 904d50838d93f3190800000000000000
+      internalID: -7980596413861604343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_part2_6
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 133
+        width: 112
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a80aad2cd8b04a50800000000000000
+      internalID: 6503401117721430176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_part2_7
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 133
+        width: 111
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ab4a62b1ed051ad0800000000000000
+      internalID: -2732262335918224473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_part2_8
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 133
+        width: 111
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a25b73d7b90989e0800000000000000
+      internalID: -1618751905931242847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_part2_9
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 133
+        width: 112
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b7558bc310d12790800000000000000
+      internalID: -7556529916313512014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_part2_10
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 133
+        width: 111
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29b247628ba46f460800000000000000
+      internalID: 7275084402843200402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_part2_11
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 133
+        width: 110
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1c01b9584cca5120800000000000000
+      internalID: 2403457962270067743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_part2_12
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 9
+        width: 102
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb1f774b1e8bf8d80800000000000000
+      internalID: -8246169113157176898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_part2_13
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 9
+        width: 102
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee93277969d1af3e0800000000000000
+      internalID: -2019268950299100690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_part2_14
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 9
+        width: 102
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29f8dcfb7f1386230800000000000000
+      internalID: 3632208039618908050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_part2_15
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 8
+        width: 102
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b44994631785d21d0800000000000000
+      internalID: -3373943302565292981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_part2_16
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 9
+        width: 101
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cda6dc9724692d3d0800000000000000
+      internalID: -3183316774342006052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_part2_17
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 9
+        width: 101
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c7aac90a50799ea0800000000000000
+      internalID: -5865533507659716671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      coyote_part2_0: -1001678756804698886
+      coyote_part2_1: -7667102296809908807
+      coyote_part2_10: 7275084402843200402
+      coyote_part2_11: 2403457962270067743
+      coyote_part2_12: -8246169113157176898
+      coyote_part2_13: -2019268950299100690
+      coyote_part2_14: 3632208039618908050
+      coyote_part2_15: -3373943302565292981
+      coyote_part2_16: -3183316774342006052
+      coyote_part2_17: -5865533507659716671
+      coyote_part2_2: -4149824303863691561
+      coyote_part2_3: 6097444737529923509
+      coyote_part2_4: -569622868824310352
+      coyote_part2_5: -7980596413861604343
+      coyote_part2_6: 6503401117721430176
+      coyote_part2_7: -2732262335918224473
+      coyote_part2_8: -1618751905931242847
+      coyote_part2_9: -7556529916313512014
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

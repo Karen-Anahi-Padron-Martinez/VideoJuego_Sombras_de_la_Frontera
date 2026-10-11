@@ -1,0 +1,46 @@
+# ==========================================
+# Unity .gitignore para "Sombras de la Frontera"
+# ==========================================
+
+# Carpetas temporales y de compilación de Unity (en cualquier subdirectorio)
+**/[Ll]ibrary/
+**/[Tt]emp/
+**/[Oo]bj/
+**/[Bb]uild/
+**/[Bb]uilds/
+**/[Ll]ogs/
+**/[Uu]ser[Ss]ettings/
+**/[Mm]emoryCaptures/
+**/Recordings/
+
+# Archivos de soluciones de Visual Studio / JetBrains Rider / VS Code
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.opendb
+*.VC.db
+
+# Configuración local de IDEs
+.vscode/
+.vs/
+.idea/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Builds exportadas locales
+*.apk
+*.aab
+*.exe
+Build/
+Builds/

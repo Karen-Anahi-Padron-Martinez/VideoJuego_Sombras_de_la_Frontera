@@ -1,0 +1,652 @@
+fileFormatVersion: 2
+guid: bf82e5af65281fd408fcc99a914a1c51
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7282184207411668093
+    second: doberman_part1_0
+  - first:
+      213: -2346392559985846048
+    second: doberman_part1_1
+  - first:
+      213: -3342509521807850103
+    second: doberman_part1_2
+  - first:
+      213: -8352564426199724992
+    second: doberman_part1_3
+  - first:
+      213: 1312864955447157011
+    second: doberman_part1_4
+  - first:
+      213: 7377078169082434418
+    second: doberman_part1_5
+  - first:
+      213: -1836683995240090494
+    second: doberman_part1_6
+  - first:
+      213: 7289562405723460675
+    second: doberman_part1_7
+  - first:
+      213: 9009908328464619635
+    second: doberman_part1_8
+  - first:
+      213: -857900335230067880
+    second: doberman_part1_9
+  - first:
+      213: 8570094834619475275
+    second: doberman_part1_10
+  - first:
+      213: -4739891799310724158
+    second: doberman_part1_11
+  - first:
+      213: -2303688849076168458
+    second: doberman_part1_12
+  - first:
+      213: -3306469568205971123
+    second: doberman_part1_13
+  - first:
+      213: 6388267053653673148
+    second: doberman_part1_14
+  - first:
+      213: 115032157039387626
+    second: doberman_part1_15
+  - first:
+      213: 3279664924806971674
+    second: doberman_part1_16
+  - first:
+      213: 6701407898308071771
+    second: doberman_part1_17
+  - first:
+      213: 4751405669262850281
+    second: doberman_part1_18
+  - first:
+      213: 2144239356484039894
+    second: doberman_part1_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: doberman_part1_0
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 267
+        width: 102
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38b9448cb0c70fa90800000000000000
+      internalID: -7282184207411668093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doberman_part1_1
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 267
+        width: 109
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e89c6ef560ff6fd0800000000000000
+      internalID: -2346392559985846048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doberman_part1_2
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 267
+        width: 109
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 985484e9c450d91d0800000000000000
+      internalID: -3342509521807850103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doberman_part1_3
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 267
+        width: 108
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04c0dcc78eab51c80800000000000000
+      internalID: -8352564426199724992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doberman_part1_4
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 267
+        width: 102
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 311ac7b98bb383210800000000000000
+      internalID: 1312864955447157011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doberman_part1_5
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 267
+        width: 106
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27392746285a06660800000000000000
+      internalID: 7377078169082434418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doberman_part1_6
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 133
+        width: 110
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 284b11333a9c286e0800000000000000
+      internalID: -1836683995240090494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doberman_part1_7
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 133
+        width: 112
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3445031e26ab92560800000000000000
+      internalID: 7289562405723460675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doberman_part1_8
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 133
+        width: 111
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37897f063ef990d70800000000000000
+      internalID: 9009908328464619635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doberman_part1_9
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 133
+        width: 109
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85b5ce1c0302814f0800000000000000
+      internalID: -857900335230067880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doberman_part1_10
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 133
+        width: 107
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4567e488d71fe670800000000000000
+      internalID: 8570094834619475275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doberman_part1_11
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 133
+        width: 109
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c31c448585883eb0800000000000000
+      internalID: -4739891799310724158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doberman_part1_12
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 4
+        width: 102
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f859cd7237a700e0800000000000000
+      internalID: -2303688849076168458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doberman_part1_13
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 4
+        width: 102
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d41a176327f0d12d0800000000000000
+      internalID: -3306469568205971123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doberman_part1_14
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 4
+        width: 103
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb4cb5fe90fa7a850800000000000000
+      internalID: 6388267053653673148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doberman_part1_15
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 4
+        width: 102
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae3641a232da89100800000000000000
+      internalID: 115032157039387626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doberman_part1_16
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 89
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a118d696fd5b38d20800000000000000
+      internalID: 3279664924806971674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doberman_part1_17
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 84
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5156a95afe200d50800000000000000
+      internalID: 6701407898308071771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doberman_part1_18
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 4
+        width: 103
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e8703c384260f140800000000000000
+      internalID: 4751405669262850281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doberman_part1_19
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 4
+        width: 102
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d4b4a4855ed1cd10800000000000000
+      internalID: 2144239356484039894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      doberman_part1_0: -7282184207411668093
+      doberman_part1_1: -2346392559985846048
+      doberman_part1_10: 8570094834619475275
+      doberman_part1_11: -4739891799310724158
+      doberman_part1_12: -2303688849076168458
+      doberman_part1_13: -3306469568205971123
+      doberman_part1_14: 6388267053653673148
+      doberman_part1_15: 115032157039387626
+      doberman_part1_16: 3279664924806971674
+      doberman_part1_17: 6701407898308071771
+      doberman_part1_18: 4751405669262850281
+      doberman_part1_19: 2144239356484039894
+      doberman_part1_2: -3342509521807850103
+      doberman_part1_3: -8352564426199724992
+      doberman_part1_4: 1312864955447157011
+      doberman_part1_5: 7377078169082434418
+      doberman_part1_6: -1836683995240090494
+      doberman_part1_7: 7289562405723460675
+      doberman_part1_8: 9009908328464619635
+      doberman_part1_9: -857900335230067880
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,1042 @@
+fileFormatVersion: 2
+guid: e43a8bf489d95d548afc05238c314df6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2835336405490464893
+    second: rottweiler_part2_0
+  - first:
+      213: 269832731172551710
+    second: rottweiler_part2_1
+  - first:
+      213: 4185611217186165812
+    second: rottweiler_part2_2
+  - first:
+      213: -2940567686581517196
+    second: rottweiler_part2_3
+  - first:
+      213: 629217127859800979
+    second: rottweiler_part2_4
+  - first:
+      213: 1573395582912403189
+    second: rottweiler_part2_5
+  - first:
+      213: -6947670739218129221
+    second: rottweiler_part2_6
+  - first:
+      213: -2849913421173731545
+    second: rottweiler_part2_7
+  - first:
+      213: -2237276063955432737
+    second: rottweiler_part2_8
+  - first:
+      213: -8455386972428404256
+    second: rottweiler_part2_9
+  - first:
+      213: -4881992845692589033
+    second: rottweiler_part2_10
+  - first:
+      213: 8863456951109287808
+    second: rottweiler_part2_11
+  - first:
+      213: -1307431553769382331
+    second: rottweiler_part2_12
+  - first:
+      213: -728063561661301138
+    second: rottweiler_part2_13
+  - first:
+      213: -5943963584057285452
+    second: rottweiler_part2_14
+  - first:
+      213: 2957973680509851806
+    second: rottweiler_part2_15
+  - first:
+      213: -4410194631437985516
+    second: rottweiler_part2_16
+  - first:
+      213: 4839860787484747894
+    second: rottweiler_part2_17
+  - first:
+      213: 5015405124163117651
+    second: rottweiler_part2_18
+  - first:
+      213: 2676837714262591545
+    second: rottweiler_part2_19
+  - first:
+      213: -2869398960233921171
+    second: rottweiler_part2_20
+  - first:
+      213: -2136458385246317747
+    second: rottweiler_part2_21
+  - first:
+      213: 459910352902526702
+    second: rottweiler_part2_22
+  - first:
+      213: -3222309181194383144
+    second: rottweiler_part2_23
+  - first:
+      213: 2871044282728294891
+    second: rottweiler_part2_24
+  - first:
+      213: 458561792536430175
+    second: rottweiler_part2_25
+  - first:
+      213: -700906033421452723
+    second: rottweiler_part2_26
+  - first:
+      213: 2847465744665753889
+    second: rottweiler_part2_27
+  - first:
+      213: -2441164520824425181
+    second: rottweiler_part2_28
+  - first:
+      213: -826706990704318672
+    second: rottweiler_part2_29
+  - first:
+      213: 4995835268710668460
+    second: rottweiler_part2_30
+  - first:
+      213: -5873181918950884296
+    second: rottweiler_part2_31
+  - first:
+      213: -5216442570990766653
+    second: rottweiler_part2_32
+  - first:
+      213: -8572837297532026472
+    second: rottweiler_part2_33
+  - first:
+      213: -7485022312662473871
+    second: rottweiler_part2_34
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: rottweiler_part2_0
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 257
+        width: 94
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 387020cbf8cd6a8d0800000000000000
+      internalID: -2835336405490464893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_1
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 351
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1c305a7073aeb300800000000000000
+      internalID: 269832731172551710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_2
+      rect:
+        serializedVersion: 2
+        x: 526
+        y: 342
+        width: 32
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4349548c937461a30800000000000000
+      internalID: 4185611217186165812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_3
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 257
+        width: 105
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4740153d4410137d0800000000000000
+      internalID: -2940567686581517196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_4
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 257
+        width: 102
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39bcca0e4ad6bb800800000000000000
+      internalID: 629217127859800979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_5
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 257
+        width: 96
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f699aa42f2d5d510800000000000000
+      internalID: 1573395582912403189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_6
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 340
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbe1784e54ae49f90800000000000000
+      internalID: -6947670739218129221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_7
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 335
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72f425ac7d21378d0800000000000000
+      internalID: -2849913421173731545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_8
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 257
+        width: 105
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdac37ff54993f0e0800000000000000
+      internalID: -2237276063955432737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_9
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 257
+        width: 106
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e970fdd85e68aa80800000000000000
+      internalID: -8455386972428404256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_10
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 327
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71cae7c6f5daf3cb0800000000000000
+      internalID: -4881992845692589033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_11
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 133
+        width: 110
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08ff5dce223510b70800000000000000
+      internalID: 8863456951109287808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_12
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 133
+        width: 109
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54e507dcde11bdde0800000000000000
+      internalID: -1307431553769382331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_13
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 133
+        width: 109
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6eb5415c0665e5f0800000000000000
+      internalID: -728063561661301138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_14
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 133
+        width: 109
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b4686edc9cc28da0800000000000000
+      internalID: -5943963584057285452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_15
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 133
+        width: 111
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e989eb1f365dc0920800000000000000
+      internalID: 2957973680509851806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_16
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 133
+        width: 109
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 419ddc25957dbc2c0800000000000000
+      internalID: -4410194631437985516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_17
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 61
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 678ee585eb3aa2340800000000000000
+      internalID: 4839860787484747894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_18
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 72
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 352aa6e336c4a9540800000000000000
+      internalID: 5015405124163117651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_19
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 62
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9388df7f7b9062520800000000000000
+      internalID: 2676837714262591545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_20
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 72
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d65c16039d8dd28d0800000000000000
+      internalID: -2869398960233921171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_21
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 61
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d431df50b66c952e0800000000000000
+      internalID: -2136458385246317747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_22
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 71
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee6974d770ee16600800000000000000
+      internalID: 459910352902526702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_23
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 61
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d0dd6a4fde0843d0800000000000000
+      internalID: -3222309181194383144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_24
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 72
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be9af6e409ff7d720800000000000000
+      internalID: 2871044282728294891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_25
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 61
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5643bf45832d5600800000000000000
+      internalID: 458561792536430175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_26
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 71
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4a7cf81da1e546f0800000000000000
+      internalID: -700906033421452723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_27
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 61
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12935ec120b348720800000000000000
+      internalID: 2847465744665753889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_28
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 72
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32539f95dcd3f1ed0800000000000000
+      internalID: -2441164520824425181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_29
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 12
+        width: 105
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 037acbd3f52f684f0800000000000000
+      internalID: -826706990704318672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_30
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 12
+        width: 103
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca81ed335b5c45540800000000000000
+      internalID: 4995835268710668460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_31
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 12
+        width: 103
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83c7fa389244e7ea0800000000000000
+      internalID: -5873181918950884296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_32
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 12
+        width: 105
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c5bedc9e197b97b0800000000000000
+      internalID: -5216442570990766653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_33
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 12
+        width: 103
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 891426316e9270980800000000000000
+      internalID: -8572837297532026472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rottweiler_part2_34
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 12
+        width: 104
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17361ed2ddbdf1890800000000000000
+      internalID: -7485022312662473871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      rottweiler_part2_0: -2835336405490464893
+      rottweiler_part2_1: 269832731172551710
+      rottweiler_part2_10: -4881992845692589033
+      rottweiler_part2_11: 8863456951109287808
+      rottweiler_part2_12: -1307431553769382331
+      rottweiler_part2_13: -728063561661301138
+      rottweiler_part2_14: -5943963584057285452
+      rottweiler_part2_15: 2957973680509851806
+      rottweiler_part2_16: -4410194631437985516
+      rottweiler_part2_17: 4839860787484747894
+      rottweiler_part2_18: 5015405124163117651
+      rottweiler_part2_19: 2676837714262591545
+      rottweiler_part2_2: 4185611217186165812
+      rottweiler_part2_20: -2869398960233921171
+      rottweiler_part2_21: -2136458385246317747
+      rottweiler_part2_22: 459910352902526702
+      rottweiler_part2_23: -3222309181194383144
+      rottweiler_part2_24: 2871044282728294891
+      rottweiler_part2_25: 458561792536430175
+      rottweiler_part2_26: -700906033421452723
+      rottweiler_part2_27: 2847465744665753889
+      rottweiler_part2_28: -2441164520824425181
+      rottweiler_part2_29: -826706990704318672
+      rottweiler_part2_3: -2940567686581517196
+      rottweiler_part2_30: 4995835268710668460
+      rottweiler_part2_31: -5873181918950884296
+      rottweiler_part2_32: -5216442570990766653
+      rottweiler_part2_33: -8572837297532026472
+      rottweiler_part2_34: -7485022312662473871
+      rottweiler_part2_4: 629217127859800979
+      rottweiler_part2_5: 1573395582912403189
+      rottweiler_part2_6: -6947670739218129221
+      rottweiler_part2_7: -2849913421173731545
+      rottweiler_part2_8: -2237276063955432737
+      rottweiler_part2_9: -8455386972428404256
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

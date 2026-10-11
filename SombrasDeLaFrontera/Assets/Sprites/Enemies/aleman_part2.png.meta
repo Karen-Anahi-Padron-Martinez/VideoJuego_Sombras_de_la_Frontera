@@ -1,0 +1,1016 @@
+fileFormatVersion: 2
+guid: d1cfb3b774af13f42b17eef037d23764
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 579745544002902856
+    second: aleman_part2_0
+  - first:
+      213: 5847334180924474462
+    second: aleman_part2_1
+  - first:
+      213: -1021690419256821526
+    second: aleman_part2_2
+  - first:
+      213: 1153709156009429596
+    second: aleman_part2_3
+  - first:
+      213: 1882293150168318659
+    second: aleman_part2_4
+  - first:
+      213: 4076091409922315975
+    second: aleman_part2_5
+  - first:
+      213: 5396816527238957693
+    second: aleman_part2_6
+  - first:
+      213: -7080063398522629783
+    second: aleman_part2_7
+  - first:
+      213: -592008945235832929
+    second: aleman_part2_8
+  - first:
+      213: 2702844636068677277
+    second: aleman_part2_9
+  - first:
+      213: 4625787520998051465
+    second: aleman_part2_10
+  - first:
+      213: -9003995915605815344
+    second: aleman_part2_11
+  - first:
+      213: 263322338579063178
+    second: aleman_part2_12
+  - first:
+      213: 5126994221591119238
+    second: aleman_part2_13
+  - first:
+      213: -1942176549339279422
+    second: aleman_part2_14
+  - first:
+      213: -4017619143854762944
+    second: aleman_part2_15
+  - first:
+      213: -4173334530818864057
+    second: aleman_part2_16
+  - first:
+      213: -1378702088217844084
+    second: aleman_part2_17
+  - first:
+      213: 6915946908327832120
+    second: aleman_part2_18
+  - first:
+      213: -1688834346756397202
+    second: aleman_part2_19
+  - first:
+      213: 6750193551154067350
+    second: aleman_part2_20
+  - first:
+      213: 914104829235519563
+    second: aleman_part2_21
+  - first:
+      213: -617790432767421726
+    second: aleman_part2_22
+  - first:
+      213: 6645739667320821765
+    second: aleman_part2_23
+  - first:
+      213: 1526078125680728292
+    second: aleman_part2_24
+  - first:
+      213: -9063661250131095182
+    second: aleman_part2_25
+  - first:
+      213: 5588668042942157542
+    second: aleman_part2_26
+  - first:
+      213: -3008062981825426982
+    second: aleman_part2_27
+  - first:
+      213: 150119786946779536
+    second: aleman_part2_28
+  - first:
+      213: -17603132685756235
+    second: aleman_part2_29
+  - first:
+      213: 3158975864239896078
+    second: aleman_part2_30
+  - first:
+      213: 5642539557781427254
+    second: aleman_part2_31
+  - first:
+      213: -8838723556735814724
+    second: aleman_part2_32
+  - first:
+      213: -835981472243359899
+    second: aleman_part2_33
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: aleman_part2_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 257
+        width: 109
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84b986a208bab0800800000000000000
+      internalID: 579745544002902856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_1
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 257
+        width: 108
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e54c0010577e52150800000000000000
+      internalID: 5847334180924474462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_2
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 257
+        width: 105
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae8f6c11af932d1f0800000000000000
+      internalID: -1021690419256821526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_3
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 257
+        width: 107
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5ace026d5cc20010800000000000000
+      internalID: 1153709156009429596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_4
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 349
+        width: 35
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c20fe2b5af3f1a10800000000000000
+      internalID: 1882293150168318659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_5
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 257
+        width: 109
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c6d0709a8f219830800000000000000
+      internalID: 4076091409922315975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_6
+      rect:
+        serializedVersion: 2
+        x: 526
+        y: 342
+        width: 32
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7a0908b90855ea40800000000000000
+      internalID: 5396816527238957693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_7
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 257
+        width: 109
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96150dfc9df8ebd90800000000000000
+      internalID: -7080063398522629783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_8
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 335
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9f4d5b3003c8c7f0800000000000000
+      internalID: -592008945235832929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_9
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 326
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9681ff40ee628520800000000000000
+      internalID: 2702844636068677277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 133
+        width: 111
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98e068bed39123040800000000000000
+      internalID: 4625787520998051465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_11
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 133
+        width: 114
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0df4f338b616b0380800000000000000
+      internalID: -9003995915605815344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_12
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 133
+        width: 113
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a812e64954287a300800000000000000
+      internalID: 263322338579063178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_13
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 133
+        width: 112
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6854b6f941eb62740800000000000000
+      internalID: 5126994221591119238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_14
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 133
+        width: 115
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cfc98de7b00c05e0800000000000000
+      internalID: -1942176549339279422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_15
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 133
+        width: 112
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0445ab7ccac8e38c0800000000000000
+      internalID: -4017619143854762944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_16
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 61
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74c8ba10b565516c0800000000000000
+      internalID: -4173334530818864057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_17
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 71
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c86afa461cddddce0800000000000000
+      internalID: -1378702088217844084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_18
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 61
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83a675422116aff50800000000000000
+      internalID: 6915946908327832120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_19
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 72
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e672b150c1e0098e0800000000000000
+      internalID: -1688834346756397202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_20
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 61
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 697bbad45418dad50800000000000000
+      internalID: 6750193551154067350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_21
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 71
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b406d02cf7d8fac00800000000000000
+      internalID: 914104829235519563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_22
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 61
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e25345efda2d67f0800000000000000
+      internalID: -617790432767421726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_23
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 71
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 508516c44096a3c50800000000000000
+      internalID: 6645739667320821765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_24
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 61
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e891b448f7bd2510800000000000000
+      internalID: 1526078125680728292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_25
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 71
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27196754d18673280800000000000000
+      internalID: -9063661250131095182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_26
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 61
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e2152b99ffee8d40800000000000000
+      internalID: 5588668042942157542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_27
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 71
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad90b4ac7a63146d0800000000000000
+      internalID: -3008062981825426982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_28
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 9
+        width: 107
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09958be9625551200800000000000000
+      internalID: 150119786946779536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_29
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 9
+        width: 106
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b8d4594b0671cff0800000000000000
+      internalID: -17603132685756235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_30
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 9
+        width: 107
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e063d02cfcfe6db20800000000000000
+      internalID: 3158975864239896078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_31
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 9
+        width: 107
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 634d6a415d35e4e40800000000000000
+      internalID: 5642539557781427254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_32
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 9
+        width: 107
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb372e431cb865580800000000000000
+      internalID: -8838723556735814724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aleman_part2_33
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 9
+        width: 107
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56f502cb74ff564f0800000000000000
+      internalID: -835981472243359899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      aleman_part2_0: 579745544002902856
+      aleman_part2_1: 5847334180924474462
+      aleman_part2_10: 4625787520998051465
+      aleman_part2_11: -9003995915605815344
+      aleman_part2_12: 263322338579063178
+      aleman_part2_13: 5126994221591119238
+      aleman_part2_14: -1942176549339279422
+      aleman_part2_15: -4017619143854762944
+      aleman_part2_16: -4173334530818864057
+      aleman_part2_17: -1378702088217844084
+      aleman_part2_18: 6915946908327832120
+      aleman_part2_19: -1688834346756397202
+      aleman_part2_2: -1021690419256821526
+      aleman_part2_20: 6750193551154067350
+      aleman_part2_21: 914104829235519563
+      aleman_part2_22: -617790432767421726
+      aleman_part2_23: 6645739667320821765
+      aleman_part2_24: 1526078125680728292
+      aleman_part2_25: -9063661250131095182
+      aleman_part2_26: 5588668042942157542
+      aleman_part2_27: -3008062981825426982
+      aleman_part2_28: 150119786946779536
+      aleman_part2_29: -17603132685756235
+      aleman_part2_3: 1153709156009429596
+      aleman_part2_30: 3158975864239896078
+      aleman_part2_31: 5642539557781427254
+      aleman_part2_32: -8838723556735814724
+      aleman_part2_33: -835981472243359899
+      aleman_part2_4: 1882293150168318659
+      aleman_part2_5: 4076091409922315975
+      aleman_part2_6: 5396816527238957693
+      aleman_part2_7: -7080063398522629783
+      aleman_part2_8: -592008945235832929
+      aleman_part2_9: 2702844636068677277
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

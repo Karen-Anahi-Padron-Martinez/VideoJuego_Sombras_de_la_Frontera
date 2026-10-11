@@ -1,0 +1,938 @@
+fileFormatVersion: 2
+guid: 9841faaeb52fa764ca054b3a1300c5aa
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1139846371217010326
+    second: bulldog_part2_0
+  - first:
+      213: -508376177194174316
+    second: bulldog_part2_1
+  - first:
+      213: -2612905451224288597
+    second: bulldog_part2_2
+  - first:
+      213: 9049759786500470291
+    second: bulldog_part2_3
+  - first:
+      213: 3062357296110819352
+    second: bulldog_part2_4
+  - first:
+      213: -6108816105226356337
+    second: bulldog_part2_5
+  - first:
+      213: 4358120938455726783
+    second: bulldog_part2_6
+  - first:
+      213: 3987701897756988178
+    second: bulldog_part2_7
+  - first:
+      213: 7933000539749243479
+    second: bulldog_part2_8
+  - first:
+      213: -514347887568673487
+    second: bulldog_part2_9
+  - first:
+      213: -8523421210429122639
+    second: bulldog_part2_10
+  - first:
+      213: 2436874823645008564
+    second: bulldog_part2_11
+  - first:
+      213: 492782593427542587
+    second: bulldog_part2_12
+  - first:
+      213: 4144062169172081823
+    second: bulldog_part2_13
+  - first:
+      213: -4737971691863281814
+    second: bulldog_part2_14
+  - first:
+      213: 5856191316811718405
+    second: bulldog_part2_15
+  - first:
+      213: -4515030059420216911
+    second: bulldog_part2_16
+  - first:
+      213: 9111935271139288568
+    second: bulldog_part2_17
+  - first:
+      213: 8812458097825922269
+    second: bulldog_part2_18
+  - first:
+      213: -6730717304990118180
+    second: bulldog_part2_19
+  - first:
+      213: 832325044664789320
+    second: bulldog_part2_20
+  - first:
+      213: 4609874328832606254
+    second: bulldog_part2_21
+  - first:
+      213: 5082406882078800632
+    second: bulldog_part2_22
+  - first:
+      213: -5145533523554663864
+    second: bulldog_part2_23
+  - first:
+      213: 8488800670209754408
+    second: bulldog_part2_24
+  - first:
+      213: -7731557251374674379
+    second: bulldog_part2_25
+  - first:
+      213: 6948584356573546568
+    second: bulldog_part2_26
+  - first:
+      213: 4956231126848180962
+    second: bulldog_part2_27
+  - first:
+      213: -8619900186798460885
+    second: bulldog_part2_28
+  - first:
+      213: 2771751853385462356
+    second: bulldog_part2_29
+  - first:
+      213: -8915450190546815082
+    second: bulldog_part2_30
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bulldog_part2_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 273
+        width: 111
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69e68e64c3c81df00800000000000000
+      internalID: 1139846371217010326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_1
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 273
+        width: 106
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 498f1127f82e1f8f0800000000000000
+      internalID: -508376177194174316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_2
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 273
+        width: 103
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba2381cf5581dbbd0800000000000000
+      internalID: -2612905451224288597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_3
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 273
+        width: 117
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 316b9f00494379d70800000000000000
+      internalID: 9049759786500470291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_4
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 365
+        width: 34
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 818d20a5cbdaf7a20800000000000000
+      internalID: 3062357296110819352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_5
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 273
+        width: 111
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f893cc14e10293ba0800000000000000
+      internalID: -6108816105226356337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_6
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 273
+        width: 110
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fba78d837e72b7c30800000000000000
+      internalID: 4358120938455726783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_7
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 143
+        width: 116
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 213d4fd8fb9275730800000000000000
+      internalID: 3987701897756988178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_8
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 143
+        width: 116
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75a5cb6c5fda71e60800000000000000
+      internalID: 7933000539749243479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_9
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 143
+        width: 115
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1352f76425bacd8f0800000000000000
+      internalID: -514347887568673487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_10
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 142
+        width: 115
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b797517199b6b980800000000000000
+      internalID: -8523421210429122639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_11
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 142
+        width: 116
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b21471bdb481d120800000000000000
+      internalID: 2436874823645008564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_12
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 143
+        width: 115
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b329eb86827b6d600800000000000000
+      internalID: 492782593427542587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_13
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 67
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9cf2a0369aa28930800000000000000
+      internalID: 4144062169172081823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_14
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 76
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6fe1ae59d75f3eb0800000000000000
+      internalID: -4737971691863281814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_15
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 66
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50f1a47a9fe554150800000000000000
+      internalID: 5856191316811718405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_16
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 76
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b11c0625146751c0800000000000000
+      internalID: -4515030059420216911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_17
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 66
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f52c9c1ad8147e70800000000000000
+      internalID: 9111935271139288568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_18
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 77
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddcbde613f32c4a70800000000000000
+      internalID: 8812458097825922269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_19
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 66
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cde4d70a540b792a0800000000000000
+      internalID: -6730717304990118180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_20
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 77
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 849e7e0e7330d8b00800000000000000
+      internalID: 832325044664789320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_21
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 66
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e208245274099ff30800000000000000
+      internalID: 4609874328832606254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_22
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 76
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fabe4aa126588640800000000000000
+      internalID: 5082406882078800632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_23
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 66
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84209a4c5846798b0800000000000000
+      internalID: -5145533523554663864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_24
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 76
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82543f4eb374ec570800000000000000
+      internalID: 8488800670209754408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_25
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 14
+        width: 111
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53e8737b4adf3b490800000000000000
+      internalID: -7731557251374674379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_26
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 14
+        width: 111
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 848076938a45e6060800000000000000
+      internalID: 6948584356573546568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_27
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 14
+        width: 111
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e2158c53f118c440800000000000000
+      internalID: 4956231126848180962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_28
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 14
+        width: 109
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b20fd864376ff5880800000000000000
+      internalID: -8619900186798460885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_29
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 14
+        width: 110
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 452329210ad377620800000000000000
+      internalID: 2771751853385462356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bulldog_part2_30
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 14
+        width: 111
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 697b4cba945f54480800000000000000
+      internalID: -8915450190546815082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bulldog_part2_0: 1139846371217010326
+      bulldog_part2_1: -508376177194174316
+      bulldog_part2_10: -8523421210429122639
+      bulldog_part2_11: 2436874823645008564
+      bulldog_part2_12: 492782593427542587
+      bulldog_part2_13: 4144062169172081823
+      bulldog_part2_14: -4737971691863281814
+      bulldog_part2_15: 5856191316811718405
+      bulldog_part2_16: -4515030059420216911
+      bulldog_part2_17: 9111935271139288568
+      bulldog_part2_18: 8812458097825922269
+      bulldog_part2_19: -6730717304990118180
+      bulldog_part2_2: -2612905451224288597
+      bulldog_part2_20: 832325044664789320
+      bulldog_part2_21: 4609874328832606254
+      bulldog_part2_22: 5082406882078800632
+      bulldog_part2_23: -5145533523554663864
+      bulldog_part2_24: 8488800670209754408
+      bulldog_part2_25: -7731557251374674379
+      bulldog_part2_26: 6948584356573546568
+      bulldog_part2_27: 4956231126848180962
+      bulldog_part2_28: -8619900186798460885
+      bulldog_part2_29: 2771751853385462356
+      bulldog_part2_3: 9049759786500470291
+      bulldog_part2_30: -8915450190546815082
+      bulldog_part2_4: 3062357296110819352
+      bulldog_part2_5: -6108816105226356337
+      bulldog_part2_6: 4358120938455726783
+      bulldog_part2_7: 3987701897756988178
+      bulldog_part2_8: 7933000539749243479
+      bulldog_part2_9: -514347887568673487
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
