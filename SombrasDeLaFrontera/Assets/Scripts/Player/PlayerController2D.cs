@@ -15,6 +15,7 @@ public class PlayerController2D : MonoBehaviour
     [Header("Referencias de Componentes")]
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Animator animator;
 
     private Vector2 movementInput;
 
@@ -25,6 +26,9 @@ public class PlayerController2D : MonoBehaviour
 
         if (spriteRenderer == null)
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        if (animator == null)
+            animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -59,6 +63,13 @@ public class PlayerController2D : MonoBehaviour
         else if (moveX > 0 && spriteRenderer != null)
         {
             spriteRenderer.flipX = false; // Mirar a la derecha
+        }
+
+        bool isMoving = movementInput.sqrMagnitude > 0.01f;
+
+        if (animator != null)
+        {
+            animator.SetBool("isMoving", isMoving);
         }
     }
 
