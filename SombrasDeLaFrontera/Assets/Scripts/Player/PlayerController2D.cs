@@ -56,7 +56,15 @@ public class PlayerController2D : MonoBehaviour
 
         movementInput = new Vector2(moveX, moveY).normalized;
 
-        if (moveX < 0 && spriteRenderer != null)
+        bool isMoving = movementInput.sqrMagnitude > 0.01f;
+        bool isMovingUp = isMoving && (moveY > 0.1f && moveY >= Mathf.Abs(moveX));
+        bool isMovingDown = isMoving && (moveY < -0.1f && Mathf.Abs(moveY) >= Mathf.Abs(moveX));
+
+        if (isMovingUp || isMovingDown)
+        {
+            if (spriteRenderer != null) spriteRenderer.flipX = false;
+        }
+        else if (moveX < 0 && spriteRenderer != null)
         {
             spriteRenderer.flipX = true;  // Mirar a la izquierda
         }
@@ -65,11 +73,11 @@ public class PlayerController2D : MonoBehaviour
             spriteRenderer.flipX = false; // Mirar a la derecha
         }
 
-        bool isMoving = movementInput.sqrMagnitude > 0.01f;
-
         if (animator != null)
         {
             animator.SetBool("isMoving", isMoving);
+            animator.SetBool("isMovingUp", isMovingUp);
+            animator.SetBool("isMovingDown", isMovingDown);
         }
     }
 
