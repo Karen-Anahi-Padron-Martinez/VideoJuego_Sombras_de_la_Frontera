@@ -17,21 +17,56 @@ AnimationClip:
   m_PositionCurves: []
   m_ScaleCurves: []
   m_FloatCurves: []
-  m_PPtrCurves: []
-  m_SampleRate: 60
+  m_PPtrCurves:
+  - serializedVersion: 2
+    curve:
+    - time: 0
+      value: {fileID: 143942753795216420, guid: 9b0312a8196ebd8419998bdd51cead7b, type: 3}
+    - time: 0.125
+      value: {fileID: 7796642154749375480, guid: 9b0312a8196ebd8419998bdd51cead7b, type: 3}
+    - time: 0.25
+      value: {fileID: -4401377878590004719, guid: 9b0312a8196ebd8419998bdd51cead7b, type: 3}
+    - time: 0.375
+      value: {fileID: 569469358863685176, guid: 9b0312a8196ebd8419998bdd51cead7b, type: 3}
+    - time: 0.5
+      value: {fileID: -3293005190166354136, guid: 9b0312a8196ebd8419998bdd51cead7b, type: 3}
+    - time: 0.625
+      value: {fileID: -603150856007704889, guid: 9b0312a8196ebd8419998bdd51cead7b, type: 3}
+    attribute: m_Sprite
+    path: 
+    classID: 212
+    script: {fileID: 0}
+    flags: 2
+  m_SampleRate: 8
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
-    genericBindings: []
-    pptrCurveMapping: []
+    genericBindings:
+    - serializedVersion: 2
+      path: 0
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
+      metaData: 0
+    pptrCurveMapping:
+    - {fileID: 143942753795216420, guid: 9b0312a8196ebd8419998bdd51cead7b, type: 3}
+    - {fileID: 7796642154749375480, guid: 9b0312a8196ebd8419998bdd51cead7b, type: 3}
+    - {fileID: -4401377878590004719, guid: 9b0312a8196ebd8419998bdd51cead7b, type: 3}
+    - {fileID: 569469358863685176, guid: 9b0312a8196ebd8419998bdd51cead7b, type: 3}
+    - {fileID: -3293005190166354136, guid: 9b0312a8196ebd8419998bdd51cead7b, type: 3}
+    - {fileID: -603150856007704889, guid: 9b0312a8196ebd8419998bdd51cead7b, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1
+    m_StopTime: 0.75
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
