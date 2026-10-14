@@ -15,6 +15,7 @@ public class SandHazard : MonoBehaviour
         if (player != null)
         {
             player.speedMultiplier = slowMultiplier;
+            Debug.Log($"[SandHazard] Mateo entró en arena movediza ({gameObject.name}). Velocidad reducida al {slowMultiplier * 100}%.");
         }
     }
 
@@ -24,6 +25,7 @@ public class SandHazard : MonoBehaviour
         if (player != null)
         {
             player.speedMultiplier = normalMultiplier;
+            Debug.Log($"[SandHazard] Mateo salió de arena movediza ({gameObject.name}). Velocidad restaurada.");
         }
     }
 }
