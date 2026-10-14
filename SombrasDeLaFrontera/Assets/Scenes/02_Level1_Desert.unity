@@ -9340,7 +9340,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &647985384
+=======
+--- !u!1 &632862512
+>>>>>>> origin/develop
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9348,20 +9352,93 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 647985385}
   m_Layer: 0
   m_Name: Cactus
+=======
+  - component: {fileID: 632862515}
+  - component: {fileID: 632862514}
+  - component: {fileID: 632862513}
+  m_Layer: 0
+  m_Name: SandHazard_Tramo2
+>>>>>>> origin/develop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!4 &647985385
+=======
+--- !u!114 &632862513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632862512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 873ade70e5f47514fb5915a334ace69f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SandHazard
+  slowMultiplier: 0.5
+  normalMultiplier: 1
+--- !u!61 &632862514
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632862512}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.14606468}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 3.5, y: 0.11715934}
+  m_EdgeRadius: 0
+--- !u!4 &632862515
+>>>>>>> origin/develop
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 647985384}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -12747,6 +12824,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 319245135}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+  m_GameObject: {fileID: 632862512}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.11603, y: 0.21373, z: 0}
+  m_LocalScale: {x: 1, y: 12, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+>>>>>>> origin/develop
 --- !u!1 &876107983
 GameObject:
   m_ObjectHideFlags: 0
@@ -12852,7 +12940,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &884441976
+=======
+--- !u!1 &1150145277
+>>>>>>> origin/develop
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12860,16 +12952,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 884441979}
   - component: {fileID: 884441978}
   - component: {fileID: 884441977}
   m_Layer: 0
   m_Name: arbusto_6
+=======
+  - component: {fileID: 1150145280}
+  - component: {fileID: 1150145279}
+  - component: {fileID: 1150145278}
+  m_Layer: 0
+  m_Name: SandHazard_Tramo3
+>>>>>>> origin/develop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!70 &884441977
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -13268,11 +13369,15 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!114 &906600491
+=======
+--- !u!114 &1150145278
+>>>>>>> origin/develop
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 906600490}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -13281,12 +13386,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CoverZone2D
   hiddenColor: {r: 0.55, g: 0.55, b: 0.55, a: 0.85}
 --- !u!61 &906600492
+=======
+  m_GameObject: {fileID: 1150145277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 873ade70e5f47514fb5915a334ace69f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SandHazard
+  slowMultiplier: 0.5
+  normalMultiplier: 1
+--- !u!61 &1150145279
+>>>>>>> origin/develop
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 906600490}
+=======
+  m_GameObject: {fileID: 1150145277}
+>>>>>>> origin/develop
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -13314,6 +13434,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
+<<<<<<< HEAD
   m_Offset: {x: -0.0116961, y: -0.00000011920929}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -13424,11 +13545,27 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!4 &906600495
+=======
+  m_Offset: {x: 0, y: 0.677861}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 3.5, y: 0.081468344}
+  m_EdgeRadius: 0
+--- !u!4 &1150145280
+>>>>>>> origin/develop
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 906600490}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
@@ -16171,6 +16308,16 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 647985385}
+=======
+  m_GameObject: {fileID: 1150145277}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.11603, y: 0.21373, z: 0}
+  m_LocalScale: {x: 1, y: 12, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+>>>>>>> origin/develop
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1152392267
 GameObject:
@@ -17188,6 +17335,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1246046798}
+  - component: {fileID: 1246046801}
+  - component: {fileID: 1246046800}
+  - component: {fileID: 1246046799}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -17211,6 +17361,7 @@ Transform:
   - {fileID: 1343333326}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &1259491762
 GameObject:
   m_ObjectHideFlags: 0
@@ -17362,11 +17513,15 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!114 &1262409257
+=======
+--- !u!114 &1246046799
+>>>>>>> origin/develop
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1262409256}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -17375,12 +17530,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CoverZone2D
   hiddenColor: {r: 0.55, g: 0.55, b: 0.55, a: 0.85}
 --- !u!61 &1262409258
+=======
+  m_GameObject: {fileID: 1246046797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fd5b58b227be71418300a25e2208c88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController2D
+  baseSpeed: 1
+  speedMultiplier: 1
+  rb: {fileID: 0}
+  spriteRenderer: {fileID: 1343333327}
+  animator: {fileID: 0}
+--- !u!61 &1246046800
+>>>>>>> origin/develop
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1262409256}
+=======
+  m_GameObject: {fileID: 1246046797}
+>>>>>>> origin/develop
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -17404,6 +17577,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
+<<<<<<< HEAD
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
@@ -17422,14 +17596,47 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!70 &1262409259
 CapsuleCollider2D:
+=======
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.024447065, y: 0.04346147}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.11447238, y: 0.08730888}
+  m_EdgeRadius: 0
+--- !u!50 &1246046801
+Rigidbody2D:
+  serializedVersion: 5
+>>>>>>> origin/develop
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1262409256}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
+=======
+  m_GameObject: {fileID: 1246046797}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+>>>>>>> origin/develop
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -17437,6 +17644,7 @@ CapsuleCollider2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
+<<<<<<< HEAD
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -18329,6 +18537,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92465b865cb96ef41a1afa95973ff646, type: 3}
+=======
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
+>>>>>>> origin/develop
 --- !u!1 &1343333325
 GameObject:
   m_ObjectHideFlags: 0
@@ -18339,6 +18553,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1343333326}
   - component: {fileID: 1343333327}
+  - component: {fileID: 1343333328}
   m_Layer: 0
   m_Name: mateo_part1_7
   m_TagString: Untagged
@@ -18421,12 +18636,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+<<<<<<< HEAD
 --- !u!1 &1344840782
 GameObject:
+=======
+--- !u!95 &1343333328
+Animator:
+  serializedVersion: 7
+>>>>>>> origin/develop
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1344840785}
@@ -21362,6 +21584,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8417557040946037663, guid: 92465b865cb96ef41a1afa95973ff646, type: 3}
   m_PrefabInstance: {fileID: 206274871}
   m_PrefabAsset: {fileID: 0}
+=======
+  m_GameObject: {fileID: 1343333325}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 26d3e512364ef414fbc3d01fcc2c88e1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+>>>>>>> origin/develop
 --- !u!1 &1525012721
 GameObject:
   m_ObjectHideFlags: 0
@@ -27522,3 +27761,5 @@ SceneRoots:
   - {fileID: 63341425}
   - {fileID: 782200935}
   - {fileID: 164393832}
+  - {fileID: 632862515}
+  - {fileID: 1150145280}

@@ -45,3 +45,4 @@ desktop.ini
 *.exe
 Build/
 Builds/
+*.slnx
