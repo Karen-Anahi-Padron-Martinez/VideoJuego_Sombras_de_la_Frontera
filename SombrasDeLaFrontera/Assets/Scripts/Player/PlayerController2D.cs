@@ -81,11 +81,35 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    [Tooltip("Multiplicador temporal de velocidad (ej. boost de Tuna)")]
+    public float boostMultiplier = 1.0f;
+
+    private Coroutine boostCoroutine;
+
+    /// <summary>
+    /// Aplica un aumento de velocidad temporal acumulable con el terreno.
+    /// </summary>
+    public void ApplySpeedBoost(float boost, float duration)
+    {
+        if (boostCoroutine != null) StopCoroutine(boostCoroutine);
+        boostCoroutine = StartCoroutine(SpeedBoostRoutine(boost, duration));
+    }
+
+    private System.Collections.IEnumerator SpeedBoostRoutine(float boost, float duration)
+    {
+        boostMultiplier = boost;
+        Debug.Log($"[PlayerController2D] ¡Boost de Tuna activado! Velocidad aumentada a x{boost:F2} por {duration} segundos.");
+        yield return new WaitForSeconds(duration);
+        boostMultiplier = 1.0f;
+        Debug.Log("[PlayerController2D] Boost de velocidad finalizado.");
+        boostCoroutine = null;
+    }
+
     private void FixedUpdate()
     {
         if (rb == null) return;
 
-        float finalSpeed = baseSpeed * speedMultiplier;
+        float finalSpeed = baseSpeed * speedMultiplier * boostMultiplier;
         rb.linearVelocity = movementInput * finalSpeed;
     }
 }
