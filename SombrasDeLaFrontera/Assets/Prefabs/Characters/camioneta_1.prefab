@@ -82,7 +82,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1318283215
   m_SortingLayer: 2
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: -22997975003686982, guid: 95acfb675964b5f4cb6bd725c99096d9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -191,3 +191,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoverZone2D
   hiddenColor: {r: 0.55, g: 0.55, b: 0.55, a: 0.85}
+  isPlayerInside: 0

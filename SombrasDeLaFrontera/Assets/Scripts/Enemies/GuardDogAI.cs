@@ -41,6 +41,7 @@ public class GuardDogAI : MonoBehaviour
     public bool isBarking { get; private set; } = false;
     private float nextBiteTime = 0f;
     private float lostSightTime = -1f;
+    private float nextAlertRefreshTime = 0f;
     private PatrolAI patrolAI;
     private SpriteRenderer spriteRenderer;
     private PlayerHealth cachedPlayerHealth;
@@ -131,10 +132,11 @@ public class GuardDogAI : MonoBehaviour
 
         // 4. Chequeo de muros/obstáculos físicos
         bool lineOfSightBlocked = false;
-        if (obstacleMask != 0 && playerInDistance && playerInFrontHalfCircle)
+        LayerMask effectiveMask = obstacleMask != 0 ? obstacleMask : LayerMask.GetMask("Default", "Environment");
+        if (playerInDistance && playerInFrontHalfCircle)
         {
-            RaycastHit2D hit = Physics2D.Raycast(dogPos, toPlayer.normalized, distanceToPlayer, obstacleMask);
-            if (hit.collider != null && !hit.collider.CompareTag("Player") && !hit.collider.name.ToLower().Contains("mateo"))
+            RaycastHit2D hit = Physics2D.Raycast(dogPos, toPlayer.normalized, distanceToPlayer, effectiveMask);
+            if (hit.collider != null && !hit.collider.isTrigger && !hit.collider.CompareTag("Player") && !hit.collider.name.ToLower().Contains("mateo"))
             {
                 lineOfSightBlocked = true;
             }
@@ -152,9 +154,10 @@ public class GuardDogAI : MonoBehaviour
             {
                 StartBarking();
             }
-            else
+            else if (Time.time >= nextAlertRefreshTime)
             {
-                // Mantener renovada la alerta de 5 segundos mientras Mateo siga visible en el medio círculo
+                // Renovar la alerta espaciada en el tiempo mientras Mateo siga visible (sin spamear cada frame)
+                nextAlertRefreshTime = Time.time + 3.0f;
                 PatrolAI.TriggerDogAlert(coyoteAlertDuration);
             }
 
@@ -186,6 +189,8 @@ public class GuardDogAI : MonoBehaviour
     private void StartBarking()
     {
         isBarking = true;
+        nextAlertRefreshTime = Time.time + 3.0f;
+
         if (patrolAI != null)
         {
             patrolAI.isAlerted = true; // El perro se detiene en seco
@@ -220,7 +225,7 @@ public class GuardDogAI : MonoBehaviour
         {
             nextBiteTime = Time.time + biteCooldown;
             Debug.Log($"<color=red>[GuardDogAI] ¡MORDIDA! {gameObject.name} mordió a Mateo (-1 corazón).</color>");
-            cachedPlayerHealth.TakeDamage(1);
+            cachedPlayerHealth.TakeDamage(1, DefeatReason.DogAttack);
         }
     }
 

@@ -263,8 +263,11 @@ public class VisionCone2D : MonoBehaviour
             detectionTimer = Mathf.Max(0f, detectionTimer - (Time.deltaTime * 1.5f));
             if (parentPatrolAI != null && detectionTimer <= 0.05f)
             {
-                // Al enfriarse la alerta, el coyote reanuda su patrullaje normal
-                parentPatrolAI.isAlerted = false;
+                // Al enfriarse la alerta, el coyote reanuda su patrullaje normal (a menos que haya alerta global por el perro)
+                if (!PatrolAI.isHighAlertFromDog)
+                {
+                    parentPatrolAI.isAlerted = false;
+                }
             }
         }
 

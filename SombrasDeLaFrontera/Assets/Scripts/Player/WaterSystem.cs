@@ -71,6 +71,8 @@ public class WaterSystem : MonoBehaviour
         isDraining = false;
         Debug.Log("[WaterSystem] ¡GAME OVER! Mateo ha colapsado por deshidratación extrema en el desierto.");
 
+        Time.timeScale = 0f;
+
         // Desactivar movimiento del jugador
         PlayerController2D controller = GetComponent<PlayerController2D>();
         if (controller != null)
@@ -82,6 +84,12 @@ public class WaterSystem : MonoBehaviour
         if (rb != null)
         {
             rb.linearVelocity = Vector2.zero;
+        }
+
+        PlayerHealth health = GetComponent<PlayerHealth>();
+        if (health != null && !health.isDead)
+        {
+            health.TakeDamage(3, DefeatReason.Dehydration);
         }
 
         OnDehydrationDied?.Invoke();
