@@ -13,10 +13,18 @@ public class CoverZone2D : MonoBehaviour
     
     private Color originalColor = Color.white;
 
+    // Estado global y local de ocultamiento
+    private static int activeCoversCount = 0;
+    public static bool isHiding => activeCoversCount > 0;
+    public bool isPlayerInside = false;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (IsPlayer(collision, out GameObject playerRoot, out SpriteRenderer sr))
         {
+            activeCoversCount++;
+            isPlayerInside = true;
+
             // 1. Guardar color original y aplicar atenuación de sigilo
             if (sr != null)
             {
@@ -24,10 +32,10 @@ public class CoverZone2D : MonoBehaviour
                 sr.color = hiddenColor;
             }
 
-            // 2. Notificar dinámicamente al jugador (cuando Karen cree PlayerController2D, lo recibirá automáticamente)
+            // 2. Notificar dinámicamente al jugador
             playerRoot.SendMessage("SetHidingState", true, SendMessageOptions.DontRequireReceiver);
 
-            Debug.Log($"[CoverZone2D] {playerRoot.name} se ha OCULTADO en {gameObject.name}");
+            Debug.Log($"[CoverZone2D] {playerRoot.name} se ha OCULTADO en {gameObject.name}. (isHiding={isHiding})");
         }
     }
 
@@ -35,16 +43,19 @@ public class CoverZone2D : MonoBehaviour
     {
         if (IsPlayer(collision, out GameObject playerRoot, out SpriteRenderer sr))
         {
-            // 1. Restaurar color original del sprite
-            if (sr != null)
+            activeCoversCount = Mathf.Max(0, activeCoversCount - 1);
+            isPlayerInside = false;
+
+            // 1. Restaurar color original del sprite si ya no está en ninguna cobertura
+            if (activeCoversCount == 0 && sr != null)
             {
                 sr.color = Color.white;
             }
 
-            // 2. Desactivar estado de sigilo en el jugador
-            playerRoot.SendMessage("SetHidingState", false, SendMessageOptions.DontRequireReceiver);
+            // 2. Notificar estado de sigilo actualizado al jugador
+            playerRoot.SendMessage("SetHidingState", isHiding, SendMessageOptions.DontRequireReceiver);
 
-            Debug.Log($"[CoverZone2D] {playerRoot.name} ha SALIDO de la cobertura {gameObject.name}");
+            Debug.Log($"[CoverZone2D] {playerRoot.name} ha SALIDO de la cobertura {gameObject.name}. (isHiding={isHiding})");
         }
     }
 

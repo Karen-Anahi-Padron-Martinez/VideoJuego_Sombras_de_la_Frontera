@@ -32,6 +32,9 @@ public class PlayerHealth : MonoBehaviour
 
     private void Awake()
     {
+        // Asegurar que el tiempo corra normalmente al entrar o reiniciar el nivel
+        Time.timeScale = 1f;
+
         currentHealth = maxHealth;
 
         if (spriteRenderer == null)
@@ -68,6 +71,19 @@ public class PlayerHealth : MonoBehaviour
         {
             StartCoroutine(InvulnerabilityRoutine());
         }
+    }
+
+    /// <summary>
+    /// Captura instantánea por linterna de vigilante coyote (Game Over directo).
+    /// </summary>
+    public void Capture()
+    {
+        if (isDead) return;
+
+        Debug.Log("[PlayerHealth] ¡CAPTURADO! Mateo ha sido descubierto por la linterna del vigilante coyote fuera de cobertura.");
+        currentHealth = 0;
+        OnHealthChanged?.Invoke(0, maxHealth);
+        Die();
     }
 
     /// <summary>
@@ -116,6 +132,9 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = true;
         Debug.Log("[PlayerHealth] ¡GAME OVER! Mateo se ha quedado sin vidas.");
+
+        // Detener completamente el juego (físicas, enemigos, agua y animaciones)
+        Time.timeScale = 0f;
 
         // Desactivar movimiento del jugador
         PlayerController2D controller = GetComponent<PlayerController2D>();

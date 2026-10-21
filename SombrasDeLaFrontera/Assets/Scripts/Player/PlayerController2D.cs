@@ -17,7 +17,20 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Animator animator;
 
+    [Header("Sigilo y Cobertura")]
+    [Tooltip("Indica si Mateo se encuentra actualmente a cubierto (ignorado por linternas)")]
+    public bool isHiding = false;
+
     private Vector2 movementInput;
+
+    /// <summary>
+    /// Establece el estado de ocultamiento de Mateo cuando entra o sale de una zona de cobertura.
+    /// </summary>
+    public void SetHidingState(bool state)
+    {
+        isHiding = state;
+        Debug.Log($"[PlayerController2D] Estado de sigilo de Mateo: {(isHiding ? "A CUBIERTO" : "AL DESCUBIERTO")}");
+    }
 
     private void Awake()
     {
