@@ -50,8 +50,17 @@ public class PatrolAI : MonoBehaviour
 
     public Vector2 CurrentFacingDirection => lastMoveDirection;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStaticAlertOnDomainLoad()
+    {
+        dogAlertEndTime = -1f;
+    }
+
     private void Awake()
     {
+        // Asegurar que ningún enemigo inicie en alerta residual de partidas anteriores
+        isAlerted = false;
+
         if (spriteRenderer == null)
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
@@ -118,6 +127,7 @@ public class PatrolAI : MonoBehaviour
         {
             dogAlertEndTime = -1f;
             SetGlobalAlert(false);
+            Debug.Log("<color=green>[PatrolAI] Alerta de perro concluida. Coyotes reanudan patrullaje normal.</color>");
         }
 
         if (waypoints == null || waypoints.Count == 0 || isWaiting || isAlerted)
@@ -250,6 +260,15 @@ public class PatrolAI : MonoBehaviour
     private static float dogAlertEndTime = -1f;
 
     /// <summary>
+    /// Restablece completamente cualquier estado de alerta estático entre reinicios o cargas de nivel.
+    /// </summary>
+    public static void ResetGlobalAlertState()
+    {
+        dogAlertEndTime = -1f;
+        SetGlobalAlert(false);
+    }
+
+    /// <summary>
     /// Dispara la alerta máxima de los coyotes durante una duración determinada (5 segundos).
     /// Durante este tiempo, los coyotes se detienen en guardia y si ven a Mateo lo capturan al instante.
     /// </summary>
@@ -257,6 +276,7 @@ public class PatrolAI : MonoBehaviour
     {
         dogAlertEndTime = Time.time + duration;
         SetGlobalAlert(true);
+        Debug.Log($"<color=orange>[PatrolAI] ¡Alerta de perro activada! Coyotes en guardia por {duration:F1}s.</color>");
     }
 
     /// <summary>

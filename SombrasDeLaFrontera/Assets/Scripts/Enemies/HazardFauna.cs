@@ -218,8 +218,8 @@ public class HazardFauna : MonoBehaviour
             nextDamageTime = Time.time + damageCooldown;
             string creatureName = (faunaType == FaunaType.Snake) ? "Serpiente de cascabel" : "Alacrán";
 
-            Debug.Log($"[HazardFauna] ¡{creatureName} atacó a Mateo en {gameObject.name}! (-{damageAmount} corazón).");
-            health.TakeDamage(damageAmount);
+            DefeatReason reason = (faunaType == FaunaType.Snake) ? DefeatReason.SnakeBite : DefeatReason.ScorpionSting;
+            health.TakeDamage(damageAmount, reason);
         }
     }
 

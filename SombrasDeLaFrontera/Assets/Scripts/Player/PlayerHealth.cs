@@ -1,6 +1,16 @@
 using System.Collections;
 using UnityEngine;
 
+public enum DefeatReason
+{
+    Generic,
+    FlashlightCaptured,    // Coyote con linterna
+    Dehydration,           // Sed / Sin agua
+    SnakeBite,             // Mordedura de serpiente
+    ScorpionSting,         // Picadura de alacrán
+    DogAttack              // Ataque de perro guardián
+}
+
 /// <summary>
 /// Gestiona la salud de Mateo (3 vidas/corazones), el daño por fauna o enemigos,
 /// y el tiempo de invulnerabilidad parpadeante tras recibir impacto.
@@ -23,10 +33,12 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth { get; private set; }
     public bool isInvulnerable { get; private set; }
     public bool isDead { get; private set; }
+    public DefeatReason lastDefeatReason { get; private set; } = DefeatReason.Generic;
 
     // Eventos estáticos para que el HUD o GameManager se enteren sin acoplamiento
     public static event System.Action<int, int> OnHealthChanged; // (actual, máxima)
     public static event System.Action OnPlayerDied;
+    public static event System.Action<DefeatReason> OnPlayerDiedWithReason;
 
     private Color normalColor = Color.white;
 
@@ -53,14 +65,19 @@ public class PlayerHealth : MonoBehaviour
     /// <summary>
     /// Aplica daño a Mateo restando vidas y activando invulnerabilidad temporal.
     /// </summary>
-    public void TakeDamage(int amount = 1)
+    public void TakeDamage(int amount = 1, DefeatReason reason = DefeatReason.Generic)
     {
         if (isDead || isInvulnerable) return;
+
+        if (reason != DefeatReason.Generic)
+        {
+            lastDefeatReason = reason;
+        }
 
         currentHealth -= amount;
         currentHealth = Mathf.Max(0, currentHealth);
 
-        Debug.Log($"[PlayerHealth] Mateo recibió daño (-{amount}). Vidas restantes: {currentHealth}/{maxHealth}");
+        Debug.Log($"[PlayerHealth] Mateo recibió daño (-{amount}, causa: {reason}). Vidas restantes: {currentHealth}/{maxHealth}");
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
         if (currentHealth <= 0)
@@ -80,6 +97,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (isDead) return;
 
+        lastDefeatReason = DefeatReason.FlashlightCaptured;
         Debug.Log("[PlayerHealth] ¡CAPTURADO! Mateo ha sido descubierto por la linterna del vigilante coyote fuera de cobertura.");
         currentHealth = 0;
         OnHealthChanged?.Invoke(0, maxHealth);
@@ -131,7 +149,7 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         isDead = true;
-        Debug.Log("[PlayerHealth] ¡GAME OVER! Mateo se ha quedado sin vidas.");
+        Debug.Log($"[PlayerHealth] ¡GAME OVER! Mateo ha sido derrotado. Causa: {lastDefeatReason}.");
 
         // Detener completamente el juego (físicas, enemigos, agua y animaciones)
         Time.timeScale = 0f;
@@ -150,5 +168,6 @@ public class PlayerHealth : MonoBehaviour
         }
 
         OnPlayerDied?.Invoke();
+        OnPlayerDiedWithReason?.Invoke(lastDefeatReason);
     }
 }
