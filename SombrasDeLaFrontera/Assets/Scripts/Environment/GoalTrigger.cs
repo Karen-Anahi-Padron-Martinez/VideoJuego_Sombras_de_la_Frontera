@@ -62,8 +62,9 @@ public class GoalTrigger : MonoBehaviour
             Debug.Log($"<color=green>[GoalTrigger] ¡PROGRESO GUARDADO! Nivel {nextLevelIndex} desbloqueado en PlayerPrefs.</color>");
         }
 
-        // 2. Detener el juego
+        // 2. Detener el juego y reproducir victoria
         Time.timeScale = 0f;
+        AudioManager.Instance?.PlayVictory();
 
         // 3. Notificar a la interfaz de victoria
         Debug.Log("<color=cyan>[GoalTrigger] ¡VICTORIA! Mateo ha cruzado el desierto y alcanzado la ribera del Río Bravo.</color>");

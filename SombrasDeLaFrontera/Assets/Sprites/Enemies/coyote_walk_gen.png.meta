@@ -1,0 +1,426 @@
+fileFormatVersion: 2
+guid: c31e92501203b8b47a3eb98b42d9ae85
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3409026609916773836
+    second: coyote_walk_gen_0
+  - first:
+      213: -9039766283583426153
+    second: coyote_walk_gen_1
+  - first:
+      213: -305842603020543272
+    second: coyote_walk_gen_2
+  - first:
+      213: 5559285961710334723
+    second: coyote_walk_gen_3
+  - first:
+      213: -3606573931531400973
+    second: coyote_walk_gen_4
+  - first:
+      213: 3402898571006114565
+    second: coyote_walk_gen_5
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: coyote_walk_gen_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 3
+        width: 67
+        height: 113
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc581f1d3ab4f4f20800000000000000
+      internalID: 3409026609916773836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_walk_gen_1
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 3
+        width: 67
+        height: 113
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 791f476b57c4c8280800000000000000
+      internalID: -9039766283583426153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_walk_gen_2
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 3
+        width: 67
+        height: 113
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8da97c1e5cd61cbf0800000000000000
+      internalID: -305842603020543272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_walk_gen_3
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 3
+        width: 67
+        height: 113
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3037f88b02d862d40800000000000000
+      internalID: 5559285961710334723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_walk_gen_4
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 3
+        width: 67
+        height: 113
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f803e22e10e2fdc0800000000000000
+      internalID: -3606573931531400973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coyote_walk_gen_5
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 3
+        width: 66
+        height: 113
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50bf0839836893f20800000000000000
+      internalID: 3402898571006114565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_coyote_walk_gen_r0_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 112
+        height: 117
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025641026}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3292fe6c68f2e3438de365f0695f980
+      internalID: 1573306372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_coyote_walk_gen_r0_c1
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 1
+        width: 112
+        height: 117
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025641026}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b73202fec2fa4e47bf684d6ad6c6e56
+      internalID: -268232070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_coyote_walk_gen_r0_c2
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 1
+        width: 112
+        height: 117
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025641026}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dc6c7b64e18d964c9ee3842cf971ce6
+      internalID: 897446128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_coyote_walk_gen_r0_c3
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 1
+        width: 112
+        height: 117
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025641026}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7fc19633b129ee4a84d43d002921fdf
+      internalID: 838719935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_coyote_walk_gen_r0_c4
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 1
+        width: 112
+        height: 117
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025641026}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49956ed2fa13537459edb804f4bea31f
+      internalID: -799545411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_coyote_walk_gen_r0_c5
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 1
+        width: 112
+        height: 117
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025641026}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 145b41e2b1a80e34aac9ed7b779e9bdf
+      internalID: -131799917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 1e7613be0733c5a4c8d8aee8287b728f
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      anim_coyote_walk_gen_r0_c0: 1573306372
+      anim_coyote_walk_gen_r0_c1: -268232070
+      anim_coyote_walk_gen_r0_c2: 897446128
+      anim_coyote_walk_gen_r0_c3: 838719935
+      anim_coyote_walk_gen_r0_c4: -799545411
+      anim_coyote_walk_gen_r0_c5: -131799917
+      coyote_walk_gen_0: 3409026609916773836
+      coyote_walk_gen_1: -9039766283583426153
+      coyote_walk_gen_2: -305842603020543272
+      coyote_walk_gen_3: 5559285961710334723
+      coyote_walk_gen_4: -3606573931531400973
+      coyote_walk_gen_5: 3402898571006114565
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

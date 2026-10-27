@@ -84,6 +84,7 @@ public class PickupItem : MonoBehaviour
                 {
                     healthSys.Heal(healthAmount);
                 }
+                AudioManager.Instance?.PlayDrinkWater();
                 Debug.Log($"[PickupItem] Mateo recogió Botiquín (+{healthAmount} vida).");
                 break;
         }

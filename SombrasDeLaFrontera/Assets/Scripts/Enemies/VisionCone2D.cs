@@ -8,6 +8,10 @@ using UnityEngine;
 /// - Si Mateo entra a la luz al descubierto, el cono cambia gradualmente de Amarillo a Rojo durante 1.5 segundos.
 /// - Si Mateo se refugia en cobertura o sale de la luz, el medidor se enfría de regreso a Amarillo.
 /// - Si el medidor llega a 1.5s (100% Rojo), se activa la captura (Game Over).
+/// Detección por cercanía (aunque Mateo esté fuera del triángulo de luz):
+/// - Pegado al coyote en cualquier dirección (lo escucha), o
+/// - Justo enfrente de él a corta distancia.
+/// En ambos casos el coyote lo encara y el medidor sube más rápido, salvo que Mateo esté escondido.
 /// </summary>
 [RequireComponent(typeof(PolygonCollider2D))]
 public class VisionCone2D : MonoBehaviour
@@ -35,6 +39,19 @@ public class VisionCone2D : MonoBehaviour
     [Tooltip("Color de alerta máxima (captura)")]
     [SerializeField] private Color alertColor = new Color(1f, 0.15f, 0.1f, 0.65f);
 
+    [Header("Detección por Cercanía")]
+    [Tooltip("Radio alrededor del coyote (en cualquier dirección) en el que detecta a Mateo aunque no lo ilumine")]
+    [SerializeField] private float closeDetectionRadius = 0.5f;
+
+    [Tooltip("Distancia frente al coyote en la que detecta a Mateo aunque esté fuera del triángulo de luz")]
+    [SerializeField] private float frontDetectionRadius = 1.1f;
+
+    [Tooltip("Medio ángulo (grados) del frente del coyote para la detección cercana")]
+    [SerializeField] private float frontDetectionHalfAngle = 75f;
+
+    [Tooltip("Multiplicador de velocidad del medidor cuando Mateo está así de cerca")]
+    [SerializeField] private float closeDetectionSpeed = 2.0f;
+
     [Header("Máscaras de Detección")]
     [SerializeField] private LayerMask obstacleMask;
 
@@ -53,12 +70,44 @@ public class VisionCone2D : MonoBehaviour
     // Estado de detección
     private float detectionTimer = 0f;
     private float lastExposedTime = -1f;
+    private float lastCloseExposedTime = -1f;
+    private PlayerController2D playerController;
     private PlayerHealth targetPlayerHealth;
     private PatrolAI parentPatrolAI;
     private readonly Collider2D[] overlapResults = new Collider2D[16];
     private ContactFilter2D contactFilter;
 
     public float DetectionProgress => Mathf.Clamp01(detectionTimer / detectionTimeToCapture);
+
+    /// <summary>Verdadero mientras Mateo está dentro del haz de luz y al descubierto.</summary>
+    public bool IsPlayerExposed => (Time.time - lastExposedTime) < 0.15f;
+
+    // Registro de todas las linternas activas (para la viñeta de peligro y los indicadores de alerta)
+    private static readonly List<VisionCone2D> activeCones = new List<VisionCone2D>();
+
+    /// <summary>Mayor progreso de detección entre todas las linternas del nivel (0 = calma, 1 = captura).</summary>
+    public static float MaxDetectionProgress
+    {
+        get
+        {
+            float max = 0f;
+            for (int i = 0; i < activeCones.Count; i++)
+            {
+                if (activeCones[i] != null) max = Mathf.Max(max, activeCones[i].DetectionProgress);
+            }
+            return max;
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (!activeCones.Contains(this)) activeCones.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        activeCones.Remove(this);
+    }
 
     private void Awake()
     {
@@ -246,11 +295,15 @@ public class VisionCone2D : MonoBehaviour
             }
         }
 
+        // 0b. Detección por cercanía (fuera del triángulo de luz)
+        CheckCloseDetection();
+
         // 1. Progresión del temporizador de detección (con margen suave para evitar parpadeo)
-        bool isExposed = (Time.time - lastExposedTime) < 0.15f;
+        bool isExposed = IsPlayerExposed;
         if (isExposed)
         {
-            detectionTimer += Time.deltaTime;
+            bool isClose = (Time.time - lastCloseExposedTime) < 0.15f;
+            detectionTimer += Time.deltaTime * (isClose ? closeDetectionSpeed : 1f);
             // El coyote se detiene en seco al detectar al jugador
             if (parentPatrolAI != null)
             {
@@ -296,10 +349,48 @@ public class VisionCone2D : MonoBehaviour
             {
                 string reason = isDogAlert ? "¡Los coyotes en alerta por el perro atraparon a Mateo al instante!" : $"Mateo permaneció {detectionTimeToCapture}s en el haz de la linterna fuera de cobertura.";
                 Debug.Log($"[VisionCone2D] ¡CAPTURA! {reason}");
+                CoyoteAnimation coyoteAnim = GetComponentInParent<CoyoteAnimation>();
+                if (coyoteAnim != null) coyoteAnim.PlayCatch();
                 targetPlayerHealth.Capture();
                 detectionTimer = 0f;
             }
         }
+    }
+
+    /// <summary>
+    /// Detecta a Mateo si está pegado al coyote o justo enfrente de él, aunque no esté dentro del haz de luz.
+    /// </summary>
+    private void CheckCloseDetection()
+    {
+        if (playerController == null)
+        {
+            playerController = FindAnyObjectByType<PlayerController2D>();
+            if (playerController == null) return;
+        }
+
+        PlayerHealth health = playerController.GetComponent<PlayerHealth>();
+        if (health == null || health.isDead) return;
+        if (CoverZone2D.isHiding || playerController.isHiding) return;
+
+        Vector2 coyotePos = parentPatrolAI != null ? (Vector2)parentPatrolAI.transform.position : (Vector2)transform.position;
+        Vector2 feet = playerController.GetFeetPosition();
+        Vector2 toPlayer = feet - coyotePos;
+        float distance = toPlayer.magnitude;
+
+        bool close = distance <= closeDetectionRadius;
+        if (!close && distance <= frontDetectionRadius && distance > 0.001f)
+        {
+            Vector2 facing = parentPatrolAI != null ? parentPatrolAI.CurrentFacingDirection : (Vector2)transform.right;
+            close = Vector2.Angle(facing, toPlayer) <= frontDetectionHalfAngle;
+        }
+        if (!close) return;
+
+        lastExposedTime = Time.time;
+        lastCloseExposedTime = Time.time;
+        targetPlayerHealth = health;
+
+        // El coyote voltea hacia Mateo (y con él la linterna)
+        if (parentPatrolAI != null) parentPatrolAI.FaceTowards(feet);
     }
 
     private void OnTriggerStay2D(Collider2D collision)

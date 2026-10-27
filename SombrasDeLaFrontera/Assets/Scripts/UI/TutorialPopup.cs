@@ -24,6 +24,9 @@ public class TutorialPopup : MonoBehaviour
 
     private bool isClosed = false;
 
+    /// <summary>Verdadero mientras el cartel del tutorial está en pantalla (bloquea la pausa).</summary>
+    public static bool IsOpen { get; private set; }
+
     private void Awake()
     {
         if (tutorialPanel == null)
@@ -45,10 +48,17 @@ public class TutorialPopup : MonoBehaviour
             tutorialPanel.SetActive(true);
         }
 
+        IsOpen = tutorialPanel != null && tutorialPanel.activeInHierarchy;
+
         if (pauseOnStart)
         {
             Time.timeScale = 0f;
         }
+    }
+
+    private void OnDisable()
+    {
+        IsOpen = false;
     }
 
     private void Update()
@@ -93,6 +103,7 @@ public class TutorialPopup : MonoBehaviour
     {
         if (isClosed) return;
         isClosed = true;
+        IsOpen = false;
 
         if (tutorialPanel != null)
         {

@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Inteligencia Artificial del Perro Guardián (Bulldog).
+/// Inteligencia Artificial del Perro Guardián (Bulldog / Rottweiler).
 /// Características:
-/// 1. Patrulla rutas fijas mediante PatrolAI.
-/// 2. Círculo de visión invisible en MEDIO CÍRCULO (180 grados) apuntando hacia donde mira/camina el perro.
-/// 3. Si detecta a Mateo al descubierto:
-///    - El perro se detiene en seco.
-///    - Mateo continúa con vida (no muere por ser visto).
-///    - El perro ladra y activa la alerta máxima de los coyotes durante 5 SEGUNDOS.
+/// 1. Patrulla rutas fijas mediante PatrolAI (animación Walk / Idle).
+/// 2. Cada cierto tiempo se echa a DESCANSAR (animación Sleep). Dormido solo despierta si Mateo
+///    pasa muy cerca y al descubierto (lo oye/huele), en cuyo caso se levanta ladrando.
+/// 3. Círculo de visión invisible en MEDIO CÍRCULO (180 grados) apuntando hacia donde mira/camina el perro.
+/// 4. Si detecta a Mateo al descubierto:
+///    - El perro se detiene en seco y LADRA (animación Bark + icono "!"). El ladrido SOLO alerta, no quita vida.
+///    - Activa la alerta máxima de los coyotes durante 5 SEGUNDOS.
 ///    - Durante esos 5 segundos, si cualquier coyote ve a Mateo, lo captura al instante.
-/// 4. Solo deja de ladrar cuando Mateo sale de su medio círculo o se esconde en cobertura.
-/// 5. Si Mateo se acerca demasiado (círculo pequeño magenta), el perro le muerde restándole 1 vida.
+/// 5. Solo deja de ladrar cuando Mateo sale de su medio círculo o se esconde en cobertura.
+/// 6. Solo si Mateo se pega demasiado al perro (casi tocándolo), éste le MUERDE (animación Bite) restándole 1 vida.
 /// </summary>
 [RequireComponent(typeof(PatrolAI))]
 public class GuardDogAI : MonoBehaviour
@@ -22,8 +23,11 @@ public class GuardDogAI : MonoBehaviour
     [Tooltip("Radio del medio círculo de visión/olfato frontal (en metros)")]
     public float detectionRadius = 3.2f;
 
-    [Tooltip("Radio de proximidad para morder al jugador")]
+    [Tooltip("(Solo referencia visual) Radio aproximado de mordida dibujado en la escena")]
     public float biteRadius = 0.75f;
+
+    [Tooltip("Separación máxima entre el cuerpo del perro y los pies de Mateo para que lo muerda (casi tocándolo)")]
+    [SerializeField] private float biteDistance = 0.08f;
 
     [Tooltip("Tiempo mínimo entre mordidas consecutivas")]
     public float biteCooldown = 1.5f;
@@ -34,16 +38,38 @@ public class GuardDogAI : MonoBehaviour
     [Tooltip("Tiempo tras perder de vista a Mateo antes de calmarse y reanudar la patrulla")]
     public float calmDownDelay = 0.8f;
 
+    [Header("Descanso (Dormir)")]
+    [Tooltip("Permite que el perro se eche a dormir periódicamente")]
+    [SerializeField] private bool canRest = true;
+
+    [Tooltip("Segundos de patrulla (mínimo y máximo) antes de echarse a descansar")]
+    [SerializeField] private Vector2 patrolTimeBeforeRest = new Vector2(10f, 16f);
+
+    [Tooltip("Segundos (mínimo y máximo) que permanece dormido")]
+    [SerializeField] private Vector2 restDuration = new Vector2(6f, 9f);
+
+    [Tooltip("Distancia a la que el perro dormido escucha a Mateo y despierta ladrando")]
+    [SerializeField] private float sleepingHearingRadius = 1.1f;
+
     [Header("Máscara de Detección")]
     [SerializeField] private LayerMask obstacleMask;
 
     // Estado interno
     public bool isBarking { get; private set; } = false;
+    public bool isResting { get; private set; } = false;
     private float nextBiteTime = 0f;
     private float lostSightTime = -1f;
     private float nextAlertRefreshTime = 0f;
+    private float nextRestTime = 0f;
+    private float nextBarkSoundTime = 0f;
+    private float nextSnoreTime = 0f;
+    private float restEndTime = 0f;
     private PatrolAI patrolAI;
     private SpriteRenderer spriteRenderer;
+    private CreatureAnimator creatureAnimator;
+    private AlertIndicator alertIndicator;
+    private Collider2D[] dogColliders;
+    private Collider2D playerCollider;
     private PlayerHealth cachedPlayerHealth;
     private Transform playerTransform;
 
@@ -54,11 +80,15 @@ public class GuardDogAI : MonoBehaviour
     {
         patrolAI = GetComponent<PatrolAI>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        creatureAnimator = GetComponentInChildren<CreatureAnimator>();
+        alertIndicator = GetComponentInChildren<AlertIndicator>(true);
+        dogColliders = GetComponents<Collider2D>();
     }
 
     private void Start()
     {
         FindPlayerReference();
+        ScheduleNextRest();
     }
 
     private void FindPlayerReference()
@@ -69,6 +99,7 @@ public class GuardDogAI : MonoBehaviour
             if (cachedPlayerHealth != null)
             {
                 playerTransform = cachedPlayerHealth.transform;
+                playerCollider = cachedPlayerHealth.GetComponent<Collider2D>();
             }
         }
     }
@@ -112,6 +143,24 @@ public class GuardDogAI : MonoBehaviour
         Vector2 playerPos = playerTransform.position;
         Vector2 toPlayer = (playerPos - dogPos);
         float distanceToPlayer = toPlayer.magnitude;
+        bool isPlayerHiding = CoverZone2D.isHiding;
+
+        // 0. Perro dormido: solo despierta si Mateo pasa muy cerca al descubierto
+        if (isResting)
+        {
+            if (!isPlayerHiding && distanceToPlayer <= sleepingHearingRadius)
+            {
+                Debug.Log($"[GuardDogAI] {gameObject.name} despertó: escuchó a Mateo muy cerca.");
+                EndRest();
+                StartBarking();
+            }
+            else if (Time.time >= restEndTime)
+            {
+                EndRest();
+            }
+            UpdateAnimation();
+            return;
+        }
 
         // 1. Chequeo de distancia (radio)
         bool playerInDistance = distanceToPlayer <= detectionRadius;
@@ -127,18 +176,23 @@ public class GuardDogAI : MonoBehaviour
             playerInFrontHalfCircle = (dot >= 0f);
         }
 
-        // 3. Chequeo de cobertura y sigilo
-        bool isPlayerHiding = CoverZone2D.isHiding;
-
-        // 4. Chequeo de muros/obstáculos físicos
+        // 3. Chequeo de muros/obstáculos físicos
         bool lineOfSightBlocked = false;
         LayerMask effectiveMask = obstacleMask != 0 ? obstacleMask : LayerMask.GetMask("Default", "Environment");
         if (playerInDistance && playerInFrontHalfCircle)
         {
-            RaycastHit2D hit = Physics2D.Raycast(dogPos, toPlayer.normalized, distanceToPlayer, effectiveMask);
-            if (hit.collider != null && !hit.collider.isTrigger && !hit.collider.CompareTag("Player") && !hit.collider.name.ToLower().Contains("mateo"))
+            // RaycastAll: el rayo nace dentro del propio collider del perro, así que se ignoran
+            // el perro mismo, Mateo, otras criaturas y los triggers; solo bloquean obstáculos sólidos.
+            RaycastHit2D[] hits = Physics2D.RaycastAll(dogPos, toPlayer.normalized, distanceToPlayer, effectiveMask);
+            foreach (RaycastHit2D hit in hits)
             {
+                Collider2D col = hit.collider;
+                if (col == null || col.isTrigger) continue;
+                if (col.GetComponentInParent<PlayerHealth>() != null || col.CompareTag("Player")) continue;
+                if (col.GetComponentInParent<PatrolAI>() != null || col.GetComponentInParent<HazardFauna>() != null) continue;
+
                 lineOfSightBlocked = true;
+                break;
             }
         }
 
@@ -161,11 +215,6 @@ public class GuardDogAI : MonoBehaviour
                 PatrolAI.TriggerDogAlert(coyoteAlertDuration);
             }
 
-            // 2. Si Mateo está a rango de mordida cuerpo a cuerpo, dañarlo (-1 vida)
-            if (distanceToPlayer <= biteRadius)
-            {
-                TryBitePlayer();
-            }
         }
         else
         {
@@ -183,7 +232,89 @@ public class GuardDogAI : MonoBehaviour
                     StopBarking();
                 }
             }
+            else if (canRest && Time.time >= nextRestTime)
+            {
+                StartRest();
+            }
         }
+
+        // Mordida: solo si Mateo se pega demasiado al perro (mire hacia donde mire)
+        if (BodyGapToPlayer() <= biteDistance)
+        {
+            if (!isBarking) StartBarking();
+            TryBitePlayer();
+        }
+
+        UpdateAnimation();
+    }
+
+    /// <summary>
+    /// Separación real entre los colliders del perro y el collider de los pies de Mateo.
+    /// </summary>
+    private float BodyGapToPlayer()
+    {
+        if (playerCollider == null || !playerCollider.enabled || dogColliders == null) return float.MaxValue;
+
+        float best = float.MaxValue;
+        foreach (Collider2D col in dogColliders)
+        {
+            if (col == null || !col.enabled) continue;
+            ColliderDistance2D d = col.Distance(playerCollider);
+            if (d.isValid) best = Mathf.Min(best, d.distance);
+        }
+        return best;
+    }
+
+    /// <summary>
+    /// Selecciona la animación según el estado: dormido, ladrando, caminando o quieto.
+    /// La mordida se reproduce como animación única (PlayOneShot) desde TryBitePlayer.
+    /// </summary>
+    private void UpdateAnimation()
+    {
+        // Sonidos: ladridos repetidos mientras alerta y ronquidos mientras duerme
+        if (isBarking && Time.time >= nextBarkSoundTime)
+        {
+            nextBarkSoundTime = Time.time + Random.Range(0.7f, 1.1f);
+            AudioManager.Instance?.PlayDogBarkAt(transform.position);
+        }
+        else if (isResting && Time.time >= nextSnoreTime)
+        {
+            nextSnoreTime = Time.time + 2.2f;
+            AudioManager.Instance?.PlayDogSnoreAt(transform.position);
+        }
+
+        if (creatureAnimator != null)
+        {
+            if (isResting) creatureAnimator.Play("Sleep");
+            else if (isBarking) creatureAnimator.Play("Bark");
+            else if (patrolAI != null && patrolAI.IsMoving) creatureAnimator.Play("Walk");
+            else creatureAnimator.Play("Idle");
+        }
+
+        if (alertIndicator != null)
+        {
+            alertIndicator.Show(isBarking ? AlertIndicator.Kind.Exclamation : AlertIndicator.Kind.None);
+        }
+    }
+
+    private void ScheduleNextRest()
+    {
+        nextRestTime = Time.time + Random.Range(patrolTimeBeforeRest.x, patrolTimeBeforeRest.y);
+    }
+
+    private void StartRest()
+    {
+        isResting = true;
+        restEndTime = Time.time + Random.Range(restDuration.x, restDuration.y);
+        if (patrolAI != null) patrolAI.isPaused = true;
+        Debug.Log($"[GuardDogAI] {gameObject.name} se echó a descansar.");
+    }
+
+    private void EndRest()
+    {
+        isResting = false;
+        if (patrolAI != null) patrolAI.isPaused = false;
+        ScheduleNextRest();
     }
 
     private void StartBarking()
@@ -195,6 +326,10 @@ public class GuardDogAI : MonoBehaviour
         {
             patrolAI.isAlerted = true; // El perro se detiene en seco
         }
+
+        nextBarkSoundTime = Time.time + Random.Range(0.7f, 1.1f);
+        AudioManager.Instance?.PlayDogBarkAt(transform.position);
+        AudioManager.Instance?.PlayAlert();
 
         Debug.Log($"<color=yellow>[GuardDogAI] ¡GUAU! ¡GUAU! {gameObject.name} detectó a Mateo. ¡Coyotes en alerta máxima por {coyoteAlertDuration} segundos!</color>");
         OnDogBarkStateChanged?.Invoke(true, transform.position);
@@ -213,6 +348,9 @@ public class GuardDogAI : MonoBehaviour
             patrolAI.isAlerted = false; // El perro reanuda su patrullaje
         }
 
+        // Tras un susto no se duerme de inmediato
+        ScheduleNextRest();
+
         Debug.Log($"[GuardDogAI] {gameObject.name} se calmó. Mateo salió del medio círculo o se ocultó. Reanudando patrulla.");
         OnDogBarkStateChanged?.Invoke(false, transform.position);
     }
@@ -225,7 +363,14 @@ public class GuardDogAI : MonoBehaviour
         {
             nextBiteTime = Time.time + biteCooldown;
             Debug.Log($"<color=red>[GuardDogAI] ¡MORDIDA! {gameObject.name} mordió a Mateo (-1 corazón).</color>");
+
+            if (creatureAnimator != null) creatureAnimator.PlayOneShot("Bite", "Bark");
+            AudioManager.Instance?.PlayDogBiteAt(transform.position);
+
             cachedPlayerHealth.TakeDamage(1, DefeatReason.DogAttack);
+
+            // Si la mordida fue la última, terminar de verla aunque el juego se congele
+            if (cachedPlayerHealth.isDead && creatureAnimator != null) creatureAnimator.UseUnscaledTime();
         }
     }
 
@@ -273,5 +418,9 @@ public class GuardDogAI : MonoBehaviour
         // Círculo pequeño de mordida
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(center, biteRadius);
+
+        // Círculo de oído mientras duerme
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(center, sleepingHearingRadius);
     }
 }

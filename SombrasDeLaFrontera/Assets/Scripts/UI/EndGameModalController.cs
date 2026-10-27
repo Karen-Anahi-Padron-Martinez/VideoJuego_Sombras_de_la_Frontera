@@ -28,6 +28,7 @@ public class DefeatMessageConfig
 ///   3. Picadura de alacrán.
 ///   4. Ataque o mordida de perro guardián.
 ///   5. Captura por linterna del vigilante coyote.
+///   6. Picadura de araña.
 ///   Incluye botones: 'Reintentar Nivel' y 'Volver al Menú'.
 /// - Victoria (Nivel Completado): Activada al cruzar la ribera del Río Bravo (GoalTrigger).
 /// </summary>
@@ -85,6 +86,13 @@ public class EndGameModalController : MonoBehaviour
         description = "Los perros guardianes te mordieron y ladraron alertando a todos los coyotes.\n\n🐕 <b>Consejo:</b> Los perros vigilan en semicírculo frontal; pasa por detrás o agáchate a cubierto."
     };
 
+    [SerializeField] private DefeatMessageConfig defeatBySpider = new DefeatMessageConfig
+    {
+        title = "¡PICADURA DE ARAÑA!",
+        titleColor = new Color(0.75f, 0.45f, 0.25f, 1f), // Café tarántula
+        description = "Una tarántula del desierto te picó cuando pasaste junto a su madriguera.\n\n<b>Consejo:</b> Si la ves levantar las patas, aléjate de inmediato: está a punto de atacar."
+    };
+
     [SerializeField] private DefeatMessageConfig defeatGeneric = new DefeatMessageConfig
     {
         title = "¡TE HAS QUEDADO SIN VIDAS!",
@@ -106,8 +114,13 @@ public class EndGameModalController : MonoBehaviour
     [SerializeField] private string mainMenuSceneName = "01_MainMenu";
     [SerializeField] private string nextLevelSceneName = "03_Level2_RioBravo";
 
+    /// <summary>Verdadero mientras se muestra la pantalla de Game Over o de Victoria (bloquea la pausa).</summary>
+    public static bool IsShowing { get; private set; }
+
     private void Awake()
     {
+        IsShowing = false;
+
         // Asegurar que los paneles inicien ocultos
         if (gameOverPanel != null) gameOverPanel.SetActive(false);
         if (victoryPanel != null) victoryPanel.SetActive(false);
@@ -136,21 +149,16 @@ public class EndGameModalController : MonoBehaviour
 
     private void OnEnable()
     {
+        // La deshidratación también llega por OnPlayerDiedWithReason (tras la animación de caída)
         PlayerHealth.OnPlayerDiedWithReason += ShowGameOver;
-        WaterSystem.OnDehydrationDied += HandleDehydrationDeath;
         GoalTrigger.OnLevelCompleted += ShowVictory;
     }
 
     private void OnDisable()
     {
         PlayerHealth.OnPlayerDiedWithReason -= ShowGameOver;
-        WaterSystem.OnDehydrationDied -= HandleDehydrationDeath;
         GoalTrigger.OnLevelCompleted -= ShowVictory;
-    }
-
-    private void HandleDehydrationDeath()
-    {
-        ShowGameOver(DefeatReason.Dehydration);
+        IsShowing = false;
     }
 
     /// <summary>
@@ -158,6 +166,10 @@ public class EndGameModalController : MonoBehaviour
     /// </summary>
     public void ShowGameOver(DefeatReason reason)
     {
+        if (IsShowing) return;
+        IsShowing = true;
+        PauseMenuController.ForceClose();
+
         DefeatMessageConfig config = GetMessageConfig(reason);
 
         if (gameOverTitleText != null)
@@ -194,6 +206,8 @@ public class EndGameModalController : MonoBehaviour
                 return defeatByScorpion;
             case DefeatReason.DogAttack:
                 return defeatByDog;
+            case DefeatReason.SpiderBite:
+                return defeatBySpider;
             default:
                 return defeatGeneric;
         }
@@ -204,6 +218,10 @@ public class EndGameModalController : MonoBehaviour
     /// </summary>
     public void ShowVictory()
     {
+        if (IsShowing) return;
+        IsShowing = true;
+        PauseMenuController.ForceClose();
+
         if (victoryPanel != null)
         {
             victoryPanel.SetActive(true);
@@ -218,6 +236,7 @@ public class EndGameModalController : MonoBehaviour
     /// </summary>
     public void RetryLevel()
     {
+        IsShowing = false;
         Time.timeScale = 1f;
         PatrolAI.ResetGlobalAlertState();
         string currentScene = SceneManager.GetActiveScene().name;
@@ -229,6 +248,7 @@ public class EndGameModalController : MonoBehaviour
     /// </summary>
     public void LoadNextLevel()
     {
+        IsShowing = false;
         Time.timeScale = 1f;
 
         // Comprobar si la escena del siguiente nivel está en BuildSettings
@@ -248,6 +268,7 @@ public class EndGameModalController : MonoBehaviour
     /// </summary>
     public void GoToMainMenu()
     {
+        IsShowing = false;
         Time.timeScale = 1f;
         SceneManager.LoadScene(mainMenuSceneName);
     }
