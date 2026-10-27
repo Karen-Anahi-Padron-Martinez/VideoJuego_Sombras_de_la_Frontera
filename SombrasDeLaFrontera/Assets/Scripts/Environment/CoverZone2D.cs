@@ -1,80 +1,130 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Gestiona las zonas de cobertura física (cactus, rocas, camionetas).
-/// Cuando Mateo se posiciona dentro del área, activa el estado de sigilo
-/// (IsHidden = true) y atenúa visualmente su sprite para indicar que está oculto.
+/// Zona de cobertura física (cactus, rocas, nopaleras, matorrales y vehículos abandonados).
+/// Sigilo con lógica de vista 3/4:
+/// - Mateo se esconde del lado de ABAJO del obstáculo (el lado que ve el jugador): el obstáculo queda
+///   entre Mateo y el desierto hacia el norte, por donde patrullan coyotes y perros.
+/// - Debe estar pegado a la base del obstáculo y alineado con él (ya no basta con rozarlo con un pixel del pie).
+/// - El obstáculo debe ser lo bastante alto para tapar su cuerpo: agachado se esconde tras rocas, arbustos y carros;
+///   de pie solo tras obstáculos altos (nopaleras, cactus).
+/// PlayerController2D usa esta medición: si Mateo se queda quieto junto a una cobertura, se agacha y queda oculto.
 /// </summary>
 public class CoverZone2D : MonoBehaviour
 {
-    [Header("Retroalimentación Visual")]
-    [Tooltip("Color o atenuación aplicada al sprite del jugador mientras está escondido")]
-    [SerializeField] private Color hiddenColor = new Color(0.55f, 0.55f, 0.55f, 0.85f);
-    
-    private Color originalColor = Color.white;
+    [Header("Área que tapa el obstáculo")]
+    [Tooltip("Ancho del área de cobertura respecto al ancho del sprite (el sprite tiene márgenes; un tronco delgado tapa menos)")]
+    [Range(0.1f, 1f)]
+    [SerializeField] private float coverWidth = 0.8f;
 
-    // Estado global y local de ocultamiento
-    private static int activeCoversCount = 0;
-    public static bool isHiding => activeCoversCount > 0;
-    public bool isPlayerInside = false;
+    [Tooltip("Alto del área de cobertura respecto al alto del sprite, medido desde la base")]
+    [Range(0.1f, 1f)]
+    [SerializeField] private float coverHeight = 0.9f;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    [Tooltip("Distancia máxima (unidades) entre los pies de Mateo y la base del obstáculo para contar como pegado a él")]
+    [SerializeField] private float hideDistance = 0.3f;
+
+    [Tooltip("Margen de altura: el obstáculo debe sobrepasar el cuerpo de Mateo este porcentaje para taparlo por completo")]
+    [SerializeField] private float heightMargin = 1.3f;
+
+    // Registro de todas las coberturas activas del nivel
+    private static readonly List<CoverZone2D> activeCovers = new List<CoverZone2D>();
+    public static IReadOnlyList<CoverZone2D> ActiveCovers => activeCovers;
+
+    // Estado global de ocultamiento (lo escribe PlayerController2D y lo leen linternas y perros)
+    private static bool playerHidden = false;
+    public static bool isHiding => playerHidden;
+
+    private SpriteRenderer spriteRenderer;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStaticState()
     {
-        if (IsPlayer(collision, out GameObject playerRoot, out SpriteRenderer sr))
-        {
-            activeCoversCount++;
-            isPlayerInside = true;
-
-            // 1. Guardar color original y aplicar atenuación de sigilo
-            if (sr != null)
-            {
-                originalColor = Color.white;
-                sr.color = hiddenColor;
-            }
-
-            // 2. Notificar dinámicamente al jugador
-            playerRoot.SendMessage("SetHidingState", true, SendMessageOptions.DontRequireReceiver);
-
-            Debug.Log($"[CoverZone2D] {playerRoot.name} se ha OCULTADO en {gameObject.name}. (isHiding={isHiding})");
-        }
+        activeCovers.Clear();
+        playerHidden = false;
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    public static void SetPlayerHidden(bool hidden)
     {
-        if (IsPlayer(collision, out GameObject playerRoot, out SpriteRenderer sr))
+        playerHidden = hidden;
+    }
+
+    public void Configure(float width, float height, float distance)
+    {
+        coverWidth = width;
+        coverHeight = height;
+        hideDistance = distance;
+    }
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null) spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+    }
+
+    private void OnEnable()
+    {
+        if (!activeCovers.Contains(this)) activeCovers.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        activeCovers.Remove(this);
+    }
+
+    /// <summary>Altura (Y) de la base del obstáculo, donde toca la arena.</summary>
+    public float BaseY => spriteRenderer != null ? spriteRenderer.bounds.min.y : transform.position.y;
+
+    /// <summary>Rectángulo en mundo que realmente tapa el obstáculo.</summary>
+    public Rect CoverRect
+    {
+        get
         {
-            activeCoversCount = Mathf.Max(0, activeCoversCount - 1);
-            isPlayerInside = false;
-
-            // 1. Restaurar color original del sprite si ya no está en ninguna cobertura
-            if (activeCoversCount == 0 && sr != null)
-            {
-                sr.color = Color.white;
-            }
-
-            // 2. Notificar estado de sigilo actualizado al jugador
-            playerRoot.SendMessage("SetHidingState", isHiding, SendMessageOptions.DontRequireReceiver);
-
-            Debug.Log($"[CoverZone2D] {playerRoot.name} ha SALIDO de la cobertura {gameObject.name}. (isHiding={isHiding})");
+            if (spriteRenderer == null) return new Rect(transform.position, Vector2.zero);
+            Bounds b = spriteRenderer.bounds;
+            float w = b.size.x * coverWidth;
+            float h = b.size.y * coverHeight;
+            return new Rect(b.center.x - w * 0.5f, b.min.y, w, h);
         }
     }
 
     /// <summary>
-    /// Comprueba si el objeto que entra en la cobertura es el jugador,
-    /// buscando en la raíz o en los hijos (por ejemplo, mateo_part1_7 dentro de Player).
+    /// Verdadero si los pies de Mateo están del lado de abajo del obstáculo y pegados a su base.
     /// </summary>
-    private bool IsPlayer(Collider2D col, out GameObject playerRoot, out SpriteRenderer sr)
+    public bool IsOnHidingSide(float feetY)
     {
-        playerRoot = null;
-        sr = null;
+        if (spriteRenderer == null) return false;
+        float baseY = BaseY;
+        return feetY <= baseY + 0.03f && feetY >= baseY - hideDistance;
+    }
 
-        if (col.CompareTag("Player") || col.name.ToLower().Contains("player") || col.transform.root.name.ToLower().Contains("player"))
-        {
-            playerRoot = col.transform.root.gameObject;
-            sr = playerRoot.GetComponentInChildren<SpriteRenderer>();
-            return true;
-        }
+    /// <summary>
+    /// Qué tanto tapa el obstáculo al cuerpo de Mateo visto desde el norte (0 a 1):
+    /// fracción del ancho del cuerpo alineada con el obstáculo × qué tanto supera el obstáculo su estatura.
+    /// </summary>
+    public float Coverage(Rect body)
+    {
+        if (body.width <= 0f || body.height <= 0f) return 0f;
+        Rect c = CoverRect;
 
-        return false;
+        float ix = Mathf.Min(body.xMax, c.xMax) - Mathf.Max(body.xMin, c.xMin);
+        if (ix <= 0f) return 0f;
+        float horizontal = Mathf.Clamp01(ix / body.width);
+        float vertical = Mathf.Clamp01((c.yMax - body.yMin) / (body.height * heightMargin));
+        return horizontal * vertical;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null) return;
+        Rect r = CoverRect;
+        Gizmos.color = new Color(0.2f, 1f, 0.4f, 0.8f);
+        Gizmos.DrawWireCube(r.center, r.size);
+
+        // Franja donde Mateo debe pararse para esconderse
+        Gizmos.color = new Color(0.2f, 0.6f, 1f, 0.8f);
+        Gizmos.DrawWireCube(new Vector3(r.center.x, BaseY - hideDistance * 0.5f, 0f), new Vector3(r.width, hideDistance, 0f));
     }
 }

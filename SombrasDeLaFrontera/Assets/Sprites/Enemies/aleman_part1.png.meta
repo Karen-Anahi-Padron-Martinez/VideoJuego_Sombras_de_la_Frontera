@@ -180,7 +180,7 @@ TextureImporter:
         width: 111
         height: 89
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -202,7 +202,7 @@ TextureImporter:
         width: 115
         height: 89
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -224,7 +224,7 @@ TextureImporter:
         width: 113
         height: 89
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -246,7 +246,7 @@ TextureImporter:
         width: 113
         height: 89
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -268,7 +268,7 @@ TextureImporter:
         width: 112
         height: 89
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -290,7 +290,7 @@ TextureImporter:
         width: 112
         height: 89
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -312,7 +312,7 @@ TextureImporter:
         width: 113
         height: 92
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -334,7 +334,7 @@ TextureImporter:
         width: 114
         height: 93
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -356,7 +356,7 @@ TextureImporter:
         width: 113
         height: 92
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -378,7 +378,7 @@ TextureImporter:
         width: 114
         height: 92
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -400,7 +400,7 @@ TextureImporter:
         width: 113
         height: 92
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -422,7 +422,7 @@ TextureImporter:
         width: 114
         height: 93
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -444,7 +444,7 @@ TextureImporter:
         width: 108
         height: 103
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -466,7 +466,7 @@ TextureImporter:
         width: 106
         height: 103
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -488,7 +488,7 @@ TextureImporter:
         width: 108
         height: 102
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -510,7 +510,7 @@ TextureImporter:
         width: 109
         height: 104
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -532,7 +532,7 @@ TextureImporter:
         width: 10
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -554,7 +554,7 @@ TextureImporter:
         width: 10
         height: 6
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -576,7 +576,7 @@ TextureImporter:
         width: 109
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -598,7 +598,7 @@ TextureImporter:
         width: 109
         height: 101
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -611,11 +611,407 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: anim_aleman_part1_r2_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3
+        width: 112
+        height: 106
+      alignment: 9
+      pivot: {x: 0.5, y: 0.028301887}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e56a396975605ad4799f4dc85174830e
+      internalID: 989297111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_aleman_part1_r2_c1
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 3
+        width: 111
+        height: 106
+      alignment: 9
+      pivot: {x: 0.5, y: 0.028301887}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29d26472472d23843ae3f244a1873f92
+      internalID: -1609647493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_aleman_part1_r2_c2
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 3
+        width: 111
+        height: 106
+      alignment: 9
+      pivot: {x: 0.5, y: 0.028301887}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9a6e5722dba4e34cba98f230754bd91
+      internalID: 1916082509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_aleman_part1_r2_c3
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 3
+        width: 112
+        height: 106
+      alignment: 9
+      pivot: {x: 0.5, y: 0.028301887}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e42ddcf4ea6823148bb715744876ffb2
+      internalID: 1384989508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_aleman_part1_r2_c4
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 3
+        width: 112
+        height: 106
+      alignment: 9
+      pivot: {x: 0.5, y: 0.028301887}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7190297d65eab72459e8da0299d8b4d2
+      internalID: -640128571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_aleman_part1_r2_c5
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 3
+        width: 111
+        height: 106
+      alignment: 9
+      pivot: {x: 0.5, y: 0.028301887}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aeff09ea2d988b84da1c649374e5b3e0
+      internalID: -1791981570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_aleman_part1_r1_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 133
+        width: 112
+        height: 93
+      alignment: 9
+      pivot: {x: 0.5, y: 0.032258064}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 560a8cd682e6f334d8077de752e30c16
+      internalID: 730663101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_aleman_part1_r1_c1
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 133
+        width: 111
+        height: 93
+      alignment: 9
+      pivot: {x: 0.5, y: 0.032258064}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 327659b923e008d458521f2630077ddb
+      internalID: 1374278503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_aleman_part1_r1_c2
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 133
+        width: 111
+        height: 93
+      alignment: 9
+      pivot: {x: 0.5, y: 0.032258064}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 741fb092aaf5653409f3b1b63c62f0c0
+      internalID: 1768292938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_aleman_part1_r1_c3
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 133
+        width: 112
+        height: 93
+      alignment: 9
+      pivot: {x: 0.5, y: 0.032258064}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22591b4b1a9047c45b928bc3d5c05aff
+      internalID: -510661569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_aleman_part1_r1_c4
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 133
+        width: 112
+        height: 93
+      alignment: 9
+      pivot: {x: 0.5, y: 0.032258064}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0d72a224261ebe4689ee4177da8114e
+      internalID: -1484155105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_aleman_part1_r1_c5
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 133
+        width: 111
+        height: 93
+      alignment: 9
+      pivot: {x: 0.5, y: 0.032258064}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4a724f2cc40cb541b831ced3055d8d8
+      internalID: -260225052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_aleman_part1_r0_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 266
+        width: 112
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.032608695}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b2a341f2749e6f47b12f97d8cdad56c
+      internalID: 1477968164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_aleman_part1_r0_c1
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 266
+        width: 111
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.032608695}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f5ab1d179820c44e846520ad1eb588c
+      internalID: -971600533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_aleman_part1_r0_c2
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 266
+        width: 111
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.032608695}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe9191055c8be1148802d674cbf9b3f3
+      internalID: 157700562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_aleman_part1_r0_c3
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 266
+        width: 112
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.032608695}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15b6cc21049b1984da6230888ab9e4f7
+      internalID: -1696876628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_aleman_part1_r0_c4
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 266
+        width: 112
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.032608695}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53a1c47ba7ee82843a5295dd907f9bbe
+      internalID: -98233355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_aleman_part1_r0_c5
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 266
+        width: 111
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.032608695}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a79006439ceb0542b1ce8a23f2d756f
+      internalID: 1519297800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 17449ea7c44a8f249a1843adeccc9c4a
     internalID: 0
     vertices: []
     indices: 
@@ -645,6 +1041,24 @@ TextureImporter:
       aleman_part1_7: -706841515823169063
       aleman_part1_8: -4944831832123525839
       aleman_part1_9: 5449692412065561257
+      anim_aleman_part1_r0_c0: 1477968164
+      anim_aleman_part1_r0_c1: -971600533
+      anim_aleman_part1_r0_c2: 157700562
+      anim_aleman_part1_r0_c3: -1696876628
+      anim_aleman_part1_r0_c4: -98233355
+      anim_aleman_part1_r0_c5: 1519297800
+      anim_aleman_part1_r1_c0: 730663101
+      anim_aleman_part1_r1_c1: 1374278503
+      anim_aleman_part1_r1_c2: 1768292938
+      anim_aleman_part1_r1_c3: -510661569
+      anim_aleman_part1_r1_c4: -1484155105
+      anim_aleman_part1_r1_c5: -260225052
+      anim_aleman_part1_r2_c0: 989297111
+      anim_aleman_part1_r2_c1: -1609647493
+      anim_aleman_part1_r2_c2: 1916082509
+      anim_aleman_part1_r2_c3: 1384989508
+      anim_aleman_part1_r2_c4: -640128571
+      anim_aleman_part1_r2_c5: -1791981570
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

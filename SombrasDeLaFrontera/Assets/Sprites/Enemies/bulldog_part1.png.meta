@@ -174,7 +174,7 @@ TextureImporter:
         width: 111
         height: 80
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -196,7 +196,7 @@ TextureImporter:
         width: 116
         height: 80
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -218,7 +218,7 @@ TextureImporter:
         width: 114
         height: 81
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -240,7 +240,7 @@ TextureImporter:
         width: 115
         height: 81
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -262,7 +262,7 @@ TextureImporter:
         width: 112
         height: 81
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -284,7 +284,7 @@ TextureImporter:
         width: 114
         height: 80
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -306,7 +306,7 @@ TextureImporter:
         width: 118
         height: 84
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -328,7 +328,7 @@ TextureImporter:
         width: 117
         height: 82
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -350,7 +350,7 @@ TextureImporter:
         width: 116
         height: 84
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -372,7 +372,7 @@ TextureImporter:
         width: 116
         height: 85
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -394,7 +394,7 @@ TextureImporter:
         width: 116
         height: 85
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -416,7 +416,7 @@ TextureImporter:
         width: 117
         height: 84
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -438,7 +438,7 @@ TextureImporter:
         width: 108
         height: 105
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -460,7 +460,7 @@ TextureImporter:
         width: 108
         height: 104
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -482,7 +482,7 @@ TextureImporter:
         width: 108
         height: 102
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -504,7 +504,7 @@ TextureImporter:
         width: 109
         height: 102
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -526,7 +526,7 @@ TextureImporter:
         width: 108
         height: 99
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -548,7 +548,7 @@ TextureImporter:
         width: 110
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -561,11 +561,407 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: anim_bulldog_part1_r2_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4
+        width: 119
+        height: 107
+      alignment: 9
+      pivot: {x: 0.5, y: 0.028037382}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1cf93c4bea8bbd48a11c85535fd6457
+      internalID: -1431328636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_bulldog_part1_r2_c1
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 4
+        width: 119
+        height: 107
+      alignment: 9
+      pivot: {x: 0.5, y: 0.028037382}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ecbb19a26723244c989a2cfe1d42105
+      internalID: 1136018805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_bulldog_part1_r2_c2
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 4
+        width: 118
+        height: 107
+      alignment: 9
+      pivot: {x: 0.5, y: 0.028037382}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55c5f4819f3cc7c479792483e24e7ade
+      internalID: 87874493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_bulldog_part1_r2_c3
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 4
+        width: 119
+        height: 107
+      alignment: 9
+      pivot: {x: 0.5, y: 0.028037382}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 125ee2f91c0d38e4892e3a6d74a4393e
+      internalID: 1344620627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_bulldog_part1_r2_c4
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 4
+        width: 119
+        height: 107
+      alignment: 9
+      pivot: {x: 0.5, y: 0.028037382}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d241d5258126e0641905af4e78c0b9dc
+      internalID: -225989477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_bulldog_part1_r2_c5
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 4
+        width: 119
+        height: 107
+      alignment: 9
+      pivot: {x: 0.5, y: 0.028037382}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0ca775e59bdd63409cfe7b88e9f7364
+      internalID: 14170243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_bulldog_part1_r1_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 143
+        width: 119
+        height: 85
+      alignment: 9
+      pivot: {x: 0.5, y: 0.03529412}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55ee373e2d0ffc447ad1e52a687404cd
+      internalID: 842445702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_bulldog_part1_r1_c1
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 143
+        width: 119
+        height: 85
+      alignment: 9
+      pivot: {x: 0.5, y: 0.03529412}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36dd9dc74cda02c4f860eff8e96066a8
+      internalID: -1559442474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_bulldog_part1_r1_c2
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 143
+        width: 118
+        height: 85
+      alignment: 9
+      pivot: {x: 0.5, y: 0.03529412}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 088894b87ce9ed442abff33dfd51e62d
+      internalID: -74749382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_bulldog_part1_r1_c3
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 143
+        width: 119
+        height: 85
+      alignment: 9
+      pivot: {x: 0.5, y: 0.03529412}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bece757d2a71074fa26a4feea536a29
+      internalID: 415729481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_bulldog_part1_r1_c4
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 143
+        width: 119
+        height: 85
+      alignment: 9
+      pivot: {x: 0.5, y: 0.03529412}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b0282a990471a443902d8ec3abafe6b
+      internalID: -779987947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_bulldog_part1_r1_c5
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 143
+        width: 119
+        height: 85
+      alignment: 9
+      pivot: {x: 0.5, y: 0.03529412}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2138948074472134e97e01aa21909155
+      internalID: 1132732281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_bulldog_part1_r0_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 285
+        width: 119
+        height: 82
+      alignment: 9
+      pivot: {x: 0.5, y: 0.036585364}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f668ed48baa43d04d8a6d41dce7e58a0
+      internalID: 500056909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_bulldog_part1_r0_c1
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 285
+        width: 119
+        height: 82
+      alignment: 9
+      pivot: {x: 0.5, y: 0.036585364}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff03876fc5e187d48880c1dc7b28e13f
+      internalID: -599551912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_bulldog_part1_r0_c2
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 285
+        width: 118
+        height: 82
+      alignment: 9
+      pivot: {x: 0.5, y: 0.036585364}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7abb2c08f4274044829fea29369c1a1
+      internalID: -165560150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_bulldog_part1_r0_c3
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 285
+        width: 119
+        height: 82
+      alignment: 9
+      pivot: {x: 0.5, y: 0.036585364}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 055fe63b8ecec7b4f85662a6800e4a5f
+      internalID: -1750594653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_bulldog_part1_r0_c4
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 285
+        width: 119
+        height: 82
+      alignment: 9
+      pivot: {x: 0.5, y: 0.036585364}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f0ab5eae11d90a419b25289461882f3
+      internalID: -1402106057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_bulldog_part1_r0_c5
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 285
+        width: 119
+        height: 82
+      alignment: 9
+      pivot: {x: 0.5, y: 0.036585364}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e88581bfb8d64d24a8ac1194c232dc5e
+      internalID: 1164837083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 9be5873796032304e8f58c5222dfccbd
     internalID: 0
     vertices: []
     indices: 
@@ -575,6 +971,24 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      anim_bulldog_part1_r0_c0: 500056909
+      anim_bulldog_part1_r0_c1: -599551912
+      anim_bulldog_part1_r0_c2: -165560150
+      anim_bulldog_part1_r0_c3: -1750594653
+      anim_bulldog_part1_r0_c4: -1402106057
+      anim_bulldog_part1_r0_c5: 1164837083
+      anim_bulldog_part1_r1_c0: 842445702
+      anim_bulldog_part1_r1_c1: -1559442474
+      anim_bulldog_part1_r1_c2: -74749382
+      anim_bulldog_part1_r1_c3: 415729481
+      anim_bulldog_part1_r1_c4: -779987947
+      anim_bulldog_part1_r1_c5: 1132732281
+      anim_bulldog_part1_r2_c0: -1431328636
+      anim_bulldog_part1_r2_c1: 1136018805
+      anim_bulldog_part1_r2_c2: 87874493
+      anim_bulldog_part1_r2_c3: 1344620627
+      anim_bulldog_part1_r2_c4: -225989477
+      anim_bulldog_part1_r2_c5: 14170243
       bulldog_part1_0: -4528376160820037921
       bulldog_part1_1: -1553909989860774577
       bulldog_part1_10: 8444057615010137689

@@ -79,6 +79,9 @@ public static class SetupDepthSortingEditor
                 // Si es un cono de visión, no tocarlo (usa Foreground)
                 if (sr.GetComponent<VisionCone2D>() != null || sr.name.Contains("VisionCone")) continue;
 
+                // Sombras (Background) e iconos de alerta (Foreground) tienen su propia capa
+                if (sr.GetComponent<BlobShadow>() != null || sr.GetComponent<AlertIndicator>() != null) continue;
+
                 sr.sortingLayerName = "Environment";
 
                 YSort2D ysort = sr.GetComponent<YSort2D>();
@@ -115,7 +118,8 @@ public static class SetupDepthSortingEditor
 
                 ysort.isStatic = false;
                 ysort.useBottomBounds = false;
-                ysort.yOffset = -0.2f; // Pies de Mateo
+                // Pies de Mateo: el pivote de su sprite está al centro del cuerpo
+                ysort.yOffset = playerSr.sprite != null ? playerSr.sprite.bounds.min.y * playerSr.transform.lossyScale.y : -0.2f;
                 ysort.baseOrder = 5000;
                 ysort.UpdateSortingOrder();
 

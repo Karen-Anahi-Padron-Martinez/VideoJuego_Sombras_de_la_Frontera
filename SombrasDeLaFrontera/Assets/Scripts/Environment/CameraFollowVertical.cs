@@ -8,6 +8,7 @@ using UnityEngine;
 /// - Durante la travesía: La cámara sigue suavemente a Mateo hacia el norte con visión hacia adelante.
 /// - Al final: La cámara se detiene en el borde superior del mapa (mapTopY),
 ///   permitiendo a Mateo avanzar hasta la meta en el río sin pasarse del mapa.
+/// - Sacudida breve al recibir daño o al ser derrotado (funciona aunque el juego esté congelado).
 /// </summary>
 public class CameraFollowVertical : MonoBehaviour
 {
@@ -29,11 +30,68 @@ public class CameraFollowVertical : MonoBehaviour
     [Tooltip("Velocidad de suavizado vertical")]
     [SerializeField] private float smoothSpeed = 6f;
 
+    [Header("Encuadre")]
+    [Tooltip("Acerca la cámara lo necesario para que el mapa llene todo el ancho de la pantalla (sin franjas lisas a los lados)")]
+    [SerializeField] private bool fitMapWidth = true;
+
+    [Tooltip("Ancho del mapa del desierto en unidades (572 px / 100)")]
+    [SerializeField] private float mapWidth = 5.72f;
+
+    [Header("Sacudida de Cámara")]
+    [Tooltip("Intensidad de la sacudida al recibir daño")]
+    [SerializeField] private float damageShake = 0.06f;
+
+    [Tooltip("Intensidad de la sacudida al ser derrotado")]
+    [SerializeField] private float defeatShake = 0.1f;
+
     private Camera cam;
+    private float baseOrthoSize;
+    private float followY;
+    private float shakeMagnitude;
+    private float shakeEndTime;
+    private float shakeDuration;
+
+    private void OnEnable()
+    {
+        PlayerHealth.OnDamaged += HandleDamaged;
+        PlayerHealth.OnPlayerDefeated += HandleDefeated;
+    }
+
+    private void OnDisable()
+    {
+        PlayerHealth.OnDamaged -= HandleDamaged;
+        PlayerHealth.OnPlayerDefeated -= HandleDefeated;
+    }
+
+    private void HandleDamaged(int amount) => Shake(damageShake, 0.25f);
+    private void HandleDefeated() => Shake(defeatShake, 0.35f);
+
+    /// <summary>
+    /// Sacude la cámara durante unos instantes (usa tiempo real).
+    /// </summary>
+    public void Shake(float magnitude, float duration)
+    {
+        shakeMagnitude = magnitude;
+        shakeDuration = duration;
+        shakeEndTime = Time.unscaledTime + duration;
+    }
 
     private void Awake()
     {
         cam = GetComponent<Camera>();
+        followY = transform.position.y;
+        if (cam != null) baseOrthoSize = cam.orthographicSize;
+    }
+
+    /// <summary>
+    /// Ajusta el tamaño ortográfico para no mostrar más allá de los bordes laterales del mapa.
+    /// Nunca aleja la cámara más que el tamaño configurado en la escena.
+    /// </summary>
+    private void FitToMapWidth()
+    {
+        if (!fitMapWidth || cam == null || !cam.orthographic || cam.aspect <= 0f) return;
+        float sizeForWidth = mapWidth / (2f * cam.aspect);
+        cam.orthographicSize = Mathf.Min(baseOrthoSize, sizeForWidth);
     }
 
     private void Start()
@@ -46,6 +104,7 @@ public class CameraFollowVertical : MonoBehaviour
         }
 
         if (cam == null) cam = GetComponent<Camera>();
+        FitToMapWidth();
 
         // Posicionar de inmediato al iniciar
         if (target != null && cam != null)
@@ -55,6 +114,7 @@ public class CameraFollowVertical : MonoBehaviour
             float maxY = mapTopY - halfHeight;
 
             float initialY = Mathf.Clamp(target.position.y + verticalOffset, minY, maxY);
+            followY = initialY;
             transform.position = new Vector3(0f, initialY, -10f);
         }
     }
@@ -63,6 +123,7 @@ public class CameraFollowVertical : MonoBehaviour
     {
         if (target == null) return;
         if (cam == null) cam = GetComponent<Camera>();
+        FitToMapWidth(); // Por si cambia el tamaño de la ventana
 
         float halfHeight = (cam != null) ? cam.orthographicSize : 3.5f;
 
@@ -76,11 +137,17 @@ public class CameraFollowVertical : MonoBehaviour
         if (minY < maxY)
         {
             float targetY = Mathf.Clamp(target.position.y + verticalOffset, minY, maxY);
-            float currentY = transform.position.y;
-            float smoothY = Mathf.Lerp(currentY, targetY, smoothSpeed * Time.deltaTime);
+            followY = Mathf.Lerp(followY, targetY, smoothSpeed * Time.deltaTime);
 
-            // X estrictamente centrado en 0
-            transform.position = new Vector3(0f, smoothY, -10f);
+            // X estrictamente centrado en 0 (más la sacudida temporal)
+            Vector2 shake = Vector2.zero;
+            float remaining = shakeEndTime - Time.unscaledTime;
+            if (remaining > 0f && shakeDuration > 0f)
+            {
+                shake = Random.insideUnitCircle * shakeMagnitude * (remaining / shakeDuration);
+            }
+
+            transform.position = new Vector3(shake.x, followY + shake.y, -10f);
         }
     }
 }

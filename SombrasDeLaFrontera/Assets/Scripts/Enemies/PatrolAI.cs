@@ -34,12 +34,19 @@ public class PatrolAI : MonoBehaviour
     [Tooltip("SpriteRenderer del enemigo para voltearlo horizontalmente")]
     [SerializeField] private SpriteRenderer spriteRenderer;
 
-    [Tooltip("Animator opcional del enemigo")]
-    [SerializeField] private Animator animator;
-
     [Header("Estado de Alerta")]
     [Tooltip("Si es verdadero, el coyote se detiene porque su linterna detectó a Mateo")]
     public bool isAlerted = false;
+
+    [Tooltip("Detiene la patrulla sin estar en alerta (ej. el perro se echa a descansar)")]
+    public bool isPaused = false;
+
+    [Header("Vigilancia durante el ladrido del perro")]
+    [Tooltip("Segundos que el coyote mira hacia cada lado mientras dura la alerta del perro")]
+    [SerializeField] private float lookAroundInterval = 1.2f;
+
+    [Tooltip("Velocidad de giro de la linterna al voltear a los lados (grados por segundo)")]
+    [SerializeField] private float lookTurnSpeed = 150f;
 
     // Estado interno
     private int currentWaypointIndex = 0;
@@ -47,8 +54,19 @@ public class PatrolAI : MonoBehaviour
     private bool isWaiting = false;
     private Vector2 lastMoveDirection = Vector2.right;
     private List<Vector2> fixedPositions = new List<Vector2>();
+    private bool isDog;
+    private bool isLookingAround;
+    private float lookAngle;
+    private float lookTargetAngle;
+    private float nextLookSwitchTime;
+    private float lastFaceTowardsTime = -10f;
 
     public Vector2 CurrentFacingDirection => lastMoveDirection;
+
+    /// <summary>
+    /// Verdadero solo en los fotogramas en que el enemigo avanza hacia un waypoint (para animar caminar vs. quieto).
+    /// </summary>
+    public bool IsMoving { get; private set; }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     private static void ResetStaticAlertOnDomainLoad()
@@ -63,9 +81,6 @@ public class PatrolAI : MonoBehaviour
 
         if (spriteRenderer == null)
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-
-        if (animator == null)
-            animator = GetComponentInChildren<Animator>();
 
         if (flashlightPivot == null)
         {
@@ -89,6 +104,8 @@ public class PatrolAI : MonoBehaviour
 
     private void Start()
     {
+        isDog = GetComponent<GuardDogAI>() != null;
+
         // Si los waypoints están como hijos del coyote, desacoplarlos en ejecución
         // para que no se desplacen junto con él (efecto zanahoria)
         Transform wpContainer = transform.Find("Waypoints");
@@ -130,9 +147,15 @@ public class PatrolAI : MonoBehaviour
             Debug.Log("<color=green>[PatrolAI] Alerta de perro concluida. Coyotes reanudan patrullaje normal.</color>");
         }
 
-        if (waypoints == null || waypoints.Count == 0 || isWaiting || isAlerted)
+        IsMoving = false;
+
+        // Durante la alerta del perro: quieto en guardia, volteando a un lado y al otro con la linterna
+        bool shouldLookAround = isAlerted && !isDog && isHighAlertFromDog && Time.time - lastFaceTowardsTime > 0.5f;
+        if (shouldLookAround) LookAround();
+        else isLookingAround = false;
+
+        if (waypoints == null || waypoints.Count == 0 || isWaiting || isAlerted || isPaused)
         {
-            if (animator != null) animator.SetBool("isMoving", false);
             return;
         }
 
@@ -163,14 +186,66 @@ public class PatrolAI : MonoBehaviour
 
             // Orientar linterna y sprite
             OrientTowards(targetPos);
-
-            if (animator != null) animator.SetBool("isMoving", true);
+            IsMoving = true;
         }
         else
         {
             // Llegó al waypoint
             transform.position = targetPos;
             StartCoroutine(WaitAtWaypointRoutine());
+        }
+    }
+
+    /// <summary>
+    /// Gira la linterna y el sprite de un lado al otro (pasando por el frente) mientras dura la alerta.
+    /// </summary>
+    private void LookAround()
+    {
+        if (!isLookingAround)
+        {
+            isLookingAround = true;
+            lookAngle = Mathf.Atan2(lastMoveDirection.y, lastMoveDirection.x) * Mathf.Rad2Deg;
+            // Empezar volteando hacia el lado contrario al que miraba
+            lookTargetAngle = Mathf.Cos(lookAngle * Mathf.Deg2Rad) >= 0f ? 180f : 0f;
+            nextLookSwitchTime = Time.time + lookAroundInterval;
+        }
+
+        if (Time.time >= nextLookSwitchTime)
+        {
+            lookTargetAngle = Mathf.Approximately(lookTargetAngle, 0f) ? 180f : 0f;
+            nextLookSwitchTime = Time.time + lookAroundInterval;
+        }
+
+        lookAngle = Mathf.MoveTowardsAngle(lookAngle, lookTargetAngle, lookTurnSpeed * Time.deltaTime);
+        SetFacingAngle(lookAngle);
+    }
+
+    /// <summary>
+    /// Encara de inmediato un punto (por ejemplo, a Mateo cuando lo detecta muy cerca).
+    /// </summary>
+    public void FaceTowards(Vector2 point)
+    {
+        Vector2 dir = point - (Vector2)transform.position;
+        if (dir.sqrMagnitude < 0.0001f) return;
+        lastFaceTowardsTime = Time.time;
+        isLookingAround = false;
+        SetFacingAngle(Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+    }
+
+    private void SetFacingAngle(float angle)
+    {
+        float rad = angle * Mathf.Deg2Rad;
+        lastMoveDirection = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
+
+        if (spriteRenderer != null)
+        {
+            if (lastMoveDirection.x < -0.1f) spriteRenderer.flipX = true;
+            else if (lastMoveDirection.x > 0.1f) spriteRenderer.flipX = false;
+        }
+
+        if (flashlightPivot != null)
+        {
+            flashlightPivot.rotation = Quaternion.Euler(0f, 0f, angle);
         }
     }
 
@@ -205,7 +280,6 @@ public class PatrolAI : MonoBehaviour
     private IEnumerator WaitAtWaypointRoutine()
     {
         isWaiting = true;
-        if (animator != null) animator.SetBool("isMoving", false);
 
         yield return new WaitForSeconds(waitTimeAtWaypoint);
 

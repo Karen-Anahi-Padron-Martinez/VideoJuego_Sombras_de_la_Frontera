@@ -61,6 +61,7 @@ public class WaterSystem : MonoBehaviour
         if (isDehydrated) return;
 
         currentWater = Mathf.Min(maxWater, currentWater + amount);
+        AudioManager.Instance?.PlayDrinkWater();
         Debug.Log($"[WaterSystem] Mateo bebió agua (+{amount:F1}%). Nivel actual: {currentWater:F1}%/{maxWater:F1}%");
         OnWaterChanged?.Invoke(currentWater, maxWater);
     }
@@ -71,25 +72,11 @@ public class WaterSystem : MonoBehaviour
         isDraining = false;
         Debug.Log("[WaterSystem] ¡GAME OVER! Mateo ha colapsado por deshidratación extrema en el desierto.");
 
-        Time.timeScale = 0f;
-
-        // Desactivar movimiento del jugador
-        PlayerController2D controller = GetComponent<PlayerController2D>();
-        if (controller != null)
-        {
-            controller.enabled = false;
-        }
-
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb != null)
-        {
-            rb.linearVelocity = Vector2.zero;
-        }
-
+        // PlayerHealth congela el juego, reproduce la caída y muestra el Game Over (ignora la invulnerabilidad)
         PlayerHealth health = GetComponent<PlayerHealth>();
         if (health != null && !health.isDead)
         {
-            health.TakeDamage(3, DefeatReason.Dehydration);
+            health.Kill(DefeatReason.Dehydration);
         }
 
         OnDehydrationDied?.Invoke();
