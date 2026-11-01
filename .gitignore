@@ -46,3 +46,9 @@ desktop.ini
 Build/
 Builds/
 *.slnx
+# Herramientas y archivos auxiliares locales (scripts generadores de sonidos/sprites, voces TTS)
+/otros/
+
+# Builds exportados (WebGL / PC) dentro del proyecto
+**/BuildWeb/
+SombrasDeLaFrontera/Data/
