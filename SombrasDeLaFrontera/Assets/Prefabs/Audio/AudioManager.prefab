@@ -354,6 +354,36 @@ MonoBehaviour:
   scorpionStingClip: {fileID: 8300000, guid: b37482810fbfc87499cb82aacd6611f6, type: 3}
   spiderSkitterClip: {fileID: 8300000, guid: 7b3a45e61bed975499f5048b0e786701, type: 3}
   spiderHissClip: {fileID: 8300000, guid: 5de404b6f20e71942812aac6a1ab4a48, type: 3}
+  borderNightBGM: {fileID: 8300000, guid: fd26df3affcee5f47a08940bc2058bf7, type: 3}
+  footstepGravelClips:
+  - {fileID: 8300000, guid: f13669c4065103241b25fe1de1917c1d, type: 3}
+  - {fileID: 8300000, guid: f4af640392de6164e9f607ead75300c3, type: 3}
+  - {fileID: 8300000, guid: fefcd3404cd0c7a479e7a03b4a6fd32d, type: 3}
+  - {fileID: 8300000, guid: 8d598ce2b9c640a47ac83a86f0ac82da, type: 3}
+  policeStepClips:
+  - {fileID: 8300000, guid: bcc4b2e49de09f74998e1feb167e73d2, type: 3}
+  - {fileID: 8300000, guid: e919b22f787625e47a805b57af8b8193, type: 3}
+  - {fileID: 8300000, guid: 2a51fd322057f3b4ebe7a8165c883d42, type: 3}
+  policeSuspectClips:
+  - {fileID: 8300000, guid: 6f8fb035a286e0741bb84c184215d270, type: 3}
+  - {fileID: 8300000, guid: 90fa1802f9de9c64a880d9ecb721f934, type: 3}
+  - {fileID: 8300000, guid: 5479e1bab05a3864c86f9833574dc4ad, type: 3}
+  - {fileID: 8300000, guid: a007822d74324244b83e387fbdc328fa, type: 3}
+  policeSpotClips:
+  - {fileID: 8300000, guid: 640d2ecdc4bf495438665a7305f83f38, type: 3}
+  - {fileID: 8300000, guid: d4f07f61676102e4ba2375b753a8e85d, type: 3}
+  - {fileID: 8300000, guid: df6d6e58a717f594ab4ea9e352df07a0, type: 3}
+  - {fileID: 8300000, guid: b4a739145a31fbd4d835b581672226b2, type: 3}
+  - {fileID: 8300000, guid: 90d3c65ff943ff84ea44a14d76c026a4, type: 3}
+  - {fileID: 8300000, guid: b315c63d2dbcf32459494410c3d73a41, type: 3}
+  policeCatchClips:
+  - {fileID: 8300000, guid: 7b81df50086a63d4086b685e508e7f33, type: 3}
+  - {fileID: 8300000, guid: e1215af541e64aa4bb63d09d5a16bf90, type: 3}
+  - {fileID: 8300000, guid: 5a9c38efa3b79fd4c9ecbe9b8762bb63, type: 3}
+  - {fileID: 8300000, guid: ae74a1345fcd43549976a8575029ea81, type: 3}
+  alarmSirenClip: {fileID: 8300000, guid: d35712b5ee85e934d82b306c533eaddb, type: 3}
+  radioStaticClip: {fileID: 8300000, guid: dc7ce4c5dc1539646aaac4b28bf8bc5b, type: 3}
+  searchlightHumClip: {fileID: 8300000, guid: 352fde8769752834893b3fac22f2e791, type: 3}
   fullVolumeDistance: 1.2
   maxHearingDistance: 5
   worldVoices: 10

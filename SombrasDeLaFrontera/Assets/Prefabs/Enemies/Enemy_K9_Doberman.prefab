@@ -183,6 +183,7 @@ MonoBehaviour:
   moveSpeed: 1.1
   waitTimeAtWaypoint: 1.5
   spinAtWaypoints: 540
+  spinDuration: 4.5
   flashlightPivot: {fileID: 0}
   spriteRenderer: {fileID: 2120000000000000}
   isAlerted: 0

@@ -9,6 +9,7 @@ using UnityEngine;
 /// 2. Prefab Assets/Prefabs/Audio/AudioManager.prefab con todos los clips asignados:
 ///    música (menú y desierto), pasos, arena movediza, agua, daño, Game Over, Victoria,
 ///    coyotes (pasos y gritos), perros (ladrido, mordida, ronquido), serpiente, alacrán y araña.
+///    Nivel 3: música de la frontera, pasos en grava, voces y botas de la policía, sirena, radio y zumbido del reflector.
 /// 3. Coloca el AudioManager en el Splash, el Menú Principal y el Nivel 1 (es persistente y no se duplica).
 /// Los sonidos se generaron con otros/generar_sonidos.py.
 /// </summary>
@@ -137,6 +138,18 @@ public static class SetupSonidosEditor
             so.FindProperty("scorpionStingClip").objectReferenceValue = Clip(SFX + "Scorpion_Sting");
             so.FindProperty("spiderSkitterClip").objectReferenceValue = Clip(SFX + "Spider_Skitter");
             so.FindProperty("spiderHissClip").objectReferenceValue = Clip(SFX + "Spider_Hiss");
+
+            // Nivel 3: frontera
+            so.FindProperty("borderNightBGM").objectReferenceValue = Clip(BGM + "Border_Night_Loop");
+            SetArray(so, "footstepGravelClips", Clips(SFX + "Footstep_Gravel", 4));
+            SetArray(so, "policeStepClips", Clips(SFX + "Police_Step", 3));
+            // Voces alternadas: impares = agente de megáfono, pares = agente de radio
+            SetArray(so, "policeSuspectClips", Clips(SFX + "Police_Suspect", 4));
+            SetArray(so, "policeSpotClips", Clips(SFX + "Police_Spot", 6));
+            SetArray(so, "policeCatchClips", Clips(SFX + "Police_Catch", 4));
+            so.FindProperty("alarmSirenClip").objectReferenceValue = Clip(SFX + "Alarm_Siren");
+            so.FindProperty("radioStaticClip").objectReferenceValue = Clip(SFX + "Radio_Static");
+            so.FindProperty("searchlightHumClip").objectReferenceValue = Clip(SFX + "Searchlight_Hum");
             so.ApplyModifiedPropertiesWithoutUndo();
 
             return PrefabUtility.SaveAsPrefabAsset(root, PREFAB_PATH);
