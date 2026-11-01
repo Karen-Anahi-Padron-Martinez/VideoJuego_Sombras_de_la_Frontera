@@ -177,7 +177,7 @@ TextureImporter:
         width: 103
         height: 79
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -199,7 +199,7 @@ TextureImporter:
         width: 109
         height: 79
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -221,7 +221,7 @@ TextureImporter:
         width: 107
         height: 80
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -243,7 +243,7 @@ TextureImporter:
         width: 107
         height: 80
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -265,7 +265,7 @@ TextureImporter:
         width: 105
         height: 79
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -287,7 +287,7 @@ TextureImporter:
         width: 107
         height: 80
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -309,7 +309,7 @@ TextureImporter:
         width: 109
         height: 83
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -331,7 +331,7 @@ TextureImporter:
         width: 109
         height: 81
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -353,7 +353,7 @@ TextureImporter:
         width: 109
         height: 82
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -375,7 +375,7 @@ TextureImporter:
         width: 109
         height: 83
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -397,7 +397,7 @@ TextureImporter:
         width: 108
         height: 82
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -419,7 +419,7 @@ TextureImporter:
         width: 111
         height: 82
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -441,7 +441,7 @@ TextureImporter:
         width: 102
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -463,7 +463,7 @@ TextureImporter:
         width: 101
         height: 95
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -485,7 +485,7 @@ TextureImporter:
         width: 100
         height: 97
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -507,7 +507,7 @@ TextureImporter:
         width: 100
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -529,7 +529,7 @@ TextureImporter:
         width: 11
         height: 15
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -551,7 +551,7 @@ TextureImporter:
         width: 102
         height: 93
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -573,7 +573,7 @@ TextureImporter:
         width: 105
         height: 93
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -586,11 +586,407 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: anim_rottweiler_part1_r2_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4
+        width: 112
+        height: 97
+      alignment: 9
+      pivot: {x: 0.5, y: 0.030927835}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 984d315710fe7ba46834fd057ec59061
+      internalID: 1160260637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_rottweiler_part1_r2_c1
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 4
+        width: 111
+        height: 97
+      alignment: 9
+      pivot: {x: 0.5, y: 0.030927835}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84b2a652c4a18674e801bb4e6d8f367b
+      internalID: 2071892356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_rottweiler_part1_r2_c2
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 4
+        width: 111
+        height: 97
+      alignment: 9
+      pivot: {x: 0.5, y: 0.030927835}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2a1fef612521444f869740f9ab6e0e9
+      internalID: 711084620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_rottweiler_part1_r2_c3
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 4
+        width: 112
+        height: 97
+      alignment: 9
+      pivot: {x: 0.5, y: 0.030927835}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce3f6bae7ea64314085e633f49933ffa
+      internalID: -1926013753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_rottweiler_part1_r2_c4
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 4
+        width: 112
+        height: 97
+      alignment: 9
+      pivot: {x: 0.5, y: 0.030927835}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84dfe62896b690644bd436ffd9ae8ed6
+      internalID: -1223663688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_rottweiler_part1_r2_c5
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 4
+        width: 111
+        height: 97
+      alignment: 9
+      pivot: {x: 0.5, y: 0.030927835}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 601180b1e6d61114ebd7a27f954208b6
+      internalID: 429450207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_rottweiler_part1_r1_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 134
+        width: 112
+        height: 84
+      alignment: 9
+      pivot: {x: 0.5, y: 0.035714287}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd9e5c49cfab6d945b420a6793bb836f
+      internalID: -689867161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_rottweiler_part1_r1_c1
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 134
+        width: 111
+        height: 84
+      alignment: 9
+      pivot: {x: 0.5, y: 0.035714287}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6df146d35bdb34d46858fbcd940f3767
+      internalID: 133089180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_rottweiler_part1_r1_c2
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 134
+        width: 111
+        height: 84
+      alignment: 9
+      pivot: {x: 0.5, y: 0.035714287}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d64eb9d508b16943940b5106bf77d74
+      internalID: 844115827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_rottweiler_part1_r1_c3
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 134
+        width: 112
+        height: 84
+      alignment: 9
+      pivot: {x: 0.5, y: 0.035714287}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7b58992c8001a94aafc792b0fca0689
+      internalID: 44836716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_rottweiler_part1_r1_c4
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 134
+        width: 112
+        height: 84
+      alignment: 9
+      pivot: {x: 0.5, y: 0.035714287}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c480bd0e47a50848a7a674e0fbd7ab8
+      internalID: 740376533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_rottweiler_part1_r1_c5
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 134
+        width: 111
+        height: 84
+      alignment: 9
+      pivot: {x: 0.5, y: 0.035714287}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53d8736dc31d3a34197d4d9bf58fec21
+      internalID: -600575481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_rottweiler_part1_r0_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 267
+        width: 112
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dfc5d422ecc22c4586387573f69c44a
+      internalID: 592054327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_rottweiler_part1_r0_c1
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 267
+        width: 111
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e53249ec46fe084793bfd40eb1928bd
+      internalID: 1175438073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_rottweiler_part1_r0_c2
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 267
+        width: 111
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49c2f0a9569850c4eb91ee9a77b23151
+      internalID: -522456384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_rottweiler_part1_r0_c3
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 267
+        width: 112
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 107daaaeda7f06447bb5cdbc0085fa70
+      internalID: -1477268821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_rottweiler_part1_r0_c4
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 267
+        width: 112
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6729f4c65a5e52c42857305968d8da66
+      internalID: -457424897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_rottweiler_part1_r0_c5
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 267
+        width: 111
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0375}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98da82469ac7afb41b8d258aa7b0dba3
+      internalID: 1925991939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 3213999869cda9c469c6b934ff1ca8c7
     internalID: 0
     vertices: []
     indices: 
@@ -600,6 +996,24 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      anim_rottweiler_part1_r0_c0: 592054327
+      anim_rottweiler_part1_r0_c1: 1175438073
+      anim_rottweiler_part1_r0_c2: -522456384
+      anim_rottweiler_part1_r0_c3: -1477268821
+      anim_rottweiler_part1_r0_c4: -457424897
+      anim_rottweiler_part1_r0_c5: 1925991939
+      anim_rottweiler_part1_r1_c0: -689867161
+      anim_rottweiler_part1_r1_c1: 133089180
+      anim_rottweiler_part1_r1_c2: 844115827
+      anim_rottweiler_part1_r1_c3: 44836716
+      anim_rottweiler_part1_r1_c4: 740376533
+      anim_rottweiler_part1_r1_c5: -600575481
+      anim_rottweiler_part1_r2_c0: 1160260637
+      anim_rottweiler_part1_r2_c1: 2071892356
+      anim_rottweiler_part1_r2_c2: 711084620
+      anim_rottweiler_part1_r2_c3: -1926013753
+      anim_rottweiler_part1_r2_c4: -1223663688
+      anim_rottweiler_part1_r2_c5: 429450207
       rottweiler_part1_0: -3193917727449761391
       rottweiler_part1_1: -8783138883697868630
       rottweiler_part1_10: -8775616476528433007
