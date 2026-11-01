@@ -104,6 +104,9 @@ public class AudioManager : MonoBehaviour
     private float sfxVolume = 0.9f;
     private const float MusicBaseVolume = 0.55f;
 
+    /// <summary>Volumen de efectos elegido por el jugador (para sonidos en bucle propios, como el motor de las lanchas).</summary>
+    public float SfxVolume => sfxVolume;
+
     private readonly List<AudioSource> worldSources = new List<AudioSource>();
     private AudioSource voiceSource;
     private int nextWorldSource;

@@ -85,6 +85,7 @@ public static partial class SetupNivel2Editor
         Directory.CreateDirectory(folder);
 
         EditorSceneManager.OpenScene(SCENE, OpenSceneMode.Single);
+        if (System.Array.IndexOf(args, "-previewBoats") >= 0) PreviewBoatsForCapture();
         Camera cam = Camera.main;
         const int width = 540, height = 960;
         cam.orthographicSize = MAP_WIDTH / 2f / (width / (float)height);
@@ -115,6 +116,42 @@ public static partial class SetupNivel2Editor
         if (Application.isBatchMode) EditorApplication.Exit(0);
     }
 
+    /// <summary>
+    /// Solo para las capturas: mete las lanchas al río (empiezan fuera de la pantalla), arma su reflector
+    /// (normalmente se crea al dar Play) y enciende el brillo de aviso de la primera.
+    /// </summary>
+    private static void PreviewBoatsForCapture()
+    {
+        const System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
+        var coneAwake = typeof(VisionCone2D).GetMethod("Awake", flags);
+        PatrolBoat[] boats = Object.FindObjectsByType<PatrolBoat>(FindObjectsSortMode.InstanceID);
+        for (int i = 0; i < boats.Length; i++)
+        {
+            PatrolBoat boat = boats[i];
+            var so = new SerializedObject(boat);
+            bool left = boat.GetComponentInChildren<SpriteRenderer>().flipX;
+            boat.transform.position = new Vector3(left ? 0.9f : -0.9f, boat.transform.position.y, 0f);
+
+            var pivot = so.FindProperty("reflectorPivot").objectReferenceValue as Transform;
+            Vector2 offset = so.FindProperty("reflectorOffset").vector2Value;
+            pivot.localPosition = new Vector3(left ? -offset.x : offset.x, offset.y, 0f);
+            pivot.rotation = Quaternion.Euler(0f, 0f, left ? 180f : 0f);
+
+            VisionCone2D cone = boat.GetComponentInChildren<VisionCone2D>();
+            coneAwake?.Invoke(cone, null);
+            cone.transform.localRotation = Quaternion.Euler(0f, 0f, i % 2 == 0 ? 35f : -35f);
+            Physics2D.SyncTransforms();
+            typeof(VisionCone2D).GetMethod("UpdateOcclusion", flags)?.Invoke(cone, null);  // Sombra de las coberturas
+
+            if (i == 0)
+            {
+                var glow = so.FindProperty("warningGlow").objectReferenceValue as SpriteRenderer;
+                glow.enabled = true;
+                glow.transform.position = new Vector3(MAP_HALF_W - 0.3f, boat.transform.position.y + 1.6f, 0f);
+            }
+        }
+    }
+
     // =========================================================================
     // CONSTRUCCIÓN
     // =========================================================================
@@ -142,6 +179,7 @@ public static partial class SetupNivel2Editor
         SetupCamera();
         SetupHudAndTexts();
         PlaceHazardsAndPickups();
+        PlaceBoatsAndCovers();
 
         EditorSceneManager.MarkSceneDirty(scene);
         EditorSceneManager.SaveScene(scene);
@@ -269,6 +307,8 @@ public static partial class SetupNivel2Editor
                     "🌊 <b>Nado:</b> En el agua Mateo acelera poco a poco y sigue deslizándose al soltar los controles; calcula tus movimientos.\n\n" +
                     "⚠️ <b>Cuidado:</b> Una vez que te metes al río ya no puedes volver al desierto. Pejelagartos, cocodrilos y serpientes de agua te quitan 1 corazón si te tocan.\n\n" +
                     "🌀 <b>Corrientes:</b> El agua con flechas te arrastra hacia un lado y los rápidos te frenan. Recoge <b>bidones</b> (más velocidad), <b>bolsas impermeables</b> (+1 corazón) y <b>carrizos</b> (aire extra).\n\n" +
+                    "🚤 <b>Lanchas:</b> La Patrulla Fronteriza barre el río con reflectores. Cuando veas un brillo en la orilla, pégate a un <b>tronco</b>, unos <b>juncos</b> o unas <b>ramas</b> <i>del lado contrario a la luz</i>: la sombra te oculta. Del lado equivocado te descubren.\n\n" +
+                    "🚧 <b>Alambrados:</b> Las púas cruzan el río y te quitan 1 corazón si las tocas; busca el hueco. Los animales te detectan si pasas cerca, aunque sea por detrás.\n\n" +
                     "🎯 <b>Objetivo:</b> Cruza el río hacia el norte y pisa la <b>arena de la orilla norte</b>.";
             }
             else if (text.text.Contains("TRAMO 1")) text.text = "SOMBRAS DE LA FRONTERA — TRAMO 2";
