@@ -74,10 +74,12 @@ public class CoyoteAnimation : MonoBehaviour
             if (kind == AlertIndicator.Kind.Question && lastKind == AlertIndicator.Kind.None)
             {
                 AudioManager.Instance?.PlayCoyoteSuspectAt(transform.position, voiceId);
+                AlarmSystem2D.Raise(transform.position);
             }
             else if (kind == AlertIndicator.Kind.Exclamation)
             {
                 AudioManager.Instance?.PlayCoyoteSpotAt(transform.position, voiceId);
+                AlarmSystem2D.Raise(transform.position);
                 AudioManager.Instance?.PlayAlert();
             }
             lastKind = kind;

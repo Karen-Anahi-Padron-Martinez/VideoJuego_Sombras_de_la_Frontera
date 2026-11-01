@@ -336,6 +336,7 @@ public class GuardDogAI : MonoBehaviour
 
         // Dispara la alerta de 5 segundos en todos los coyotes (capturan al instante si ven a Mateo)
         PatrolAI.TriggerDogAlert(coyoteAlertDuration);
+        AlarmSystem2D.Raise(transform.position);
     }
 
     private void StopBarking()

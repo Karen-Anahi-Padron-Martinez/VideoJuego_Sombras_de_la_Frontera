@@ -34,8 +34,11 @@ public class DangerVignette : MonoBehaviour
     {
         if (vignette == null) return;
 
-        float danger = VisionCone2D.MaxDetectionProgress;
+        float danger = Mathf.Max(VisionCone2D.MaxDetectionProgress, SearchlightTower2D.MaxDetectionProgress);
         if (PatrolAI.isHighAlertFromDog) danger = Mathf.Max(danger, 0.5f);
+        // Nivel 3: bajo una lámpara o con una alarma activa los bordes se tiñen un poco de rojo
+        if (LightZone2D.PlayerLit) danger = Mathf.Max(danger, 0.35f);
+        if (AlarmSystem2D.AnyActive) danger = Mathf.Max(danger, 0.25f);
 
         currentDanger = Mathf.MoveTowards(currentDanger, danger, Time.unscaledDeltaTime * blendSpeed);
         vignette.color.Override(Color.Lerp(calmColor, dangerColor, currentDanger));
