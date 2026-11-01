@@ -42,6 +42,10 @@ public class SwimController2D : MonoBehaviour
     [Tooltip("Altura (Y) donde los pies de Mateo pisan la arena de la orilla norte")]
     [SerializeField] private float waterEndY = 33.8f;
 
+    [Header("Sigilo en el Río")]
+    [Tooltip("Distancia máxima (unidades) entre Mateo y un tronco, junco o montón de ramas para contar como pegado a él")]
+    [SerializeField] private float hideDistance = 0.35f;
+
     [Header("Referencias")]
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -53,6 +57,7 @@ public class SwimController2D : MonoBehaviour
     public bool isMoving = false;
     public bool isSwimming = false;
     public bool isDiving = false; // Lo controla DiveController2D (buceo)
+    public bool isHiding = false; // Pegado a un tronco, junco o ramas y a la sombra de los reflectores (CoverZone2D)
 
     // Velocidad del agua de las corrientes en las que está Mateo (suma de todas las zonas que toca)
     private Vector2 currentFlow = Vector2.zero;
@@ -155,6 +160,8 @@ public class SwimController2D : MonoBehaviour
         inWater = feetY >= waterStartY && feetY < waterEndY;
         isSwimming = inWater && isMoving;
 
+        EvaluateCover(feetY);
+
         bool isMovingUp = isMoving && (moveY > 0.1f && moveY >= Mathf.Abs(moveX));
         bool isMovingDown = isMoving && (moveY < -0.1f && Mathf.Abs(moveY) >= Mathf.Abs(moveX));
 
@@ -222,6 +229,49 @@ public class SwimController2D : MonoBehaviour
         rb.linearVelocity = Vector2.Lerp(currentVelocity, targetVelocity, lerpRate * Time.fixedDeltaTime);
     }
 
+    /// <summary>
+    /// Los troncos, juncos y ramas son sólidos y cortan la luz: Mateo queda oculto solo si está pegado a uno
+    /// y, además, ningún reflector que lo alcance lo ve directamente (la cobertura queda entre la luz y él).
+    /// Del lado equivocado de la cobertura lo descubren. Avisa a linternas y reflectores con CoverZone2D.SetPlayerHidden.
+    /// </summary>
+    private void EvaluateCover(float feetY)
+    {
+        bool hidden = false;
+        if (inWater && bodyCollider != null)
+        {
+            var covers = CoverZone2D.ActiveCovers;
+            for (int i = 0; i < covers.Count && !hidden; i++)
+            {
+                if (covers[i] == null) continue;
+                Collider2D solid = covers[i].GetComponent<Collider2D>();
+                if (solid == null || solid.isTrigger) continue;
+                ColliderDistance2D d = bodyCollider.Distance(solid);
+                if (d.isValid && d.distance <= hideDistance) hidden = true;
+            }
+
+            if (hidden)
+            {
+                Vector2 feet = new Vector2(GetFeetPosition().x, feetY);
+                var lights = VisionCone2D.ActiveCones;
+                for (int i = 0; i < lights.Count && hidden; i++)
+                {
+                    VisionCone2D light = lights[i];
+                    if (light == null) continue;
+                    Vector2 origin = light.transform.position;
+                    if (Vector2.Distance(origin, feet) > light.Range + 0.5f) continue;
+                    if (!LightOcclusion2D.IsBlocked(origin, feet)) hidden = false;  // Esta luz lo ve directamente
+                }
+            }
+        }
+
+        if (hidden != isHiding)
+        {
+            Debug.Log($"[SwimController2D] Estado de sigilo de Mateo: {(hidden ? "OCULTO tras una cobertura" : "AL DESCUBIERTO")}");
+        }
+        isHiding = hidden;
+        CoverZone2D.SetPlayerHidden(isHiding);
+    }
+
     /// <summary>Punto de los pies de Mateo (base de su collider).</summary>
     public Vector2 GetFeetPosition()
     {
@@ -238,6 +288,7 @@ public class SwimController2D : MonoBehaviour
         // Al morir o desactivarse, Mateo deja de moverse y de contar como oculto
         movementInput = Vector2.zero;
         isMoving = false;
+        isHiding = false;
         CoverZone2D.SetPlayerHidden(false);
         if (animator != null && animator.runtimeAnimatorController != null)
         {

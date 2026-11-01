@@ -245,5 +245,8 @@ MonoBehaviour:
   patrolHalfWidth: 2
   zigzagAmplitude: 0.5
   zigzagFrequency: 0.6
+  chaseRadius: 1
+  chaseSpeedMultiplier: 1.8
+  chaseLeash: 1.6
   minMapBounds: {x: -2.7, y: 1.5}
   maxMapBounds: {x: 2.7, y: 33.5}

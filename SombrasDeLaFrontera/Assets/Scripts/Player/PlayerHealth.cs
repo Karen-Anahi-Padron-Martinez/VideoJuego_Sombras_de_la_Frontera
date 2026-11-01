@@ -12,7 +12,9 @@ public enum DefeatReason
     SpiderBite,            // Picadura de araña
     SearchlightSpotted,    // Reflector de torre de vigilancia (Nivel 3)
     RiverPredatorBite,     // Pejelagarto o cocodrilo del Río Bravo (Nivel 2)
-    WaterSnakeBite         // Serpiente de agua del Río Bravo (Nivel 2)
+    WaterSnakeBite,        // Serpiente de agua del Río Bravo (Nivel 2)
+    BoatSearchlight,       // Reflector de una lancha de la Patrulla Fronteriza (Nivel 2)
+    BarbedWire             // Alambre de púas en el Río Bravo (Nivel 2)
 }
 
 /// <summary>

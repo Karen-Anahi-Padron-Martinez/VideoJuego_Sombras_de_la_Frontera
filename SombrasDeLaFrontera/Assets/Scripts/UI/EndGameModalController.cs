@@ -114,6 +114,20 @@ public class EndGameModalController : MonoBehaviour
         description = "Una serpiente de agua te mordió al cruzarte en su camino.\n\n🐍 <b>Consejo:</b> Nada en zigzag de orilla a orilla; espera a que se aleje antes de pasar."
     };
 
+    [SerializeField] private DefeatMessageConfig defeatByBoat = new DefeatMessageConfig
+    {
+        title = "¡LA LANCHA TE DESCUBRIÓ!",
+        titleColor = new Color(1f, 0.85f, 0.35f, 1f), // Amarillo reflector
+        description = "El reflector de la Patrulla Fronteriza te alumbró nadando en la superficie.\n\n🚤 <b>Consejo:</b> Cuando veas el brillo en la orilla, escóndete bajo un tronco o entre los juncos, o sumérgete hasta que pase la luz."
+    };
+
+    [SerializeField] private DefeatMessageConfig defeatByBarbedWire = new DefeatMessageConfig
+    {
+        title = "¡ATRAPADO EN EL ALAMBRE DE PÚAS!",
+        titleColor = new Color(0.75f, 0.75f, 0.8f, 1f), // Gris metálico
+        description = "Las púas del alambrado bajo el agua te hirieron una y otra vez.\n\n🚧 <b>Consejo:</b> Cada alambrado tiene un hueco; búscalo con calma y no nades pegado a las púas."
+    };
+
     [SerializeField] private DefeatMessageConfig defeatGeneric = new DefeatMessageConfig
     {
         title = "¡TE HAS QUEDADO SIN VIDAS!",
@@ -235,6 +249,10 @@ public class EndGameModalController : MonoBehaviour
                 return defeatByRiverPredator;
             case DefeatReason.WaterSnakeBite:
                 return defeatByWaterSnake;
+            case DefeatReason.BoatSearchlight:
+                return defeatByBoat;
+            case DefeatReason.BarbedWire:
+                return defeatByBarbedWire;
             default:
                 return defeatGeneric;
         }

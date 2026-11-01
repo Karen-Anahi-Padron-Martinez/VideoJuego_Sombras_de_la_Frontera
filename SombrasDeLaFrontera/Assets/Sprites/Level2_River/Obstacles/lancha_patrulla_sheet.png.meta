@@ -1,0 +1,316 @@
+fileFormatVersion: 2
+guid: 07fd2adb937f0d743b2cee59bdc3ea5d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4583206208092470156
+    second: lancha_patrulla_sheet_0
+  - first:
+      213: -8855057782669564525
+    second: lancha_patrulla_sheet_1
+  - first:
+      213: -3578188690224388445
+    second: lancha_patrulla_sheet_2
+  - first:
+      213: 3641410941120800391
+    second: lancha_patrulla_sheet_3
+  - first:
+      213: 574098488985328896
+    second: lancha_patrulla_sheet_4
+  - first:
+      213: 5106055459550156598
+    second: lancha_patrulla_sheet_5
+  - first:
+      213: -5908522722829455712
+    second: lancha_patrulla_sheet_6
+  - first:
+      213: 6532147762101694196
+    second: lancha_patrulla_sheet_7
+  - first:
+      213: -1752912779642249717
+    second: lancha_patrulla_sheet_8
+  - first:
+      213: 1206224888352317457
+    second: lancha_patrulla_sheet_9
+  - first:
+      213: -7067510216288221322
+    second: lancha_patrulla_sheet_10
+  - first:
+      213: -6153527210192397279
+    second: lancha_patrulla_sheet_11
+  - first:
+      213: -3517150537122612502
+    second: lancha_patrulla_sheet_12
+  - first:
+      213: -5969139738079121431
+    second: lancha_patrulla_sheet_13
+  - first:
+      213: 2178503736076908727
+    second: lancha_patrulla_sheet_14
+  - first:
+      213: 1969290425767607317
+    second: lancha_patrulla_sheet_15
+  - first:
+      213: -2578015731531128071
+    second: lancha_patrulla_sheet_16
+  - first:
+      213: 8194322157370887263
+    second: lancha_patrulla_sheet_17
+  - first:
+      213: -5577622655818638951
+    second: lancha_patrulla_sheet_18
+  - first:
+      213: 5774754224721989833
+    second: lancha_patrulla_sheet_19
+  - first:
+      213: -1875629152233404547
+    second: lancha_patrulla_sheet_20
+  - first:
+      213: -7042075604445258487
+    second: lancha_patrulla_sheet_21
+  - first:
+      213: -3229748626023935179
+    second: lancha_patrulla_sheet_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 118
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: lancha_r0_c0
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 255
+        width: 193
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5489637, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04a61eda1d354714cb722e84877e1142
+      internalID: -146572267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lancha_r0_c1
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 255
+        width: 206
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5774272, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c09f3e9510194fb4f8a22d991b3b3bd4
+      internalID: -1244037169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lancha_r0_c2
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 247
+        width: 209
+        height: 113
+      alignment: 9
+      pivot: {x: 0.5834928, y: 0.59292036}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 745d9a8048943d242843e7d57fff35e3
+      internalID: 2040833450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lancha_r1_c0
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 44
+        width: 273
+        height: 134
+      alignment: 9
+      pivot: {x: 0.68113554, y: 0.6567164}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1cd651cba6abca4ba6821fa4d615a13
+      internalID: 1677837220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lancha_r1_c1
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 45
+        width: 217
+        height: 127
+      alignment: 9
+      pivot: {x: 0.5988479, y: 0.63779527}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f8e2ffbdf794b644b069b2ae24e4756
+      internalID: 659742611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: cb788d68a3fe1a84cae0b3d35388cbac
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      lancha_r0_c0: -146572267
+      lancha_r0_c1: -1244037169
+      lancha_r0_c2: 2040833450
+      lancha_r1_c0: 1677837220
+      lancha_r1_c1: 659742611
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

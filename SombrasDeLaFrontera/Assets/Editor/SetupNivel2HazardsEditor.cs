@@ -48,12 +48,12 @@ public static partial class SetupNivel2Editor
     // Recorrido del río de sur a norte: primero una corriente suave para aprender, luego fauna y contracorrientes alternadas
     private static readonly FaunaSpot[] FaunaLayout =
     {
-        new FaunaSpot("Fauna_Pejelagarto", 7.5f, 1.9f, 1.1f, false),
-        new FaunaSpot("Fauna_SerpienteAgua", 11.0f, 2.0f, 0.9f, true, 0.45f, 0.55f),
-        new FaunaSpot("Fauna_Cocodrilo", 17.0f, 1.6f, 0.7f, false),
-        new FaunaSpot("Fauna_Pejelagarto", 23.5f, 2.0f, 1.4f, true),
-        new FaunaSpot("Fauna_SerpienteAgua", 26.5f, 2.0f, 1.1f, false, 0.5f, 0.7f),
-        new FaunaSpot("Fauna_Pejelagarto", 30.5f, 1.9f, 1.6f, false),
+        new FaunaSpot("Fauna_Pejelagarto", 7.5f, 1.9f, 1.3f, false),
+        new FaunaSpot("Fauna_SerpienteAgua", 11.0f, 2.0f, 1.05f, true, 0.45f, 0.6f),
+        new FaunaSpot("Fauna_Cocodrilo", 17.0f, 1.8f, 0.85f, false),
+        new FaunaSpot("Fauna_Pejelagarto", 23.5f, 2.0f, 1.6f, true),
+        new FaunaSpot("Fauna_SerpienteAgua", 26.5f, 2.0f, 1.25f, false, 0.5f, 0.75f),
+        new FaunaSpot("Fauna_Pejelagarto", 30.5f, 1.9f, 1.9f, false),
     };
 
     private static readonly CurrentSpot[] CurrentLayout =
@@ -66,10 +66,10 @@ public static partial class SetupNivel2Editor
 
     private static readonly (string prefab, Vector2 pos)[] PickupLayout =
     {
-        ("Pickup_Bidon", new Vector2(-1.8f, 9.2f)),
-        ("Pickup_BolsaImpermeable", new Vector2(1.9f, 15.8f)),
+        ("Pickup_Bidon", new Vector2(-2.0f, 8.6f)),
+        ("Pickup_BolsaImpermeable", new Vector2(2.2f, 16.3f)),
         ("Pickup_Carrizo", new Vector2(-1.6f, 18.4f)),
-        ("Pickup_Carrizo", new Vector2(0f, 22.0f)),
+        ("Pickup_Carrizo", new Vector2(-0.2f, 25.4f)),
         ("Pickup_Bidon", new Vector2(1.8f, 25.0f)),
         ("Pickup_BolsaImpermeable", new Vector2(-1.9f, 31.8f)),
     };
@@ -192,19 +192,19 @@ public static partial class SetupNivel2Editor
         Sprite[] garSwim = Pick(gar, "pejelagarto_r0_c0", "pejelagarto_r0_c1", "pejelagarto_r0_c2", "pejelagarto_r0_c3", "pejelagarto_r1_c0", "pejelagarto_r1_c1");
         Sprite[] garBite = Pick(gar, "pejelagarto_r1_c2", "pejelagarto_r1_c3", "pejelagarto_r1_c2");
         BuildFaunaPrefab("Fauna_Pejelagarto", "Pejelagarto", HazardFauna.FaunaType.Gar, HazardFauna.MovePattern.Patrol,
-            garSwim, 8f, garBite, 8f, new Vector2(0.7f, 0.35f));
+            garSwim, 8f, garBite, 8f, new Vector2(0.7f, 0.35f), chaseRadius: 1.2f);
 
         // Cocodrilo: 6 cuadros ondulando; la mordida es una embestida rápida con los mismos cuadros
         Sprite[] crocSwim = Pick(croc, "cocodrilo_r0_c0", "cocodrilo_r0_c1", "cocodrilo_r0_c2", "cocodrilo_r1_c0", "cocodrilo_r1_c1", "cocodrilo_r1_c2");
         Sprite[] crocBite = Pick(croc, "cocodrilo_r0_c1", "cocodrilo_r1_c2", "cocodrilo_r0_c0");
         BuildFaunaPrefab("Fauna_Cocodrilo", "Cocodrilo", HazardFauna.FaunaType.Crocodile, HazardFauna.MovePattern.Patrol,
-            crocSwim, 6f, crocBite, 10f, new Vector2(0.7f, 0.3f));
+            crocSwim, 6f, crocBite, 10f, new Vector2(0.7f, 0.3f), chaseRadius: 1.4f);
 
         // Serpiente de agua: 7 cuadros ondulando
         Sprite[] snakeSwim = Enumerable.Range(0, 7).Select(i => snake.TryGetValue($"serpiente_agua_c{i}", out Sprite s) ? s : null).Where(s => s != null).ToArray();
         Sprite[] snakeBite = snakeSwim.Length >= 2 ? new[] { snakeSwim[0], snakeSwim[1], snakeSwim[0] } : snakeSwim;
         BuildFaunaPrefab("Fauna_SerpienteAgua", "SerpienteAgua", HazardFauna.FaunaType.WaterSnake, HazardFauna.MovePattern.ZigZag,
-            snakeSwim, 8f, snakeBite, 10f, new Vector2(0.6f, 0.35f));
+            snakeSwim, 8f, snakeBite, 10f, new Vector2(0.6f, 0.35f), chaseRadius: 1.0f);
 
         // Consumibles: columna 0 bidón, 1 bolsa impermeable, 2 carrizo; filas = 2 cuadros de las ondas del agua
         BuildPickupPrefab("Pickup_Bidon", PickupItem.ItemType.Bidon, Pick(items, "consumible_r0_c0", "consumible_r1_c0"));
@@ -232,7 +232,7 @@ public static partial class SetupNivel2Editor
     }
 
     private static void BuildFaunaPrefab(string prefabName, string creature, HazardFauna.FaunaType type, HazardFauna.MovePattern pattern,
-        Sprite[] swim, float swimFps, Sprite[] bite, float biteFps, Vector2 bodyFactor)
+        Sprite[] swim, float swimFps, Sprite[] bite, float biteFps, Vector2 bodyFactor, float chaseRadius)
     {
         if (swim.Length == 0) { Debug.LogError($"[Nivel2] Sin cuadros para {creature}."); return; }
 
@@ -268,6 +268,9 @@ public static partial class SetupNivel2Editor
         so.FindProperty("attackReachBonus").floatValue = 0.15f;
         so.FindProperty("canWander").boolValue = false;
         so.FindProperty("turnDuration").floatValue = 0.5f;
+        so.FindProperty("chaseRadius").floatValue = chaseRadius;        // Detecta a Mateo alrededor (también por detrás)
+        so.FindProperty("chaseSpeedMultiplier").floatValue = 1.8f;
+        so.FindProperty("chaseLeash").floatValue = 1.6f;
         so.FindProperty("minMapBounds").vector2Value = FaunaMinBounds;
         so.FindProperty("maxMapBounds").vector2Value = FaunaMaxBounds;
         so.ApplyModifiedPropertiesWithoutUndo();
@@ -413,11 +416,11 @@ public static partial class SetupNivel2Editor
     /// Rebana una hoja con filas de figuras separadas por transparencia. Los nombres quedan como "prefijo_rFila_cColumna"
     /// (fila 0 = la de arriba). El PPU se calcula para que el cuadro típico mida targetWidth (o targetHeight) unidades.
     /// </summary>
-    private static void SliceSheet(string texPath, string prefix, int[] expectedPerRow, float targetWidth = 0f, float targetHeight = 0f, bool fullRect = false, float inset = 0f)
+    private static void SliceSheet(string texPath, string prefix, int[] expectedPerRow, float targetWidth = 0f, float targetHeight = 0f, bool fullRect = false, float inset = 0f, int mergeMargin = 9)
     {
         if (!File.Exists(texPath)) { Debug.LogError($"[Nivel2] No existe {texPath}."); return; }
 
-        List<RectInt> boxes = DetectFigures(texPath, out int texW, out int texH);
+        List<RectInt> boxes = DetectFigures(texPath, out int texW, out int texH, null, mergeMargin);
         List<List<RectInt>> rows = ArrangeRows(boxes);
         if (rows.Count != expectedPerRow.Length || rows.Where((r, i) => r.Count != expectedPerRow[i]).Any())
         {
@@ -676,7 +679,11 @@ public static partial class SetupNivel2Editor
     /// <summary>
     /// Agrega o actualiza sprites en la hoja sin tocar los cortes existentes (conserva sus IDs y referencias).
     /// </summary>
-    private static void WriteSpriteRects(string texPath, List<(string name, Rect rect)> cells)
+    private static void WriteSpriteRects(string texPath, List<(string name, Rect rect)> cells) =>
+        WriteSpriteRects(texPath, cells.Select(c => (c.name, c.rect, new Vector2(0.5f, 0.5f))).ToList());
+
+    /// <summary>Igual que la anterior, con un pivote propio para cada cuadro (fracciones del rectángulo).</summary>
+    private static void WriteSpriteRects(string texPath, List<(string name, Rect rect, Vector2 pivot)> cells)
     {
         TextureImporter importer = AssetImporter.GetAtPath(texPath) as TextureImporter;
         if (importer == null) return;
@@ -706,8 +713,9 @@ public static partial class SetupNivel2Editor
             }
 
             spriteRect.rect = cell.rect;
-            spriteRect.alignment = SpriteAlignment.Center;
-            spriteRect.pivot = new Vector2(0.5f, 0.5f);
+            bool centered = Mathf.Approximately(cell.pivot.x, 0.5f) && Mathf.Approximately(cell.pivot.y, 0.5f);
+            spriteRect.alignment = centered ? SpriteAlignment.Center : SpriteAlignment.Custom;
+            spriteRect.pivot = cell.pivot;
             spriteRect.border = Vector4.zero;
 
             if (!pairs.Any(p => p.name == cell.name)) pairs.Add(new SpriteNameFileIdPair(cell.name, spriteRect.spriteID));
@@ -805,7 +813,8 @@ public static partial class SetupNivel2Editor
                     Debug.LogWarning($"[Nivel2][FALLA] {areas[i].name} se encima con {areas[j].name}");
                     problems++;
                 }
-        Expect(true, $"Revisadas {areas.Count} zonas de fauna, corrientes y consumibles para que no se encimen");
+        problems += VerifyBoatsAndCovers(areas);
+        Expect(true, $"Revisadas {areas.Count} zonas de fauna, corrientes, consumibles, lanchas y coberturas para que no se encimen");
 
         return problems;
     }

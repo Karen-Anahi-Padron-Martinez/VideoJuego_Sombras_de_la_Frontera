@@ -373,6 +373,336 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: tronco_c0
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 842
+        width: 190
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f17584a058db9db488ecdc70eed5ad14
+      internalID: -846297104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tronco_c1
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 842
+        width: 255
+        height: 133
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cd9fcf7ee73f9d48aac028fb1ddb261
+      internalID: 1561145085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tronco_c2
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 813
+        width: 248
+        height: 168
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e94df3f773c7e1449610d1efcd3f912
+      internalID: -1909115340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tronco_c3
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 797
+        width: 195
+        height: 217
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3d56170772983d46a960f7d1563c864
+      internalID: -1858450898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tronco_c4
+      rect:
+        serializedVersion: 2
+        x: 1010
+        y: 796
+        width: 240
+        height: 218
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bc669fb18ec35d4ca16d8dde7249287
+      internalID: -294371271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tronco_c5
+      rect:
+        serializedVersion: 2
+        x: 1267
+        y: 806
+        width: 240
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0057b385cc7d4d249857fc916b07e4cb
+      internalID: -1461031449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_c0
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 574
+        width: 228
+        height: 225
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55b2fc67f729cb144b1689a814660639
+      internalID: -1125313093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_c1
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 602
+        width: 256
+        height: 167
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 090a2bf7f7e554b41ae987f42367992a
+      internalID: -809819288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_c2
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 593
+        width: 228
+        height: 206
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2eef6e918c9c2fe48a042fe4746a9024
+      internalID: -1240927619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_c3
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 576
+        width: 214
+        height: 199
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bc316d23ba78f64a872658020362d33
+      internalID: -755269563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_c4
+      rect:
+        serializedVersion: 2
+        x: 1013
+        y: 574
+        width: 270
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01729a4eeaf2b82489519a6a86d9f9a3
+      internalID: -1161853298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ramas_c5
+      rect:
+        serializedVersion: 2
+        x: 1299
+        y: 575
+        width: 214
+        height: 193
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e3047ad768fec542a63a4e108af97c3
+      internalID: -1054196036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alambre_c0
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 32
+        width: 522
+        height: 145
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09e7c8d4f23d285479b0a7897454cd2e
+      internalID: -1103874733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alambre_c1
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 29
+        width: 434
+        height: 149
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a0bdb3af700fd143ad77d46df4e0f22
+      internalID: 1948031664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alambre_c2
+      rect:
+        serializedVersion: 2
+        x: 1075
+        y: 27
+        width: 421
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eea7c025cf41f53429bcdffffdb2dda8
+      internalID: -1643333521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -387,6 +717,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      alambre_c0: -1103874733
+      alambre_c1: 1948031664
+      alambre_c2: -1643333521
+      ramas_c0: -1125313093
+      ramas_c1: -809819288
+      ramas_c2: -1240927619
+      ramas_c3: -755269563
+      ramas_c4: -1161853298
+      ramas_c5: -1054196036
       serpiente_agua_c0: 1393490015
       serpiente_agua_c1: 1318146719
       serpiente_agua_c2: 1191026546
@@ -394,6 +733,12 @@ TextureImporter:
       serpiente_agua_c4: 558549815
       serpiente_agua_c5: 1452166047
       serpiente_agua_c6: -1860183147
+      tronco_c0: -846297104
+      tronco_c1: 1561145085
+      tronco_c2: -1909115340
+      tronco_c3: -1858450898
+      tronco_c4: -294371271
+      tronco_c5: -1461031449
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

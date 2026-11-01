@@ -89,6 +89,15 @@ public class HazardFauna : MonoBehaviour
     [Tooltip("Ondulaciones completas del zigzag por segundo")]
     [SerializeField] private float zigzagFrequency = 0.6f;
 
+    [Tooltip("Distancia (en cualquier dirección, también por detrás) a la que detecta a Mateo y sale a perseguirlo (0 = no persigue)")]
+    [SerializeField] private float chaseRadius = 0f;
+
+    [Tooltip("Multiplicador de velocidad mientras persigue a Mateo")]
+    [SerializeField] private float chaseSpeedMultiplier = 1.8f;
+
+    [Tooltip("Qué tanto se aleja de su carril (arriba o abajo) para perseguir a Mateo antes de rendirse")]
+    [SerializeField] private float chaseLeash = 1.6f;
+
     [Header("Límites del Mapa")]
     [Tooltip("Límite inferior izquierdo del desierto caminable")]
     [SerializeField] private Vector2 minMapBounds = new Vector2(-2.7f, 2.5f);
@@ -114,6 +123,9 @@ public class HazardFauna : MonoBehaviour
     private PlayerHealth playerHealth;
     private Collider2D playerCollider;
     private float swimPhase = 0f;
+    private bool isChasing = false;
+    private float laneOffsetY = 0f;
+    private readonly Collider2D[] solidHits = new Collider2D[8];
 
     public FaunaType Type => faunaType;
     private bool IsSwimmer => movePattern != MovePattern.Wander;
@@ -256,6 +268,8 @@ public class HazardFauna : MonoBehaviour
     {
         if (isAttacking || isTurning || spriteRenderer == null) return;
 
+        if (UpdateChase()) return;
+
         float dir = spriteRenderer.flipX ? -1f : 1f;
         float minX = Mathf.Max(spawnPosition.x - patrolHalfWidth, minMapBounds.x);
         float maxX = Mathf.Min(spawnPosition.x + patrolHalfWidth, maxMapBounds.x);
@@ -263,25 +277,97 @@ public class HazardFauna : MonoBehaviour
         Vector2 pos = transform.position;
         pos.x += dir * moveSpeed * Time.deltaTime;
 
+        // Al llegar al extremo de su carril da la vuelta (sin saltos, aunque regrese de perseguir a Mateo fuera del carril)
         if ((dir > 0f && pos.x >= maxX) || (dir < 0f && pos.x <= minX))
         {
-            pos.x = Mathf.Clamp(pos.x, minX, maxX);
             StartCoroutine(TurnRoutine(!spriteRenderer.flipX, turnDuration));
         }
 
-        if (movePattern == MovePattern.ZigZag)
-        {
-            float previousY = pos.y;
-            swimPhase += Time.deltaTime * zigzagFrequency * Mathf.PI * 2f;
-            pos.y = spawnPosition.y + Mathf.Sin(swimPhase) * zigzagAmplitude;
+        float previousY = pos.y;
+        if (movePattern == MovePattern.ZigZag) swimPhase += Time.deltaTime * zigzagFrequency * Mathf.PI * 2f;
 
-            // Inclinar el cuerpo hacia donde ondula (los sprites miran a la derecha)
+        // Después de una persecución regresa poco a poco a la altura de su carril
+        laneOffsetY = Mathf.MoveTowards(laneOffsetY, 0f, moveSpeed * 0.8f * Time.deltaTime);
+        pos.y = LaneY() + laneOffsetY;
+
+        if (movePattern == MovePattern.ZigZag || Mathf.Abs(laneOffsetY) > 0.01f)
+        {
+            // Inclinar el cuerpo hacia donde ondula o regresa (los sprites miran a la derecha)
             float slope = (pos.y - previousY) / Mathf.Max(0.0001f, moveSpeed * Time.deltaTime);
             float angle = Mathf.Clamp(Mathf.Atan(slope) * Mathf.Rad2Deg, -30f, 30f);
             transform.rotation = Quaternion.Euler(0f, 0f, angle * dir);
         }
+        else
+        {
+            transform.rotation = Quaternion.identity;
+        }
 
         transform.position = pos;
+    }
+
+    /// <summary>Altura de su recorrido normal en este momento (con la ondulación del zigzag).</summary>
+    private float LaneY() =>
+        spawnPosition.y + (movePattern == MovePattern.ZigZag ? Mathf.Sin(swimPhase) * zigzagAmplitude : 0f);
+
+    /// <summary>
+    /// Detección de la fauna del río: si Mateo pasa cerca (también por detrás), lo encara y lo persigue más rápido
+    /// sin salirse del agua ni atravesar troncos, juncos, ramas o alambrados. Se rinde si Mateo se aleja o sale de su zona,
+    /// y entonces vuelve a su carril. Devuelve verdadero mientras persigue.
+    /// </summary>
+    private bool UpdateChase()
+    {
+        if (chaseRadius <= 0f || playerHealth == null || playerHealth.isDead)
+        {
+            isChasing = false;
+            return false;
+        }
+
+        Vector2 target = playerCollider != null ? (Vector2)playerCollider.bounds.center : (Vector2)playerHealth.transform.position;
+        float zoneMinX = Mathf.Max(spawnPosition.x - patrolHalfWidth, minMapBounds.x) - 0.5f;
+        float zoneMaxX = Mathf.Min(spawnPosition.x + patrolHalfWidth, maxMapBounds.x) + 0.5f;
+        bool inZone = Mathf.Abs(target.y - spawnPosition.y) <= chaseLeash && target.x >= zoneMinX && target.x <= zoneMaxX &&
+                      target.y >= minMapBounds.y && target.y <= maxMapBounds.y;
+        float distance = DistanceToPlayer();
+
+        if (!isChasing && inZone && distance <= chaseRadius)
+        {
+            isChasing = true;
+            AudioManager.Instance?.PlayFaunaAlertAt(faunaType, transform.position);
+            Debug.Log($"[HazardFauna] {gameObject.name} detectó a Mateo y lo persigue.");
+        }
+        else if (isChasing && (!inZone || distance > chaseRadius * 1.8f))
+        {
+            isChasing = false;
+            laneOffsetY = transform.position.y - LaneY();
+            Debug.Log($"[HazardFauna] {gameObject.name} perdió a Mateo y regresa a su carril.");
+        }
+        if (!isChasing) return false;
+
+        Vector2 pos = transform.position;
+        Vector2 toTarget = target - pos;
+        if (toTarget.sqrMagnitude < 0.0001f) return true;
+
+        spriteRenderer.flipX = toTarget.x < 0f;
+        Vector2 next = pos + toTarget.normalized * (moveSpeed * chaseSpeedMultiplier * Time.deltaTime);
+        next.x = Mathf.Clamp(next.x, minMapBounds.x, maxMapBounds.x);
+        next.y = Mathf.Clamp(next.y, minMapBounds.y, maxMapBounds.y);
+        if (!BlockedBySolid(next)) transform.position = next;
+
+        float angle = Mathf.Clamp(Mathf.Atan2(toTarget.y, Mathf.Abs(toTarget.x)) * Mathf.Rad2Deg, -35f, 35f);
+        transform.rotation = Quaternion.Euler(0f, 0f, spriteRenderer.flipX ? -angle : angle);
+        return true;
+    }
+
+    /// <summary>Verdadero si en ese punto hay un obstáculo sólido (tronco, juncos, ramas, alambrado o pared del río).</summary>
+    private bool BlockedBySolid(Vector2 point)
+    {
+        int count = Physics2D.OverlapCircle(point, 0.15f, ContactFilter2D.noFilter, solidHits);
+        for (int i = 0; i < count; i++)
+        {
+            Collider2D c = solidHits[i];
+            if (c != null && !c.isTrigger && c.attachedRigidbody == null) return true;
+        }
+        return false;
     }
 
     /// <summary>
