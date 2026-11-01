@@ -174,7 +174,7 @@ TextureImporter:
         width: 79
         height: 118
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -196,7 +196,7 @@ TextureImporter:
         width: 78
         height: 118
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -218,7 +218,7 @@ TextureImporter:
         width: 79
         height: 118
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -240,7 +240,7 @@ TextureImporter:
         width: 77
         height: 118
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -262,7 +262,7 @@ TextureImporter:
         width: 62
         height: 119
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -284,7 +284,7 @@ TextureImporter:
         width: 70
         height: 118
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -306,7 +306,7 @@ TextureImporter:
         width: 77
         height: 122
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -328,7 +328,7 @@ TextureImporter:
         width: 77
         height: 122
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -350,7 +350,7 @@ TextureImporter:
         width: 78
         height: 122
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -372,7 +372,7 @@ TextureImporter:
         width: 78
         height: 122
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -394,7 +394,7 @@ TextureImporter:
         width: 77
         height: 122
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -416,7 +416,7 @@ TextureImporter:
         width: 76
         height: 122
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -438,7 +438,7 @@ TextureImporter:
         width: 129
         height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -460,7 +460,7 @@ TextureImporter:
         width: 128
         height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -482,7 +482,7 @@ TextureImporter:
         width: 129
         height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -504,7 +504,7 @@ TextureImporter:
         width: 129
         height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -526,7 +526,7 @@ TextureImporter:
         width: 127
         height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -548,7 +548,7 @@ TextureImporter:
         width: 99
         height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -561,11 +561,407 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: anim_police_part1_r2_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 112
+        height: 125
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c47c564bac0f1b3418726bc7c9229bc9
+      internalID: -2003176177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_part1_r2_c1
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 111
+        height: 125
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d410565e6840164e969e69952ab8a53
+      internalID: -1918040539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_part1_r2_c2
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 0
+        width: 111
+        height: 125
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cf5fcbede4bca647b3d067b47bf068a
+      internalID: 180522628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_part1_r2_c3
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 0
+        width: 112
+        height: 125
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 395919c16e1d6e34e8a15ff16c8921f1
+      internalID: -436785935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_part1_r2_c4
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 0
+        width: 112
+        height: 125
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89968a3dbb950bf4d89433d1f9d475e8
+      internalID: 463735997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_part1_r2_c5
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 0
+        width: 111
+        height: 125
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49320005c00c5bc40aa2e46db52addb5
+      internalID: 1093509619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_part1_r1_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 125
+        width: 112
+        height: 124
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024193548}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5c47bd0608d6b84d96aacd1d1283b92
+      internalID: -2034282792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_part1_r1_c1
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 125
+        width: 111
+        height: 124
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024193548}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fcf8b94946d31a4d8c044e7c53410e9
+      internalID: 1447791373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_part1_r1_c2
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 125
+        width: 111
+        height: 124
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024193548}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 993f046bc5d52cf4f8e0d4402f8fdd56
+      internalID: 1549265712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_part1_r1_c3
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 125
+        width: 112
+        height: 124
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024193548}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 355a9989bf149e849a513ab70a525734
+      internalID: -719548207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_part1_r1_c4
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 125
+        width: 112
+        height: 124
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024193548}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0209adf09b83a404daae556fee86de8e
+      internalID: -415111514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_part1_r1_c5
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 125
+        width: 111
+        height: 124
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024193548}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0944ad224e30dc4aafdee08eb739645
+      internalID: 949227586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_part1_r0_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 249
+        width: 112
+        height: 125
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 028595d24eb22614584912cbd7ee96f4
+      internalID: 749620928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_part1_r0_c1
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 249
+        width: 111
+        height: 125
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb662fe1a2c0c544e93de82b2754ef93
+      internalID: -904911128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_part1_r0_c2
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 249
+        width: 111
+        height: 125
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 230f37e28f7fd1b4aa1b5a8abe0174e5
+      internalID: -1910166773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_part1_r0_c3
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 249
+        width: 112
+        height: 125
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 347cd1e7b1571d74c974b80661b226a7
+      internalID: -1299058426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_part1_r0_c4
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 249
+        width: 112
+        height: 125
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a0daaf3c941f054aa4df0ab394ca362
+      internalID: -476196156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_part1_r0_c5
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 249
+        width: 111
+        height: 125
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae5765b2a62d33a48a7862e4dd90318d
+      internalID: -1529501027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 1899815039ce7f84f8e8454148756586
     internalID: 0
     vertices: []
     indices: 
@@ -575,6 +971,24 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      anim_police_part1_r0_c0: 749620928
+      anim_police_part1_r0_c1: -904911128
+      anim_police_part1_r0_c2: -1910166773
+      anim_police_part1_r0_c3: -1299058426
+      anim_police_part1_r0_c4: -476196156
+      anim_police_part1_r0_c5: -1529501027
+      anim_police_part1_r1_c0: -2034282792
+      anim_police_part1_r1_c1: 1447791373
+      anim_police_part1_r1_c2: 1549265712
+      anim_police_part1_r1_c3: -719548207
+      anim_police_part1_r1_c4: -415111514
+      anim_police_part1_r1_c5: 949227586
+      anim_police_part1_r2_c0: -2003176177
+      anim_police_part1_r2_c1: -1918040539
+      anim_police_part1_r2_c2: 180522628
+      anim_police_part1_r2_c3: -436785935
+      anim_police_part1_r2_c4: 463735997
+      anim_police_part1_r2_c5: 1093509619
       police_part1_0: 5381578657736717200
       police_part1_1: -4080182624145744670
       police_part1_10: -3648385732440187962

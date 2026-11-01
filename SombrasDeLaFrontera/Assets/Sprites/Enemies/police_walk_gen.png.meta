@@ -1,0 +1,426 @@
+fileFormatVersion: 2
+guid: 0fd9575f2bc04c54ea68452c7990a650
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6318108253818911336
+    second: police_walk_gen_0
+  - first:
+      213: 6646502664824546498
+    second: police_walk_gen_1
+  - first:
+      213: -3199712367849737820
+    second: police_walk_gen_2
+  - first:
+      213: -3025160920198576608
+    second: police_walk_gen_3
+  - first:
+      213: 1591017812937938543
+    second: police_walk_gen_4
+  - first:
+      213: -6481895781638971465
+    second: police_walk_gen_5
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: police_walk_gen_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 3
+        width: 79
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89509a694029158a0800000000000000
+      internalID: -6318108253818911336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: police_walk_gen_1
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 3
+        width: 78
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c4ed8f75fe1d3c50800000000000000
+      internalID: 6646502664824546498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: police_walk_gen_2
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 3
+        width: 79
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a174e2ed865893d0800000000000000
+      internalID: -3199712367849737820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: police_walk_gen_3
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 4
+        width: 77
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0268b2bcb287406d0800000000000000
+      internalID: -3025160920198576608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: police_walk_gen_4
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 3
+        width: 77
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f661c73754e641610800000000000000
+      internalID: 1591017812937938543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: police_walk_gen_5
+      rect:
+        serializedVersion: 2
+        x: 590
+        y: 3
+        width: 70
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bf5e40112eab06a0800000000000000
+      internalID: -6481895781638971465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_walk_gen_r0_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 112
+        height: 121
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024793388}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e797dbff969c1d468c03d7942ba9723
+      internalID: 218989314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_walk_gen_r0_c1
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 1
+        width: 112
+        height: 121
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024793388}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82eba62ca20d39b4cbc16378c043da4c
+      internalID: -1738946238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_walk_gen_r0_c2
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 1
+        width: 112
+        height: 121
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024793388}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c9c90e6f7161864ba58995483374b14
+      internalID: 1432508410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_walk_gen_r0_c3
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 1
+        width: 112
+        height: 121
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024793388}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8430dc70dc8612428410da7c629c781
+      internalID: -161555888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_walk_gen_r0_c4
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 1
+        width: 112
+        height: 121
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024793388}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6f72d2ae2a05ac4986ee0ce194a119a
+      internalID: -960758863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_police_walk_gen_r0_c5
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 1
+        width: 112
+        height: 121
+      alignment: 9
+      pivot: {x: 0.5, y: 0.024793388}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa0bacb220db7cd4c83c773a39397a7d
+      internalID: 309256318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 60d2e441ccdc83541b37cbc273272bd3
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      anim_police_walk_gen_r0_c0: 218989314
+      anim_police_walk_gen_r0_c1: -1738946238
+      anim_police_walk_gen_r0_c2: 1432508410
+      anim_police_walk_gen_r0_c3: -161555888
+      anim_police_walk_gen_r0_c4: -960758863
+      anim_police_walk_gen_r0_c5: 309256318
+      police_walk_gen_0: -6318108253818911336
+      police_walk_gen_1: 6646502664824546498
+      police_walk_gen_2: -3199712367849737820
+      police_walk_gen_3: -3025160920198576608
+      police_walk_gen_4: 1591017812937938543
+      police_walk_gen_5: -6481895781638971465
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
