@@ -45,7 +45,7 @@ public static class SetupNivel3Editor
     private const float MAP_TOP_Y = 35.6f;
     private const float MAP_HALF_W = 2.86f;
 
-    private enum Kind { Solid, Lamp }
+    private enum Kind { Solid, Lamp, Tower }
 
     private class ObstacleDef
     {
@@ -83,7 +83,7 @@ public static class SetupNivel3Editor
         new ObstacleDef("malla_recta",            Kind.Solid, 0.70f, 1.00f, 0.12f, false),
         new ObstacleDef("malla_esquina",          Kind.Solid, 0.70f, 1.00f, 0.12f, false),
         new ObstacleDef("porton",                 Kind.Solid, 0.70f, 1.00f, 0.12f, false),
-        new ObstacleDef("torre_vigilancia",       Kind.Solid, 0.95f, 0.75f, 0.10f, false),
+        new ObstacleDef("torre_vigilancia",       Kind.Tower, 0.95f, 0.75f, 0.10f, false),
         new ObstacleDef("poste_luz",              Kind.Lamp,  0.80f, 0.22f, 0.05f, false),
 
         // Vegetación y rocas del desierto del Nivel 1 (mismo sprite, escala y cobertura que allá)
@@ -116,7 +116,7 @@ public static class SetupNivel3Editor
         ("generador", 1.15f, 10.2f, false),
         ("patrulla_pickup", -1.8f, 12.0f, false),
         ("barriles", 2.2f, 11.3f, true),
-        ("poste_luz", 0.5f, 12.7f, false),
+        ("poste_luz", -0.9f, 12.55f, false),   // Ilumina la ruta del policía del patio
         ("cajas_madera", 1.4f, 13.6f, false),
         ("generador", -0.4f, 13.9f, false),
         ("contenedor_basura", 2.2f, 15.0f, false),
@@ -124,7 +124,7 @@ public static class SetupNivel3Editor
         ("barrera_concreto", 0.6f, 15.8f, false),
         ("tarimas", 1.9f, 16.9f, false),
         ("barril_tirado", -0.3f, 17.0f, true),
-        ("poste_luz", -2.45f, 17.4f, false),
+        ("poste_luz", 0.75f, 16.6f, false),    // Ilumina la ruta vertical del policía central
         ("costales", -1.4f, 17.8f, false),
         ("barrera_concreto_doble", -2.1f, 19.3f, false),
         ("barrera_concreto", -0.8f, 19.5f, false),
@@ -133,7 +133,7 @@ public static class SetupNivel3Editor
         ("arbusto_seco_l3", 2.5f, 20.2f, false),
         ("contenedor_azul", -1.9f, 21.5f, false),
         ("barriles", 0.0f, 21.6f, false),
-        ("poste_luz", 1.0f, 22.0f, false),
+        ("poste_luz", 0.1f, 23.05f, false),    // Cruce del estacionamiento de contenedores
         ("contenedor_rojo", 1.8f, 23.2f, false),
         ("cajas_madera", -0.8f, 23.6f, false),
         ("tarimas", -2.3f, 24.4f, false),
@@ -144,14 +144,15 @@ public static class SetupNivel3Editor
         ("cajas_madera", 2.3f, 27.0f, true),
         ("patrulla_pickup", 0.3f, 27.6f, true),
         ("barril_tirado", -2.3f, 27.8f, false),
-        ("poste_luz", -0.9f, 28.6f, false),
+        ("poste_luz", -0.4f, 8.9f, false),     // Paso abierto de la malla (vigilado desde el desierto)
         ("torre_vigilancia", -2.3f, 29.3f, false),
         ("contenedor_basura", 0.7f, 29.8f, true),
         ("barrera_concreto_doble", -1.0f, 30.8f, false),
         ("torre_vigilancia", 2.35f, 30.4f, false),
+        ("torre_vigilancia", 2.5f, 17.95f, false),
         ("costales", 1.5f, 31.4f, false),
         ("generador", -2.2f, 31.9f, false),
-        ("poste_luz", -0.9f, 32.3f, false),
+        ("poste_luz", 0.75f, 32.3f, false),    // Llegada al hueco del muro
         ("barriles", 2.4f, 32.3f, false),
         // Vegetación y rocas del desierto (acomodadas con otros/nivel3/desierto_extra.py)
         ("cactus_l1", -0.21f, 3.28f, false),
@@ -232,6 +233,15 @@ public static class SetupNivel3Editor
         ("Botella", -0.23f, 26.18f),
         ("Botella", -1.54f, 29.94f),
         ("Cantimplora", 1.68f, 32.06f),
+    };
+
+    // Reflectores de las torres: posición de la torre, dirección central, amplitud (±grados), periodo (s) y desfase.
+    // Las dos torres del muro se alternan para dejar momentos seguros para cruzar.
+    private static readonly (float x, float y, float center, float range, float period, float phase)[] Searchlights =
+    {
+        (2.5f, 17.95f, 195f, 40f, 7.5f, 0.00f),   // Patio: barre hacia la izquierda y abajo
+        (-2.3f, 29.3f, -10f, 40f, 7.0f, 0.00f),   // Muro, lado izquierdo
+        (2.35f, 30.4f, 190f, 40f, 7.0f, 0.50f),   // Muro, lado derecho (a contratiempo)
     };
 
     // Objetos del Nivel 1 que se conservan (todo lo demás se quita)
@@ -346,6 +356,7 @@ public static class SetupNivel3Editor
         SetupLighting();
         SetupPostProcess(profile);
         SetupPlayerAndTexts();
+        SetupAlarmAndHud();
         PlaceEnemiesAndResources();
 
         EditorSceneManager.MarkSceneDirty(scene);
@@ -425,6 +436,7 @@ public static class SetupNivel3Editor
             ysort.baseOrder = 5000;
 
             if (def.kind == Kind.Lamp) AddLampLight(go, local);
+            if (def.kind == Kind.Tower) AddSearchlight(go, local);
             go.transform.localScale = new Vector3(def.scale, def.scale, 1f);
 
             string path = $"{PREFAB_DIR}/{def.name}.prefab";
@@ -438,9 +450,39 @@ public static class SetupNivel3Editor
     /// Luz del poste: una Light2D que ilumina a personajes y objetos cercanos, un charco de luz cálida en el suelo
     /// y un brillo en el foco (estos dos son sprites sin iluminación, así se ven encendidos en todo momento).
     /// </summary>
+    /// <summary>Reflector en la base de la torre: haz que barre el suelo (SearchlightTower2D) con su luz 2D.</summary>
+    private static void AddSearchlight(GameObject towerObj, Bounds local)
+    {
+        var beam = new GameObject("Reflector");
+        beam.transform.SetParent(towerObj.transform, false);
+        beam.transform.localPosition = new Vector3(local.center.x - 0.12f, local.max.y - 0.55f, 0f);
+        beam.AddComponent<MeshFilter>();
+        beam.AddComponent<MeshRenderer>();
+        beam.AddComponent<SearchlightTower2D>();
+
+        var lightObj = new GameObject("Luz_Reflector");
+        lightObj.transform.SetParent(beam.transform, false);
+        Light2D light = lightObj.AddComponent<Light2D>();
+        light.lightType = Light2D.LightType.Point;
+        light.color = new Color(1f, 0.97f, 0.8f, 1f);
+        light.intensity = 1.1f;
+        light.pointLightInnerRadius = 0.2f;
+        light.pointLightOuterRadius = 3.6f;
+        light.pointLightOuterAngle = 22f;
+        light.pointLightInnerAngle = 10f;
+        light.falloffIntensity = 0.6f;
+        SetTargetLayers(light, SortingLayer.layers.Select(l => l.id));
+    }
+
     private static void AddLampLight(GameObject lampObj, Bounds local)
     {
         float groundY = local.min.y + 0.05f;
+
+        // Zona iluminada: dentro de ella las patrullas detectan más rápido a Mateo
+        var zone = new GameObject("Zona_Luz");
+        zone.transform.SetParent(lampObj.transform, false);
+        zone.transform.localPosition = new Vector3(LampHead.x, groundY + 0.1f, 0f);
+        zone.AddComponent<LightZone2D>();
 
         var lightObj = new GameObject("Luz");
         lightObj.transform.SetParent(lampObj.transform, false);
@@ -588,7 +630,50 @@ public static class SetupNivel3Editor
             go.transform.position = new Vector3(x, baseY + halfH, 0f);
             if (flip) sr.flipX = true;
             go.GetComponent<YSort2D>().UpdateSortingOrder();
+
+            SearchlightTower2D beam = go.GetComponentInChildren<SearchlightTower2D>();
+            if (beam != null) ConfigureSearchlight(beam, x, baseY);
         }
+    }
+
+    private static void ConfigureSearchlight(SearchlightTower2D beam, float towerX, float towerY)
+    {
+        var cfg = Searchlights.FirstOrDefault(c => Mathf.Abs(c.x - towerX) < 0.01f && Mathf.Abs(c.y - towerY) < 0.01f);
+        var so = new SerializedObject(beam);
+        if (cfg.period > 0f)
+        {
+            so.FindProperty("centerAngle").floatValue = cfg.center;
+            so.FindProperty("sweepHalfRange").floatValue = cfg.range;
+            so.FindProperty("sweepPeriod").floatValue = cfg.period;
+            so.FindProperty("phaseOffset").floatValue = cfg.phase;
+        }
+        else
+        {
+            beam.enabled = false; // Torre sin reflector configurado
+        }
+        so.ApplyModifiedPropertiesWithoutUndo();
+        PrefabUtility.RecordPrefabInstancePropertyModifications(beam);
+    }
+
+    /// <summary>Sistema de alarma de la escena e indicador "¡ILUMINADO!" en el HUD.</summary>
+    private static void SetupAlarmAndHud()
+    {
+        new GameObject("Sistema_Alarma").AddComponent<AlarmSystem2D>();
+
+        Transform hud = FindRoot("HUD_Canvas").transform;
+        Transform stealth = hud.Find("StealthIndicator");
+        if (stealth == null) { Debug.LogWarning("[Nivel3] No se encontró StealthIndicator en el HUD."); return; }
+
+        // Mismo lugar que "OCULTO": nunca se muestran a la vez
+        GameObject lit = Object.Instantiate(stealth.gameObject, stealth.parent);
+        lit.name = "LitIndicator";
+        lit.transform.SetSiblingIndex(stealth.GetSiblingIndex() + 1);
+        lit.GetComponent<Image>().color = new Color(0.25f, 0.16f, 0.02f, 0.88f);
+        Text label = lit.GetComponentInChildren<Text>();
+        label.text = "¡ILUMINADO!";
+        label.color = new Color(1f, 0.85f, 0.4f, 1f);
+        lit.GetComponent<CanvasGroup>().alpha = 0f;
+        lit.AddComponent<LightExposureIndicator>();
     }
 
     private static void SetupLighting()
@@ -675,7 +760,7 @@ public static class SetupNivel3Editor
                     "🕹️  <b>Controles:</b> Usa <b>W, A, S, D</b> o las <b>Flechas</b> para moverte.\n\n" +
                     "📦 <b>Sigilo:</b> Ocúltate detrás de <b>contenedores, casetas, patrullas y barreras</b>. " +
                     "Las mallas, las tarimas y los generadores no te cubren: solo estorban el paso.\n\n" +
-                    "💡 <b>Cuidado:</b> Las lámparas iluminan el camino; no te quedes bajo su luz.\n\n" +
+                    "💡 <b>Cuidado:</b> Bajo una lámpara, si un policía te ve te atrapa al instante. Los reflectores de las torres barren el terreno: obsérvalos y cruza cuando se alejen.\n\n" +
                     "🎯 <b>Objetivo:</b> Cruza el patio de detención hacia el norte y escapa por el <b>hueco del muro fronterizo</b>.";
             }
             else if (text.text.Contains("NIVEL 1 COMPLETADO")) text.text = "¡NIVEL 3 COMPLETADO!";
@@ -722,6 +807,10 @@ public static class SetupNivel3Editor
             string zone = route[0].y < DESERT_TOP_Y ? "Desierto" : "Frontera";
             GameObject police = SpawnCreature(policePrefab, policeGroup, $"Policia_{i + 1}_{zone}", route[0]);
             SetRoute(police, route);
+            PatrolAI policePatrol = police.GetComponent<PatrolAI>();
+            policePatrol.moveSpeed = 0.55f;
+            policePatrol.waitTimeAtWaypoint = 3f;
+            PrefabUtility.RecordPrefabInstancePropertyModifications(policePatrol);
         }
 
         foreach (var (breed, a, b) in DogRoutes)
@@ -732,7 +821,7 @@ public static class SetupNivel3Editor
             SetRoute(dog, new[] { a, b });
 
             PatrolAI patrol = dog.GetComponent<PatrolAI>();
-            patrol.moveSpeed = 1.0f;
+            patrol.moveSpeed = 0.6f;
             GuardDogAI dogAI = dog.GetComponent<GuardDogAI>();
             dogAI.detectionRadius = 2.8f;
             dogAI.biteRadius = 0.65f;
@@ -938,6 +1027,13 @@ public static class SetupNivel3Editor
             Expect(inside == null, $"{type} en ({x:F2}, {y:F2}) accesible");
         }
 
+        int beams = Object.FindObjectsByType<SearchlightTower2D>().Count(b => b.enabled);
+        int lightZones = Object.FindObjectsByType<LightZone2D>().Length;
+        int lamps = Layout.Count(l => l.name == "poste_luz");
+        Expect(beams == Searchlights.Length, $"Reflectores activos: {beams} de {Searchlights.Length}");
+        Expect(lightZones == lamps, $"Zonas iluminadas: {lightZones} de {lamps} lámparas");
+        Expect(Object.FindAnyObjectByType<AlarmSystem2D>() != null, "Sistema de alarma en la escena");
+
         Debug.Log($"[Nivel3] Verificación terminada con {problems} problemas.");
         return problems;
     }
@@ -976,6 +1072,9 @@ public static class SetupNivel3Editor
             updateMesh?.Invoke(light, new object[] { true });
             lateUpdate?.Invoke(light, null);
         }
+
+        var beamUpdate = typeof(SearchlightTower2D).GetMethod("Update", flags);
+        foreach (SearchlightTower2D beam in Object.FindObjectsByType<SearchlightTower2D>()) beamUpdate?.Invoke(beam, null);
 
         // Cuadro de calentamiento para que terminen de subir las texturas recién importadas
         cam.targetTexture = rt;

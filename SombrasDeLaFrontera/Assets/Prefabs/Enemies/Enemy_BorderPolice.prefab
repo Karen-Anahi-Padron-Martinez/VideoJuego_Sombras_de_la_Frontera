@@ -666,6 +666,7 @@ MonoBehaviour:
   patrolMode: 0
   moveSpeed: 0.8
   waitTimeAtWaypoint: 2
+  spinAtWaypoints: 540
   flashlightPivot: {fileID: 4770350909157929650}
   spriteRenderer: {fileID: 0}
   isAlerted: 0

@@ -27,6 +27,12 @@ public class PatrolAI : MonoBehaviour
     [Tooltip("Tiempo de espera en cada punto de ruta antes de avanzar al siguiente")]
     public float waitTimeAtWaypoint = 1.2f;
 
+    [Tooltip("Grados que gira la linterna al detenerse en cada extremo de la ruta (540 = vuelta y media, termina mirando hacia atrás). Los perros no giran.")]
+    [SerializeField] private float spinAtWaypoints = 540f;
+
+    [Tooltip("Segundos que tarda esa vuelta (si es mayor que la espera en el waypoint, la espera se alarga)")]
+    [SerializeField] private float spinDuration = 4.5f;
+
     [Header("Referencias Visuales")]
     [Tooltip("Pivote de la linterna / cono de visión que debe apuntar hacia donde se camina")]
     [SerializeField] private Transform flashlightPivot;
@@ -181,7 +187,8 @@ public class PatrolAI : MonoBehaviour
         if (distance > 0.08f)
         {
             // Mover hacia el waypoint
-            Vector2 step = dir.normalized * (moveSpeed * Time.deltaTime);
+            // Con alarma cercana (AlarmSystem2D, Nivel 3) la patrulla camina más rápido
+            Vector2 step = dir.normalized * (moveSpeed * AlarmSystem2D.SpeedMultiplierAt(currentPos) * Time.deltaTime);
             transform.position = currentPos + step;
 
             // Orientar linterna y sprite
@@ -281,7 +288,27 @@ public class PatrolAI : MonoBehaviour
     {
         isWaiting = true;
 
-        yield return new WaitForSeconds(waitTimeAtWaypoint);
+        if (isDog || spinAtWaypoints <= 0f || waitTimeAtWaypoint <= 0f)
+        {
+            yield return new WaitForSeconds(waitTimeAtWaypoint);
+        }
+        else
+        {
+            // Gira la linterna vuelta y media (barre todo a su alrededor) y queda mirando hacia el otro lado.
+            // Si se alerta a media vuelta, el giro se detiene y continúa cuando se calma.
+            float startAngle = Mathf.Atan2(lastMoveDirection.y, lastMoveDirection.x) * Mathf.Rad2Deg;
+            float duration = Mathf.Max(waitTimeAtWaypoint, spinDuration);
+            float elapsed = 0f;
+            while (elapsed < duration)
+            {
+                if (!isAlerted && !isPaused)
+                {
+                    elapsed += Time.deltaTime;
+                    SetFacingAngle(startAngle + spinAtWaypoints * Mathf.SmoothStep(0f, 1f, elapsed / duration));
+                }
+                yield return null;
+            }
+        }
 
         AdvanceToNextWaypoint();
         isWaiting = false;

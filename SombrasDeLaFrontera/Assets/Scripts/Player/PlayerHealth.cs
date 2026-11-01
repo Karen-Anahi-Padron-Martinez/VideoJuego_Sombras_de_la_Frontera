@@ -9,7 +9,8 @@ public enum DefeatReason
     SnakeBite,             // Mordedura de serpiente
     ScorpionSting,         // Picadura de alacrán
     DogAttack,             // Ataque de perro guardián
-    SpiderBite             // Picadura de araña
+    SpiderBite,            // Picadura de araña
+    SearchlightSpotted     // Reflector de torre de vigilancia (Nivel 3)
 }
 
 /// <summary>
@@ -123,11 +124,14 @@ public class PlayerHealth : MonoBehaviour
     /// <summary>
     /// Captura instantánea por linterna de vigilante coyote (Game Over directo).
     /// </summary>
-    public void Capture()
+    public void Capture() => Capture(DefeatReason.FlashlightCaptured);
+
+    /// <summary>Captura instantánea (ignora las vidas) con el motivo indicado para la pantalla de Game Over.</summary>
+    public void Capture(DefeatReason reason)
     {
         if (isDead) return;
 
-        lastDefeatReason = DefeatReason.FlashlightCaptured;
+        lastDefeatReason = reason;
         AudioManager.Instance?.PlayAlert();
         Debug.Log("[PlayerHealth] ¡CAPTURADO! Mateo ha sido descubierto por la linterna del vigilante coyote fuera de cobertura.");
         currentHealth = 0;

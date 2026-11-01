@@ -76,6 +76,8 @@ public class VisionCone2D : MonoBehaviour
     private PatrolAI parentPatrolAI;
     private readonly Collider2D[] overlapResults = new Collider2D[16];
     private ContactFilter2D contactFilter;
+    private Vector3[] fullConeVertices;     // Cono sin recortar (espacio local)
+    private Vector3[] occludedVertices;     // Cono recortado por las coberturas
 
     public float DetectionProgress => Mathf.Clamp01(detectionTimer / detectionTimeToCapture);
 
@@ -252,6 +254,8 @@ public class VisionCone2D : MonoBehaviour
         coneMesh.vertices = vertices;
         coneMesh.triangles = triangles;
         coneMesh.RecalculateNormals();
+        fullConeVertices = vertices;
+        occludedVertices = (Vector3[])vertices.Clone();
 
         if (meshFilter != null)
         {
@@ -280,8 +284,31 @@ public class VisionCone2D : MonoBehaviour
         coneMesh.colors = colors;
     }
 
+    /// <summary>
+    /// Recorta el haz donde lo corta una cobertura (CoverZone2D): la luz no alumbra detrás de lo que puede ocultar a Mateo.
+    /// </summary>
+    private void UpdateOcclusion()
+    {
+        if (coneMesh == null || fullConeVertices == null || fullConeVertices.Length != coneMesh.vertexCount) return;
+
+        Vector2 origin = transform.position;
+        for (int i = 1; i < fullConeVertices.Length; i++)
+        {
+            Vector2 worldEnd = transform.TransformPoint(fullConeVertices[i]);
+            Vector2 delta = worldEnd - origin;
+            float length = delta.magnitude;
+            if (length < 0.001f) { occludedVertices[i] = fullConeVertices[i]; continue; }
+            float clear = LightOcclusion2D.ClearDistance(origin, delta / length, length);
+            occludedVertices[i] = fullConeVertices[i] * (clear / length);
+        }
+        coneMesh.vertices = occludedVertices;
+        coneMesh.RecalculateBounds();
+    }
+
     private void Update()
     {
+        UpdateOcclusion();
+
         // 0. Chequeo activo de solapamiento físico en cada fotograma
         if (coneCollider != null)
         {
@@ -304,6 +331,8 @@ public class VisionCone2D : MonoBehaviour
         {
             bool isClose = (Time.time - lastCloseExposedTime) < 0.15f;
             detectionTimer += Time.deltaTime * (isClose ? closeDetectionSpeed : 1f);
+            // Bajo una lámpara (LightZone2D, Nivel 3) Mateo queda a la vista: si lo ven, lo atrapan al instante
+            if (LightZone2D.PlayerLit) detectionTimer = Mathf.Max(detectionTimer, detectionTimeToCapture);
             // El coyote se detiene en seco al detectar al jugador
             if (parentPatrolAI != null)
             {
@@ -374,6 +403,7 @@ public class VisionCone2D : MonoBehaviour
 
         Vector2 coyotePos = parentPatrolAI != null ? (Vector2)parentPatrolAI.transform.position : (Vector2)transform.position;
         Vector2 feet = playerController.GetFeetPosition();
+        if (LightOcclusion2D.IsBlocked(coyotePos, feet)) return; // Una cobertura se interpone
         Vector2 toPlayer = feet - coyotePos;
         float distance = toPlayer.magnitude;
 
@@ -419,6 +449,10 @@ public class VisionCone2D : MonoBehaviour
             // Mateo está a cubierto en cactus, roca o nopalera
             return;
         }
+
+        // Una cobertura entre la linterna y Mateo le hace sombra
+        Vector2 targetFeet = controller != null ? controller.GetFeetPosition() : (Vector2)col.transform.position;
+        if (LightOcclusion2D.IsBlocked(transform.position, targetFeet)) return;
 
         // Comprobar si hay obstáculos sólidos interrumpiendo la línea de visión
         if (obstacleMask != 0)

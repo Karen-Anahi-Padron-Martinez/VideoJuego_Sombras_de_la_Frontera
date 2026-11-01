@@ -93,6 +93,12 @@ public class EndGameModalController : MonoBehaviour
         description = "Una tarántula del desierto te picó cuando pasaste junto a su madriguera.\n\n<b>Consejo:</b> Si la ves levantar las patas, aléjate de inmediato: está a punto de atacar."
     };
 
+    [SerializeField] private DefeatMessageConfig defeatBySearchlight = new DefeatMessageConfig
+    {
+        title = "¡EL REFLECTOR TE DESCUBRIÓ!",
+        titleColor = new Color(1f, 0.85f, 0.35f, 1f), // Amarillo reflector
+        description = "El haz de la torre de vigilancia te alumbró en campo abierto.\n\n🗼 <b>Consejo:</b> Observa el barrido del reflector, cruza cuando se aleje y agáchate tras un obstáculo: su luz no pasa a través de ellos."
+    };
     [SerializeField] private DefeatMessageConfig defeatGeneric = new DefeatMessageConfig
     {
         title = "¡TE HAS QUEDADO SIN VIDAS!",
@@ -208,6 +214,8 @@ public class EndGameModalController : MonoBehaviour
                 return defeatByDog;
             case DefeatReason.SpiderBite:
                 return defeatBySpider;
+            case DefeatReason.SearchlightSpotted:
+                return defeatBySearchlight;
             default:
                 return defeatGeneric;
         }
