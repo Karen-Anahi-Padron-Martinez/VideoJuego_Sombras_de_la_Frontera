@@ -99,6 +99,21 @@ public class EndGameModalController : MonoBehaviour
         titleColor = new Color(1f, 0.85f, 0.35f, 1f), // Amarillo reflector
         description = "El haz de la torre de vigilancia te alumbró en campo abierto.\n\n🗼 <b>Consejo:</b> Observa el barrido del reflector, cruza cuando se aleje y agáchate tras un obstáculo: su luz no pasa a través de ellos."
     };
+
+    [SerializeField] private DefeatMessageConfig defeatByRiverPredator = new DefeatMessageConfig
+    {
+        title = "¡ATACADO EN EL RÍO!",
+        titleColor = new Color(0.45f, 0.75f, 0.70f, 1f), // Verde agua turbia
+        description = "Un pejelagarto te mordió mientras cruzabas el Río Bravo.\n\n🐊 <b>Consejo:</b> Observa su recorrido de lado a lado y cruza por detrás de él cuando se aleje."
+    };
+
+    [SerializeField] private DefeatMessageConfig defeatByWaterSnake = new DefeatMessageConfig
+    {
+        title = "¡MORDEDURA DE SERPIENTE DE AGUA!",
+        titleColor = new Color(0.60f, 0.85f, 0.25f, 1f), // Verde ponzoñoso
+        description = "Una serpiente de agua te mordió al cruzarte en su camino.\n\n🐍 <b>Consejo:</b> Nada en zigzag de orilla a orilla; espera a que se aleje antes de pasar."
+    };
+
     [SerializeField] private DefeatMessageConfig defeatGeneric = new DefeatMessageConfig
     {
         title = "¡TE HAS QUEDADO SIN VIDAS!",
@@ -216,6 +231,10 @@ public class EndGameModalController : MonoBehaviour
                 return defeatBySpider;
             case DefeatReason.SearchlightSpotted:
                 return defeatBySearchlight;
+            case DefeatReason.RiverPredatorBite:
+                return defeatByRiverPredator;
+            case DefeatReason.WaterSnakeBite:
+                return defeatByWaterSnake;
             default:
                 return defeatGeneric;
         }
