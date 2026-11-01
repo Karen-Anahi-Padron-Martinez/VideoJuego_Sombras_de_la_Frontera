@@ -16,7 +16,7 @@ public class MainMenuController : MonoBehaviour
 {
     [Header("Configuración de Escenas")]
     [SerializeField] private string level1SceneName = "02_Level1_Desert";
-    [SerializeField] private string level2SceneName = "03_Level2_RioBravo";
+    [SerializeField] private string level2SceneName = "03_Level2_River";
     [SerializeField] private string level3SceneName = "04_Level3_BorderWall";
     [SerializeField] private string level4SceneName = "05_Level4_SafeHaven";
 

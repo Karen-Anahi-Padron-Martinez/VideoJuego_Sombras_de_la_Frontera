@@ -1880,7 +1880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuController
   level1SceneName: 02_Level1_Desert
-  level2SceneName: 03_Level2_RioBravo
+  level2SceneName: 03_Level2_River
   level3SceneName: 04_Level3_BorderWall
   level4SceneName: 05_Level4_SafeHaven
   mainMenuButtons: {fileID: 1402302653}
