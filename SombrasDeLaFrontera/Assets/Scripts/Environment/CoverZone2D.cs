@@ -73,16 +73,27 @@ public class CoverZone2D : MonoBehaviour
         activeCovers.Remove(this);
     }
 
+    // Se busca también fuera de Play (Awake no corre en el editor), p. ej. para las herramientas de verificación
+    private SpriteRenderer Renderer
+    {
+        get
+        {
+            if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
+            if (spriteRenderer == null) spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            return spriteRenderer;
+        }
+    }
+
     /// <summary>Altura (Y) de la base del obstáculo, donde toca la arena.</summary>
-    public float BaseY => spriteRenderer != null ? spriteRenderer.bounds.min.y : transform.position.y;
+    public float BaseY => Renderer != null ? Renderer.bounds.min.y : transform.position.y;
 
     /// <summary>Rectángulo en mundo que realmente tapa el obstáculo.</summary>
     public Rect CoverRect
     {
         get
         {
-            if (spriteRenderer == null) return new Rect(transform.position, Vector2.zero);
-            Bounds b = spriteRenderer.bounds;
+            if (Renderer == null) return new Rect(transform.position, Vector2.zero);
+            Bounds b = Renderer.bounds;
             float w = b.size.x * coverWidth;
             float h = b.size.y * coverHeight;
             return new Rect(b.center.x - w * 0.5f, b.min.y, w, h);
@@ -94,7 +105,7 @@ public class CoverZone2D : MonoBehaviour
     /// </summary>
     public bool IsOnHidingSide(float feetY)
     {
-        if (spriteRenderer == null) return false;
+        if (Renderer == null) return false;
         float baseY = BaseY;
         return feetY <= baseY + 0.03f && feetY >= baseY - hideDistance;
     }

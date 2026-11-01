@@ -17,7 +17,7 @@ using UnityEngine;
 /// 3. Agrega a Mateo las animaciones Agacharse (Mateo_Crouch) y Caer (Mateo_Death), y reemplaza sus caminatas
 ///    (lateral, de frente y de espaldas) por cuadros con movimiento de piernas (mateo_walk_gen.png).
 ///    El coyote también camina con la hoja coyote_walk_gen.png (piernas alternando).
-///    Ambas hojas se generaron con Docs/generar_caminatas.py a partir de los sprites originales.
+///    Ambas hojas se generaron con otros/generar_caminatas.py a partir de los sprites originales.
 /// 4. Configura los prefabs de enemigos (Animator, CreatureAnimator, icono de alerta y sombra)
 ///    y crea el prefab de la Araña (Hazard_Spider).
 /// Las animaciones se disparan desde código (GuardDogAI, HazardFauna, CoyoteAnimation, PlayerController2D)

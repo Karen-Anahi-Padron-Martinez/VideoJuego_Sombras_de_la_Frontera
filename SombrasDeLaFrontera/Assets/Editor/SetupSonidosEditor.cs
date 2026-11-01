@@ -10,7 +10,7 @@ using UnityEngine;
 ///    música (menú y desierto), pasos, arena movediza, agua, daño, Game Over, Victoria,
 ///    coyotes (pasos y gritos), perros (ladrido, mordida, ronquido), serpiente, alacrán y araña.
 /// 3. Coloca el AudioManager en el Splash, el Menú Principal y el Nivel 1 (es persistente y no se duplica).
-/// Los sonidos se generaron con Docs/generar_sonidos.py.
+/// Los sonidos se generaron con otros/generar_sonidos.py.
 /// </summary>
 public static class SetupSonidosEditor
 {
