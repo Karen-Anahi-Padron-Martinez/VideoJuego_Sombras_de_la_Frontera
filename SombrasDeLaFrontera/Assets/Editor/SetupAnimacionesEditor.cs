@@ -45,6 +45,7 @@ public static class SetupAnimacionesEditor
         ("aleman_part1", 6, 3), ("aleman_part2", 6, 3),
         ("doberman_part1", 6, 3), ("doberman_part2", 6, 3),
         ("coyote_part1", 6, 3), ("coyote_part2", 6, 3), ("coyote_walk_gen", 6, 1),
+        ("police_part1", 6, 3), ("police_part2", 6, 3), ("police_walk_gen", 6, 1),
         ("snake", 5, 4), ("scorpion", 6, 3), ("spider", 6, 3)
     };
 
@@ -79,6 +80,15 @@ public static class SetupAnimacionesEditor
                 new AnimSpec("Walk",  "coyote_walk_gen", 0, 10f, true),
                 new AnimSpec("Alert", "coyote_part2", 1, 8f,  true),
                 new AnimSpec("Catch", "coyote_part2", 2, 10f, true),
+            }
+        },
+        // Policía fronterizo (Nivel 3): misma distribución de hoja que el coyote
+        { "Police", new[]
+            {
+                new AnimSpec("Idle",  "police_part1", 1, 4f,  true),
+                new AnimSpec("Walk",  "police_walk_gen", 0, 10f, true),
+                new AnimSpec("Alert", "police_part2", 1, 8f,  true),
+                new AnimSpec("Catch", "police_part2", 2, 10f, true),
             }
         },
         { "Snake", new[]
@@ -172,6 +182,7 @@ public static class SetupAnimacionesEditor
         SetupCreaturePrefab($"{PREFAB_DIR}/Hazard_Snake.prefab", "Snake", controllers["Snake"], 0.8f, null);
         SetupCreaturePrefab($"{PREFAB_DIR}/Hazard_Scorpion.prefab", "Scorpion", controllers["Scorpion"], 0.75f, null);
         CreateSpiderPrefab(controllers["Spider"]);
+        CreatePoliceAndK9Prefabs(controllers);
 
         AssetDatabase.SaveAssets();
         Debug.Log("<color=green><b>[Animaciones]</b> ¡Listo! Clips, AnimatorControllers y prefabs de Perros, Coyotes, Serpientes, Alacranes, Arañas y Mateo configurados.</color>");
@@ -648,6 +659,71 @@ public static class SetupAnimacionesEditor
         if (blob == null) blob = shadow.gameObject.AddComponent<BlobShadow>();
         blob.Configure(ownerRenderer, widthFactor, 0.3f);
         EditorUtility.SetDirty(blob);
+    }
+
+    // =====================================================================
+    // NIVEL 3: POLICÍA FRONTERIZO Y PERROS K-9
+    // =====================================================================
+
+    public const string POLICE_PREFAB = PREFAB_DIR + "/Enemy_BorderPolice.prefab";
+    public static readonly string[] K9Breeds = { "Aleman", "Doberman", "Rottweiler" };
+    public static string K9Prefab(string breed) => $"{PREFAB_DIR}/Enemy_K9_{breed}.prefab";
+
+    /// <summary>
+    /// Corta las hojas del policía, crea su controlador y los prefabs Enemy_BorderPolice (copia del coyote: misma IA y linterna)
+    /// y Enemy_K9_* (copias del perro guardián con la raza correspondiente). Lo usa la herramienta del Nivel 3.
+    /// </summary>
+    public static void SetupPoliceAndK9Prefabs()
+    {
+        foreach (var sheet in Sheets.Where(sh => sh.file.StartsWith("police")))
+        {
+            string path = ENEMY_SPRITES + sheet.file + ".png";
+            if (File.Exists(path)) SliceGrid(path, sheet.cols, sheet.rows, "anim_" + sheet.file);
+        }
+
+        var controllers = new Dictionary<string, AnimatorController> { ["Police"] = BuildCreatureController("Police", Creatures["Police"]) };
+        foreach (string breed in K9Breeds)
+        {
+            AnimatorController ctrl = AssetDatabase.LoadAssetAtPath<AnimatorController>($"{CONTROLLERS_DIR}/{breed}_Controller.controller");
+            controllers[breed] = ctrl != null ? ctrl : BuildCreatureController(breed, Creatures[breed]);
+        }
+
+        CreatePoliceAndK9Prefabs(controllers);
+        AssetDatabase.SaveAssets();
+    }
+
+    private static void CreatePoliceAndK9Prefabs(Dictionary<string, AnimatorController> controllers)
+    {
+        if (!File.Exists(POLICE_PREFAB)) AssetDatabase.CopyAsset($"{PREFAB_DIR}/Enemy_CoyotePatrol.prefab", POLICE_PREFAB);
+        SetupCreaturePrefab(POLICE_PREFAB, "Police", null, 0.55f, root =>
+        {
+            root.name = "Enemy_BorderPolice";
+            root.transform.localScale = new Vector3(0.55f, 0.55f, 1f); // Adulto: un poco más alto que Mateo
+            if (root.GetComponent<CoyoteAnimation>() == null) root.AddComponent<CoyoteAnimation>();
+            SetBaseSprite(root, "police_part1", "anim_police_part1_r1_c0");
+        }, controllers);
+
+        foreach (string breed in K9Breeds)
+        {
+            string path = K9Prefab(breed);
+            if (!File.Exists(path)) AssetDatabase.CopyAsset($"{PREFAB_DIR}/Enemy_GuardDog.prefab", path);
+            SetupCreaturePrefab(path, breed, null, 0.75f, root =>
+            {
+                root.name = $"Enemy_K9_{breed}";
+                root.transform.localScale = new Vector3(0.45f, 0.45f, 1f);
+                string sheet = breed.ToLowerInvariant() + "_part1";
+                SetBaseSprite(root, sheet, $"anim_{sheet}_r2_c0");
+            }, controllers);
+        }
+    }
+
+    /// <summary>Sprite que se ve en el editor y en el primer cuadro (el primero de la animación de reposo).</summary>
+    private static void SetBaseSprite(GameObject root, string sheet, string spriteName)
+    {
+        if (LoadSprites(ENEMY_SPRITES + sheet + ".png").TryGetValue(spriteName, out Sprite sprite))
+            root.GetComponent<SpriteRenderer>().sprite = sprite;
+        else
+            Debug.LogWarning($"[Animaciones] No se encontró el sprite {spriteName}");
     }
 
     private static void CreateSpiderPrefab(AnimatorController spiderController)

@@ -28,6 +28,7 @@ public static class SetupNivel3Editor
     private const string PROFILE_PATH = "Assets/Settings/Level3_PostProcess.asset";
     private const string THUMBNAIL = "Assets/Sprites/UI/Thumbnail_Level3.jpg";
     private const string GLOW_SPRITE = "Assets/Sprites/Effects/LightGlow.png";
+    private const string LEVEL1_OBSTACLES = "Assets/Sprites/Environment/obstacle_1.png";
     private const string UNLIT_MATERIAL = "Packages/com.unity.render-pipelines.universal/Runtime/Materials/Sprite-Unlit-Default.mat";
 
     // Poste de luz: el poste está a la izquierda del sprite y el foco arriba a la derecha (coordenadas locales)
@@ -51,10 +52,11 @@ public static class SetupNivel3Editor
         public string name; public Kind kind; public float scale;
         public float footW, footH;              // Collider sólido en la base (fracción del sprite)
         public bool isCover; public float coverW, coverH;
-        public ObstacleDef(string name, Kind kind, float scale, float footW, float footH, bool isCover, float coverW = 0f, float coverH = 0f)
+        public string level1Slice;              // Si no es nulo, el sprite sale de la hoja de obstáculos del Nivel 1
+        public ObstacleDef(string name, Kind kind, float scale, float footW, float footH, bool isCover, float coverW = 0f, float coverH = 0f, string level1Slice = null)
         {
             this.name = name; this.kind = kind; this.scale = scale; this.footW = footW; this.footH = footH;
-            this.isCover = isCover; this.coverW = coverW; this.coverH = coverH;
+            this.isCover = isCover; this.coverW = coverW; this.coverH = coverH; this.level1Slice = level1Slice;
         }
     }
 
@@ -83,6 +85,14 @@ public static class SetupNivel3Editor
         new ObstacleDef("porton",                 Kind.Solid, 0.70f, 1.00f, 0.12f, false),
         new ObstacleDef("torre_vigilancia",       Kind.Solid, 0.95f, 0.75f, 0.10f, false),
         new ObstacleDef("poste_luz",              Kind.Lamp,  0.80f, 0.22f, 0.05f, false),
+
+        // Vegetación y rocas del desierto del Nivel 1 (mismo sprite, escala y cobertura que allá)
+        new ObstacleDef("cactus_l1",       Kind.Solid, 1f, 0.30f, 0.14f, true,  0.45f, 0.90f, "obstacle_1_0"),
+        new ObstacleDef("nopalera_l1",     Kind.Solid, 1f, 0.70f, 0.22f, true,  0.85f, 0.85f, "obstacle_1_1"),
+        new ObstacleDef("roca_pequena_l1", Kind.Solid, 1f, 0.85f, 0.30f, true,  0.90f, 0.90f, "obstacle_1_4"),
+        new ObstacleDef("roca_grande_l1",  Kind.Solid, 1f, 0.85f, 0.30f, true,  0.90f, 0.90f, "obstacle_1_5"),
+        new ObstacleDef("arbusto_seco_l1", Kind.Solid, 1f, 0.50f, 0.20f, false, 0f,    0f,    "obstacle_1_6"),
+        new ObstacleDef("arbusto_l1",      Kind.Solid, 1f, 0.60f, 0.25f, true,  0.85f, 0.85f, "obstacle_1_7"),
     };
 
     // (prefab, x, base y, voltear)
@@ -143,6 +153,85 @@ public static class SetupNivel3Editor
         ("generador", -2.2f, 31.9f, false),
         ("poste_luz", -0.9f, 32.3f, false),
         ("barriles", 2.4f, 32.3f, false),
+        // Vegetación y rocas del desierto (acomodadas con otros/nivel3/desierto_extra.py)
+        ("cactus_l1", -0.21f, 3.28f, false),
+        ("cactus_l1", 1.69f, 6.54f, true),
+        ("cactus_l1", 1.48f, 2.23f, true),
+        ("nopalera_l1", 1.95f, 5.01f, true),
+        ("nopalera_l1", -0.62f, 1.22f, true),
+        ("nopalera_l1", -1.28f, 5.74f, false),
+        ("roca_grande_l1", 0.66f, 7.08f, true),
+        ("roca_grande_l1", -1.04f, 5.25f, false),
+        ("roca_pequena_l1", 0.99f, 1.15f, false),
+        ("roca_pequena_l1", -1.17f, 1.83f, true),
+        ("roca_pequena_l1", -2.23f, 3.9f, true),
+        ("arbusto_l1", 1.67f, 3.96f, true),
+        ("arbusto_l1", 1.04f, 2.92f, true),
+        ("arbusto_l1", 0.04f, 7.74f, false),
+        ("arbusto_seco_l1", -2.26f, 6.71f, false),
+        ("arbusto_seco_l1", 0.22f, 6.47f, true),
+    };
+
+    // =========================================================================
+    // ENEMIGOS, FAUNA Y RECURSOS (Issue 2). Rutas revisadas contra los obstáculos con otros/nivel3/enemigos_preview.py
+    // =========================================================================
+
+    // La zona del desierto termina en la malla (y ≈ 9); el resto es la zona de la frontera
+    private const float DESERT_TOP_Y = 8.7f;
+
+    // Policías (ida y vuelta entre los puntos): 2 en el desierto y 4 en la frontera
+    private static readonly Vector2[][] PoliceRoutes =
+    {
+        new[] { new Vector2(-1.7f, 4.6f), new Vector2(1.9f, 4.6f) },
+        new[] { new Vector2(-1.0f, 8.55f), new Vector2(2.4f, 8.55f) },
+        new[] { new Vector2(-2.4f, 13.2f), new Vector2(0.9f, 13.2f) },
+        new[] { new Vector2(0.1f, 15.05f), new Vector2(0.1f, 18.4f) },
+        new[] { new Vector2(-2.4f, 22.75f), new Vector2(2.4f, 22.75f) },
+        new[] { new Vector2(-0.2f, 28.9f), new Vector2(-0.2f, 32.45f) },
+    };
+
+    // Perros K-9 (raza, punto A, punto B): 1 en el desierto y 2 en la frontera
+    private static readonly (string breed, Vector2 a, Vector2 b)[] DogRoutes =
+    {
+        ("Rottweiler", new Vector2(-2.3f, 6.3f), new Vector2(-1.2f, 6.3f)),
+        ("Aleman", new Vector2(-1.6f, 20.45f), new Vector2(1.4f, 20.45f)),
+        ("Doberman", new Vector2(-2.1f, 27.15f), new Vector2(-0.5f, 27.15f)),
+    };
+
+    // Fauna nociva solo en el desierto
+    private static readonly (string type, float x, float y)[] FaunaSpots =
+    {
+        ("Snake", -1.9f, 3.0f),
+        ("Snake", 0.9f, 6.5f),
+        ("Scorpion", 2.0f, 1.6f),
+        ("Scorpion", -0.5f, 2.6f),
+        ("Spider", 2.35f, 4.0f),
+        ("Spider", -2.4f, 8.2f),
+    };
+
+    // 6 tunas (desierto), 5 cantimploras y 9 botellas repartidas en todo el mapa
+    private static readonly (string type, float x, float y)[] ResourceSpots =
+    {
+        ("Tuna", -2.44f, 2.03f),
+        ("Tuna", 0.81f, 2.21f),
+        ("Tuna", 0.18f, 4.51f),
+        ("Tuna", -0.54f, 6.26f),
+        ("Tuna", -1.34f, 6.81f),
+        ("Botella", 2.46f, 7.34f),
+        ("Cantimplora", -0.72f, 7.56f),
+        ("Botella", 0.7f, 8.04f),
+        ("Tuna", -0.44f, 8.57f),
+        ("Cantimplora", -1.51f, 11.51f),
+        ("Botella", -0.83f, 13.56f),
+        ("Botella", -2.02f, 13.65f),
+        ("Cantimplora", 2.2f, 13.77f),
+        ("Botella", 1.77f, 16.04f),
+        ("Cantimplora", 0.42f, 18.28f),
+        ("Botella", 1.84f, 21.52f),
+        ("Botella", 0.51f, 22.9f),
+        ("Botella", -0.23f, 26.18f),
+        ("Botella", -1.54f, 29.94f),
+        ("Cantimplora", 1.68f, 32.06f),
     };
 
     // Objetos del Nivel 1 que se conservan (todo lo demás se quita)
@@ -178,6 +267,28 @@ public static class SetupNivel3Editor
         int problems = VerifyLevel3();
         EditorUtility.DisplayDialog("Nivel 3", problems == 0 ? "Todo correcto: colisiones, hueco del muro y coberturas."
             : $"Se encontraron {problems} problemas. Revisa la consola.", "Aceptar");
+    }
+
+    [MenuItem("Sombras de la Frontera/Nivel 3/3. Colocar Policías, Perros, Fauna y Recursos")]
+    /// <summary>Uso por línea de comandos: coloca enemigos y recursos en la escena existente, verifica y captura.</summary>
+    public static void PlaceEnemiesFromCommandLine()
+    {
+        var scene = EditorSceneManager.OpenScene(SCENE, OpenSceneMode.Single);
+        PlaceEnemiesAndResources();
+        EditorSceneManager.MarkSceneDirty(scene);
+        EditorSceneManager.SaveScene(scene);
+        VerifyLevel3();
+        CapturePreviews(Path.GetFullPath(Path.Combine(Application.dataPath, "../../otros/nivel3/capturas")));
+    }
+
+    public static void PlaceEnemiesMenu()
+    {
+        if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
+        var scene = EditorSceneManager.OpenScene(SCENE, OpenSceneMode.Single);
+        PlaceEnemiesAndResources();
+        EditorSceneManager.MarkSceneDirty(scene);
+        EditorSceneManager.SaveScene(scene);
+        EditorUtility.DisplayDialog("Nivel 3", "6 policías, 3 perros K-9, 6 criaturas de fauna y 20 recursos colocados.", "Aceptar");
     }
 
     [MenuItem("Sombras de la Frontera/Depuración/Desbloquear todos los niveles")]
@@ -216,8 +327,16 @@ public static class SetupNivel3Editor
         Dictionary<string, GameObject> prefabs = BuildPrefabs();
         VolumeProfile profile = BuildPostProcessProfile();
 
-        if (File.Exists(SCENE)) AssetDatabase.DeleteAsset(SCENE);
-        AssetDatabase.CopyAsset(SOURCE_SCENE, SCENE);
+        if (File.Exists(SCENE))
+        {
+            // Se sobrescribe el contenido y se conserva el .meta: la escena mantiene su GUID (sin cambios innecesarios en git)
+            File.Copy(SOURCE_SCENE, SCENE, true);
+            AssetDatabase.ImportAsset(SCENE, ImportAssetOptions.ForceUpdate);
+        }
+        else
+        {
+            AssetDatabase.CopyAsset(SOURCE_SCENE, SCENE);
+        }
         var scene = EditorSceneManager.OpenScene(SCENE, OpenSceneMode.Single);
 
         RemoveDesertContent(scene);
@@ -227,6 +346,7 @@ public static class SetupNivel3Editor
         SetupLighting();
         SetupPostProcess(profile);
         SetupPlayerAndTexts();
+        PlaceEnemiesAndResources();
 
         EditorSceneManager.MarkSceneDirty(scene);
         EditorSceneManager.SaveScene(scene);
@@ -239,7 +359,7 @@ public static class SetupNivel3Editor
     private static void ConfigureImports()
     {
         ConfigureSprite(MAP_SPRITE, 4096);
-        foreach (ObstacleDef def in Defs) ConfigureSprite(OBSTACLE_SPRITES + def.name + ".png", 512);
+        foreach (ObstacleDef def in Defs.Where(d => d.level1Slice == null)) ConfigureSprite(OBSTACLE_SPRITES + def.name + ".png", 512);
         ConfigureSprite(THUMBNAIL, 1024);
         ConfigureSprite(GLOW_SPRITE, 256);
     }
@@ -273,7 +393,9 @@ public static class SetupNivel3Editor
         var result = new Dictionary<string, GameObject>();
         foreach (ObstacleDef def in Defs)
         {
-            Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>(OBSTACLE_SPRITES + def.name + ".png");
+            Sprite sprite = def.level1Slice != null
+                ? AssetDatabase.LoadAllAssetsAtPath(LEVEL1_OBSTACLES).OfType<Sprite>().FirstOrDefault(sp => sp.name == def.level1Slice)
+                : AssetDatabase.LoadAssetAtPath<Sprite>(OBSTACLE_SPRITES + def.name + ".png");
             if (sprite == null) { Debug.LogWarning($"[Nivel3] Falta el sprite {def.name}"); continue; }
 
             var go = new GameObject(def.name);
@@ -534,12 +656,12 @@ public static class SetupNivel3Editor
 
     private static void SetupPlayerAndTexts()
     {
-        // Sin pickups todavía (Issue 5): la sed avanza más lento de noche
+        // De noche la sed avanza un poco más lento que en el desierto del Nivel 1 (1.5)
         WaterSystem water = Object.FindAnyObjectByType<WaterSystem>();
         if (water != null)
         {
             var so = new SerializedObject(water);
-            so.FindProperty("waterDrainRate").floatValue = 0.6f;
+            so.FindProperty("waterDrainRate").floatValue = 1.0f;
             so.ApplyModifiedPropertiesWithoutUndo();
         }
 
@@ -576,6 +698,136 @@ public static class SetupNivel3Editor
                 "Mateo ha perdido sus 3 corazones ante los peligros de la frontera.\n\n🛡️ <b>Consejo:</b> Protege tu salud y administra bien tus movimientos.";
             so.ApplyModifiedPropertiesWithoutUndo();
         }
+    }
+
+    public static void PlaceEnemiesAndResources()
+    {
+        SetupAnimacionesEditor.SetupPoliceAndK9Prefabs();
+
+        foreach (string rootName in new[] { "EnemiesAndHazards", "Pickups" })
+        {
+            GameObject old = FindRoot(rootName);
+            if (old != null) Object.DestroyImmediate(old);
+        }
+
+        Transform enemies = new GameObject("EnemiesAndHazards").transform;
+        Transform policeGroup = CreateGroup("Policias", enemies);
+        Transform dogGroup = CreateGroup("Perros_K9", enemies);
+        Transform faunaGroup = CreateGroup("Fauna_Nociva", enemies);
+
+        GameObject policePrefab = AssetDatabase.LoadAssetAtPath<GameObject>(SetupAnimacionesEditor.POLICE_PREFAB);
+        for (int i = 0; i < PoliceRoutes.Length; i++)
+        {
+            Vector2[] route = PoliceRoutes[i];
+            string zone = route[0].y < DESERT_TOP_Y ? "Desierto" : "Frontera";
+            GameObject police = SpawnCreature(policePrefab, policeGroup, $"Policia_{i + 1}_{zone}", route[0]);
+            SetRoute(police, route);
+        }
+
+        foreach (var (breed, a, b) in DogRoutes)
+        {
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(SetupAnimacionesEditor.K9Prefab(breed));
+            string zone = a.y < DESERT_TOP_Y ? "Desierto" : "Frontera";
+            GameObject dog = SpawnCreature(prefab, dogGroup, $"Perro_K9_{breed}_{zone}", a);
+            SetRoute(dog, new[] { a, b });
+
+            PatrolAI patrol = dog.GetComponent<PatrolAI>();
+            patrol.moveSpeed = 1.0f;
+            GuardDogAI dogAI = dog.GetComponent<GuardDogAI>();
+            dogAI.detectionRadius = 2.8f;
+            dogAI.biteRadius = 0.65f;
+            dogAI.coyoteAlertDuration = 5.0f;
+            dogAI.calmDownDelay = 0.8f;
+            PrefabUtility.RecordPrefabInstancePropertyModifications(patrol);
+            PrefabUtility.RecordPrefabInstancePropertyModifications(dogAI);
+        }
+
+        var faunaCount = new Dictionary<string, int>();
+        foreach (var (type, x, y) in FaunaSpots)
+        {
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/Prefabs/Enemies/Hazard_{type}.prefab");
+            faunaCount[type] = faunaCount.TryGetValue(type, out int n) ? n + 1 : 1;
+            GameObject creature = SpawnCreature(prefab, faunaGroup, $"{type}_{faunaCount[type]}", new Vector2(x, y));
+
+            // Que no salgan del desierto
+            var so = new SerializedObject(creature.GetComponent<HazardFauna>());
+            so.FindProperty("minMapBounds").vector2Value = new Vector2(-2.6f, 0.9f);
+            so.FindProperty("maxMapBounds").vector2Value = new Vector2(2.6f, DESERT_TOP_Y);
+            so.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        Transform pickups = new GameObject("Pickups").transform;
+        var groups = new Dictionary<string, Transform>
+        {
+            ["Tuna"] = CreateGroup("Tunas", pickups),
+            ["Cantimplora"] = CreateGroup("Cantimploras", pickups),
+            ["Botella"] = CreateGroup("Botellas", pickups),
+        };
+        int canteens = 0;
+        foreach (var (type, x, y) in ResourceSpots)
+        {
+            string prefabName = type == "Tuna" ? "Pickup_Tuna"
+                : type == "Botella" ? "Pickup_Botella"
+                : $"Pickup_Cantimplora_{(canteens++ % 2) + 1}";
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/Prefabs/Items/{prefabName}.prefab");
+            var item = (GameObject)PrefabUtility.InstantiatePrefab(prefab, groups[type]);
+            item.transform.position = new Vector3(x, y, 0f);
+        }
+
+        Debug.Log($"[Nivel3] {PoliceRoutes.Length} policías, {DogRoutes.Length} perros K-9, {FaunaSpots.Length} criaturas y {ResourceSpots.Length} recursos colocados.");
+    }
+
+    private static Transform CreateGroup(string name, Transform parent)
+    {
+        var group = new GameObject(name).transform;
+        group.SetParent(parent, false);
+        return group;
+    }
+
+    private static GameObject SpawnCreature(GameObject prefab, Transform parent, string name, Vector2 position)
+    {
+        var go = (GameObject)PrefabUtility.InstantiatePrefab(prefab, parent);
+        go.name = name;
+        go.transform.position = new Vector3(position.x, position.y, 0f);
+
+        // Profundidad por los pies, igual que en el Nivel 1 (pasan delante o detrás de los obstáculos)
+        SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
+        sr.sortingLayerName = "Environment";
+        YSort2D ysort = go.GetComponent<YSort2D>();
+        if (ysort == null) ysort = go.AddComponent<YSort2D>();
+        ysort.isStatic = false;
+        ysort.useBottomBounds = false;
+        ysort.yOffset = 0f;
+        ysort.baseOrder = 5000;
+        ysort.UpdateSortingOrder();
+        return go;
+    }
+
+    private static void SetRoute(GameObject creature, Vector2[] route)
+    {
+        Transform wpRoot = creature.transform.Find("Waypoints");
+        if (wpRoot == null)
+        {
+            wpRoot = new GameObject("Waypoints").transform;
+            wpRoot.SetParent(creature.transform, false);
+        }
+
+        var points = new List<Transform>();
+        for (int i = 0; i < route.Length; i++)
+        {
+            Transform wp = wpRoot.Find($"WP_{i}");
+            if (wp == null)
+            {
+                wp = new GameObject($"WP_{i}").transform;
+                wp.SetParent(wpRoot, false);
+            }
+            wp.position = new Vector3(route[i].x, route[i].y, 0f);
+            points.Add(wp);
+        }
+
+        PatrolAI patrol = creature.GetComponent<PatrolAI>();
+        patrol.SetWaypoints(points, PatrolAI.PatrolMode.PingPong);
+        PrefabUtility.RecordPrefabInstancePropertyModifications(patrol);
     }
 
     private static void RegisterInBuildSettings()
@@ -661,6 +913,29 @@ public static class SetupNivel3Editor
             var behind = new Rect(b.center.x - w * 0.5f, behindY, w, h);
             float coverageBehind = cover.IsOnHidingSide(behindY) ? cover.Coverage(behind) : 0f;
             Expect(coverageBehind < 0.6f, $"{obstacle.name}: no oculta desde el lado de atrás ({coverageBehind:P0})");
+        }
+
+        // Rutas de policías y perros libres de obstáculos (con el ancho del cuerpo)
+        var routes = PoliceRoutes.Select((r, i) => ($"Policía {i + 1}", r))
+            .Concat(DogRoutes.Select(d => ($"Perro {d.breed}", new[] { d.a, d.b })));
+        foreach (var (who, route) in routes)
+        {
+            for (int i = 0; i < route.Length - 1; i++)
+            {
+                Vector2 dir = route[i + 1] - route[i];
+                RaycastHit2D[] hits = Physics2D.CircleCastAll(route[i], 0.12f, dir.normalized, dir.magnitude);
+                Collider2D blocker = hits.Select(h => h.collider)
+                    .FirstOrDefault(c => !c.isTrigger && c.attachedRigidbody == null && c.GetComponentInParent<PatrolAI>() == null);
+                Expect(blocker == null, $"{who}: ruta libre{(blocker != null ? $" (choca con {blocker.name})" : "")}");
+            }
+        }
+
+        // Recursos fuera de los obstáculos
+        foreach (var (type, x, y) in ResourceSpots)
+        {
+            Collider2D inside = Physics2D.OverlapCircleAll(new Vector2(x, y), 0.15f)
+                .FirstOrDefault(c => !c.isTrigger && c.attachedRigidbody == null && c.GetComponentInParent<PatrolAI>() == null);
+            Expect(inside == null, $"{type} en ({x:F2}, {y:F2}) accesible");
         }
 
         Debug.Log($"[Nivel3] Verificación terminada con {problems} problemas.");
