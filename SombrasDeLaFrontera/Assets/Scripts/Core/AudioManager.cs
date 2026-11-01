@@ -352,6 +352,9 @@ public class AudioManager : MonoBehaviour
         {
             case HazardFauna.FaunaType.Snake: PlayAt(snakeRattleClip, pos, 1f, 0.06f); break;
             case HazardFauna.FaunaType.Scorpion: PlayAt(scorpionClickClip, pos, 1f, 0.1f); break;
+            case HazardFauna.FaunaType.WaterSnake: PlayAt(snakeHissClip, pos, 0.6f, 0.08f); break;
+            case HazardFauna.FaunaType.Gar:
+            case HazardFauna.FaunaType.Crocodile: break; // Los depredadores del río se acercan en silencio
             default: PlayAt(spiderSkitterClip, pos, 1f, 0.12f); break;
         }
     }
@@ -363,6 +366,9 @@ public class AudioManager : MonoBehaviour
         {
             case HazardFauna.FaunaType.Snake: PlayAt(snakeHissClip, pos, 1f, 0.06f); break;
             case HazardFauna.FaunaType.Scorpion: PlayAt(scorpionStingClip, pos, 1f, 0.08f); break;
+            case HazardFauna.FaunaType.WaterSnake: PlayAt(snakeHissClip, pos, 1f, 0.06f); break;
+            case HazardFauna.FaunaType.Gar:
+            case HazardFauna.FaunaType.Crocodile: PlayAt(dogBiteClip, pos, 0.9f, 0.1f); break; // Mordida
             default: PlayAt(spiderHissClip, pos, 1f, 0.08f); break;
         }
     }
@@ -370,7 +376,7 @@ public class AudioManager : MonoBehaviour
     /// <summary>Patitas de la araña y el alacrán al caminar (muy bajito).</summary>
     public void PlayFaunaMoveAt(HazardFauna.FaunaType type, Vector3 pos)
     {
-        if (type == HazardFauna.FaunaType.Snake) return;
+        if (type != HazardFauna.FaunaType.Spider && type != HazardFauna.FaunaType.Scorpion) return;
         PlayAt(type == HazardFauna.FaunaType.Spider ? spiderSkitterClip : scorpionClickClip, pos, 0.4f, 0.15f, 0.7f);
     }
 

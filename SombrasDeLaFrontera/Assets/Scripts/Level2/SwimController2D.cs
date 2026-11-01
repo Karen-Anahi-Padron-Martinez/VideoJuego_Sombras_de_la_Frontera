@@ -29,8 +29,11 @@ public class SwimController2D : MonoBehaviour
     [Tooltip("Fricción en el agua al soltar controles (menor valor = Mateo se desliza más por inercia)")]
     [SerializeField] private float waterDrag = 1.8f;
 
-    [Tooltip("Multiplicador para objetos flotantes (ej. bidón de impulso)")]
+    [Tooltip("Multiplicador general de velocidad (ej. al bucear se reduce)")]
     public float speedMultiplier = 1.0f;
+
+    [Tooltip("Multiplicador temporal de velocidad (ej. bidón flotante)")]
+    public float boostMultiplier = 1.0f;
 
     [Header("Límites del Agua")]
     [Tooltip("Altura (Y) donde los pies de Mateo entran al agua desde la orilla sur")]
@@ -51,8 +54,12 @@ public class SwimController2D : MonoBehaviour
     public bool isSwimming = false;
     public bool isDiving = false; // Lo controla DiveController2D (buceo)
 
-    // Fuerzas externas (corrientes de agua)
-    private Vector2 externalCurrentForce = Vector2.zero;
+    // Velocidad del agua de las corrientes en las que está Mateo (suma de todas las zonas que toca)
+    private Vector2 currentFlow = Vector2.zero;
+    private Coroutine boostCoroutine;
+
+    /// <summary>Velocidad con la que el agua arrastra a Mateo en este momento.</summary>
+    public Vector2 CurrentFlow => currentFlow;
 
     // Input virtual (pantalla táctil / joystick en UI)
     private Vector2 virtualInput = Vector2.zero;
@@ -185,8 +192,14 @@ public class SwimController2D : MonoBehaviour
         if (rb == null) return;
 
         // Velocidad según el medio (tierra o agua)
-        float currentMaxSpeed = (inWater ? swimSpeed : walkSpeed) * speedMultiplier;
+        float currentMaxSpeed = (inWater ? swimSpeed : walkSpeed) * speedMultiplier * boostMultiplier;
         Vector2 targetVelocity = movementInput * currentMaxSpeed;
+
+        // Las corrientes (CurrentZone2D) arrastran a Mateo: quieto se deja llevar, nadando en contra avanza más lento
+        if (inWater)
+        {
+            targetVelocity += currentFlow;
+        }
 
         // Fricción / Inercia: en tierra se detiene casi al instante, en agua acelera y se desliza suavemente
         float lerpRate;
@@ -200,16 +213,13 @@ public class SwimController2D : MonoBehaviour
         }
 
         Vector2 currentVelocity = rb.linearVelocity;
-        Vector2 newVelocity = Vector2.Lerp(currentVelocity, targetVelocity, lerpRate * Time.fixedDeltaTime);
-
-        // Sumar empuje de corriente externa (CurrentZone2D) solo en el agua
-        if (inWater)
+        // Dentro de una corriente el agua lo jala con la aceleración del nado aunque suelte los controles
+        if (inWater && !isMoving && currentFlow.sqrMagnitude > 0.0001f)
         {
-            newVelocity += externalCurrentForce * Time.fixedDeltaTime;
-            externalCurrentForce = Vector2.Lerp(externalCurrentForce, Vector2.zero, 4f * Time.fixedDeltaTime);
+            lerpRate = waterAcceleration;
         }
 
-        rb.linearVelocity = newVelocity;
+        rb.linearVelocity = Vector2.Lerp(currentVelocity, targetVelocity, lerpRate * Time.fixedDeltaTime);
     }
 
     /// <summary>Punto de los pies de Mateo (base de su collider).</summary>
@@ -235,12 +245,36 @@ public class SwimController2D : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Permite a las zonas de corrientes (CurrentZone2D) empujar a Mateo
-    /// </summary>
-    public void ApplyCurrentPush(Vector2 force)
+    /// <summary>Una zona de corriente (CurrentZone2D) empieza a arrastrar a Mateo con la velocidad indicada.</summary>
+    public void AddCurrent(Vector2 flow)
     {
-        externalCurrentForce += force;
+        currentFlow += flow;
+    }
+
+    /// <summary>Mateo sale de una zona de corriente.</summary>
+    public void RemoveCurrent(Vector2 flow)
+    {
+        currentFlow -= flow;
+        if (currentFlow.sqrMagnitude < 0.0001f) currentFlow = Vector2.zero;
+    }
+
+    /// <summary>
+    /// Aumento de velocidad temporal (bidón flotante). Si ya hay uno activo, se reinicia su duración.
+    /// </summary>
+    public void ApplySpeedBoost(float boost, float duration)
+    {
+        if (boostCoroutine != null) StopCoroutine(boostCoroutine);
+        boostCoroutine = StartCoroutine(SpeedBoostRoutine(boost, duration));
+    }
+
+    private System.Collections.IEnumerator SpeedBoostRoutine(float boost, float duration)
+    {
+        boostMultiplier = boost;
+        Debug.Log($"[SwimController2D] ¡Impulso del bidón! Velocidad x{boost:F2} por {duration} segundos.");
+        yield return new WaitForSeconds(duration);
+        boostMultiplier = 1.0f;
+        boostCoroutine = null;
+        Debug.Log("[SwimController2D] Impulso del bidón terminado.");
     }
 
     /// <summary>

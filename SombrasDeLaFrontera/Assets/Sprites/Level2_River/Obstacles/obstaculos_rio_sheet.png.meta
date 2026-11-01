@@ -1,0 +1,401 @@
+fileFormatVersion: 2
+guid: a1dfd058416424148af241e8cec9a49b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8827992966480710804
+    second: obstaculos_rio_sheet_0
+  - first:
+      213: 3505999521582969631
+    second: obstaculos_rio_sheet_1
+  - first:
+      213: 3353850273942060039
+    second: obstaculos_rio_sheet_2
+  - first:
+      213: 3298133199728954861
+    second: obstaculos_rio_sheet_3
+  - first:
+      213: 7181842395457963251
+    second: obstaculos_rio_sheet_4
+  - first:
+      213: -4269238174808508248
+    second: obstaculos_rio_sheet_5
+  - first:
+      213: -6277756827399610367
+    second: obstaculos_rio_sheet_6
+  - first:
+      213: -8692240282728562808
+    second: obstaculos_rio_sheet_7
+  - first:
+      213: -5878842281169552363
+    second: obstaculos_rio_sheet_8
+  - first:
+      213: -8912686998166344547
+    second: obstaculos_rio_sheet_9
+  - first:
+      213: 6429393710094303459
+    second: obstaculos_rio_sheet_10
+  - first:
+      213: -4411927600677221083
+    second: obstaculos_rio_sheet_11
+  - first:
+      213: -1948409747686107596
+    second: obstaculos_rio_sheet_12
+  - first:
+      213: -4917061990149805804
+    second: obstaculos_rio_sheet_13
+  - first:
+      213: 8857363048931078421
+    second: obstaculos_rio_sheet_14
+  - first:
+      213: -5847899617023150422
+    second: obstaculos_rio_sheet_15
+  - first:
+      213: -5862342854341266443
+    second: obstaculos_rio_sheet_16
+  - first:
+      213: -3789604078449930304
+    second: obstaculos_rio_sheet_17
+  - first:
+      213: 4298758480063033582
+    second: obstaculos_rio_sheet_18
+  - first:
+      213: -8093616522647237256
+    second: obstaculos_rio_sheet_19
+  - first:
+      213: -2728297071706377006
+    second: obstaculos_rio_sheet_20
+  - first:
+      213: 15613040245802904
+    second: obstaculos_rio_sheet_21
+  - first:
+      213: -3452243648240197246
+    second: obstaculos_rio_sheet_22
+  - first:
+      213: -4225960139344291909
+    second: obstaculos_rio_sheet_23
+  - first:
+      213: -7328011341473192713
+    second: obstaculos_rio_sheet_24
+  - first:
+      213: -2963109233088374179
+    second: obstaculos_rio_sheet_25
+  - first:
+      213: -4030183155332129316
+    second: obstaculos_rio_sheet_26
+  - first:
+      213: -7388468166627815211
+    second: obstaculos_rio_sheet_27
+  - first:
+      213: -5148621436289334326
+    second: obstaculos_rio_sheet_28
+  - first:
+      213: -5755451764383645507
+    second: obstaculos_rio_sheet_29
+  - first:
+      213: -6056146810350610590
+    second: obstaculos_rio_sheet_30
+  - first:
+      213: -9160870972599088501
+    second: obstaculos_rio_sheet_31
+  - first:
+      213: 3046470875452091432
+    second: obstaculos_rio_sheet_32
+  - first:
+      213: -4647192347684699478
+    second: obstaculos_rio_sheet_33
+  - first:
+      213: 3899108180149160224
+    second: obstaculos_rio_sheet_34
+  - first:
+      213: -1676639224414346140
+    second: obstaculos_rio_sheet_35
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 225
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: serpiente_agua_c0
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 198
+        width: 166
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f3a63e31de499040bf8e05f662152ff
+      internalID: 1393490015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: serpiente_agua_c1
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 202
+        width: 187
+        height: 151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 494cf5383124246479727e8531be1a44
+      internalID: 1318146719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: serpiente_agua_c2
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 203
+        width: 187
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67d491e0f13a6dc4d961311f2cc07f18
+      internalID: 1191026546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: serpiente_agua_c3
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 215
+        width: 195
+        height: 147
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1457c01c624bf0c4a99f193e1e1c25c3
+      internalID: 970840592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: serpiente_agua_c4
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 216
+        width: 212
+        height: 146
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d7c503709e594d4ab577531f9ab6c73
+      internalID: 558549815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: serpiente_agua_c5
+      rect:
+        serializedVersion: 2
+        x: 1072
+        y: 241
+        width: 225
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f29e873cdbffc1a4bab4a42569227c27
+      internalID: 1452166047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: serpiente_agua_c6
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 197
+        width: 200
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f975c37ea0367a04694794722a5cae24
+      internalID: -1860183147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c52093150c41a7f46a1e95e01be7be19
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      serpiente_agua_c0: 1393490015
+      serpiente_agua_c1: 1318146719
+      serpiente_agua_c2: 1191026546
+      serpiente_agua_c3: 970840592
+      serpiente_agua_c4: 558549815
+      serpiente_agua_c5: 1452166047
+      serpiente_agua_c6: -1860183147
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

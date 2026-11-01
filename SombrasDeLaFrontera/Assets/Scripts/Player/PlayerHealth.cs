@@ -10,7 +10,9 @@ public enum DefeatReason
     ScorpionSting,         // Picadura de alacrán
     DogAttack,             // Ataque de perro guardián
     SpiderBite,            // Picadura de araña
-    SearchlightSpotted     // Reflector de torre de vigilancia (Nivel 3)
+    SearchlightSpotted,    // Reflector de torre de vigilancia (Nivel 3)
+    RiverPredatorBite,     // Pejelagarto o cocodrilo del Río Bravo (Nivel 2)
+    WaterSnakeBite         // Serpiente de agua del Río Bravo (Nivel 2)
 }
 
 /// <summary>

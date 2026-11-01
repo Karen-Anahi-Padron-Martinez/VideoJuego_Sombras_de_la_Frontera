@@ -7,14 +7,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Nivel 2 "Río Bravo" (Issue: escenario vertical y mecánicas de nado).
+/// Nivel 2 "Río Bravo" (Issues: escenario vertical y nado; fauna, corrientes y consumibles en SetupNivel2HazardsEditor).
 /// 1. Construye 03_Level2_River a partir del Nivel 1 (HUD, pausa, Victoria/Game Over, cámara vertical y Mateo ya conectados)
 ///    y quita lo propio del desierto.
 /// 2. Coloca el fondo vertical del río (River_Map) con sus límites laterales, la pared norte y el cierre de la orilla sur.
 /// 3. Cambia a Mateo de caminar (PlayerController2D) a nadar (SwimController2D) con el Animator de nado.
 /// 4. Mueve la meta a la arena de la orilla norte y ajusta textos, cámara y progreso para el Nivel 2.
 /// </summary>
-public static class SetupNivel2Editor
+public static partial class SetupNivel2Editor
 {
     private const string SOURCE_SCENE = "Assets/Scenes/02_Level1_Desert.unity";
     public const string SCENE = "Assets/Scenes/03_Level2_River.unity";
@@ -73,6 +73,48 @@ public static class SetupNivel2Editor
         if (Application.isBatchMode) EditorApplication.Exit(problems == 0 ? 0 : 1);
     }
 
+    /// <summary>
+    /// Capturas del río completo con la cámara del juego, de sur a norte (sin guardar cambios en la escena).
+    /// Uso: Unity -batchmode -executeMethod SetupNivel2Editor.CaptureFromCommandLine -capturesFolder &lt;carpeta&gt;
+    /// </summary>
+    public static void CaptureFromCommandLine()
+    {
+        string[] args = System.Environment.GetCommandLineArgs();
+        int i = System.Array.IndexOf(args, "-capturesFolder");
+        string folder = i >= 0 && i + 1 < args.Length ? args[i + 1] : Path.GetFullPath("Temp/Nivel2_Capturas");
+        Directory.CreateDirectory(folder);
+
+        EditorSceneManager.OpenScene(SCENE, OpenSceneMode.Single);
+        Camera cam = Camera.main;
+        const int width = 540, height = 960;
+        cam.orthographicSize = MAP_WIDTH / 2f / (width / (float)height);
+        float half = cam.orthographicSize;
+        var rt = new RenderTexture(width, height, 24);
+        var tex = new Texture2D(width, height, TextureFormat.RGB24, false);
+        cam.targetTexture = rt;
+
+        // Cuadro de calentamiento para que terminen de subir las texturas recién importadas
+        cam.transform.position = new Vector3(0f, half, -10f);
+        cam.Render();
+
+        int index = 0;
+        for (float y = half; ; y += half * 2f - 0.5f)
+        {
+            float camY = Mathf.Min(y, MAP_TOP_Y - half);
+            cam.transform.position = new Vector3(0f, camY, -10f);
+            cam.Render();
+            RenderTexture.active = rt;
+            tex.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+            tex.Apply();
+            File.WriteAllBytes(Path.Combine(folder, $"nivel2_{index++}.png"), tex.EncodeToPNG());
+            if (camY < y) break;
+        }
+        cam.targetTexture = null;
+        RenderTexture.active = null;
+        Debug.Log($"[Nivel2] {index} capturas guardadas en {folder}");
+        if (Application.isBatchMode) EditorApplication.Exit(0);
+    }
+
     // =========================================================================
     // CONSTRUCCIÓN
     // =========================================================================
@@ -99,6 +141,7 @@ public static class SetupNivel2Editor
         SetupPlayer();
         SetupCamera();
         SetupHudAndTexts();
+        PlaceHazardsAndPickups();
 
         EditorSceneManager.MarkSceneDirty(scene);
         EditorSceneManager.SaveScene(scene);
@@ -224,7 +267,8 @@ public static class SetupNivel2Editor
                     "Llegaste al Río Bravo. La otra orilla está cerca, pero la corriente no perdona...\n\n" +
                     "🕹️  <b>Controles:</b> Usa <b>W, A, S, D</b> o las <b>Flechas</b> para nadar en 8 direcciones.\n\n" +
                     "🌊 <b>Nado:</b> En el agua Mateo acelera poco a poco y sigue deslizándose al soltar los controles; calcula tus movimientos.\n\n" +
-                    "⚠️ <b>Cuidado:</b> Una vez que te metes al río ya no puedes volver al desierto.\n\n" +
+                    "⚠️ <b>Cuidado:</b> Una vez que te metes al río ya no puedes volver al desierto. Pejelagartos, cocodrilos y serpientes de agua te quitan 1 corazón si te tocan.\n\n" +
+                    "🌀 <b>Corrientes:</b> El agua con flechas te arrastra hacia un lado y los rápidos te frenan. Recoge <b>bidones</b> (más velocidad), <b>bolsas impermeables</b> (+1 corazón) y <b>carrizos</b> (aire extra).\n\n" +
                     "🎯 <b>Objetivo:</b> Cruza el río hacia el norte y pisa la <b>arena de la orilla norte</b>.";
             }
             else if (text.text.Contains("TRAMO 1")) text.text = "SOMBRAS DE LA FRONTERA — TRAMO 2";
@@ -325,6 +369,6 @@ public static class SetupNivel2Editor
         Expect(modal != null && new SerializedObject(modal).FindProperty("nextLevelSceneName").stringValue == NEXT_LEVEL_SCENE,
             "El botón de siguiente nivel lleva al Nivel 3");
 
-        return problems;
+        return problems + VerifyHazards();
     }
 }

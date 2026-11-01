@@ -19,9 +19,19 @@ public class HazardFauna : MonoBehaviour
 {
     public enum FaunaType
     {
-        Snake,     // Serpiente de cascabel
-        Scorpion,  // Alacrán del desierto
-        Spider     // Araña (tarántula)
+        Snake,      // Serpiente de cascabel
+        Scorpion,   // Alacrán del desierto
+        Spider,     // Araña (tarántula)
+        Gar,        // Pejelagarto del Río Bravo (Nivel 2)
+        Crocodile,  // Cocodrilo del Río Bravo (Nivel 2)
+        WaterSnake  // Serpiente de agua del Río Bravo (Nivel 2)
+    }
+
+    public enum MovePattern
+    {
+        Wander,  // Merodea cerca de su nido (fauna del desierto)
+        Patrol,  // Nada de lado a lado en un carril horizontal (pejelagarto, cocodrilo)
+        ZigZag   // Avanza de lado a lado ondulando hacia arriba y abajo (serpiente de agua)
     }
 
     [Header("Identificación de Fauna")]
@@ -66,6 +76,19 @@ public class HazardFauna : MonoBehaviour
     [Tooltip("Duración del giro rápido cuando va a atacar")]
     [SerializeField] private float attackTurnDuration = 0.2f;
 
+    [Header("Nado en el Río (Nivel 2)")]
+    [Tooltip("Wander = merodeo del desierto; Patrol y ZigZag = fauna acuática que cruza el río de lado a lado sin detenerse")]
+    [SerializeField] private MovePattern movePattern = MovePattern.Wander;
+
+    [Tooltip("Distancia que nada a cada lado de su posición inicial antes de dar la vuelta")]
+    [SerializeField] private float patrolHalfWidth = 2f;
+
+    [Tooltip("Altura de la ondulación del zigzag (unidades hacia arriba y abajo)")]
+    [SerializeField] private float zigzagAmplitude = 0.5f;
+
+    [Tooltip("Ondulaciones completas del zigzag por segundo")]
+    [SerializeField] private float zigzagFrequency = 0.6f;
+
     [Header("Límites del Mapa")]
     [Tooltip("Límite inferior izquierdo del desierto caminable")]
     [SerializeField] private Vector2 minMapBounds = new Vector2(-2.7f, 2.5f);
@@ -90,8 +113,10 @@ public class HazardFauna : MonoBehaviour
     private Collider2D[] myColliders;
     private PlayerHealth playerHealth;
     private Collider2D playerCollider;
+    private float swimPhase = 0f;
 
     public FaunaType Type => faunaType;
+    private bool IsSwimmer => movePattern != MovePattern.Wander;
 
     private void Awake()
     {
@@ -106,7 +131,7 @@ public class HazardFauna : MonoBehaviour
     private void Start()
     {
         spawnPosition = transform.position;
-        if (canWander)
+        if (canWander && !IsSwimmer)
         {
             StartCoroutine(WanderRoutine());
         }
@@ -161,6 +186,14 @@ public class HazardFauna : MonoBehaviour
         }
         wasAlerted = isAlerted;
 
+        // Fauna del río: no se detiene a vigilar, sigue nadando su recorrido y muerde al contacto
+        if (IsSwimmer)
+        {
+            UpdateSwimming();
+            if (creatureAnimator != null && !isAttacking) creatureAnimator.Play("Walk");
+            return;
+        }
+
         if (isAlerted && !isAttacking)
         {
             isMoving = false;
@@ -213,6 +246,42 @@ public class HazardFauna : MonoBehaviour
             else if (isMoving && !isTurning) creatureAnimator.Play("Walk");
             else creatureAnimator.Play("Idle");
         }
+    }
+
+    /// <summary>
+    /// Nado de la fauna del río: avanza hacia donde mira, da la vuelta (giro lento) al llegar al extremo de su carril
+    /// y, en zigzag, ondula hacia arriba y abajo inclinando el cuerpo en la dirección de avance.
+    /// </summary>
+    private void UpdateSwimming()
+    {
+        if (isAttacking || isTurning || spriteRenderer == null) return;
+
+        float dir = spriteRenderer.flipX ? -1f : 1f;
+        float minX = Mathf.Max(spawnPosition.x - patrolHalfWidth, minMapBounds.x);
+        float maxX = Mathf.Min(spawnPosition.x + patrolHalfWidth, maxMapBounds.x);
+
+        Vector2 pos = transform.position;
+        pos.x += dir * moveSpeed * Time.deltaTime;
+
+        if ((dir > 0f && pos.x >= maxX) || (dir < 0f && pos.x <= minX))
+        {
+            pos.x = Mathf.Clamp(pos.x, minX, maxX);
+            StartCoroutine(TurnRoutine(!spriteRenderer.flipX, turnDuration));
+        }
+
+        if (movePattern == MovePattern.ZigZag)
+        {
+            float previousY = pos.y;
+            swimPhase += Time.deltaTime * zigzagFrequency * Mathf.PI * 2f;
+            pos.y = spawnPosition.y + Mathf.Sin(swimPhase) * zigzagAmplitude;
+
+            // Inclinar el cuerpo hacia donde ondula (los sprites miran a la derecha)
+            float slope = (pos.y - previousY) / Mathf.Max(0.0001f, moveSpeed * Time.deltaTime);
+            float angle = Mathf.Clamp(Mathf.Atan(slope) * Mathf.Rad2Deg, -30f, 30f);
+            transform.rotation = Quaternion.Euler(0f, 0f, angle * dir);
+        }
+
+        transform.position = pos;
     }
 
     /// <summary>
@@ -297,7 +366,7 @@ public class HazardFauna : MonoBehaviour
             yield return TurnRoutine(!spriteRenderer.flipX, attackTurnDuration);
         }
 
-        if (creatureAnimator != null) creatureAnimator.PlayOneShot("Attack", "Alert");
+        if (creatureAnimator != null) creatureAnimator.PlayOneShot("Attack", IsSwimmer ? "Walk" : "Alert");
         AudioManager.Instance?.PlayFaunaAttackAt(faunaType, transform.position);
 
         yield return new WaitForSeconds(attackHitDelay);
@@ -324,6 +393,9 @@ public class HazardFauna : MonoBehaviour
         {
             case FaunaType.Snake: return DefeatReason.SnakeBite;
             case FaunaType.Spider: return DefeatReason.SpiderBite;
+            case FaunaType.Gar:
+            case FaunaType.Crocodile: return DefeatReason.RiverPredatorBite;
+            case FaunaType.WaterSnake: return DefeatReason.WaterSnakeBite;
             default: return DefeatReason.ScorpionSting;
         }
     }
@@ -404,7 +476,16 @@ public class HazardFauna : MonoBehaviour
     {
         Gizmos.color = (faunaType == FaunaType.Snake) ? Color.green : Color.red;
         Vector2 center = Application.isPlaying ? spawnPosition : (Vector2)transform.position;
-        Gizmos.DrawWireSphere(center, wanderRadius);
+        if (IsSwimmer)
+        {
+            // Carril de nado (y la altura del zigzag)
+            float h = movePattern == MovePattern.ZigZag ? zigzagAmplitude * 2f : 0.1f;
+            Gizmos.DrawWireCube(center, new Vector3(patrolHalfWidth * 2f, h, 0f));
+        }
+        else
+        {
+            Gizmos.DrawWireSphere(center, wanderRadius);
+        }
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, alertRadius);
