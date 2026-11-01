@@ -118,7 +118,7 @@ public class EndGameModalController : MonoBehaviour
 
     [Header("Configuración de Escenas")]
     [SerializeField] private string mainMenuSceneName = "01_MainMenu";
-    [SerializeField] private string nextLevelSceneName = "03_Level2_RioBravo";
+    [SerializeField] private string nextLevelSceneName = "03_Level2_River";
 
     /// <summary>Verdadero mientras se muestra la pantalla de Game Over o de Victoria (bloquea la pausa).</summary>
     public static bool IsShowing { get; private set; }

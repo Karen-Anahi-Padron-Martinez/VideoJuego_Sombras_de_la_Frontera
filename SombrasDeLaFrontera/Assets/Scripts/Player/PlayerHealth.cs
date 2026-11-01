@@ -210,6 +210,13 @@ public class PlayerHealth : MonoBehaviour
             controller.enabled = false;
         }
 
+        // Nivel 2 (Río Bravo): Mateo nada con SwimController2D en lugar de PlayerController2D
+        SwimController2D swimmer = GetComponent<SwimController2D>();
+        if (swimmer != null)
+        {
+            swimmer.enabled = false;
+        }
+
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)
         {
