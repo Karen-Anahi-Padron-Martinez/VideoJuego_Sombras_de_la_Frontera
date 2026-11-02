@@ -1,0 +1,984 @@
+fileFormatVersion: 2
+guid: b72d1f90a4e3215689cba09876543210
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 213000000000001
+    second: mateo_swim_0_0
+  - first:
+      213: 213000000000002
+    second: mateo_swim_0_1
+  - first:
+      213: 213000000000003
+    second: mateo_swim_0_2
+  - first:
+      213: 213000000000004
+    second: mateo_swim_0_3
+  - first:
+      213: 213000000000005
+    second: mateo_swim_0_4
+  - first:
+      213: 213000000000006
+    second: mateo_swim_0_5
+  - first:
+      213: 213000000000011
+    second: mateo_swim_1_0
+  - first:
+      213: 213000000000012
+    second: mateo_swim_1_1
+  - first:
+      213: 213000000000013
+    second: mateo_swim_1_2
+  - first:
+      213: 213000000000014
+    second: mateo_swim_1_3
+  - first:
+      213: 213000000000015
+    second: mateo_swim_1_4
+  - first:
+      213: 213000000000016
+    second: mateo_swim_1_5
+  - first:
+      213: 213000000000021
+    second: mateo_swim_2_0
+  - first:
+      213: 213000000000022
+    second: mateo_swim_2_1
+  - first:
+      213: 213000000000023
+    second: mateo_swim_2_2
+  - first:
+      213: 213000000000024
+    second: mateo_swim_2_3
+  - first:
+      213: 213000000000025
+    second: mateo_swim_2_4
+  - first:
+      213: 213000000000026
+    second: mateo_swim_2_5
+  - first:
+      213: -1049971603520181331
+    second: mateo_swim_up_0
+  - first:
+      213: 6347027007298478643
+    second: mateo_swim_up_1
+  - first:
+      213: 7531542993055361664
+    second: mateo_swim_up_2
+  - first:
+      213: 5155758088612928039
+    second: mateo_swim_up_3
+  - first:
+      213: 6544555173779111252
+    second: mateo_swim_up_4
+  - first:
+      213: -3709044448196574015
+    second: mateo_swim_up_5
+  - first:
+      213: 8720337284886719768
+    second: mateo_swim_side1_0
+  - first:
+      213: 6002390603673224197
+    second: mateo_swim_side1_1
+  - first:
+      213: -5682939022043422057
+    second: mateo_swim_side1_2
+  - first:
+      213: -2801080696544097578
+    second: mateo_swim_side1_3
+  - first:
+      213: 6781388930060866667
+    second: mateo_swim_side1_4
+  - first:
+      213: -5314013716635784470
+    second: mateo_swim_side1_5
+  - first:
+      213: -4064526236506266854
+    second: mateo_swim_side2_0
+  - first:
+      213: 6980666369845505614
+    second: mateo_swim_side2_1
+  - first:
+      213: -1356404339325454717
+    second: mateo_swim_side2_2
+  - first:
+      213: 8332786059619393489
+    second: mateo_swim_side2_3
+  - first:
+      213: 487813554858035064
+    second: mateo_swim_side2_4
+  - first:
+      213: -6355860594595215982
+    second: mateo_swim_side2_5
+  - first:
+      213: -2725043597282981509
+    second: mateo_swim_down_0
+  - first:
+      213: 587475192488451205
+    second: mateo_swim_down_1
+  - first:
+      213: -6827309735821582309
+    second: mateo_swim_down_2
+  - first:
+      213: -1869557704072553718
+    second: mateo_swim_down_3
+  - first:
+      213: -4714722492721337629
+    second: mateo_swim_down_4
+  - first:
+      213: 7308022309202058630
+    second: mateo_swim_down_5
+  - first:
+      213: -2882166264348368690
+    second: mateo_swim_float_0
+  - first:
+      213: -1849946297295343855
+    second: mateo_swim_float_1
+  - first:
+      213: 3166621283160932560
+    second: mateo_swim_float_2
+  - first:
+      213: -5234058454505699486
+    second: mateo_swim_float_3
+  - first:
+      213: -4473792743396662091
+    second: mateo_swim_float_4
+  - first:
+      213: 88321644199393574
+    second: mateo_swim_float_5
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 126
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: mateo_swim_up_0
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 619
+        width: 201
+        height: 184
+      alignment: 9
+      pivot: {x: 0.45915806, y: 0.51835203}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dabaeebb360cd61f0800000000000000
+      internalID: -1049971603520181331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_up_1
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 621
+        width: 212
+        height: 183
+      alignment: 9
+      pivot: {x: 0.44762406, y: 0.52272177}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33226d56f6b251850800000000000000
+      internalID: 6347027007298478643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_up_2
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 619
+        width: 219
+        height: 188
+      alignment: 9
+      pivot: {x: 0.47036368, y: 0.53952414}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08aa5a7c27a658860800000000000000
+      internalID: 7531542993055361664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_up_3
+      rect:
+        serializedVersion: 2
+        x: 1049
+        y: 617
+        width: 192
+        height: 188
+      alignment: 9
+      pivot: {x: 0.45917067, y: 0.508567}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72ade9b4aaeec8740800000000000000
+      internalID: 5155758088612928039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_up_4
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 617
+        width: 214
+        height: 188
+      alignment: 9
+      pivot: {x: 0.43199998, y: 0.52823263}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45d7c0a814ee2da50800000000000000
+      internalID: 6544555173779111252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_up_5
+      rect:
+        serializedVersion: 2
+        x: 1673
+        y: 617
+        width: 203
+        height: 188
+      alignment: 9
+      pivot: {x: 0.5043019, y: 0.5382392}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c4cb19c9b3d68cc0800000000000000
+      internalID: -3709044448196574015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_side1_0
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 470
+        width: 282
+        height: 151
+      alignment: 9
+      pivot: {x: 0.5277805, y: 0.47366878}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81d644bee8cd40970800000000000000
+      internalID: 8720337284886719768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_side1_1
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 463
+        width: 289
+        height: 158
+      alignment: 9
+      pivot: {x: 0.5271599, y: 0.48242727}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 504c517b376cc4350800000000000000
+      internalID: 6002390603673224197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_side1_2
+      rect:
+        serializedVersion: 2
+        x: 674
+        y: 470
+        width: 286
+        height: 151
+      alignment: 9
+      pivot: {x: 0.51287097, y: 0.4730192}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79265e6a1152221b0800000000000000
+      internalID: -5682939022043422057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_side1_3
+      rect:
+        serializedVersion: 2
+        x: 998
+        y: 476
+        width: 275
+        height: 143
+      alignment: 9
+      pivot: {x: 0.5480806, y: 0.462696}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6da094f72ff8029d0800000000000000
+      internalID: -2801080696544097578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_side1_4
+      rect:
+        serializedVersion: 2
+        x: 1315
+        y: 467
+        width: 285
+        height: 154
+      alignment: 9
+      pivot: {x: 0.52231276, y: 0.48593813}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b645b047d455c1e50800000000000000
+      internalID: 6781388930060866667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_side1_5
+      rect:
+        serializedVersion: 2
+        x: 1636
+        y: 467
+        width: 277
+        height: 154
+      alignment: 9
+      pivot: {x: 0.51798666, y: 0.48404762}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aeaee58fda4d046b0800000000000000
+      internalID: -5314013716635784470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_side2_0
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 309
+        width: 283
+        height: 151
+      alignment: 9
+      pivot: {x: 0.49135858, y: 0.47838405}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a13e9c43ce6e797c0800000000000000
+      internalID: -4064526236506266854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_side2_1
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 309
+        width: 280
+        height: 152
+      alignment: 9
+      pivot: {x: 0.4827896, y: 0.47612983}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4e2826041f40e060800000000000000
+      internalID: 6980666369845505614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_side2_2
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 307
+        width: 282
+        height: 154
+      alignment: 9
+      pivot: {x: 0.46961597, y: 0.49444678}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38635be90751d2de0800000000000000
+      internalID: -1356404339325454717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_side2_3
+      rect:
+        serializedVersion: 2
+        x: 1007
+        y: 312
+        width: 273
+        height: 149
+      alignment: 9
+      pivot: {x: 0.47540352, y: 0.46993485}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1dfd0f0b5c004a370800000000000000
+      internalID: 8332786059619393489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_side2_4
+      rect:
+        serializedVersion: 2
+        x: 1323
+        y: 308
+        width: 279
+        height: 153
+      alignment: 9
+      pivot: {x: 0.4955718, y: 0.4949249}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8770fe5f7df05c600800000000000000
+      internalID: 487813554858035064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_side2_5
+      rect:
+        serializedVersion: 2
+        x: 1648
+        y: 321
+        width: 275
+        height: 139
+      alignment: 9
+      pivot: {x: 0.4820055, y: 0.444384}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 295cf39c6727bc7a0800000000000000
+      internalID: -6355860594595215982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_down_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 174
+        width: 263
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5105558, y: 0.4197904}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b79ce724943be2ad0800000000000000
+      internalID: -2725043597282981509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_down_1
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 162
+        width: 204
+        height: 143
+      alignment: 9
+      pivot: {x: 0.5035884, y: 0.48119316}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58cd0a23391272800800000000000000
+      internalID: 587475192488451205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_down_2
+      rect:
+        serializedVersion: 2
+        x: 740
+        y: 174
+        width: 191
+        height: 137
+      alignment: 9
+      pivot: {x: 0.4121688, y: 0.420752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b10e9c8c7f58041a0800000000000000
+      internalID: -6827309735821582309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_down_3
+      rect:
+        serializedVersion: 2
+        x: 1025
+        y: 173
+        width: 218
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5178127, y: 0.4507427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0b19a96c2ffd06e0800000000000000
+      internalID: -1869557704072553718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_down_4
+      rect:
+        serializedVersion: 2
+        x: 1340
+        y: 166
+        width: 231
+        height: 144
+      alignment: 9
+      pivot: {x: 0.48700294, y: 0.4402809}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3eaecce5fd0f19eb0800000000000000
+      internalID: -4714722492721337629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_down_5
+      rect:
+        serializedVersion: 2
+        x: 1661
+        y: 163
+        width: 232
+        height: 138
+      alignment: 9
+      pivot: {x: 0.54948795, y: 0.49748307}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68d5e96129f4b6560800000000000000
+      internalID: 7308022309202058630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_float_0
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 6
+        width: 223
+        height: 156
+      alignment: 9
+      pivot: {x: 0.49580526, y: 0.4972264}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec0a6ed8d0d7008d0800000000000000
+      internalID: -2882166264348368690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_float_1
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 13
+        width: 245
+        height: 148
+      alignment: 9
+      pivot: {x: 0.49409118, y: 0.50321186}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11f6920e4aba356e0800000000000000
+      internalID: -1849946297295343855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_float_2
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 12
+        width: 206
+        height: 149
+      alignment: 9
+      pivot: {x: 0.4795082, y: 0.48600826}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d0cff0974912fb20800000000000000
+      internalID: 3166621283160932560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_float_3
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 10
+        width: 245
+        height: 150
+      alignment: 9
+      pivot: {x: 0.4916743, y: 0.49153778}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 267ce8d1193ec57b0800000000000000
+      internalID: -5234058454505699486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_float_4
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 7
+        width: 244
+        height: 156
+      alignment: 9
+      pivot: {x: 0.49136502, y: 0.5135306}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b42f1bf335e9e1c0800000000000000
+      internalID: -4473792743396662091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_swim_float_5
+      rect:
+        serializedVersion: 2
+        x: 1682
+        y: 7
+        width: 218
+        height: 154
+      alignment: 9
+      pivot: {x: 0.5036672, y: 0.49897504}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 629bb744118c93100800000000000000
+      internalID: 88321644199393574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 3883b49c4bed2dc46ae614ccd82ba742
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      mateo_swim_0_0: 213000000000001
+      mateo_swim_0_1: 213000000000002
+      mateo_swim_0_2: 213000000000003
+      mateo_swim_0_3: 213000000000004
+      mateo_swim_0_4: 213000000000005
+      mateo_swim_0_5: 213000000000006
+      mateo_swim_1_0: 213000000000011
+      mateo_swim_1_1: 213000000000012
+      mateo_swim_1_2: 213000000000013
+      mateo_swim_1_3: 213000000000014
+      mateo_swim_1_4: 213000000000015
+      mateo_swim_1_5: 213000000000016
+      mateo_swim_2_0: 213000000000021
+      mateo_swim_2_1: 213000000000022
+      mateo_swim_2_2: 213000000000023
+      mateo_swim_2_3: 213000000000024
+      mateo_swim_2_4: 213000000000025
+      mateo_swim_2_5: 213000000000026
+      mateo_swim_down_0: -2725043597282981509
+      mateo_swim_down_1: 587475192488451205
+      mateo_swim_down_2: -6827309735821582309
+      mateo_swim_down_3: -1869557704072553718
+      mateo_swim_down_4: -4714722492721337629
+      mateo_swim_down_5: 7308022309202058630
+      mateo_swim_float_0: -2882166264348368690
+      mateo_swim_float_1: -1849946297295343855
+      mateo_swim_float_2: 3166621283160932560
+      mateo_swim_float_3: -5234058454505699486
+      mateo_swim_float_4: -4473792743396662091
+      mateo_swim_float_5: 88321644199393574
+      mateo_swim_side1_0: 8720337284886719768
+      mateo_swim_side1_1: 6002390603673224197
+      mateo_swim_side1_2: -5682939022043422057
+      mateo_swim_side1_3: -2801080696544097578
+      mateo_swim_side1_4: 6781388930060866667
+      mateo_swim_side1_5: -5314013716635784470
+      mateo_swim_side2_0: -4064526236506266854
+      mateo_swim_side2_1: 6980666369845505614
+      mateo_swim_side2_2: -1356404339325454717
+      mateo_swim_side2_3: 8332786059619393489
+      mateo_swim_side2_4: 487813554858035064
+      mateo_swim_side2_5: -6355860594595215982
+      mateo_swim_up_0: -1049971603520181331
+      mateo_swim_up_1: 6347027007298478643
+      mateo_swim_up_2: 7531542993055361664
+      mateo_swim_up_3: 5155758088612928039
+      mateo_swim_up_4: 6544555173779111252
+      mateo_swim_up_5: -3709044448196574015
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

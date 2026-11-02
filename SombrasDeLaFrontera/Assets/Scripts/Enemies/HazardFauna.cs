@@ -19,9 +19,19 @@ public class HazardFauna : MonoBehaviour
 {
     public enum FaunaType
     {
-        Snake,     // Serpiente de cascabel
-        Scorpion,  // Alacrán del desierto
-        Spider     // Araña (tarántula)
+        Snake,      // Serpiente de cascabel
+        Scorpion,   // Alacrán del desierto
+        Spider,     // Araña (tarántula)
+        Gar,        // Pejelagarto del Río Bravo (Nivel 2)
+        Crocodile,  // Cocodrilo del Río Bravo (Nivel 2)
+        WaterSnake  // Serpiente de agua del Río Bravo (Nivel 2)
+    }
+
+    public enum MovePattern
+    {
+        Wander,  // Merodea cerca de su nido (fauna del desierto)
+        Patrol,  // Nada de lado a lado en un carril horizontal (pejelagarto, cocodrilo)
+        ZigZag   // Avanza de lado a lado ondulando hacia arriba y abajo (serpiente de agua)
     }
 
     [Header("Identificación de Fauna")]
@@ -66,6 +76,28 @@ public class HazardFauna : MonoBehaviour
     [Tooltip("Duración del giro rápido cuando va a atacar")]
     [SerializeField] private float attackTurnDuration = 0.2f;
 
+    [Header("Nado en el Río (Nivel 2)")]
+    [Tooltip("Wander = merodeo del desierto; Patrol y ZigZag = fauna acuática que cruza el río de lado a lado sin detenerse")]
+    [SerializeField] private MovePattern movePattern = MovePattern.Wander;
+
+    [Tooltip("Distancia que nada a cada lado de su posición inicial antes de dar la vuelta")]
+    [SerializeField] private float patrolHalfWidth = 2f;
+
+    [Tooltip("Altura de la ondulación del zigzag (unidades hacia arriba y abajo)")]
+    [SerializeField] private float zigzagAmplitude = 0.5f;
+
+    [Tooltip("Ondulaciones completas del zigzag por segundo")]
+    [SerializeField] private float zigzagFrequency = 0.6f;
+
+    [Tooltip("Distancia (en cualquier dirección, también por detrás) a la que detecta a Mateo y sale a perseguirlo (0 = no persigue)")]
+    [SerializeField] private float chaseRadius = 0f;
+
+    [Tooltip("Multiplicador de velocidad mientras persigue a Mateo")]
+    [SerializeField] private float chaseSpeedMultiplier = 1.8f;
+
+    [Tooltip("Qué tanto se aleja de su carril (arriba o abajo) para perseguir a Mateo antes de rendirse")]
+    [SerializeField] private float chaseLeash = 1.6f;
+
     [Header("Límites del Mapa")]
     [Tooltip("Límite inferior izquierdo del desierto caminable")]
     [SerializeField] private Vector2 minMapBounds = new Vector2(-2.7f, 2.5f);
@@ -90,8 +122,13 @@ public class HazardFauna : MonoBehaviour
     private Collider2D[] myColliders;
     private PlayerHealth playerHealth;
     private Collider2D playerCollider;
+    private float swimPhase = 0f;
+    private bool isChasing = false;
+    private float laneOffsetY = 0f;
+    private readonly Collider2D[] solidHits = new Collider2D[8];
 
     public FaunaType Type => faunaType;
+    private bool IsSwimmer => movePattern != MovePattern.Wander;
 
     private void Awake()
     {
@@ -106,7 +143,7 @@ public class HazardFauna : MonoBehaviour
     private void Start()
     {
         spawnPosition = transform.position;
-        if (canWander)
+        if (canWander && !IsSwimmer)
         {
             StartCoroutine(WanderRoutine());
         }
@@ -161,6 +198,14 @@ public class HazardFauna : MonoBehaviour
         }
         wasAlerted = isAlerted;
 
+        // Fauna del río: no se detiene a vigilar, sigue nadando su recorrido y muerde al contacto
+        if (IsSwimmer)
+        {
+            UpdateSwimming();
+            if (creatureAnimator != null && !isAttacking) creatureAnimator.Play("Walk");
+            return;
+        }
+
         if (isAlerted && !isAttacking)
         {
             isMoving = false;
@@ -213,6 +258,126 @@ public class HazardFauna : MonoBehaviour
             else if (isMoving && !isTurning) creatureAnimator.Play("Walk");
             else creatureAnimator.Play("Idle");
         }
+    }
+
+    /// <summary>
+    /// Nado de la fauna del río: avanza hacia donde mira, da la vuelta (giro lento) al llegar al extremo de su carril
+    /// y, en zigzag, ondula hacia arriba y abajo inclinando el cuerpo en la dirección de avance.
+    /// </summary>
+    private void UpdateSwimming()
+    {
+        if (isAttacking || isTurning || spriteRenderer == null) return;
+
+        if (UpdateChase()) return;
+
+        float dir = spriteRenderer.flipX ? -1f : 1f;
+        float minX = Mathf.Max(spawnPosition.x - patrolHalfWidth, minMapBounds.x);
+        float maxX = Mathf.Min(spawnPosition.x + patrolHalfWidth, maxMapBounds.x);
+
+        Vector2 pos = transform.position;
+        pos.x += dir * moveSpeed * Time.deltaTime;
+
+        // Al llegar al extremo de su carril da la vuelta (sin saltos, aunque regrese de perseguir a Mateo fuera del carril)
+        if ((dir > 0f && pos.x >= maxX) || (dir < 0f && pos.x <= minX))
+        {
+            StartCoroutine(TurnRoutine(!spriteRenderer.flipX, turnDuration));
+        }
+
+        float previousY = pos.y;
+        if (movePattern == MovePattern.ZigZag) swimPhase += Time.deltaTime * zigzagFrequency * Mathf.PI * 2f;
+
+        // Después de una persecución regresa poco a poco a la altura de su carril
+        laneOffsetY = Mathf.MoveTowards(laneOffsetY, 0f, moveSpeed * 0.8f * Time.deltaTime);
+        pos.y = LaneY() + laneOffsetY;
+
+        if (movePattern == MovePattern.ZigZag || Mathf.Abs(laneOffsetY) > 0.01f)
+        {
+            // Inclinar el cuerpo hacia donde ondula o regresa (los sprites miran a la derecha)
+            float slope = (pos.y - previousY) / Mathf.Max(0.0001f, moveSpeed * Time.deltaTime);
+            float angle = Mathf.Clamp(Mathf.Atan(slope) * Mathf.Rad2Deg, -30f, 30f);
+            transform.rotation = Quaternion.Euler(0f, 0f, angle * dir);
+        }
+        else
+        {
+            transform.rotation = Quaternion.identity;
+        }
+
+        transform.position = pos;
+        PlaySwimSound(1.1f, 1.8f);
+    }
+
+    /// <summary>Chapoteo de la fauna del río al nadar (se oye solo si está cerca de la cámara).</summary>
+    private void PlaySwimSound(float minInterval, float maxInterval)
+    {
+        if (Time.time < nextMoveSoundTime) return;
+        nextMoveSoundTime = Time.time + Random.Range(minInterval, maxInterval);
+        AudioManager.Instance?.PlayFaunaMoveAt(faunaType, transform.position);
+    }
+
+    /// <summary>Altura de su recorrido normal en este momento (con la ondulación del zigzag).</summary>
+    private float LaneY() =>
+        spawnPosition.y + (movePattern == MovePattern.ZigZag ? Mathf.Sin(swimPhase) * zigzagAmplitude : 0f);
+
+    /// <summary>
+    /// Detección de la fauna del río: si Mateo pasa cerca (también por detrás), lo encara y lo persigue más rápido
+    /// sin salirse del agua ni atravesar troncos, juncos, ramas o alambrados. Se rinde si Mateo se aleja o sale de su zona,
+    /// y entonces vuelve a su carril. Devuelve verdadero mientras persigue.
+    /// </summary>
+    private bool UpdateChase()
+    {
+        if (chaseRadius <= 0f || playerHealth == null || playerHealth.isDead)
+        {
+            isChasing = false;
+            return false;
+        }
+
+        Vector2 target = playerCollider != null ? (Vector2)playerCollider.bounds.center : (Vector2)playerHealth.transform.position;
+        float zoneMinX = Mathf.Max(spawnPosition.x - patrolHalfWidth, minMapBounds.x) - 0.5f;
+        float zoneMaxX = Mathf.Min(spawnPosition.x + patrolHalfWidth, maxMapBounds.x) + 0.5f;
+        bool inZone = Mathf.Abs(target.y - spawnPosition.y) <= chaseLeash && target.x >= zoneMinX && target.x <= zoneMaxX &&
+                      target.y >= minMapBounds.y && target.y <= maxMapBounds.y;
+        float distance = DistanceToPlayer();
+
+        if (!isChasing && inZone && distance <= chaseRadius)
+        {
+            isChasing = true;
+            AudioManager.Instance?.PlayFaunaAlertAt(faunaType, transform.position);
+            Debug.Log($"[HazardFauna] {gameObject.name} detectó a Mateo y lo persigue.");
+        }
+        else if (isChasing && (!inZone || distance > chaseRadius * 1.8f))
+        {
+            isChasing = false;
+            laneOffsetY = transform.position.y - LaneY();
+            Debug.Log($"[HazardFauna] {gameObject.name} perdió a Mateo y regresa a su carril.");
+        }
+        if (!isChasing) return false;
+
+        Vector2 pos = transform.position;
+        Vector2 toTarget = target - pos;
+        if (toTarget.sqrMagnitude < 0.0001f) return true;
+
+        spriteRenderer.flipX = toTarget.x < 0f;
+        Vector2 next = pos + toTarget.normalized * (moveSpeed * chaseSpeedMultiplier * Time.deltaTime);
+        next.x = Mathf.Clamp(next.x, minMapBounds.x, maxMapBounds.x);
+        next.y = Mathf.Clamp(next.y, minMapBounds.y, maxMapBounds.y);
+        if (!BlockedBySolid(next)) transform.position = next;
+        PlaySwimSound(0.45f, 0.7f);   // Persiguiendo chapotea más seguido
+
+        float angle = Mathf.Clamp(Mathf.Atan2(toTarget.y, Mathf.Abs(toTarget.x)) * Mathf.Rad2Deg, -35f, 35f);
+        transform.rotation = Quaternion.Euler(0f, 0f, spriteRenderer.flipX ? -angle : angle);
+        return true;
+    }
+
+    /// <summary>Verdadero si en ese punto hay un obstáculo sólido (tronco, juncos, ramas, alambrado o pared del río).</summary>
+    private bool BlockedBySolid(Vector2 point)
+    {
+        int count = Physics2D.OverlapCircle(point, 0.15f, ContactFilter2D.noFilter, solidHits);
+        for (int i = 0; i < count; i++)
+        {
+            Collider2D c = solidHits[i];
+            if (c != null && !c.isTrigger && c.attachedRigidbody == null) return true;
+        }
+        return false;
     }
 
     /// <summary>
@@ -297,7 +462,7 @@ public class HazardFauna : MonoBehaviour
             yield return TurnRoutine(!spriteRenderer.flipX, attackTurnDuration);
         }
 
-        if (creatureAnimator != null) creatureAnimator.PlayOneShot("Attack", "Alert");
+        if (creatureAnimator != null) creatureAnimator.PlayOneShot("Attack", IsSwimmer ? "Walk" : "Alert");
         AudioManager.Instance?.PlayFaunaAttackAt(faunaType, transform.position);
 
         yield return new WaitForSeconds(attackHitDelay);
@@ -324,6 +489,9 @@ public class HazardFauna : MonoBehaviour
         {
             case FaunaType.Snake: return DefeatReason.SnakeBite;
             case FaunaType.Spider: return DefeatReason.SpiderBite;
+            case FaunaType.Gar:
+            case FaunaType.Crocodile: return DefeatReason.RiverPredatorBite;
+            case FaunaType.WaterSnake: return DefeatReason.WaterSnakeBite;
             default: return DefeatReason.ScorpionSting;
         }
     }
@@ -404,7 +572,16 @@ public class HazardFauna : MonoBehaviour
     {
         Gizmos.color = (faunaType == FaunaType.Snake) ? Color.green : Color.red;
         Vector2 center = Application.isPlaying ? spawnPosition : (Vector2)transform.position;
-        Gizmos.DrawWireSphere(center, wanderRadius);
+        if (IsSwimmer)
+        {
+            // Carril de nado (y la altura del zigzag)
+            float h = movePattern == MovePattern.ZigZag ? zigzagAmplitude * 2f : 0.1f;
+            Gizmos.DrawWireCube(center, new Vector3(patrolHalfWidth * 2f, h, 0f));
+        }
+        else
+        {
+            Gizmos.DrawWireSphere(center, wanderRadius);
+        }
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, alertRadius);

@@ -12333,7 +12333,7 @@ MonoBehaviour:
   nextLevelButton: {fileID: 1987079199}
   victoryMenuButton: {fileID: 989575021}
   mainMenuSceneName: 01_MainMenu
-  nextLevelSceneName: 03_Level2_RioBravo
+  nextLevelSceneName: 03_Level2_River
 --- !u!114 &1845229869
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,0 +1,493 @@
+fileFormatVersion: 2
+guid: 1b210aa51135df44f96228498c501582
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -9135008677947849690
+    second: corrientes_suave_0
+  - first:
+      213: 1467348717094216627
+    second: corrientes_suave_1
+  - first:
+      213: 2938389277306046080
+    second: corrientes_suave_2
+  - first:
+      213: -5931249271687222642
+    second: corrientes_suave_3
+  - first:
+      213: 2387409202954865031
+    second: corrientes_suave_4
+  - first:
+      213: 1579341780377438055
+    second: corrientes_suave_5
+  - first:
+      213: 6265006803444672128
+    second: corrientes_suave_6
+  - first:
+      213: -7592425144861477436
+    second: corrientes_suave_7
+  - first:
+      213: -8993465885137004121
+    second: corrientes_suave_8
+  - first:
+      213: 4361759570325871017
+    second: corrientes_suave_9
+  - first:
+      213: 2601640490804841366
+    second: corrientes_suave_10
+  - first:
+      213: 4084513306158048694
+    second: corrientes_suave_11
+  - first:
+      213: -7033401374387799102
+    second: corrientes_suave_12
+  - first:
+      213: -243426673202434509
+    second: corrientes_suave_13
+  - first:
+      213: 2218608268194584582
+    second: corrientes_suave_14
+  - first:
+      213: -7321219205531699177
+    second: corrientes_suave_15
+  - first:
+      213: 4015375055772725986
+    second: corrientes_suave_16
+  - first:
+      213: -144858831248806581
+    second: corrientes_suave_17
+  - first:
+      213: -8810967336789053917
+    second: corrientes_suave_18
+  - first:
+      213: -4891841915001840137
+    second: corrientes_suave_19
+  - first:
+      213: 3044128910056022119
+    second: corrientes_suave_20
+  - first:
+      213: -55323657052030748
+    second: corrientes_suave_21
+  - first:
+      213: 211756858328567047
+    second: corrientes_suave_22
+  - first:
+      213: 7725201446079908471
+    second: corrientes_suave_23
+  - first:
+      213: -1056624100667508556
+    second: corrientes_suave_24
+  - first:
+      213: -1713971984912174653
+    second: corrientes_suave_25
+  - first:
+      213: 2816031573247564008
+    second: corrientes_suave_26
+  - first:
+      213: -6044874030728097086
+    second: corrientes_suave_27
+  - first:
+      213: 6836410874989812220
+    second: corrientes_suave_28
+  - first:
+      213: -43898011050118097
+    second: corrientes_suave_29
+  - first:
+      213: -8500067836958483818
+    second: corrientes_suave_30
+  - first:
+      213: 7092349733201456236
+    second: corrientes_suave_31
+  - first:
+      213: 6751156104620379198
+    second: corrientes_suave_32
+  - first:
+      213: 205972051096693688
+    second: corrientes_suave_33
+  - first:
+      213: 2373637751280427295
+    second: corrientes_suave_34
+  - first:
+      213: 4435141441169538056
+    second: corrientes_suave_35
+  - first:
+      213: 5997689132555039818
+    second: corrientes_suave_36
+  - first:
+      213: 1794285759156074434
+    second: corrientes_suave_37
+  - first:
+      213: 6519487648386420337
+    second: corrientes_suave_38
+  - first:
+      213: 7406798665548563240
+    second: corrientes_suave_39
+  - first:
+      213: -2968799187940966960
+    second: corrientes_suave_40
+  - first:
+      213: 3966526051795702730
+    second: corrientes_suave_41
+  - first:
+      213: -2144863320071372561
+    second: corrientes_suave_42
+  - first:
+      213: -5600385428325691423
+    second: corrientes_suave_43
+  - first:
+      213: -6165940430657191204
+    second: corrientes_suave_44
+  - first:
+      213: -4932985399922645956
+    second: corrientes_suave_45
+  - first:
+      213: -6394896304734322880
+    second: corrientes_suave_46
+  - first:
+      213: 1949611934046282347
+    second: corrientes_suave_47
+  - first:
+      213: 8194476317756173188
+    second: corrientes_suave_48
+  - first:
+      213: -9003588760793099551
+    second: corrientes_suave_49
+  - first:
+      213: -1558960607996458717
+    second: corrientes_suave_50
+  - first:
+      213: 4179306609219744771
+    second: corrientes_suave_51
+  - first:
+      213: 5746577769850438815
+    second: corrientes_suave_52
+  - first:
+      213: -5714874997760773399
+    second: corrientes_suave_53
+  - first:
+      213: -643304520690755850
+    second: corrientes_suave_54
+  - first:
+      213: -5046331356034936397
+    second: corrientes_suave_55
+  - first:
+      213: -9218508775121124098
+    second: corrientes_suave_56
+  - first:
+      213: -4299652554146308177
+    second: corrientes_suave_57
+  - first:
+      213: -8746423086293521195
+    second: corrientes_suave_58
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 148
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: corriente_r0_c0
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 239
+        width: 110
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22109b787a764eb4c9465eb47b6f31a7
+      internalID: 1986229270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: corriente_r0_c1
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 241
+        width: 111
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0125dd184641dc041b4c8cdca8c30c58
+      internalID: 663115931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: corriente_r0_c2
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 247
+        width: 110
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a1047f7c3bd14b459a885ac32f76cf9
+      internalID: 1215175051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: corriente_r0_c3
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 239
+        width: 110
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 274fe39cd37de484b962c40d44e4ffb7
+      internalID: 818925844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: corriente_r1_c0
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 60
+        width: 116
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f48af40df2fffd744bec1ac094d03eac
+      internalID: 1505646625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: corriente_r1_c1
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 57
+        width: 115
+        height: 115
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d4a9a351c2566245afeb8ca0ab9e8e1
+      internalID: -17130373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: corriente_r1_c2
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 59
+        width: 117
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 942ce2036183654448d072e4f1272c84
+      internalID: 1968823416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: corriente_r1_c3
+      rect:
+        serializedVersion: 2
+        x: 573
+        y: 59
+        width: 120
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30dd33661ba62744b88ba5e2d027b89a
+      internalID: 718170652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 7ee25f542fdec564891a2cda1d5e51ec
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      corriente_r0_c0: 1986229270
+      corriente_r0_c1: 663115931
+      corriente_r0_c2: 1215175051
+      corriente_r0_c3: 818925844
+      corriente_r1_c0: 1505646625
+      corriente_r1_c1: -17130373
+      corriente_r1_c2: 1968823416
+      corriente_r1_c3: 718170652
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
