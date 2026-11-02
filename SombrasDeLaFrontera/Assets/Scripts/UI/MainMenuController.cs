@@ -163,32 +163,96 @@ public class MainMenuController : MonoBehaviour
         ConfigureLevelCard(cardLevel4Btn, level4StatusText, maxUnlocked >= 4);
     }
 
+    /// <summary>
+    /// Partes visuales de una tarjeta de nivel y su aspecto original (bloqueado), para poder alternar
+    /// entre "bloqueado" y "desbloqueado" (que copia el aspecto de la tarjeta del Nivel 1).
+    /// </summary>
+    private class LevelCardView
+    {
+        public Image card, actionBadge, thumb;
+        public Outline outline;
+        public Button button;
+        public Text title, subheader, status, actionText;
+        public GameObject lockIcon;
+        public Color cardColor, outlineColor, titleColor, subheaderColor, statusColor, actionColor, actionTextColor, thumbColor;
+        public ColorBlock colors;
+        public string statusText, actionLabel;
+
+        public LevelCardView(Button btn)
+        {
+            button = btn;
+            Transform t = btn.transform;
+            card = btn.GetComponent<Image>();
+            outline = btn.GetComponent<Outline>();
+            title = t.Find("LevelTitle")?.GetComponent<Text>();
+            subheader = t.Find("LevelSubheader")?.GetComponent<Text>();
+            status = t.Find("StatusBadge")?.GetComponent<Text>();
+            actionBadge = t.Find("ActionBadge")?.GetComponent<Image>();
+            actionText = t.Find("ActionBadge/ActionText")?.GetComponent<Text>();
+            thumb = t.Find("ThumbFrame")?.GetComponent<Image>();
+            Transform lockT = t.Find("ThumbFrame/LockIcon");
+            lockIcon = lockT != null ? lockT.gameObject : null;
+
+            colors = btn.colors;
+            if (card != null) cardColor = card.color;
+            if (outline != null) outlineColor = outline.effectColor;
+            if (title != null) titleColor = title.color;
+            if (subheader != null) subheaderColor = subheader.color;
+            if (status != null) { statusColor = status.color; statusText = status.text; }
+            if (actionBadge != null) actionColor = actionBadge.color;
+            if (actionText != null) { actionTextColor = actionText.color; actionLabel = actionText.text; }
+            if (thumb != null) thumbColor = thumb.color;
+        }
+    }
+
+    private readonly System.Collections.Generic.Dictionary<Button, LevelCardView> cardViews = new System.Collections.Generic.Dictionary<Button, LevelCardView>();
+
+    private LevelCardView ViewOf(Button btn)
+    {
+        if (btn == null) return null;
+        if (!cardViews.TryGetValue(btn, out LevelCardView view))
+        {
+            view = new LevelCardView(btn);
+            cardViews[btn] = view;
+        }
+        return view;
+    }
+
     private void ConfigureLevelCard(Button cardBtn, Text statusText, bool isUnlocked)
     {
-        if (cardBtn != null)
-        {
-            cardBtn.interactable = isUnlocked;
-        }
+        LevelCardView view = ViewOf(cardBtn);
+        if (view == null) return;
+        cardBtn.interactable = isUnlocked;
 
-        if (statusText != null)
+        // Desbloqueada: se ve igual que la tarjeta del Nivel 1 ("DISPONIBLE" e "INICIAR TRAVESÍA")
+        LevelCardView reference = isUnlocked ? ViewOf(cardLevel1Btn) : view;
+        if (reference == null) reference = view;
+
+        if (view.card != null) view.card.color = reference.cardColor;
+        if (view.outline != null) view.outline.effectColor = reference.outlineColor;
+        cardBtn.colors = reference.colors;
+        if (view.title != null) view.title.color = reference.titleColor;
+        if (view.subheader != null) view.subheader.color = reference.subheaderColor;
+        if (view.status != null) { view.status.text = reference.statusText; view.status.color = reference.statusColor; }
+        if (view.actionBadge != null) view.actionBadge.color = reference.actionColor;
+        if (view.actionText != null) { view.actionText.text = reference.actionLabel; view.actionText.color = reference.actionTextColor; }
+
+        // Miniatura: a color si está disponible; oscurecida y con candado si está bloqueada
+        if (view.thumb != null)
         {
-            if (isUnlocked)
-            {
-                statusText.text = "DESBLOQUEADO";
-                statusText.color = new Color(0.35f, 0.90f, 0.45f, 1f); // Verde activo
-            }
-            else
-            {
-                statusText.text = "🔒 BLOQUEADO";
-                statusText.color = new Color(0.7f, 0.7f, 0.7f, 0.65f); // Gris bloqueado
-            }
+            bool hasImage = view.thumb.sprite != null;
+            view.thumb.color = isUnlocked ? Color.white : (hasImage ? new Color(0.32f, 0.32f, 0.36f, 1f) : view.thumbColor);
         }
+        if (view.lockIcon != null) view.lockIcon.SetActive(!isUnlocked);
     }
 
     public void OnPlayClicked()
     {
+        // Nueva partida: siempre se empieza desde cero y se vuelven a bloquear todos los niveles
+        PlayerPrefs.SetInt(PREF_MAX_LEVEL, 1);
         PlayerPrefs.SetInt(PREF_GAME_STARTED, 1);
         PlayerPrefs.Save();
+        UpdateLevelsProgress();
 
         LaunchLevel(1, level1SceneName);
     }
