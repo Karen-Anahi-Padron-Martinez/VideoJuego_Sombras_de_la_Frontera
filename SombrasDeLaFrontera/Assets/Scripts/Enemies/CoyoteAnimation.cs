@@ -13,6 +13,11 @@ using UnityEngine;
 [RequireComponent(typeof(PatrolAI))]
 public class CoyoteAnimation : MonoBehaviour
 {
+    public enum VoiceSet { Coyote, Police }
+
+    [Tooltip("Voces y pasos: coyote (Nivel 1) o policía fronterizo (Nivel 3)")]
+    [SerializeField] private VoiceSet voiceSet = VoiceSet.Coyote;
+
     [Tooltip("Progreso mínimo de detección para que el coyote reaccione y señale a Mateo")]
     [SerializeField] private float alertThreshold = 0.05f;
 
@@ -54,7 +59,8 @@ public class CoyoteAnimation : MonoBehaviour
             if (Time.time >= nextStepTime)
             {
                 nextStepTime = Time.time + stepInterval;
-                AudioManager.Instance?.PlayCoyoteStepAt(transform.position);
+                if (voiceSet == VoiceSet.Police) AudioManager.Instance?.PlayPoliceStepAt(transform.position);
+                else AudioManager.Instance?.PlayCoyoteStepAt(transform.position);
             }
         }
         else
@@ -73,12 +79,14 @@ public class CoyoteAnimation : MonoBehaviour
         {
             if (kind == AlertIndicator.Kind.Question && lastKind == AlertIndicator.Kind.None)
             {
-                AudioManager.Instance?.PlayCoyoteSuspectAt(transform.position, voiceId);
+                if (voiceSet == VoiceSet.Police) AudioManager.Instance?.PlayPoliceSuspectAt(transform.position, voiceId);
+                else AudioManager.Instance?.PlayCoyoteSuspectAt(transform.position, voiceId);
                 AlarmSystem2D.Raise(transform.position);
             }
             else if (kind == AlertIndicator.Kind.Exclamation)
             {
-                AudioManager.Instance?.PlayCoyoteSpotAt(transform.position, voiceId);
+                if (voiceSet == VoiceSet.Police) AudioManager.Instance?.PlayPoliceSpotAt(transform.position, voiceId);
+                else AudioManager.Instance?.PlayCoyoteSpotAt(transform.position, voiceId);
                 AlarmSystem2D.Raise(transform.position);
                 AudioManager.Instance?.PlayAlert();
             }
@@ -92,7 +100,8 @@ public class CoyoteAnimation : MonoBehaviour
     public void PlayCatch()
     {
         hasCaught = true;
-        AudioManager.Instance?.PlayCoyoteCatchAt(transform.position);
+        if (voiceSet == VoiceSet.Police) AudioManager.Instance?.PlayPoliceCatchAt(transform.position, voiceId);
+        else AudioManager.Instance?.PlayCoyoteCatchAt(transform.position);
         if (creatureAnimator != null)
         {
             creatureAnimator.UseUnscaledTime();

@@ -87,6 +87,20 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip spiderSkitterClip;
     [SerializeField] private AudioClip spiderHissClip;
 
+    [Header("Nivel 3: Frontera")]
+    [Tooltip("Música de tensión nocturna del Nivel 3 (bucle)")]
+    [SerializeField] private AudioClip borderNightBGM;
+    [Tooltip("Pasos de Mateo sobre grava y concreto")]
+    [SerializeField] private AudioClip[] footstepGravelClips;
+    [SerializeField] private AudioClip[] policeStepClips;
+    [SerializeField] private AudioClip[] policeSuspectClips;
+    [SerializeField] private AudioClip[] policeSpotClips;
+    [SerializeField] private AudioClip[] policeCatchClips;
+    [SerializeField] private AudioClip alarmSirenClip;
+    [SerializeField] private AudioClip radioStaticClip;
+    [Tooltip("Zumbido en bucle de los reflectores de las torres")]
+    [SerializeField] private AudioClip searchlightHumClip;
+
     [Header("Nivel 2: Río Bravo")]
     [SerializeField] private AudioClip riverBGM;
     [SerializeField] private AudioClip[] swimStrokeClips;
@@ -162,6 +176,7 @@ public class AudioManager : MonoBehaviour
     private AudioSource voiceSource;
     private int nextWorldSource;
     private readonly Dictionary<string, float> lastPlayTimes = new Dictionary<string, float>();
+    private bool isBorderLevel;   // Nivel 3: pasos en grava y música de la frontera
 
     private void Awake()
     {
@@ -205,7 +220,9 @@ public class AudioManager : MonoBehaviour
         currentZones = 0;
 
         bool isLevel = sceneName.Contains("Level");
+        isBorderLevel = sceneName.Contains("Level3") || sceneName.Contains("BorderWall");
         AudioClip clip = isLevel ? desertNightBGM : menuBGM;
+        if (isBorderLevel && borderNightBGM != null) clip = borderNightBGM;
         if (sceneName.Contains("Level2") && riverBGM != null) clip = riverBGM;
         if (clip != null) PlayBGM(clip);
         else StopBGM();
@@ -326,7 +343,9 @@ public class AudioManager : MonoBehaviour
     public void PlayFootstep()
     {
         if (footstepSource == null) return;
-        AudioClip clip = Pick(footstepSandClips);
+        AudioClip clip = isBorderLevel && footstepGravelClips != null && footstepGravelClips.Length > 0
+            ? Pick(footstepGravelClips)
+            : Pick(footstepSandClips);
         if (clip == null) return;
 
         footstepSource.pitch = Random.Range(0.90f, 1.10f);
@@ -529,6 +548,72 @@ public class AudioManager : MonoBehaviour
     {
         PlayVoiceAt(Pick(coyoteCatchClips), pos, 1f, 3f, true);
     }
+
+    // ---------------------------------------------------------------- Patrulla Fronteriza (Nivel 3)
+
+    public void PlayPoliceStepAt(Vector3 pos) => PlayAt(Pick(policeStepClips), pos, 0.45f, 0.1f);
+
+    /// <summary>Sospecha: estática de radio y "¿Quién anda ahí?".</summary>
+    public void PlayPoliceSuspectAt(Vector3 pos, int ownerId)
+    {
+        if (!CooldownReady("suspect" + ownerId, 6f) || !CooldownReady("anyshout", 1.2f)) return;
+        PlayAt(radioStaticClip, pos, 0.55f, 0.04f, 1.4f);
+        PlayVoiceAt(PickPolice(policeSuspectClips, ownerId), pos, 0.9f, 1.6f, false);
+    }
+
+    /// <summary>Lo descubre: "¡Alto! ¡Patrulla Fronteriza!".</summary>
+    public void PlayPoliceSpotAt(Vector3 pos, int ownerId)
+    {
+        if (!CooldownReady("spot" + ownerId, 4f) || !CooldownReady("anyshout", 0.8f)) return;
+        PlayVoiceAt(PickPolice(policeSpotClips, ownerId), pos, 1f, 2f, true);
+    }
+
+    /// <summary>Lo atrapa: "¡Quieto! ¡Estás detenido!" (corta cualquier otra voz).</summary>
+    public void PlayPoliceCatchAt(Vector3 pos, int ownerId) => PlayVoiceAt(PickPolice(policeCatchClips, ownerId), pos, 1f, 3f, true);
+
+    /// <summary>
+    /// Hay dos agentes: los clips impares (1, 3, 5...) son el agente de megáfono y los pares el agente de radio.
+    /// Cada policía usa siempre la misma voz según su número.
+    /// </summary>
+    private static AudioClip PickPolice(AudioClip[] clips, int ownerId)
+    {
+        if (clips == null || clips.Length == 0) return null;
+        int persona = Mathf.Abs(ownerId) % 2;
+        int options = (clips.Length - persona + 1) / 2;
+        if (options <= 0) return Pick(clips);
+        return clips[persona + 2 * Random.Range(0, options)];
+    }
+
+    /// <summary>Estática de la radio de una patrulla.</summary>
+    public void PlayRadioAt(Vector3 pos)
+    {
+        if (!CooldownReady("radio", 1.5f)) return;
+        PlayAt(radioStaticClip, pos, 0.55f, 0.05f, 1.4f);
+    }
+
+    /// <summary>Sirena de la instalación (se escucha en todo el nivel; no se encima consigo misma).</summary>
+    public void PlayAlarmSiren()
+    {
+        if (!CooldownReady("siren", 8f)) return;
+        PlayOneShotSFX(alarmSirenClip, 0.45f);
+    }
+
+    /// <summary>Clip del zumbido de los reflectores (lo reproduce cada torre en su propio bucle).</summary>
+    public AudioClip SearchlightHumClip => searchlightHumClip;
+
+    /// <summary>Volumen y paneo para un sonido continuo en esa posición (respeta el volumen de Efectos).</summary>
+    public void GetWorldMix(Vector3 worldPos, float rangeMultiplier, out float volume, out float pan)
+    {
+        Vector3 listener = GetListenerPosition();
+        float distance = Vector2.Distance(listener, worldPos);
+        float far = maxHearingDistance * rangeMultiplier;
+        float near = fullVolumeDistance * rangeMultiplier;
+        float attenuation = 1f - Mathf.Clamp01((distance - near) / Mathf.Max(0.01f, far - near));
+        volume = attenuation * attenuation * sfxVolume;
+        pan = Mathf.Clamp((worldPos.x - listener.x) / 3f, -0.8f, 0.8f);
+    }
+
+    // ---------------------------------------------------------------- Perros
 
     public void PlayDogBarkAt(Vector3 pos) => PlayAt(Pick(dogBarkClips), pos, 0.85f, 0.1f, 1.4f);
     public void PlayDogBiteAt(Vector3 pos) => PlayAt(dogBiteClip, pos, 0.95f, 0.06f);

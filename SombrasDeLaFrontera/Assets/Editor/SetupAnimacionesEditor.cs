@@ -699,7 +699,11 @@ public static class SetupAnimacionesEditor
         {
             root.name = "Enemy_BorderPolice";
             root.transform.localScale = new Vector3(0.55f, 0.55f, 1f); // Adulto: un poco más alto que Mateo
-            if (root.GetComponent<CoyoteAnimation>() == null) root.AddComponent<CoyoteAnimation>();
+            CoyoteAnimation anim = root.GetComponent<CoyoteAnimation>();
+            if (anim == null) anim = root.AddComponent<CoyoteAnimation>();
+            var animSo = new SerializedObject(anim);
+            animSo.FindProperty("voiceSet").enumValueIndex = (int)CoyoteAnimation.VoiceSet.Police; // Voces y botas de policía
+            animSo.ApplyModifiedPropertiesWithoutUndo();
             SetBaseSprite(root, "police_part1", "anim_police_part1_r1_c0");
         }, controllers);
 

@@ -280,6 +280,20 @@ public static class SetupNivel3Editor
     }
 
     [MenuItem("Sombras de la Frontera/Nivel 3/3. Colocar Policías, Perros, Fauna y Recursos")]
+    /// <summary>Uso por línea de comandos: asigna los sonidos al AudioManager y las voces de policía a su prefab.</summary>
+    public static void AudioFromCommandLine()
+    {
+        SetupSonidosEditor.SetupSounds();
+        SetupAnimacionesEditor.SetupPoliceAndK9Prefabs();
+    }
+
+    [MenuItem("Sombras de la Frontera/Nivel 3/4. Configurar Sonidos del Nivel 3")]
+    public static void AudioMenu()
+    {
+        AudioFromCommandLine();
+        EditorUtility.DisplayDialog("Nivel 3", "Música, voces de policía, sirena, radio, reflectores y pasos del Nivel 3 asignados.", "Aceptar");
+    }
+
     /// <summary>Uso por línea de comandos: coloca enemigos y recursos en la escena existente, verifica y captura.</summary>
     public static void PlaceEnemiesFromCommandLine()
     {

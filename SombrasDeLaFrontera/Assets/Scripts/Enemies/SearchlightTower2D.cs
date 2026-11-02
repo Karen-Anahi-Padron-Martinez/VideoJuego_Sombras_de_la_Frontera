@@ -67,6 +67,7 @@ public class SearchlightTower2D : MonoBehaviour
     private float lastAlarmTime = -10f;
     private PlayerController2D player;
     private PlayerHealth playerHealth;
+    private AudioSource humSource;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     private static void ResetStaticState() => activeLights.Clear();
@@ -110,6 +111,7 @@ public class SearchlightTower2D : MonoBehaviour
         }
 
         FindPlayer();
+        UpdateHum();
 
         bool exposed = IsPlayerInBeam(out float angleToPlayer);
         if (exposed)
@@ -151,6 +153,32 @@ public class SearchlightTower2D : MonoBehaviour
         }
 
         RebuildBeam();
+    }
+
+    /// <summary>
+    /// Zumbido eléctrico del reflector: más fuerte mientras más cerca está la cámara y un poco más agudo al seguir a Mateo.
+    /// Respeta el volumen de Efectos y se pausa con el menú de pausa.
+    /// </summary>
+    private void UpdateHum()
+    {
+        AudioManager audio = AudioManager.Instance;
+        if (audio == null || audio.SearchlightHumClip == null) return;
+
+        if (humSource == null)
+        {
+            humSource = gameObject.AddComponent<AudioSource>();
+            humSource.clip = audio.SearchlightHumClip;
+            humSource.loop = true;
+            humSource.playOnAwake = false;
+            humSource.spatialBlend = 0f;
+            humSource.time = Random.Range(0f, humSource.clip.length);
+            humSource.Play();
+        }
+
+        audio.GetWorldMix(transform.position, 0.9f, out float volume, out float pan);
+        humSource.volume = volume * 0.35f;
+        humSource.panStereo = pan;
+        humSource.pitch = Mathf.MoveTowards(humSource.pitch, trackingPlayer ? 1.12f : 1f, Time.deltaTime * 0.5f);
     }
 
     /// <summary>Ángulo del barrido en este momento: va y viene como un péndulo, más despacio en los extremos.</summary>

@@ -47,6 +47,8 @@ public class AlarmSystem2D : MonoBehaviour
             }
         }
         instance.alarms.Add(new Alarm { position = position, radius = radius, endTime = end });
+        AudioManager.Instance?.PlayAlarmSiren();
+        AudioManager.Instance?.PlayRadioAt(position);
         Debug.Log($"<color=orange>[AlarmSystem2D] ¡Alarma en {position}! Las patrullas cercanas aceleran el paso.</color>");
     }
 

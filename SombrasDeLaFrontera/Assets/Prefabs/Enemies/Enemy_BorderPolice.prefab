@@ -667,6 +667,7 @@ MonoBehaviour:
   moveSpeed: 0.8
   waitTimeAtWaypoint: 2
   spinAtWaypoints: 540
+  spinDuration: 4.5
   flashlightPivot: {fileID: 4770350909157929650}
   spriteRenderer: {fileID: 0}
   isAlerted: 0
@@ -792,6 +793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d00a7a0498960f44eafed621f75f1308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoyoteAnimation
+  voiceSet: 1
   alertThreshold: 0.05
   stepInterval: 0.42
 --- !u!1 &3758141613700020391
