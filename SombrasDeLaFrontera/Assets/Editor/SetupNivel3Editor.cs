@@ -224,14 +224,14 @@ public static class SetupNivel3Editor
         ("Tuna", -0.44f, 8.57f),
         ("Cantimplora", -1.51f, 11.51f),
         ("Botella", -0.83f, 13.56f),
-        ("Botella", -2.02f, 13.65f),
+        ("Botella", 0.6f, 18.9f),      // Riesgo: dentro del barrido del reflector del patio
         ("Cantimplora", 2.2f, 13.77f),
         ("Botella", 1.77f, 16.04f),
         ("Cantimplora", 0.42f, 18.28f),
-        ("Botella", 1.84f, 21.52f),
-        ("Botella", 0.51f, 22.9f),
+        ("Botella", 1.2f, 32.6f),      // Riesgo: junto al hueco del muro, bajo la lámpara
+        ("Botella", 0.51f, 22.9f),     // Riesgo: bajo la lámpara de los contenedores
         ("Botella", -0.23f, 26.18f),
-        ("Botella", -1.54f, 29.94f),
+        ("Botella", -0.9f, 29.6f),     // Riesgo: en el barrido de la torre izquierda del muro
         ("Cantimplora", 1.68f, 32.06f),
     };
 
@@ -313,6 +313,22 @@ public static class SetupNivel3Editor
         EditorSceneManager.MarkSceneDirty(scene);
         EditorSceneManager.SaveScene(scene);
         EditorUtility.DisplayDialog("Nivel 3", "6 policías, 3 perros K-9, 6 criaturas de fauna y 20 recursos colocados.", "Aceptar");
+    }
+
+    [MenuItem("Sombras de la Frontera/Nivel 3/5. Analizar Recorrido de Inicio a Fin")]
+    public static void AnalyzeMenu()
+    {
+        if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
+        EditorSceneManager.OpenScene(SCENE, OpenSceneMode.Single);
+        string report = AnalyzeRoute(null);
+        EditorUtility.DisplayDialog("Nivel 3: recorrido", report, "Aceptar");
+    }
+
+    /// <summary>Uso por línea de comandos: analiza el recorrido y guarda el camino en otros/nivel3/recorrido.txt.</summary>
+    public static void AnalyzeFromCommandLine()
+    {
+        EditorSceneManager.OpenScene(SCENE, OpenSceneMode.Single);
+        AnalyzeRoute(Path.GetFullPath(Path.Combine(Application.dataPath, "../../otros/nivel3/recorrido.txt")));
     }
 
     [MenuItem("Sombras de la Frontera/Depuración/Desbloquear todos los niveles")]
@@ -931,6 +947,122 @@ public static class SetupNivel3Editor
         PatrolAI patrol = creature.GetComponent<PatrolAI>();
         patrol.SetWaypoints(points, PatrolAI.PatrolMode.PingPong);
         PrefabUtility.RecordPrefabInstancePropertyModifications(patrol);
+    }
+
+    // =========================================================================
+    // PRUEBA DE INICIO A FIN (Issue 5): busca un camino real de Mateo desde el inicio hasta el hueco del muro
+    // esquivando los obstáculos sólidos, y mide qué tan largo y arriesgado es.
+    // =========================================================================
+
+    public static string AnalyzeRoute(string outputPath)
+    {
+        Physics2D.SyncTransforms();
+        PlayerController2D player = Object.FindAnyObjectByType<PlayerController2D>();
+        CapsuleCollider2D feet = player.GetComponent<CapsuleCollider2D>();
+        Vector2 feetSize = Vector2.Scale(feet.size, player.transform.lossyScale);
+        Vector2 start = player.transform.TransformPoint(feet.offset);
+        Vector2 goal = FindRoot("GoalTrigger_Muro").transform.position;
+        float speed = new SerializedObject(player).FindProperty("baseSpeed").floatValue;
+
+        // Rejilla de 0.1 unidades: una celda es transitable si los pies de Mateo caben sin tocar nada sólido
+        const float cell = 0.1f;
+        const float minX = -2.85f, minY = 0f;
+        int nx = 58, ny = 345;
+        var walkable = new bool[nx, ny];
+        for (int ix = 0; ix < nx; ix++)
+            for (int iy = 0; iy < ny; iy++)
+            {
+                Vector2 c = new Vector2(minX + ix * cell, minY + iy * cell);
+                walkable[ix, iy] = !Physics2D.OverlapCapsuleAll(c, feetSize, CapsuleDirection2D.Horizontal, 0f)
+                    .Any(col => !col.isTrigger && col.attachedRigidbody == null);
+            }
+
+        Vector2Int ToCell(Vector2 p) => new Vector2Int(Mathf.Clamp(Mathf.RoundToInt((p.x - minX) / cell), 0, nx - 1), Mathf.Clamp(Mathf.RoundToInt((p.y - minY) / cell), 0, ny - 1));
+        Vector2 ToWorld(Vector2Int c) => new Vector2(minX + c.x * cell, minY + c.y * cell);
+
+        // A* con 8 vecinos
+        Vector2Int s0 = ToCell(start), g0 = ToCell(goal);
+        var cost = new Dictionary<Vector2Int, float> { [s0] = 0f };
+        var from = new Dictionary<Vector2Int, Vector2Int>();
+        var open = new SortedSet<(float f, int x, int y)> { (Vector2.Distance(s0, g0), s0.x, s0.y) };
+        bool found = false;
+        while (open.Count > 0)
+        {
+            var top = open.Min; open.Remove(top);
+            var cur = new Vector2Int(top.x, top.y);
+            if (cur == g0) { found = true; break; }
+            for (int dx = -1; dx <= 1; dx++)
+                for (int dy = -1; dy <= 1; dy++)
+                {
+                    if (dx == 0 && dy == 0) continue;
+                    var nb = new Vector2Int(cur.x + dx, cur.y + dy);
+                    if (nb.x < 0 || nb.y < 0 || nb.x >= nx || nb.y >= ny || !walkable[nb.x, nb.y]) continue;
+                    if (dx != 0 && dy != 0 && (!walkable[cur.x + dx, cur.y] || !walkable[cur.x, cur.y + dy])) continue;
+                    float ng = cost[cur] + (dx != 0 && dy != 0 ? 1.4142f : 1f);
+                    if (cost.TryGetValue(nb, out float old) && old <= ng) continue;
+                    cost[nb] = ng;
+                    from[nb] = cur;
+                    open.Add((ng + Vector2.Distance(nb, g0), nb.x, nb.y));
+                }
+        }
+
+        if (!found)
+        {
+            string fail = "NO hay camino del inicio a la meta: algún obstáculo o pared cierra el paso.";
+            Debug.LogWarning("[Nivel3][FALLA] " + fail);
+            return fail;
+        }
+
+        var path = new List<Vector2>();
+        for (var c = g0; ; c = from[c]) { path.Add(ToWorld(c)); if (c == s0) break; }
+        path.Reverse();
+        float length = 0f;
+        for (int i = 1; i < path.Count; i++) length += Vector2.Distance(path[i - 1], path[i]);
+
+        // Riesgos a lo largo del camino más corto
+        var lamps = Object.FindObjectsByType<LightZone2D>();
+        int litSteps = path.Count(p => lamps.Any(z =>
+        {
+            Vector2 r = new SerializedObject(z).FindProperty("radii").vector2Value;
+            Vector2 d = p - (Vector2)z.transform.position;
+            return (d.x / r.x) * (d.x / r.x) + (d.y / r.y) * (d.y / r.y) <= 1f;
+        }));
+        int beamSteps = path.Count(p => Object.FindObjectsByType<SearchlightTower2D>().Any(b =>
+        {
+            var so = new SerializedObject(b);
+            Vector2 d = p - (Vector2)b.transform.position;
+            float reach = so.FindProperty("beamLength").floatValue;
+            float half = so.FindProperty("sweepHalfRange").floatValue + so.FindProperty("beamWidthAngle").floatValue * 0.5f;
+            float angle = Mathf.Atan2(d.y, d.x) * Mathf.Rad2Deg;
+            return d.magnitude <= reach && Mathf.Abs(Mathf.DeltaAngle(so.FindProperty("centerAngle").floatValue, angle)) <= half;
+        }));
+        int patrolsCrossed = PoliceRoutes.Count(route => path.Any(p => DistanceToSegment(p, route[0], route[route.Length - 1]) < 1.0f));
+        int dogsCrossed = DogRoutes.Count(d => path.Any(p => DistanceToSegment(p, d.a, d.b) < 1.2f));
+        int coversNear = Object.FindObjectsByType<CoverZone2D>().Count(c => path.Any(p => Vector2.Distance(p, c.transform.position) < 0.9f));
+
+        float runSeconds = length / Mathf.Max(0.1f, speed);
+        string report =
+            $"Hay camino del inicio a la meta.\n\n" +
+            $"• Recorrido más corto: {length:F1} unidades ({runSeconds:F0} s corriendo sin parar).\n" +
+            $"• Rutas de policía que cruza: {patrolsCrossed} de {PoliceRoutes.Length}. Rutas de perros: {dogsCrossed} de {DogRoutes.Length}.\n" +
+            $"• Tramos bajo lámparas: {litSteps * cell:F1} u. Tramos dentro del alcance de reflectores: {beamSteps * cell:F1} u.\n" +
+            $"• Coberturas junto al camino para esconderse: {coversNear}.\n\n" +
+            "Esperando patrullas, reflectores y escondiéndose, una partida real dura varios minutos.";
+        Debug.Log("[Nivel3][Recorrido] " + report.Replace("\n", " "));
+
+        if (!string.IsNullOrEmpty(outputPath))
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
+            File.WriteAllLines(outputPath, path.Select(p => string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:F2} {1:F2}", p.x, p.y)));
+        }
+        return report;
+    }
+
+    private static float DistanceToSegment(Vector2 p, Vector2 a, Vector2 b)
+    {
+        Vector2 ab = b - a;
+        float t = ab.sqrMagnitude < 1e-6f ? 0f : Mathf.Clamp01(Vector2.Dot(p - a, ab) / ab.sqrMagnitude);
+        return Vector2.Distance(p, a + ab * t);
     }
 
     private static void RegisterInBuildSettings()
