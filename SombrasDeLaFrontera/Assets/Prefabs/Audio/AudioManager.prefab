@@ -305,9 +305,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 325fe623643179e4fa7f176eaaba230e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
-  audioMixer: {fileID: 0}
-  musicGroup: {fileID: 0}
-  sfxGroup: {fileID: 0}
+  audioMixer: {fileID: 24100000, guid: 2102224454eb37c459a77933cbf980e9, type: 2}
+  musicGroup: {fileID: 623548438661428913, guid: 2102224454eb37c459a77933cbf980e9, type: 2}
+  sfxGroup: {fileID: -8355806516399316274, guid: 2102224454eb37c459a77933cbf980e9, type: 2}
   musicSource: {fileID: 2536975225447716445}
   sfxSource: {fileID: 1355302019875575109}
   footstepSource: {fileID: 153793835306701}
@@ -354,6 +354,60 @@ MonoBehaviour:
   scorpionStingClip: {fileID: 8300000, guid: b37482810fbfc87499cb82aacd6611f6, type: 3}
   spiderSkitterClip: {fileID: 8300000, guid: 7b3a45e61bed975499f5048b0e786701, type: 3}
   spiderHissClip: {fileID: 8300000, guid: 5de404b6f20e71942812aac6a1ab4a48, type: 3}
+  borderNightBGM: {fileID: 8300000, guid: fd26df3affcee5f47a08940bc2058bf7, type: 3}
+  footstepGravelClips:
+  - {fileID: 8300000, guid: f13669c4065103241b25fe1de1917c1d, type: 3}
+  - {fileID: 8300000, guid: f4af640392de6164e9f607ead75300c3, type: 3}
+  - {fileID: 8300000, guid: fefcd3404cd0c7a479e7a03b4a6fd32d, type: 3}
+  - {fileID: 8300000, guid: 8d598ce2b9c640a47ac83a86f0ac82da, type: 3}
+  policeStepClips:
+  - {fileID: 8300000, guid: bcc4b2e49de09f74998e1feb167e73d2, type: 3}
+  - {fileID: 8300000, guid: e919b22f787625e47a805b57af8b8193, type: 3}
+  - {fileID: 8300000, guid: 2a51fd322057f3b4ebe7a8165c883d42, type: 3}
+  policeSuspectClips:
+  - {fileID: 8300000, guid: 6f8fb035a286e0741bb84c184215d270, type: 3}
+  - {fileID: 8300000, guid: 90fa1802f9de9c64a880d9ecb721f934, type: 3}
+  - {fileID: 8300000, guid: 5479e1bab05a3864c86f9833574dc4ad, type: 3}
+  - {fileID: 8300000, guid: a007822d74324244b83e387fbdc328fa, type: 3}
+  policeSpotClips:
+  - {fileID: 8300000, guid: 640d2ecdc4bf495438665a7305f83f38, type: 3}
+  - {fileID: 8300000, guid: d4f07f61676102e4ba2375b753a8e85d, type: 3}
+  - {fileID: 8300000, guid: df6d6e58a717f594ab4ea9e352df07a0, type: 3}
+  - {fileID: 8300000, guid: b4a739145a31fbd4d835b581672226b2, type: 3}
+  - {fileID: 8300000, guid: 90d3c65ff943ff84ea44a14d76c026a4, type: 3}
+  - {fileID: 8300000, guid: b315c63d2dbcf32459494410c3d73a41, type: 3}
+  policeCatchClips:
+  - {fileID: 8300000, guid: 7b81df50086a63d4086b685e508e7f33, type: 3}
+  - {fileID: 8300000, guid: e1215af541e64aa4bb63d09d5a16bf90, type: 3}
+  - {fileID: 8300000, guid: 5a9c38efa3b79fd4c9ecbe9b8762bb63, type: 3}
+  - {fileID: 8300000, guid: ae74a1345fcd43549976a8575029ea81, type: 3}
+  alarmSirenClip: {fileID: 8300000, guid: d35712b5ee85e934d82b306c533eaddb, type: 3}
+  radioStaticClip: {fileID: 8300000, guid: dc7ce4c5dc1539646aaac4b28bf8bc5b, type: 3}
+  searchlightHumClip: {fileID: 8300000, guid: 352fde8769752834893b3fac22f2e791, type: 3}
+  riverBGM: {fileID: 8300000, guid: f69dda81fa6aa2e4996f93033a27006a, type: 3}
+  swimStrokeClips:
+  - {fileID: 8300000, guid: 52e24eae0fe050e41af70c944d6970e6, type: 3}
+  - {fileID: 8300000, guid: 7068ca104262e0348bafe36a5414f81e, type: 3}
+  - {fileID: 8300000, guid: 1a55df6784b1ea246ab4d3cd913f3e8e, type: 3}
+  diveClip: {fileID: 8300000, guid: b81b4631b4265b3448b8ed7634342202, type: 3}
+  surfaceClip: {fileID: 8300000, guid: a9abcbc6f9736314987f0de1d4211244, type: 3}
+  bubblesClip: {fileID: 8300000, guid: 6d28808f34c1320499fe712af8950c20, type: 3}
+  currentLoopClip: {fileID: 8300000, guid: d51f17a6f7dbe74429149289a457110a, type: 3}
+  pickupClip: {fileID: 8300000, guid: 8eca18a87feabba499a0537daff7c15b, type: 3}
+  drownClip: {fileID: 8300000, guid: c49d60cae4dc3b44c8f3a9ba2b2b4761, type: 3}
+  boatSirenClip: {fileID: 8300000, guid: f94bb8ffe0fae9c458712f6c9f2eb930, type: 3}
+  boatEngineClip: {fileID: 8300000, guid: 8fb7e1b8750a8334dab91a863043ddee, type: 3}
+  garBiteClip: {fileID: 8300000, guid: a413a960db828ca4ba1b50b3c8ed49c7, type: 3}
+  garSplashClip: {fileID: 8300000, guid: 6c47d940975970448a2b31b16c415fa9, type: 3}
+  crocBiteClip: {fileID: 8300000, guid: 52e8b39d0916b9c40b8baee630c69fdf, type: 3}
+  crocGrowlClip: {fileID: 8300000, guid: 6c47d940975970448a2b31b16c415fa9, type: 3}
+  waterSnakeHissClip: {fileID: 8300000, guid: b9d94e04f79dd774cb684fd92dac12f4, type: 3}
+  waterSnakeStrikeClip: {fileID: 8300000, guid: 450be87ffc1e8674fa26b2c5f67b4d8c, type: 3}
+  faunaSwimClip: {fileID: 8300000, guid: eac7ace4431c60b41a63342d3b16f16e, type: 3}
+  underwaterCutoffParam: CorteSubmarino
+  underwaterCutoff: 650
+  surfaceCutoff: 22000
+  underwaterFadeTime: 0.25
   fullVolumeDistance: 1.2
   maxHearingDistance: 5
   worldVoices: 10

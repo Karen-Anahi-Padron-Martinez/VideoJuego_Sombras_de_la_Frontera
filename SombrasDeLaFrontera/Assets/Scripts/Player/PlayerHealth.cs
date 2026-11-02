@@ -10,7 +10,12 @@ public enum DefeatReason
     ScorpionSting,         // Picadura de alacrán
     DogAttack,             // Ataque de perro guardián
     SpiderBite,            // Picadura de araña
-    SearchlightSpotted     // Reflector de torre de vigilancia (Nivel 3)
+    SearchlightSpotted,    // Reflector de torre de vigilancia (Nivel 3)
+    RiverPredatorBite,     // Pejelagarto o cocodrilo del Río Bravo (Nivel 2)
+    WaterSnakeBite,        // Serpiente de agua del Río Bravo (Nivel 2)
+    BoatSearchlight,       // Reflector de una lancha de la Patrulla Fronteriza (Nivel 2)
+    BarbedWire,            // Alambre de púas en el Río Bravo (Nivel 2)
+    Drowning               // Se acabó el aire buceando en el Río Bravo (Nivel 2)
 }
 
 /// <summary>
@@ -208,6 +213,13 @@ public class PlayerHealth : MonoBehaviour
         if (controller != null)
         {
             controller.enabled = false;
+        }
+
+        // Nivel 2 (Río Bravo): Mateo nada con SwimController2D en lugar de PlayerController2D
+        SwimController2D swimmer = GetComponent<SwimController2D>();
+        if (swimmer != null)
+        {
+            swimmer.enabled = false;
         }
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();

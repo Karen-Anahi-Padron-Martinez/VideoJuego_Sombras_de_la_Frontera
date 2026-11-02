@@ -99,6 +99,42 @@ public class EndGameModalController : MonoBehaviour
         titleColor = new Color(1f, 0.85f, 0.35f, 1f), // Amarillo reflector
         description = "El haz de la torre de vigilancia te alumbró en campo abierto.\n\n🗼 <b>Consejo:</b> Observa el barrido del reflector, cruza cuando se aleje y agáchate tras un obstáculo: su luz no pasa a través de ellos."
     };
+
+    [SerializeField] private DefeatMessageConfig defeatByRiverPredator = new DefeatMessageConfig
+    {
+        title = "¡ATACADO EN EL RÍO!",
+        titleColor = new Color(0.45f, 0.75f, 0.70f, 1f), // Verde agua turbia
+        description = "Un pejelagarto te mordió mientras cruzabas el Río Bravo.\n\n🐊 <b>Consejo:</b> Observa su recorrido de lado a lado y cruza por detrás de él cuando se aleje."
+    };
+
+    [SerializeField] private DefeatMessageConfig defeatByWaterSnake = new DefeatMessageConfig
+    {
+        title = "¡MORDEDURA DE SERPIENTE DE AGUA!",
+        titleColor = new Color(0.60f, 0.85f, 0.25f, 1f), // Verde ponzoñoso
+        description = "Una serpiente de agua te mordió al cruzarte en su camino.\n\n🐍 <b>Consejo:</b> Nada en zigzag de orilla a orilla; espera a que se aleje antes de pasar."
+    };
+
+    [SerializeField] private DefeatMessageConfig defeatByBoat = new DefeatMessageConfig
+    {
+        title = "¡LA LANCHA TE DESCUBRIÓ!",
+        titleColor = new Color(1f, 0.85f, 0.35f, 1f), // Amarillo reflector
+        description = "El reflector de la Patrulla Fronteriza te alumbró nadando en la superficie.\n\n🚤 <b>Consejo:</b> Cuando veas el brillo en la orilla, escóndete bajo un tronco o entre los juncos, o sumérgete hasta que pase la luz."
+    };
+
+    [SerializeField] private DefeatMessageConfig defeatByBarbedWire = new DefeatMessageConfig
+    {
+        title = "¡ATRAPADO EN EL ALAMBRE DE PÚAS!",
+        titleColor = new Color(0.75f, 0.75f, 0.8f, 1f), // Gris metálico
+        description = "Las púas del alambrado bajo el agua te hirieron una y otra vez.\n\n🚧 <b>Consejo:</b> Cada alambrado tiene un hueco; búscalo con calma y no nades pegado a las púas."
+    };
+
+    [SerializeField] private DefeatMessageConfig defeatByDrowning = new DefeatMessageConfig
+    {
+        title = "¡TE QUEDASTE SIN AIRE!",
+        titleColor = new Color(0.35f, 0.7f, 1f, 1f), // Azul profundo
+        description = "Mateo se quedó demasiado tiempo bajo el agua y no alcanzó a salir a respirar.\n\n🤿 <b>Consejo:</b> Vigila la barra de aire: sumérgete solo mientras pasa la luz y sal a la superficie antes de que se vacíe. Los carrizos te dan aire extra."
+    };
+
     [SerializeField] private DefeatMessageConfig defeatGeneric = new DefeatMessageConfig
     {
         title = "¡TE HAS QUEDADO SIN VIDAS!",
@@ -118,7 +154,7 @@ public class EndGameModalController : MonoBehaviour
 
     [Header("Configuración de Escenas")]
     [SerializeField] private string mainMenuSceneName = "01_MainMenu";
-    [SerializeField] private string nextLevelSceneName = "03_Level2_RioBravo";
+    [SerializeField] private string nextLevelSceneName = "03_Level2_River";
 
     /// <summary>Verdadero mientras se muestra la pantalla de Game Over o de Victoria (bloquea la pausa).</summary>
     public static bool IsShowing { get; private set; }
@@ -216,6 +252,16 @@ public class EndGameModalController : MonoBehaviour
                 return defeatBySpider;
             case DefeatReason.SearchlightSpotted:
                 return defeatBySearchlight;
+            case DefeatReason.RiverPredatorBite:
+                return defeatByRiverPredator;
+            case DefeatReason.WaterSnakeBite:
+                return defeatByWaterSnake;
+            case DefeatReason.BoatSearchlight:
+                return defeatByBoat;
+            case DefeatReason.BarbedWire:
+                return defeatByBarbedWire;
+            case DefeatReason.Drowning:
+                return defeatByDrowning;
             default:
                 return defeatGeneric;
         }
