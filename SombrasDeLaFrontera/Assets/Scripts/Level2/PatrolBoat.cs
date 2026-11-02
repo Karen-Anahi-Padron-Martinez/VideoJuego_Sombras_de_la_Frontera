@@ -55,6 +55,8 @@ public class PatrolBoat : MonoBehaviour
     private Color glowBaseColor = Color.white;
 
     private static AudioClip engineClip;
+    private float basePitch = 1f;
+    private float lastCameraDistance = -1f;
 
     /// <summary>Verdadero mientras el brillo de aviso está encendido (la lancha está por entrar a la pantalla).</summary>
     public bool IsWarning => warningGlow != null && warningGlow.enabled;
@@ -75,7 +77,8 @@ public class PatrolBoat : MonoBehaviour
         engine.playOnAwake = false;
         engine.spatialBlend = 0f;
         engine.volume = 0f;
-        engine.pitch = Random.Range(0.92f, 1.08f);
+        basePitch = Random.Range(0.93f, 1.07f);  // Cada lancha con su propio tono de motor
+        engine.pitch = basePitch;
     }
 
     private void Start()
@@ -83,6 +86,13 @@ public class PatrolBoat : MonoBehaviour
         cam = Camera.main;
         lastPosition = transform.position;
         stoppedSince = Time.time;
+        // Por el canal de Efectos del mezclador: se apaga bajo el agua como todo lo demás
+        if (AudioManager.Instance != null && AudioManager.Instance.SfxGroup != null)
+            engine.outputAudioMixerGroup = AudioManager.Instance.SfxGroup;
+        // Motor fuera de borda grabado en el AudioManager; si no está, se usa el generado por código
+        if (AudioManager.Instance != null && AudioManager.Instance.BoatEngineClip != null)
+            engine.clip = AudioManager.Instance.BoatEngineClip;
+        if (engine.clip != null) engine.time = Random.Range(0f, engine.clip.length * 0.95f);  // Las lanchas no suenan sincronizadas
         engine.Play();
     }
 
@@ -154,20 +164,33 @@ public class PatrolBoat : MonoBehaviour
         warningGlow.transform.localScale = Vector3.one * Mathf.Lerp(0.85f, 1.15f, pulse);
     }
 
+    /// <summary>
+    /// Volumen según la distancia a la cámara (más fuerte al acercarse) y efecto Doppler:
+    /// el tono sube mientras la lancha se acerca y baja cuando se aleja.
+    /// </summary>
     private void UpdateEngine()
     {
         if (engine == null) return;
         if (cam == null) cam = Camera.main;
 
         float volume = 0f;
+        float targetPitch = basePitch;
         if (cam != null && Time.timeScale > 0f)
         {
             float distance = Vector2.Distance(cam.transform.position, transform.position);
             float closeness = Mathf.Clamp01(1f - distance / engineHearingRange);
             float sfx = AudioManager.Instance != null ? AudioManager.Instance.SfxVolume : 1f;
-            volume = engineVolume * closeness * closeness * sfx;
+            volume = engineVolume * Mathf.Pow(closeness, 1.6f) * sfx;
+
+            if (lastCameraDistance >= 0f && Time.deltaTime > 0f)
+            {
+                float approachSpeed = (lastCameraDistance - distance) / Time.deltaTime;  // Positivo al acercarse
+                targetPitch = basePitch * (1f + Mathf.Clamp(approachSpeed * 0.035f, -0.08f, 0.08f));
+            }
+            lastCameraDistance = distance;
         }
         engine.volume = Mathf.MoveTowards(engine.volume, volume, Time.unscaledDeltaTime * 2f);
+        engine.pitch = Mathf.Lerp(engine.pitch, targetPitch, Time.unscaledDeltaTime * 3f);
     }
 
     /// <summary>

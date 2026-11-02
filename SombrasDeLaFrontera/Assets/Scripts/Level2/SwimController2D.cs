@@ -42,6 +42,20 @@ public class SwimController2D : MonoBehaviour
     [Tooltip("Altura (Y) donde los pies de Mateo pisan la arena de la orilla norte")]
     [SerializeField] private float waterEndY = 33.8f;
 
+    [Header("Animación")]
+    [Tooltip("Cuánto debe dominar un eje sobre el otro para cambiar entre nado de lado y nado vertical (evita trabas en diagonal)")]
+    [SerializeField] private float directionHysteresis = 1.3f;
+
+    [Tooltip("Segundos que sigue la animación de nado tras soltar los controles (evita parpadeos de reposo entre teclas)")]
+    [SerializeField] private float animMoveGrace = 0.12f;
+
+    [Header("Sonido")]
+    [Tooltip("Segundos entre brazadas al nadar en la superficie")]
+    [SerializeField] private float strokeInterval = 0.55f;
+
+    [Tooltip("Segundos entre pasos al caminar por la arena de las orillas")]
+    [SerializeField] private float footstepInterval = 0.38f;
+
     [Header("Sigilo en el Río")]
     [Tooltip("Distancia máxima (unidades) entre Mateo y un tronco, junco o montón de ramas para contar como pegado a él")]
     [SerializeField] private float hideDistance = 0.35f;
@@ -62,6 +76,12 @@ public class SwimController2D : MonoBehaviour
     // Velocidad del agua de las corrientes en las que está Mateo (suma de todas las zonas que toca)
     private Vector2 currentFlow = Vector2.zero;
     private Coroutine boostCoroutine;
+    private float soundTimer;
+
+    private enum SwimFacing { Side, Up, Down }
+    private SwimFacing facing = SwimFacing.Side;
+    private float lastHorizontalSign = 1f;
+    private float animMoveTimer;
 
     /// <summary>Velocidad con la que el agua arrastra a Mateo en este momento.</summary>
     public Vector2 CurrentFlow => currentFlow;
@@ -161,36 +181,57 @@ public class SwimController2D : MonoBehaviour
         isSwimming = inWater && isMoving;
 
         EvaluateCover(feetY);
+        UpdateMovementSound();
 
-        bool isMovingUp = isMoving && (moveY > 0.1f && moveY >= Mathf.Abs(moveX));
-        bool isMovingDown = isMoving && (moveY < -0.1f && Mathf.Abs(moveY) >= Mathf.Abs(moveX));
+        // 5. Animación estable: un instante sin teclas no corta el nado, y en las diagonales la dirección
+        //    solo cambia cuando el otro eje domina claramente (si no, el clip se reinicia y parece trabado)
+        animMoveTimer = isMoving ? animMoveGrace : Mathf.Max(0f, animMoveTimer - Time.deltaTime);
+        bool animMoving = isMoving || animMoveTimer > 0f;
+        if (isMoving) UpdateFacing(moveX, moveY);
 
-        // 5. Volteo horizontal (FlipX)
+        bool isMovingUp = animMoving && facing == SwimFacing.Up;
+        bool isMovingDown = animMoving && facing == SwimFacing.Down;
+
+        // 6. Volteo horizontal (FlipX)
         if (spriteRenderer != null)
         {
-            if ((inWater && !isMoving) || isMovingUp || isMovingDown)
-            {
-                // Flotando quieto (de frente) o nado vertical: vista recta sin voltear
-                spriteRenderer.flipX = false;
-            }
-            else if (moveX < -0.05f)
-            {
-                spriteRenderer.flipX = true;  // Nado hacia la izquierda
-            }
-            else if (moveX > 0.05f)
-            {
-                spriteRenderer.flipX = false; // Nado hacia la derecha
-            }
+            if (animMoving && facing == SwimFacing.Side) spriteRenderer.flipX = lastHorizontalSign < 0f;  // De lado: hacia donde nada
+            else if (inWater || isMovingUp || isMovingDown) spriteRenderer.flipX = false;                 // Flotando o nado vertical
+            else if (moveX < -0.05f) spriteRenderer.flipX = true;                                       // Caminando en la orilla
+            else if (moveX > 0.05f) spriteRenderer.flipX = false;
         }
 
-        // 6. Parámetros para Animator (Swim_Up, Swim_Side, Swim_Down, Idle_Float y caminata en orilla)
+        // 7. Parámetros para Animator (Swim_Up, Swim_Side, Swim_Down, Idle_Float y caminata en orilla)
         if (animator != null)
         {
             animator.SetBool(InWaterHash, inWater);
-            animator.SetBool(IsMovingHash, isMoving);
+            animator.SetBool(IsMovingHash, animMoving);
             animator.SetBool(IsMovingUpHash, isMovingUp);
             animator.SetBool(IsMovingDownHash, isMovingDown);
             if (animatorHasDiving) animator.SetBool(IsDivingHash, isDiving);
+        }
+    }
+
+    /// <summary>
+    /// Dirección de la animación con margen: pasa de "de lado" a "arriba/abajo" solo si el eje vertical supera
+    /// claramente al horizontal (y al revés), así en las diagonales no alterna entre clips en cada cuadro.
+    /// </summary>
+    private void UpdateFacing(float moveX, float moveY)
+    {
+        float ax = Mathf.Abs(moveX), ay = Mathf.Abs(moveY);
+        if (ax > 0.05f) lastHorizontalSign = Mathf.Sign(moveX);
+
+        if (facing == SwimFacing.Side)
+        {
+            if (ay > ax * directionHysteresis) facing = moveY > 0f ? SwimFacing.Up : SwimFacing.Down;
+        }
+        else if (ax > ay * directionHysteresis)
+        {
+            facing = SwimFacing.Side;
+        }
+        else if (ay > 0.1f)
+        {
+            facing = moveY > 0f ? SwimFacing.Up : SwimFacing.Down;
         }
     }
 
@@ -270,6 +311,30 @@ public class SwimController2D : MonoBehaviour
         }
         isHiding = hidden;
         CoverZone2D.SetPlayerHidden(isHiding);
+    }
+
+    /// <summary>Brazadas al nadar en la superficie (más seguidas con el bidón) y pasos en la arena de las orillas.</summary>
+    private void UpdateMovementSound()
+    {
+        if (!isMoving || isDiving)
+        {
+            soundTimer = 0f;
+            return;
+        }
+
+        soundTimer -= Time.deltaTime;
+        if (soundTimer > 0f) return;
+
+        if (inWater)
+        {
+            soundTimer = strokeInterval / Mathf.Max(0.5f, speedMultiplier * boostMultiplier);
+            AudioManager.Instance?.PlaySwimStroke();
+        }
+        else
+        {
+            soundTimer = footstepInterval;
+            AudioManager.Instance?.PlayFootstep();
+        }
     }
 
     /// <summary>Punto de los pies de Mateo (base de su collider).</summary>

@@ -14,7 +14,8 @@ public enum DefeatReason
     RiverPredatorBite,     // Pejelagarto o cocodrilo del Río Bravo (Nivel 2)
     WaterSnakeBite,        // Serpiente de agua del Río Bravo (Nivel 2)
     BoatSearchlight,       // Reflector de una lancha de la Patrulla Fronteriza (Nivel 2)
-    BarbedWire             // Alambre de púas en el Río Bravo (Nivel 2)
+    BarbedWire,            // Alambre de púas en el Río Bravo (Nivel 2)
+    Drowning               // Se acabó el aire buceando en el Río Bravo (Nivel 2)
 }
 
 /// <summary>

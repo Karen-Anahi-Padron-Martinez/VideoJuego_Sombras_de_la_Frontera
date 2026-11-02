@@ -128,6 +128,13 @@ public class EndGameModalController : MonoBehaviour
         description = "Las púas del alambrado bajo el agua te hirieron una y otra vez.\n\n🚧 <b>Consejo:</b> Cada alambrado tiene un hueco; búscalo con calma y no nades pegado a las púas."
     };
 
+    [SerializeField] private DefeatMessageConfig defeatByDrowning = new DefeatMessageConfig
+    {
+        title = "¡TE QUEDASTE SIN AIRE!",
+        titleColor = new Color(0.35f, 0.7f, 1f, 1f), // Azul profundo
+        description = "Mateo se quedó demasiado tiempo bajo el agua y no alcanzó a salir a respirar.\n\n🤿 <b>Consejo:</b> Vigila la barra de aire: sumérgete solo mientras pasa la luz y sal a la superficie antes de que se vacíe. Los carrizos te dan aire extra."
+    };
+
     [SerializeField] private DefeatMessageConfig defeatGeneric = new DefeatMessageConfig
     {
         title = "¡TE HAS QUEDADO SIN VIDAS!",
@@ -253,6 +260,8 @@ public class EndGameModalController : MonoBehaviour
                 return defeatByBoat;
             case DefeatReason.BarbedWire:
                 return defeatByBarbedWire;
+            case DefeatReason.Drowning:
+                return defeatByDrowning;
             default:
                 return defeatGeneric;
         }

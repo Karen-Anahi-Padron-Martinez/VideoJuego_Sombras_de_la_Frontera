@@ -303,6 +303,15 @@ public class HazardFauna : MonoBehaviour
         }
 
         transform.position = pos;
+        PlaySwimSound(1.1f, 1.8f);
+    }
+
+    /// <summary>Chapoteo de la fauna del río al nadar (se oye solo si está cerca de la cámara).</summary>
+    private void PlaySwimSound(float minInterval, float maxInterval)
+    {
+        if (Time.time < nextMoveSoundTime) return;
+        nextMoveSoundTime = Time.time + Random.Range(minInterval, maxInterval);
+        AudioManager.Instance?.PlayFaunaMoveAt(faunaType, transform.position);
     }
 
     /// <summary>Altura de su recorrido normal en este momento (con la ondulación del zigzag).</summary>
@@ -352,6 +361,7 @@ public class HazardFauna : MonoBehaviour
         next.x = Mathf.Clamp(next.x, minMapBounds.x, maxMapBounds.x);
         next.y = Mathf.Clamp(next.y, minMapBounds.y, maxMapBounds.y);
         if (!BlockedBySolid(next)) transform.position = next;
+        PlaySwimSound(0.45f, 0.7f);   // Persiguiendo chapotea más seguido
 
         float angle = Mathf.Clamp(Mathf.Atan2(toTarget.y, Mathf.Abs(toTarget.x)) * Mathf.Rad2Deg, -35f, 35f);
         transform.rotation = Quaternion.Euler(0f, 0f, spriteRenderer.flipX ? -angle : angle);

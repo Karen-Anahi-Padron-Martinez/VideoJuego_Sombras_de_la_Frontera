@@ -187,12 +187,12 @@ TextureImporter:
       name: mateo_tread_0
       rect:
         serializedVersion: 2
-        x: 21
+        x: 19
         y: 130
-        width: 340
-        height: 420
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 344
+        height: 419
+      alignment: 9
+      pivot: {x: 0.49595654, y: 0.5407652}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -209,12 +209,12 @@ TextureImporter:
       name: mateo_tread_1
       rect:
         serializedVersion: 2
-        x: 415
-        y: 130
-        width: 270
-        height: 420
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 414
+        y: 134
+        width: 272
+        height: 415
+      alignment: 9
+      pivot: {x: 0.503376, y: 0.5400563}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -231,12 +231,12 @@ TextureImporter:
       name: mateo_tread_2
       rect:
         serializedVersion: 2
-        x: 730
-        y: 130
-        width: 362
-        height: 420
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 728
+        y: 131
+        width: 365
+        height: 418
+      alignment: 9
+      pivot: {x: 0.50153995, y: 0.5514685}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -253,12 +253,12 @@ TextureImporter:
       name: mateo_tread_3
       rect:
         serializedVersion: 2
-        x: 1136
-        y: 130
-        width: 261
-        height: 420
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1134
+        y: 131
+        width: 264
+        height: 418
+      alignment: 9
+      pivot: {x: 0.50460446, y: 0.54100883}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -275,12 +275,12 @@ TextureImporter:
       name: mateo_tread_4
       rect:
         serializedVersion: 2
-        x: 1445
-        y: 130
-        width: 362
-        height: 420
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1444
+        y: 142
+        width: 364
+        height: 407
+      alignment: 9
+      pivot: {x: 0.4959328, y: 0.54621696}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -297,12 +297,12 @@ TextureImporter:
       name: mateo_tread_5
       rect:
         serializedVersion: 2
-        x: 1858
-        y: 130
-        width: 254
-        height: 420
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1857
+        y: 132
+        width: 256
+        height: 417
+      alignment: 9
+      pivot: {x: 0.49831152, y: 0.5445181}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

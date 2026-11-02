@@ -259,12 +259,12 @@ TextureImporter:
       name: mateo_swim_up_0
       rect:
         serializedVersion: 2
-        x: 86
-        y: 604
-        width: 197
-        height: 198
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 84
+        y: 619
+        width: 201
+        height: 184
+      alignment: 9
+      pivot: {x: 0.45915806, y: 0.51835203}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -281,12 +281,12 @@ TextureImporter:
       name: mateo_swim_up_1
       rect:
         serializedVersion: 2
-        x: 407
-        y: 604
-        width: 209
-        height: 199
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 405
+        y: 621
+        width: 212
+        height: 183
+      alignment: 9
+      pivot: {x: 0.44762406, y: 0.52272177}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -303,12 +303,12 @@ TextureImporter:
       name: mateo_swim_up_2
       rect:
         serializedVersion: 2
-        x: 715
-        y: 604
-        width: 216
-        height: 201
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 714
+        y: 619
+        width: 219
+        height: 188
+      alignment: 9
+      pivot: {x: 0.47036368, y: 0.53952414}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -325,12 +325,12 @@ TextureImporter:
       name: mateo_swim_up_3
       rect:
         serializedVersion: 2
-        x: 1050
-        y: 604
+        x: 1049
+        y: 617
         width: 192
-        height: 199
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 188
+      alignment: 9
+      pivot: {x: 0.45917067, y: 0.508567}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -347,12 +347,12 @@ TextureImporter:
       name: mateo_swim_up_4
       rect:
         serializedVersion: 2
-        x: 1366
-        y: 604
-        width: 211
-        height: 200
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1365
+        y: 617
+        width: 214
+        height: 188
+      alignment: 9
+      pivot: {x: 0.43199998, y: 0.52823263}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -369,12 +369,12 @@ TextureImporter:
       name: mateo_swim_up_5
       rect:
         serializedVersion: 2
-        x: 1674
-        y: 604
-        width: 201
-        height: 200
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1673
+        y: 617
+        width: 203
+        height: 188
+      alignment: 9
+      pivot: {x: 0.5043019, y: 0.5382392}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -391,12 +391,12 @@ TextureImporter:
       name: mateo_swim_side1_0
       rect:
         serializedVersion: 2
-        x: 34
-        y: 471
-        width: 280
-        height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 33
+        y: 470
+        width: 282
+        height: 151
+      alignment: 9
+      pivot: {x: 0.5277805, y: 0.47366878}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -413,12 +413,12 @@ TextureImporter:
       name: mateo_swim_side1_1
       rect:
         serializedVersion: 2
-        x: 356
-        y: 464
-        width: 286
-        height: 135
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 355
+        y: 463
+        width: 289
+        height: 158
+      alignment: 9
+      pivot: {x: 0.5271599, y: 0.48242727}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -435,12 +435,12 @@ TextureImporter:
       name: mateo_swim_side1_2
       rect:
         serializedVersion: 2
-        x: 676
-        y: 471
-        width: 283
-        height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 674
+        y: 470
+        width: 286
+        height: 151
+      alignment: 9
+      pivot: {x: 0.51287097, y: 0.4730192}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -457,12 +457,12 @@ TextureImporter:
       name: mateo_swim_side1_3
       rect:
         serializedVersion: 2
-        x: 1000
-        y: 459
-        width: 272
-        height: 140
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 998
+        y: 476
+        width: 275
+        height: 143
+      alignment: 9
+      pivot: {x: 0.5480806, y: 0.462696}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -479,12 +479,12 @@ TextureImporter:
       name: mateo_swim_side1_4
       rect:
         serializedVersion: 2
-        x: 1317
-        y: 459
-        width: 282
-        height: 140
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1315
+        y: 467
+        width: 285
+        height: 154
+      alignment: 9
+      pivot: {x: 0.52231276, y: 0.48593813}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -501,12 +501,12 @@ TextureImporter:
       name: mateo_swim_side1_5
       rect:
         serializedVersion: 2
-        x: 1638
-        y: 468
-        width: 274
-        height: 131
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1636
+        y: 467
+        width: 277
+        height: 154
+      alignment: 9
+      pivot: {x: 0.51798666, y: 0.48404762}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -523,12 +523,12 @@ TextureImporter:
       name: mateo_swim_side2_0
       rect:
         serializedVersion: 2
-        x: 37
-        y: 289
-        width: 280
-        height: 165
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 36
+        y: 309
+        width: 283
+        height: 151
+      alignment: 9
+      pivot: {x: 0.49135858, y: 0.47838405}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -545,12 +545,12 @@ TextureImporter:
       name: mateo_swim_side2_1
       rect:
         serializedVersion: 2
-        x: 367
-        y: 289
-        width: 278
-        height: 165
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 366
+        y: 309
+        width: 280
+        height: 152
+      alignment: 9
+      pivot: {x: 0.4827896, y: 0.47612983}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -567,12 +567,12 @@ TextureImporter:
       name: mateo_swim_side2_2
       rect:
         serializedVersion: 2
-        x: 688
-        y: 289
-        width: 280
-        height: 165
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 687
+        y: 307
+        width: 282
+        height: 154
+      alignment: 9
+      pivot: {x: 0.46961597, y: 0.49444678}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -589,12 +589,12 @@ TextureImporter:
       name: mateo_swim_side2_3
       rect:
         serializedVersion: 2
-        x: 1009
-        y: 289
-        width: 270
-        height: 165
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1007
+        y: 312
+        width: 273
+        height: 149
+      alignment: 9
+      pivot: {x: 0.47540352, y: 0.46993485}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -611,12 +611,12 @@ TextureImporter:
       name: mateo_swim_side2_4
       rect:
         serializedVersion: 2
-        x: 1324
-        y: 289
-        width: 276
-        height: 165
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1323
+        y: 308
+        width: 279
+        height: 153
+      alignment: 9
+      pivot: {x: 0.4955718, y: 0.4949249}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -633,12 +633,12 @@ TextureImporter:
       name: mateo_swim_side2_5
       rect:
         serializedVersion: 2
-        x: 1650
-        y: 289
-        width: 271
-        height: 165
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1648
+        y: 321
+        width: 275
+        height: 139
+      alignment: 9
+      pivot: {x: 0.4820055, y: 0.444384}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -655,12 +655,12 @@ TextureImporter:
       name: mateo_swim_down_0
       rect:
         serializedVersion: 2
-        x: 34
-        y: 175
-        width: 259
-        height: 104
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 32
+        y: 174
+        width: 263
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5105558, y: 0.4197904}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -677,12 +677,12 @@ TextureImporter:
       name: mateo_swim_down_1
       rect:
         serializedVersion: 2
-        x: 399
-        y: 164
-        width: 201
-        height: 115
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 398
+        y: 162
+        width: 204
+        height: 143
+      alignment: 9
+      pivot: {x: 0.5035884, y: 0.48119316}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -699,12 +699,12 @@ TextureImporter:
       name: mateo_swim_down_2
       rect:
         serializedVersion: 2
-        x: 741
-        y: 175
-        width: 189
-        height: 104
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 740
+        y: 174
+        width: 191
+        height: 137
+      alignment: 9
+      pivot: {x: 0.4121688, y: 0.420752}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -721,12 +721,12 @@ TextureImporter:
       name: mateo_swim_down_3
       rect:
         serializedVersion: 2
-        x: 1026
-        y: 174
-        width: 216
-        height: 105
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1025
+        y: 173
+        width: 218
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5178127, y: 0.4507427}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -743,12 +743,12 @@ TextureImporter:
       name: mateo_swim_down_4
       rect:
         serializedVersion: 2
-        x: 1342
-        y: 167
-        width: 228
-        height: 112
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1340
+        y: 166
+        width: 231
+        height: 144
+      alignment: 9
+      pivot: {x: 0.48700294, y: 0.4402809}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -765,12 +765,12 @@ TextureImporter:
       name: mateo_swim_down_5
       rect:
         serializedVersion: 2
-        x: 1662
-        y: 164
-        width: 230
-        height: 115
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1661
+        y: 163
+        width: 232
+        height: 138
+      alignment: 9
+      pivot: {x: 0.54948795, y: 0.49748307}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -787,12 +787,12 @@ TextureImporter:
       name: mateo_swim_float_0
       rect:
         serializedVersion: 2
-        x: 57
-        y: 7
-        width: 221
-        height: 152
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 56
+        y: 6
+        width: 223
+        height: 156
+      alignment: 9
+      pivot: {x: 0.49580526, y: 0.4972264}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -809,12 +809,12 @@ TextureImporter:
       name: mateo_swim_float_1
       rect:
         serializedVersion: 2
-        x: 371
-        y: 14
-        width: 242
-        height: 145
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 370
+        y: 13
+        width: 245
+        height: 148
+      alignment: 9
+      pivot: {x: 0.49409118, y: 0.50321186}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -831,12 +831,12 @@ TextureImporter:
       name: mateo_swim_float_2
       rect:
         serializedVersion: 2
-        x: 716
-        y: 13
-        width: 204
-        height: 146
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 715
+        y: 12
+        width: 206
+        height: 149
+      alignment: 9
+      pivot: {x: 0.4795082, y: 0.48600826}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -853,12 +853,12 @@ TextureImporter:
       name: mateo_swim_float_3
       rect:
         serializedVersion: 2
-        x: 1013
-        y: 12
-        width: 242
-        height: 147
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1012
+        y: 10
+        width: 245
+        height: 150
+      alignment: 9
+      pivot: {x: 0.4916743, y: 0.49153778}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -875,12 +875,12 @@ TextureImporter:
       name: mateo_swim_float_4
       rect:
         serializedVersion: 2
-        x: 1345
-        y: 9
-        width: 242
-        height: 150
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1344
+        y: 7
+        width: 244
+        height: 156
+      alignment: 9
+      pivot: {x: 0.49136502, y: 0.5135306}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -897,12 +897,12 @@ TextureImporter:
       name: mateo_swim_float_5
       rect:
         serializedVersion: 2
-        x: 1683
-        y: 8
-        width: 216
-        height: 151
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1682
+        y: 7
+        width: 218
+        height: 154
+      alignment: 9
+      pivot: {x: 0.5036672, y: 0.49897504}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

@@ -72,6 +72,14 @@ public static partial class SetupNivel2Editor
         ("Pickup_Carrizo", new Vector2(-0.2f, 25.4f)),
         ("Pickup_Bidon", new Vector2(1.8f, 25.0f)),
         ("Pickup_BolsaImpermeable", new Vector2(-1.9f, 31.8f)),
+        // Agua para la sed: nadar cansa (varias en los huecos de los alambrados)
+        ("Pickup_Botella_Rio", new Vector2(-0.6f, 2.4f)),
+        ("Pickup_Cantimplora_Rio", new Vector2(2.2f, 8.3f)),
+        ("Pickup_Botella_Rio", new Vector2(-2.2f, 15.1f)),
+        ("Pickup_Botella_Rio", new Vector2(-1.0f, 19.0f)),
+        ("Pickup_Botella_Rio", new Vector2(0f, 22.2f)),
+        ("Pickup_Cantimplora_Rio", new Vector2(2.35f, 29.2f)),
+        ("Pickup_Botella_Rio", new Vector2(0.2f, 31.9f)),
     };
 
     // =========================================================================
@@ -210,6 +218,8 @@ public static partial class SetupNivel2Editor
         BuildPickupPrefab("Pickup_Bidon", PickupItem.ItemType.Bidon, Pick(items, "consumible_r0_c0", "consumible_r1_c0"));
         BuildPickupPrefab("Pickup_BolsaImpermeable", PickupItem.ItemType.BolsaImpermeable, Pick(items, "consumible_r0_c1", "consumible_r1_c1"));
         BuildPickupPrefab("Pickup_Carrizo", PickupItem.ItemType.Carrizo, Pick(items, "consumible_r0_c2", "consumible_r1_c2"));
+        BuildWaterPickup("Pickup_Botella_Rio", "Assets/Prefabs/Items/Pickup_Botella.prefab", PickupItem.ItemType.Botella, 15f);
+        BuildWaterPickup("Pickup_Cantimplora_Rio", "Assets/Prefabs/Items/Pickup_Cantimplora_1.prefab", PickupItem.ItemType.Cantimplora, 30f);
 
         // Corrientes: fila 0 flujo lateral con flechas, fila 1 rápidos (contracorriente)
         BuildCurrentPrefab("Corriente_Lateral", CurrentZone2D.CurrentType.Lateral, new Vector2(1.3f, 0f),
@@ -279,24 +289,38 @@ public static partial class SetupNivel2Editor
         Object.DestroyImmediate(root);
     }
 
-    private static void BuildPickupPrefab(string prefabName, PickupItem.ItemType type, Sprite[] frames)
+    /// <summary>
+    /// Botella o cantimplora del Nivel 1 en versión flotante para el río: mismo sprite y escala que en el desierto,
+    /// con vaivén y la cantidad de agua indicada (nadar cansa).
+    /// </summary>
+    private static void BuildWaterPickup(string prefabName, string sourcePrefab, PickupItem.ItemType type, float waterAmount)
+    {
+        GameObject source = AssetDatabase.LoadAssetAtPath<GameObject>(sourcePrefab);
+        SpriteRenderer sourceSr = source != null ? source.GetComponentInChildren<SpriteRenderer>() : null;
+        if (sourceSr == null || sourceSr.sprite == null) { Debug.LogError($"[Nivel2] No se encontró el sprite de {sourcePrefab}."); return; }
+        BuildPickupPrefab(prefabName, type, new[] { sourceSr.sprite }, source.transform.localScale.x, waterAmount);
+    }
+
+    private static void BuildPickupPrefab(string prefabName, PickupItem.ItemType type, Sprite[] frames, float scale = 1f, float waterAmount = 0f)
     {
         if (frames.Length == 0) { Debug.LogError($"[Nivel2] Sin cuadros para {prefabName}."); return; }
 
         var root = new GameObject(prefabName);
         var visual = new GameObject("Visual");
         visual.transform.SetParent(root.transform, false);
+        visual.transform.localScale = new Vector3(scale, scale, 1f);
         SpriteRenderer sr = visual.AddComponent<SpriteRenderer>();
         sr.sprite = frames[0];
         sr.sortingLayerName = "Characters";
         visual.AddComponent<YSort2D>();
 
         CircleCollider2D col = root.AddComponent<CircleCollider2D>();
-        col.radius = Mathf.Min(frames[0].bounds.size.x, frames[0].bounds.size.y) * 0.4f;
+        col.radius = Mathf.Min(frames[0].bounds.size.x, frames[0].bounds.size.y) * 0.4f * scale;
         col.isTrigger = true;
 
         var pickup = new SerializedObject(root.AddComponent<PickupItem>());
         pickup.FindProperty("itemType").enumValueIndex = (int)type;
+        pickup.FindProperty("waterAmount").floatValue = waterAmount;
         pickup.FindProperty("healthAmount").intValue = 1;
         pickup.FindProperty("speedBoost").floatValue = 1.5f;     // Bidón: +50% de velocidad
         pickup.FindProperty("boostDuration").floatValue = 5f;
@@ -700,8 +724,9 @@ public static partial class SetupNivel2Editor
         // Quitar los cortes automáticos que Unity crea al importar ("<archivo>_0", "<archivo>_1"...): no se usan
         string autoPrefix = Path.GetFileNameWithoutExtension(texPath) + "_";
         bool IsAutoSlice(string name) => name.StartsWith(autoPrefix) && int.TryParse(name.Substring(autoPrefix.Length), out _);
-        rects.RemoveAll(r => IsAutoSlice(r.name));
-        pairs.RemoveAll(p => IsAutoSlice(p.name));
+        // (los que se van a escribir se conservan aunque se llamen igual, p. ej. "swimup_0": así no cambia su ID)
+        rects.RemoveAll(r => IsAutoSlice(r.name) && !cells.Any(c => c.name == r.name));
+        pairs.RemoveAll(p => IsAutoSlice(p.name) && !cells.Any(c => c.name == p.name));
 
         foreach (var cell in cells)
         {
@@ -761,6 +786,10 @@ public static partial class SetupNivel2Editor
         Expect(currents.Any(c => c.Type == CurrentZone2D.CurrentType.CounterCurrent && c.Flow.y < 0f), "Hay contracorrientes que frenan el avance");
         foreach (PickupItem.ItemType t in new[] { PickupItem.ItemType.Bidon, PickupItem.ItemType.BolsaImpermeable, PickupItem.ItemType.Carrizo })
             Expect(pickups.Any(p => p.Type == t), $"Hay al menos un consumible {t}");
+        int water = pickups.Count(p => p.Type == PickupItem.ItemType.Botella || p.Type == PickupItem.ItemType.Cantimplora);
+        Expect(water >= 5 && pickups.Where(p => p.Type == PickupItem.ItemType.Botella || p.Type == PickupItem.ItemType.Cantimplora)
+                                    .All(p => new SerializedObject(p).FindProperty("waterAmount").floatValue > 0f),
+            $"Hay {water} botellas y cantimploras flotando para recuperar agua");
 
         // Cada animal: con animación de nado y mordida, cuerpo que muerde y carril completo dentro del agua
         var areas = new List<(string name, Rect rect)>();
