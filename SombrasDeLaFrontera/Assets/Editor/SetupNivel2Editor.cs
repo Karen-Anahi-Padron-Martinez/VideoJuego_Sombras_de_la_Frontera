@@ -21,6 +21,9 @@ public static partial class SetupNivel2Editor
     private const string RIVER_MAP_PREFAB = "Assets/Prefabs/Level2_River/River_Map.prefab";
     private const string SWIM_CONTROLLER = "Assets/Animations/Clips/Visual.controller";
     private const string NEXT_LEVEL_SCENE = "04_Level3_BorderWall";
+    private const float WATER_DRAIN_RATE = 1.2f;  // Sed nadando (desierto 1.5, muro de noche 1.0)
+    private const string BUBBLE_SPRITE ="Assets/Sprites/Level2_River/Effects/burbuja.png";
+    private const string UNLIT_SPRITE_MATERIAL = "Packages/com.unity.render-pipelines.universal/Runtime/Materials/Sprite-Unlit-Default.mat";
 
     // Medidas del mapa del río (100 PPU): 5.72 de ancho, de y = 0 (orilla sur) a y = 34.8 (orilla norte)
     private const float MAP_WIDTH = 5.72f;
@@ -87,6 +90,7 @@ public static partial class SetupNivel2Editor
         EditorSceneManager.OpenScene(SCENE, OpenSceneMode.Single);
         if (System.Array.IndexOf(args, "-previewBoats") >= 0) PreviewBoatsForCapture();
         Camera cam = Camera.main;
+        if (System.Array.IndexOf(args, "-previewDive") >= 0) PreviewDiveForCapture(cam);
         const int width = 540, height = 960;
         cam.orthographicSize = MAP_WIDTH / 2f / (width / (float)height);
         float half = cam.orthographicSize;
@@ -152,6 +156,36 @@ public static partial class SetupNivel2Editor
         }
     }
 
+    /// <summary>
+    /// Solo para las capturas: Mateo buceando en el agua (silueta y burbujas) y el HUD dibujado por la cámara
+    /// (normalmente es una capa encima de la pantalla) sin el tutorial, con la barra de aire a la mitad y +3 s de carrizo.
+    /// </summary>
+    private static void PreviewDiveForCapture(Camera cam)
+    {
+        DiveController2D dive = Object.FindAnyObjectByType<DiveController2D>();
+        var so = new SerializedObject(dive);
+        var sr = so.FindProperty("spriteRenderer").objectReferenceValue as SpriteRenderer;
+        dive.transform.root.position = new Vector3(-0.6f, 2.6f, 0f);
+        sr.color = so.FindProperty("diveColor").colorValue;
+        sr.sortingLayerName = so.FindProperty("underwaterSortingLayer").stringValue;
+        var bubbles = so.FindProperty("bubbles").objectReferenceValue as ParticleSystem;
+        bubbles.Simulate(1.2f, true, true);
+
+        GameObject hud = FindRoot("HUD_Canvas");
+        Canvas canvas = hud.GetComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceCamera;
+        canvas.worldCamera = cam;
+        canvas.planeDistance = 1f;
+        foreach (Transform t in hud.GetComponentsInChildren<Transform>(true))
+            if (t.name == "TutorialPanel") t.gameObject.SetActive(false);
+
+        AirBarUI air = Object.FindAnyObjectByType<AirBarUI>();
+        var airSo = new SerializedObject(air);
+        (airSo.FindProperty("slider").objectReferenceValue as Slider).value = 0.5f;
+        (airSo.FindProperty("label").objectReferenceValue as Text).text = "AIRE  +3s";
+        Canvas.ForceUpdateCanvases();
+    }
+
     // =========================================================================
     // CONSTRUCCIÓN
     // =========================================================================
@@ -159,6 +193,8 @@ public static partial class SetupNivel2Editor
     public static void BuildLevel2()
     {
         AssetDatabase.Refresh();
+        SetupRiverAudio();   // Mezclador, efectos y música del río en el AudioManager persistente
+        FixPlayerAnimations();   // Cuadros de nado sin recortes ni brincos y ciclo de caminar completo
 
         if (File.Exists(SCENE))
         {
@@ -246,9 +282,14 @@ public static partial class SetupNivel2Editor
         GameObject mateo = health.gameObject;
         mateo.transform.root.position = PlayerSpawn;
 
-        // En el río no hay sed ni pasos sobre la arena: se cambia el control de caminar por el de nado
+        // Nadar cansa: la sed sigue (un poco más lenta que en el desierto) y se cambia el control de caminar por el de nado
         WaterSystem water = mateo.GetComponent<WaterSystem>();
-        if (water != null) Object.DestroyImmediate(water);
+        if (water != null)
+        {
+            var waterSo = new SerializedObject(water);
+            waterSo.FindProperty("waterDrainRate").floatValue = WATER_DRAIN_RATE;
+            waterSo.ApplyModifiedPropertiesWithoutUndo();
+        }
         PlayerController2D walker = mateo.GetComponent<PlayerController2D>();
         if (walker != null) Object.DestroyImmediate(walker);
 
@@ -276,6 +317,113 @@ public static partial class SetupNivel2Editor
         // La sombra de la arena y el polvo no tienen sentido flotando en el agua
         foreach (BlobShadow shadow in mateo.GetComponentsInChildren<BlobShadow>(true)) shadow.gameObject.SetActive(false);
         foreach (ParticleSystem dust in mateo.GetComponentsInChildren<ParticleSystem>(true)) dust.gameObject.SetActive(false);
+
+        // Buceo: mantener Espacio para sumergirse (4 s de aire), con burbujas mientras está bajo el agua
+        DiveController2D dive = mateo.GetComponent<DiveController2D>();
+        if (dive == null) dive = mateo.AddComponent<DiveController2D>();
+        var diveSo = new SerializedObject(dive);
+        diveSo.FindProperty("maxAirSeconds").floatValue = 4f;
+        diveSo.FindProperty("diveSpeedMultiplier").floatValue = 0.6f;
+        diveSo.FindProperty("spriteRenderer").objectReferenceValue = sr;
+        diveSo.FindProperty("bubbles").objectReferenceValue = BuildBubbles(mateo.transform);
+        diveSo.ApplyModifiedPropertiesWithoutUndo();
+    }
+
+    /// <summary>Burbujas que suben y se desvanecen alrededor de Mateo mientras bucea.</summary>
+    private static ParticleSystem BuildBubbles(Transform mateo)
+    {
+        Transform old = mateo.Find("Burbujas");
+        if (old != null) Object.DestroyImmediate(old.gameObject);
+
+        var go = new GameObject("Burbujas");
+        go.transform.SetParent(mateo, false);
+        // Mateo está escalado (0.3): las burbujas se miden en unidades de mundo
+        go.transform.localScale = new Vector3(1f / mateo.lossyScale.x, 1f / mateo.lossyScale.y, 1f);
+        ParticleSystem ps = go.AddComponent<ParticleSystem>();
+        ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+        ParticleSystem.MainModule main = ps.main;
+        main.playOnAwake = false;
+        main.loop = true;
+        main.duration = 1f;
+        main.startLifetime = new ParticleSystem.MinMaxCurve(0.6f, 1.1f);
+        main.startSpeed = new ParticleSystem.MinMaxCurve(0.15f, 0.45f);
+        main.startSize = new ParticleSystem.MinMaxCurve(0.04f, 0.1f);
+        main.startColor = new Color(0.85f, 0.96f, 1f, 0.9f);
+        main.simulationSpace = ParticleSystemSimulationSpace.World;
+        main.scalingMode = ParticleSystemScalingMode.Hierarchy;
+        main.maxParticles = 40;
+
+        ParticleSystem.EmissionModule emission = ps.emission;
+        emission.rateOverTime = 14f;
+
+        ParticleSystem.ShapeModule shape = ps.shape;
+        shape.shapeType = ParticleSystemShapeType.Circle;
+        shape.radius = 0.14f;
+
+        // Suben hacia arriba de la pantalla y se desvanecen creciendo un poco
+        ParticleSystem.VelocityOverLifetimeModule velocity = ps.velocityOverLifetime;
+        velocity.enabled = true;
+        velocity.space = ParticleSystemSimulationSpace.World;
+        velocity.x = new ParticleSystem.MinMaxCurve(-0.05f, 0.05f);
+        velocity.y = new ParticleSystem.MinMaxCurve(0.25f, 0.4f);
+        velocity.z = new ParticleSystem.MinMaxCurve(0f, 0f);
+
+        ParticleSystem.ColorOverLifetimeModule color = ps.colorOverLifetime;
+        color.enabled = true;
+        var fade = new Gradient();
+        fade.SetKeys(new[] { new GradientColorKey(Color.white, 0f), new GradientColorKey(Color.white, 1f) },
+                     new[] { new GradientAlphaKey(0f, 0f), new GradientAlphaKey(1f, 0.15f), new GradientAlphaKey(0f, 1f) });
+        color.color = fade;
+
+        ParticleSystem.SizeOverLifetimeModule size = ps.sizeOverLifetime;
+        size.enabled = true;
+        size.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.Linear(0f, 0.7f, 1f, 1.3f));
+
+        ParticleSystem.TextureSheetAnimationModule sheet = ps.textureSheetAnimation;
+        sheet.enabled = true;
+        sheet.mode = ParticleSystemAnimationMode.Sprites;
+        sheet.AddSprite(BuildBubbleSprite());
+
+        ParticleSystemRenderer renderer = go.GetComponent<ParticleSystemRenderer>();
+        renderer.sharedMaterial = AssetDatabase.LoadAssetAtPath<Material>(UNLIT_SPRITE_MATERIAL);
+        renderer.sortingLayerName = "Background";  // Bajo el agua, sobre la silueta de Mateo
+        renderer.sortingOrder = 6000;
+        return ps;
+    }
+
+    /// <summary>Genera (una sola vez) el sprite de una burbuja: anillo claro con un brillo.</summary>
+    private static Sprite BuildBubbleSprite()
+    {
+        if (!File.Exists(BUBBLE_SPRITE))
+        {
+            const int size = 32;
+            var tex = new Texture2D(size, size, TextureFormat.RGBA32, false);
+            Vector2 c = new Vector2(size / 2f - 0.5f, size / 2f - 0.5f);
+            for (int y = 0; y < size; y++)
+                for (int x = 0; x < size; x++)
+                {
+                    float d = Vector2.Distance(new Vector2(x, y), c) / (size / 2f);
+                    float ring = Mathf.Clamp01(1f - Mathf.Abs(d - 0.8f) / 0.18f);           // Borde de la burbuja
+                    float inside = d < 0.8f ? 0.18f : 0f;                                     // Relleno muy tenue
+                    float shine = Mathf.Clamp01(1f - Vector2.Distance(new Vector2(x, y), c + new Vector2(-5f, 5f)) / 4f);
+                    float a = Mathf.Clamp01(Mathf.Max(ring, inside) + shine);
+                    tex.SetPixel(x, y, new Color(1f, 1f, 1f, a));
+                }
+            tex.Apply();
+            File.WriteAllBytes(BUBBLE_SPRITE, tex.EncodeToPNG());
+            Object.DestroyImmediate(tex);
+            AssetDatabase.ImportAsset(BUBBLE_SPRITE, ImportAssetOptions.ForceUpdate);
+
+            var importer = (TextureImporter)AssetImporter.GetAtPath(BUBBLE_SPRITE);
+            importer.textureType = TextureImporterType.Sprite;
+            importer.spriteImportMode = SpriteImportMode.Single;
+            importer.spritePixelsPerUnit = 320f;   // 0.1 unidades
+            importer.alphaIsTransparency = true;
+            importer.mipmapEnabled = false;
+            importer.SaveAndReimport();
+        }
+        return AssetDatabase.LoadAssetAtPath<Sprite>(BUBBLE_SPRITE);
     }
 
     private static void SetupCamera()
@@ -293,9 +441,27 @@ public static partial class SetupNivel2Editor
     {
         GameObject hud = FindRoot("HUD_Canvas");
 
-        // Sin barra de agua (sed) en el río; el medidor de aire llega con la mecánica de buceo
+        // Barra de agua (sed) como en el Nivel 1 y, debajo, una copia que funciona como medidor de aire del buceo
         Transform waterSlider = hud.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == "WaterSlider");
-        if (waterSlider != null) waterSlider.gameObject.SetActive(false);
+        if (waterSlider != null)
+        {
+            waterSlider.gameObject.SetActive(true);
+            AddBarLabel(hud, waterSlider, "AGUA", new Color(0.85f, 0.95f, 1f, 1f));
+            Transform airSlider = Object.Instantiate(waterSlider.gameObject, waterSlider.parent).transform;
+            airSlider.SetSiblingIndex(waterSlider.GetSiblingIndex() + 1);
+            var waterRect = (RectTransform)waterSlider;
+            var airRect = (RectTransform)airSlider;
+            airRect.anchoredPosition = waterRect.anchoredPosition - new Vector2(0f, waterRect.sizeDelta.y + 6f);
+
+            // El panel de estado crece para que quepa la barra nueva
+            var panel = waterSlider.parent as RectTransform;
+            if (panel != null)
+            {
+                float needed = -(airRect.anchoredPosition.y - airRect.sizeDelta.y) + 4f;
+                if (panel.sizeDelta.y < needed) panel.sizeDelta = new Vector2(panel.sizeDelta.x, needed);
+            }
+            SetupAirBar(hud, airSlider);
+        }
 
         foreach (Text text in hud.GetComponentsInChildren<Text>(true))
         {
@@ -308,6 +474,8 @@ public static partial class SetupNivel2Editor
                     "⚠️ <b>Cuidado:</b> Una vez que te metes al río ya no puedes volver al desierto. Pejelagartos, cocodrilos y serpientes de agua te quitan 1 corazón si te tocan.\n\n" +
                     "🌀 <b>Corrientes:</b> El agua con flechas te arrastra hacia un lado y los rápidos te frenan. Recoge <b>bidones</b> (más velocidad), <b>bolsas impermeables</b> (+1 corazón) y <b>carrizos</b> (aire extra).\n\n" +
                     "🚤 <b>Lanchas:</b> La Patrulla Fronteriza barre el río con reflectores. Cuando veas un brillo en la orilla, pégate a un <b>tronco</b>, unos <b>juncos</b> o unas <b>ramas</b> <i>del lado contrario a la luz</i>: la sombra te oculta. Del lado equivocado te descubren.\n\n" +
+                    "💧 <b>Agua:</b> Nadar cansa y la barra de <b>AGUA</b> baja poco a poco. Recoge <b>botellas</b> y <b>cantimploras</b> que flotan en el río.\n\n" +
+                    "🤿 <b>Buceo:</b> Mantén <b>ESPACIO</b> para sumergirte: los reflectores no te ven, pero nadas más lento y solo tienes <b>4 segundos de aire</b>. Suelta para respirar antes de que la barra de aire se vacíe.\n\n" +
                     "🚧 <b>Alambrados:</b> Las púas cruzan el río y te quitan 1 corazón si las tocas; busca el hueco. Los animales te detectan si pasas cerca, aunque sea por detrás.\n\n" +
                     "🎯 <b>Objetivo:</b> Cruza el río hacia el norte y pisa la <b>arena de la orilla norte</b>.";
             }
@@ -324,8 +492,57 @@ public static partial class SetupNivel2Editor
             so.FindProperty("nextLevelSceneName").stringValue = NEXT_LEVEL_SCENE;
             so.FindProperty("defeatGeneric.description").stringValue =
                 "Mateo ha perdido sus 3 corazones ante los peligros del Río Bravo.\n\n🛡️ <b>Consejo:</b> Protege tu salud y administra bien tus movimientos.";
+            so.FindProperty("defeatByDehydration.title").stringValue = "¡AGOTADO EN EL RÍO!";
+            so.FindProperty("defeatByDehydration.description").stringValue =
+                "Nadar contra la corriente te dejó sin fuerzas y sin agua para seguir.\n\n💧 <b>Consejo:</b> Recoge las botellas y cantimploras que flotan en el río para mantener tu barra de agua llena.";
             so.ApplyModifiedPropertiesWithoutUndo();
         }
+    }
+
+    /// <summary>Barra de aire: copia de la barra de agua con su etiqueta "AIRE" y el color del aire (AirBarUI la actualiza).</summary>
+    private static void SetupAirBar(GameObject hud, Transform bar)
+    {
+        bar.gameObject.SetActive(true);
+        bar.name = "AirSlider";
+        Slider slider = bar.GetComponent<Slider>();
+        Image fill = bar.GetComponentsInChildren<Image>(true).FirstOrDefault(i => i.name == "Fill");
+        Text label = AddBarLabel(hud, bar, "AIRE", new Color(0.85f, 0.97f, 1f, 1f));
+
+        AirBarUI air = bar.GetComponent<AirBarUI>();
+        if (air == null) air = bar.gameObject.AddComponent<AirBarUI>();
+        var so = new SerializedObject(air);
+        so.FindProperty("slider").objectReferenceValue = slider;
+        so.FindProperty("fillImage").objectReferenceValue = fill;
+        so.FindProperty("label").objectReferenceValue = label;
+        so.ApplyModifiedPropertiesWithoutUndo();
+        if (slider != null) slider.value = 1f;
+        if (fill != null) fill.color = new Color(0.7f, 0.93f, 1f, 1f);
+    }
+
+    /// <summary>Etiqueta dentro de una barra del HUD (encima quedan los corazones). Reemplaza la que ya tuviera.</summary>
+    private static Text AddBarLabel(GameObject hud, Transform bar, string text, Color color)
+    {
+        Transform oldLabel = bar.Find("BarLabel");
+        if (oldLabel != null) Object.DestroyImmediate(oldLabel.gameObject);
+        var labelGo = new GameObject("BarLabel", typeof(RectTransform));
+        labelGo.transform.SetParent(bar, false);
+        var rt = (RectTransform)labelGo.transform;
+        rt.anchorMin = Vector2.zero;
+        rt.anchorMax = Vector2.one;
+        rt.pivot = new Vector2(0.5f, 0.5f);
+        rt.anchoredPosition = new Vector2(6f, 0f);
+        rt.sizeDelta = new Vector2(-24f, 0f);
+        Text label = labelGo.AddComponent<Text>();
+        Text reference = hud.GetComponentsInChildren<Text>(true).FirstOrDefault(t => t.font != null);
+        if (reference != null) label.font = reference.font;
+        label.text = text;
+        label.fontSize = 16;
+        label.fontStyle = FontStyle.Bold;
+        label.alignment = TextAnchor.MiddleLeft;
+        label.color = color;
+        label.raycastTarget = false;
+        labelGo.AddComponent<Shadow>().effectColor = new Color(0f, 0f, 0f, 0.8f);
+        return label;
     }
 
     private static GameObject FindRoot(string name) =>
@@ -357,13 +574,33 @@ public static partial class SetupNivel2Editor
         SwimController2D swim = Object.FindAnyObjectByType<SwimController2D>();
         Expect(swim != null, "Mateo tiene SwimController2D");
         Expect(Object.FindAnyObjectByType<PlayerController2D>() == null, "No queda PlayerController2D (caminar) en la escena");
-        Expect(Object.FindAnyObjectByType<WaterSystem>() == null, "No hay sistema de sed en el río");
+        WaterSystem thirst = swim.GetComponent<WaterSystem>();
+        Expect(thirst != null && Mathf.Approximately(new SerializedObject(thirst).FindProperty("waterDrainRate").floatValue, WATER_DRAIN_RATE),
+            $"Mateo se cansa nadando: la barra de agua baja {WATER_DRAIN_RATE}% por segundo");
         if (swim == null) return problems;
 
         Animator animator = swim.GetComponent<Animator>();
         Expect(animator != null && animator.runtimeAnimatorController != null && animator.runtimeAnimatorController.name == "Visual",
             "Mateo usa el Animator de nado (Swim_Up, Swim_Side, Swim_Down, Idle_Float)");
         Expect(swim.GetComponent<PlayerHealth>() != null, "Mateo conserva sus 3 corazones (PlayerHealth)");
+
+        // Buceo: 4 s de aire, 60% de velocidad, burbujas y medidor de aire en el HUD
+        DiveController2D dive = swim.GetComponent<DiveController2D>();
+        Expect(dive != null, "Mateo puede bucear (DiveController2D)");
+        if (dive != null)
+        {
+            var diveSo = new SerializedObject(dive);
+            Expect(Mathf.Approximately(diveSo.FindProperty("maxAirSeconds").floatValue, 4f) &&
+                   Mathf.Approximately(diveSo.FindProperty("diveSpeedMultiplier").floatValue, 0.6f),
+                "El buceo dura hasta 4 s de aire y reduce la velocidad al 60%");
+            var bubbles = diveSo.FindProperty("bubbles").objectReferenceValue as ParticleSystem;
+            Expect(bubbles != null && bubbles.textureSheetAnimation.spriteCount > 0 &&
+                   bubbles.GetComponent<ParticleSystemRenderer>().sharedMaterial != null, "Mateo suelta burbujas al bucear");
+            Expect(diveSo.FindProperty("spriteRenderer").objectReferenceValue != null, "La silueta de Mateo se oscurece bajo el agua");
+        }
+        AirBarUI airBar = Object.FindAnyObjectByType<AirBarUI>(FindObjectsInactive.Include);
+        Expect(airBar != null && airBar.gameObject.activeInHierarchy && new SerializedObject(airBar).FindProperty("slider").objectReferenceValue != null,
+            "El HUD muestra la barra de aire");
 
         Vector2 feet = swim.GetFeetPosition();
         Expect(feet.y > 0f && feet.y < WATER_START_Y, $"Mateo inicia en la arena de la orilla sur (pies en y={feet.y:F2})");
@@ -409,6 +646,6 @@ public static partial class SetupNivel2Editor
         Expect(modal != null && new SerializedObject(modal).FindProperty("nextLevelSceneName").stringValue == NEXT_LEVEL_SCENE,
             "El botón de siguiente nivel lleva al Nivel 3");
 
-        return problems + VerifyHazards();
+        return problems + VerifyHazards() + VerifyAudio() + VerifyPlayerAnimations();
     }
 }

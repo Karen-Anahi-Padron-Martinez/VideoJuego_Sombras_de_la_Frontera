@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   itemType: 4
-  waterAmount: 25
+  waterAmount: 0
   healthAmount: 1
   speedBoost: 1.5
   boostDuration: 5

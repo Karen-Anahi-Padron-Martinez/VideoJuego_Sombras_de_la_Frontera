@@ -58,6 +58,7 @@ public class CurrentZone2D : MonoBehaviour
         swimmer = swim;
         swimmerInside = true;
         swimmer.AddCurrent(flow);
+        AudioManager.Instance?.EnterCurrent();   // Rumor del agua mientras Mateo está en la corriente
         Debug.Log($"[CurrentZone2D] Mateo entró a {(currentType == CurrentType.Lateral ? "una corriente lateral" : "una contracorriente")} ({gameObject.name}).");
     }
 
@@ -75,6 +76,7 @@ public class CurrentZone2D : MonoBehaviour
     private void ReleaseSwimmer()
     {
         if (swimmer != null) swimmer.RemoveCurrent(flow);
+        AudioManager.Instance?.ExitCurrent();
         swimmerInside = false;
         swimmer = null;
     }

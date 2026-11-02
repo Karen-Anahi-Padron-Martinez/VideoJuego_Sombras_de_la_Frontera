@@ -91,6 +91,7 @@ public class VisionCone2D : MonoBehaviour
     private SwimController2D swimmer;
     private PlayerHealth targetPlayerHealth;
     private float sweepTime;
+    private bool wasExposed;
     private PatrolAI parentPatrolAI;
     private readonly Collider2D[] overlapResults = new Collider2D[16];
     private ContactFilter2D contactFilter;
@@ -357,6 +358,11 @@ public class VisionCone2D : MonoBehaviour
 
         // 1. Progresión del temporizador de detección (con margen suave para evitar parpadeo)
         bool isExposed = IsPlayerExposed;
+
+        // Reflector de lancha: aviso sonoro en cuanto la luz alumbra a Mateo al descubierto
+        if (sweepHalfAngle > 0f && isExposed && !wasExposed) AudioManager.Instance?.PlayLightAlert();
+        wasExposed = isExposed;
+
         if (isExposed)
         {
             bool isClose = (Time.time - lastCloseExposedTime) < 0.15f;
@@ -410,6 +416,7 @@ public class VisionCone2D : MonoBehaviour
                 Debug.Log($"[VisionCone2D] ¡CAPTURA! {reason}");
                 CoyoteAnimation coyoteAnim = GetComponentInParent<CoyoteAnimation>();
                 if (coyoteAnim != null) coyoteAnim.PlayCatch();
+                if (defeatReason == DefeatReason.BoatSearchlight) AudioManager.Instance?.PlayBoatCapture();  // Sirena de la lancha
                 targetPlayerHealth.Capture(defeatReason);
                 detectionTimer = 0f;
             }

@@ -71,6 +71,7 @@ public class PickupItem : MonoBehaviour
                 {
                     waterSys.AddWater(waterAmount);
                 }
+                if (swimmer != null) AudioManager.Instance?.PlayDrinkWater();  // Nivel 2: botellas flotantes
                 Debug.Log($"[PickupItem] Mateo recogió Cantimplora (+{waterAmount}% agua).");
                 break;
 
@@ -80,6 +81,7 @@ public class PickupItem : MonoBehaviour
                 {
                     botWater.AddWater(waterAmount);
                 }
+                if (swimmer != null) AudioManager.Instance?.PlayDrinkWater();
                 Debug.Log($"[PickupItem] Mateo bebió una Botella de agua (+{waterAmount}% agua).");
                 break;
 
@@ -102,20 +104,20 @@ public class PickupItem : MonoBehaviour
             case ItemType.Bidon:
                 if (swimmer != null) swimmer.ApplySpeedBoost(speedBoost, boostDuration);
                 else if (player != null) player.ApplySpeedBoost(speedBoost, boostDuration);
-                AudioManager.Instance?.PlayDrinkWater();
+                AudioManager.Instance?.PlayPickup();
                 Debug.Log($"[PickupItem] Mateo se impulsó con un Bidón (x{speedBoost:F2} de velocidad por {boostDuration}s).");
                 break;
 
             case ItemType.BolsaImpermeable:
                 health.Heal(healthAmount);
-                AudioManager.Instance?.PlayDrinkWater();
+                AudioManager.Instance?.PlayPickup();
                 Debug.Log($"[PickupItem] Mateo recogió una Bolsa impermeable (+{healthAmount} vida).");
                 break;
 
             case ItemType.Carrizo:
                 // El medidor de aire (DiveController2D) recibe el aire extra
                 health.SendMessage("AddAirBonus", airBonusSeconds, SendMessageOptions.DontRequireReceiver);
-                AudioManager.Instance?.PlayDrinkWater();
+                AudioManager.Instance?.PlayPickup();
                 Debug.Log($"[PickupItem] Mateo recogió un Carrizo (+{airBonusSeconds}s de aire para bucear).");
                 break;
         }

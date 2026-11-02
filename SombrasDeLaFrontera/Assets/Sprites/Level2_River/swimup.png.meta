@@ -139,12 +139,12 @@ TextureImporter:
       name: swimup_0
       rect:
         serializedVersion: 2
-        x: 19
-        y: 113
-        width: 82
-        height: 83
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 20
+        y: 114
+        width: 80
+        height: 81
+      alignment: 9
+      pivot: {x: 0.4602074, y: 0.5183706}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -161,12 +161,12 @@ TextureImporter:
       name: swimup_1
       rect:
         serializedVersion: 2
-        x: 122
-        y: 114
-        width: 58
-        height: 82
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 124
+        y: 116
+        width: 54
+        height: 79
+      alignment: 9
+      pivot: {x: 0.5248184, y: 0.5229693}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -183,12 +183,12 @@ TextureImporter:
       name: swimup_2
       rect:
         serializedVersion: 2
-        x: 205
-        y: 115
-        width: 72
-        height: 82
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 206
+        y: 116
+        width: 69
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5302102, y: 0.509153}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -205,12 +205,12 @@ TextureImporter:
       name: swimup_3
       rect:
         serializedVersion: 2
-        x: 290
-        y: 113
-        width: 90
-        height: 85
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 292
+        y: 115
+        width: 86
+        height: 81
+      alignment: 9
+      pivot: {x: 0.4744589, y: 0.5398552}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -227,12 +227,12 @@ TextureImporter:
       name: swimup_4
       rect:
         serializedVersion: 2
-        x: 386
-        y: 110
-        width: 81
-        height: 85
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 388
+        y: 112
+        width: 77
+        height: 82
+      alignment: 9
+      pivot: {x: 0.4649163, y: 0.51602566}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -249,12 +249,12 @@ TextureImporter:
       name: swimup_5
       rect:
         serializedVersion: 2
-        x: 480
-        y: 104
-        width: 63
-        height: 91
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 481
+        y: 106
+        width: 60
+        height: 87
+      alignment: 9
+      pivot: {x: 0.44595337, y: 0.57136345}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -271,12 +271,12 @@ TextureImporter:
       name: swimup_6
       rect:
         serializedVersion: 2
-        x: 559
-        y: 110
-        width: 69
-        height: 88
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 561
+        y: 112
+        width: 65
+        height: 84
+      alignment: 9
+      pivot: {x: 0.5385357, y: 0.51499194}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -293,12 +293,12 @@ TextureImporter:
       name: swimup_7
       rect:
         serializedVersion: 2
-        x: 642
-        y: 112
-        width: 84
-        height: 84
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 644
+        y: 114
+        width: 80
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5039917, y: 0.5346138}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -315,7 +315,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b893fdca0a1c55144b08b8705318b7a2
     internalID: 0
     vertices: []
     indices: 
