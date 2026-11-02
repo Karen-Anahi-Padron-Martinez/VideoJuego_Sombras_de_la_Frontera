@@ -1,0 +1,1014 @@
+fileFormatVersion: 2
+guid: 76ad89be40cb92842a0b2b31af8c3db7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8594985661526293017
+    second: mateo_walk_gen_0
+  - first:
+      213: 6939858120498246706
+    second: mateo_walk_gen_1
+  - first:
+      213: 2187489537435125095
+    second: mateo_walk_gen_2
+  - first:
+      213: -672125527631609322
+    second: mateo_walk_gen_3
+  - first:
+      213: -3112163941425517529
+    second: mateo_walk_gen_4
+  - first:
+      213: -8000682716233963487
+    second: mateo_walk_gen_5
+  - first:
+      213: 8798020126898574093
+    second: mateo_walk_gen_6
+  - first:
+      213: -1833994509305522807
+    second: mateo_walk_gen_7
+  - first:
+      213: 7774638224331526155
+    second: mateo_walk_gen_8
+  - first:
+      213: 8686593345749697279
+    second: mateo_walk_gen_9
+  - first:
+      213: 6882195209603023934
+    second: mateo_walk_gen_10
+  - first:
+      213: -8140581266960471334
+    second: mateo_walk_gen_11
+  - first:
+      213: 7458780266782239667
+    second: mateo_walk_gen_12
+  - first:
+      213: -3512620089108752248
+    second: mateo_walk_gen_13
+  - first:
+      213: 1718054067606489180
+    second: mateo_walk_gen_14
+  - first:
+      213: -1361642481881433746
+    second: mateo_walk_gen_15
+  - first:
+      213: -2698422139123868911
+    second: mateo_walk_gen_16
+  - first:
+      213: 3511049401188856011
+    second: mateo_walk_gen_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: mateo_walk_gen_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 481
+        width: 97
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91ab9d4cbe5874770800000000000000
+      internalID: 8594985661526293017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_walk_gen_1
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 481
+        width: 99
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23478ef01345f4060800000000000000
+      internalID: 6939858120498246706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_walk_gen_2
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 481
+        width: 98
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76544bcf4268b5e10800000000000000
+      internalID: 2187489537435125095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_walk_gen_3
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 481
+        width: 97
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 612cb09c4612ca6f0800000000000000
+      internalID: -672125527631609322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_walk_gen_4
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 481
+        width: 98
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72c6d8c526f5fc4d0800000000000000
+      internalID: -3112163941425517529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_walk_gen_5
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 481
+        width: 97
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1286442857dd7f090800000000000000
+      internalID: -8000682716233963487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_walk_gen_6
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 245
+        width: 97
+        height: 199
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d03d68601b8d81a70800000000000000
+      internalID: 8798020126898574093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_walk_gen_7
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 245
+        width: 101
+        height: 199
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 985d3d0f5b75c86e0800000000000000
+      internalID: -1833994509305522807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_walk_gen_8
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 245
+        width: 95
+        height: 199
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b005472f54015eb60800000000000000
+      internalID: 7774638224331526155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_walk_gen_9
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 245
+        width: 93
+        height: 199
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff2cea9df9afc8870800000000000000
+      internalID: 8686593345749697279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_walk_gen_10
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 245
+        width: 94
+        height: 199
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3488476418728f50800000000000000
+      internalID: 6882195209603023934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_walk_gen_11
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 245
+        width: 97
+        height: 199
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ada2f95e778d60f80800000000000000
+      internalID: -8140581266960471334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_walk_gen_12
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 9
+        width: 93
+        height: 187
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bbaf336229e28760800000000000000
+      internalID: 7458780266782239667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_walk_gen_13
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 9
+        width: 94
+        height: 187
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88895cdb3aaa04fc0800000000000000
+      internalID: -3512620089108752248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_walk_gen_14
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 9
+        width: 94
+        height: 187
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5889946211c7d710800000000000000
+      internalID: 1718054067606489180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_walk_gen_15
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 9
+        width: 93
+        height: 187
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e69306480697a1de0800000000000000
+      internalID: -1361642481881433746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_walk_gen_16
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 9
+        width: 94
+        height: 187
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11bd87f7c574d8ad0800000000000000
+      internalID: -2698422139123868911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mateo_walk_gen_17
+      rect:
+        serializedVersion: 2
+        x: 654
+        y: 9
+        width: 94
+        height: 187
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc0b5baf3d0c9b030800000000000000
+      internalID: 3511049401188856011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_mateo_walk_gen_r2_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8
+        width: 128
+        height: 190
+      alignment: 9
+      pivot: {x: 0.5, y: 0.53157896}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c67cb7d7e8ad4944ab50c492e8dc88c
+      internalID: 607965397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_mateo_walk_gen_r2_c1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 8
+        width: 128
+        height: 190
+      alignment: 9
+      pivot: {x: 0.5, y: 0.53157896}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4e03ce64b247d74e8fd626af01d79fa
+      internalID: -1911213877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_mateo_walk_gen_r2_c2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 8
+        width: 128
+        height: 190
+      alignment: 9
+      pivot: {x: 0.5, y: 0.53157896}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce900345f42fe4a4f8c269b89f05121d
+      internalID: -1830745407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_mateo_walk_gen_r2_c3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 8
+        width: 128
+        height: 190
+      alignment: 9
+      pivot: {x: 0.5, y: 0.53157896}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab1f75aba05755e4a90c2897d92f8af4
+      internalID: -1865314041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_mateo_walk_gen_r2_c4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 8
+        width: 128
+        height: 190
+      alignment: 9
+      pivot: {x: 0.5, y: 0.53157896}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 533afdc8fcbaa04459d5ef2631a61366
+      internalID: -487308732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_mateo_walk_gen_r2_c5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 8
+        width: 128
+        height: 190
+      alignment: 9
+      pivot: {x: 0.5, y: 0.53157896}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5caf4fa02314f3a48b6c51e643c07a0a
+      internalID: -1673940521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_mateo_walk_gen_r1_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 243
+        width: 128
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49753696}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f9107b0561174a41b0f569809f2cb53
+      internalID: -1215662180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_mateo_walk_gen_r1_c1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 243
+        width: 128
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49753696}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d03effff584afb44e9ca0825dd77a6f8
+      internalID: -1540856217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_mateo_walk_gen_r1_c2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 243
+        width: 128
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49753696}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23630b9103094914e80da80bd01b4414
+      internalID: 425416897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_mateo_walk_gen_r1_c3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 243
+        width: 128
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49753696}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83aadc3b61764ee408ba62f705da2501
+      internalID: -198930642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_mateo_walk_gen_r1_c4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 243
+        width: 128
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49753696}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e952f813d78c9ac4eb8f384c522e4c4d
+      internalID: -1794379864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_mateo_walk_gen_r1_c5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 243
+        width: 128
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49753696}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e816f959010448045bad8bce04187489
+      internalID: 225443679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_mateo_walk_gen_r0_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 479
+        width: 128
+        height: 190
+      alignment: 9
+      pivot: {x: 0.5, y: 0.53157896}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af7568a1827afa546b74f5b5a3be7f3b
+      internalID: 378258478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_mateo_walk_gen_r0_c1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 479
+        width: 128
+        height: 190
+      alignment: 9
+      pivot: {x: 0.5, y: 0.53157896}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdd1ef098a8feb742801c4bbfaf1bf56
+      internalID: 849809718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_mateo_walk_gen_r0_c2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 479
+        width: 128
+        height: 190
+      alignment: 9
+      pivot: {x: 0.5, y: 0.53157896}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdd239317dee3be4aac4c4d3c541751d
+      internalID: 1772150854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_mateo_walk_gen_r0_c3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 479
+        width: 128
+        height: 190
+      alignment: 9
+      pivot: {x: 0.5, y: 0.53157896}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 649e6259d0955e048889e275c15d2693
+      internalID: -2009056385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_mateo_walk_gen_r0_c4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 479
+        width: 128
+        height: 190
+      alignment: 9
+      pivot: {x: 0.5, y: 0.53157896}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00322efcd7f5e924683c669db8aaa6bc
+      internalID: -751226920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_mateo_walk_gen_r0_c5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 479
+        width: 128
+        height: 190
+      alignment: 9
+      pivot: {x: 0.5, y: 0.53157896}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3566853b5a31b343b363272fcda88fd
+      internalID: 839038234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 1e921864aa7716345bfcd37e7d3be0b6
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      anim_mateo_walk_gen_r0_c0: 378258478
+      anim_mateo_walk_gen_r0_c1: 849809718
+      anim_mateo_walk_gen_r0_c2: 1772150854
+      anim_mateo_walk_gen_r0_c3: -2009056385
+      anim_mateo_walk_gen_r0_c4: -751226920
+      anim_mateo_walk_gen_r0_c5: 839038234
+      anim_mateo_walk_gen_r1_c0: -1215662180
+      anim_mateo_walk_gen_r1_c1: -1540856217
+      anim_mateo_walk_gen_r1_c2: 425416897
+      anim_mateo_walk_gen_r1_c3: -198930642
+      anim_mateo_walk_gen_r1_c4: -1794379864
+      anim_mateo_walk_gen_r1_c5: 225443679
+      anim_mateo_walk_gen_r2_c0: 607965397
+      anim_mateo_walk_gen_r2_c1: -1911213877
+      anim_mateo_walk_gen_r2_c2: -1830745407
+      anim_mateo_walk_gen_r2_c3: -1865314041
+      anim_mateo_walk_gen_r2_c4: -487308732
+      anim_mateo_walk_gen_r2_c5: -1673940521
+      mateo_walk_gen_0: 8594985661526293017
+      mateo_walk_gen_1: 6939858120498246706
+      mateo_walk_gen_10: 6882195209603023934
+      mateo_walk_gen_11: -8140581266960471334
+      mateo_walk_gen_12: 7458780266782239667
+      mateo_walk_gen_13: -3512620089108752248
+      mateo_walk_gen_14: 1718054067606489180
+      mateo_walk_gen_15: -1361642481881433746
+      mateo_walk_gen_16: -2698422139123868911
+      mateo_walk_gen_17: 3511049401188856011
+      mateo_walk_gen_2: 2187489537435125095
+      mateo_walk_gen_3: -672125527631609322
+      mateo_walk_gen_4: -3112163941425517529
+      mateo_walk_gen_5: -8000682716233963487
+      mateo_walk_gen_6: 8798020126898574093
+      mateo_walk_gen_7: -1833994509305522807
+      mateo_walk_gen_8: 7774638224331526155
+      mateo_walk_gen_9: 8686593345749697279
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

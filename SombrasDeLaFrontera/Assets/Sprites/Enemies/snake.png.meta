@@ -611,11 +611,451 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: anim_snake_r3_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8
+        width: 143
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.032608695}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c0c376d3423805409747d0c1325d24d
+      internalID: -128484256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_snake_r3_c1
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 8
+        width: 142
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.032608695}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07590dc11ae98d641b8211eda83fc83b
+      internalID: -223861642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_snake_r3_c2
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 8
+        width: 143
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.032608695}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 184972d63bc12474582ea698d1592956
+      internalID: -1265864870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_snake_r3_c3
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 8
+        width: 142
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.032608695}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae9945b43ec0a1a47a4b37dc15305790
+      internalID: -1572958605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_snake_r3_c4
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 8
+        width: 143
+        height: 92
+      alignment: 9
+      pivot: {x: 0.5, y: 0.032608695}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a23025ce3a064c4ab7cc963d2c4633f
+      internalID: -1337542722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_snake_r2_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 117
+        width: 143
+        height: 95
+      alignment: 9
+      pivot: {x: 0.5, y: 0.031578947}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05a4d1b06cfda4541a01ba67ced30429
+      internalID: 54128927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_snake_r2_c1
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 117
+        width: 142
+        height: 95
+      alignment: 9
+      pivot: {x: 0.5, y: 0.031578947}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bbd8bd84fedc0941b152f79c4344aa5
+      internalID: 1667348210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_snake_r2_c2
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 117
+        width: 143
+        height: 95
+      alignment: 9
+      pivot: {x: 0.5, y: 0.031578947}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb9ff39e8488ae4418f2a2edecaa1d7b
+      internalID: 984080319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_snake_r2_c3
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 117
+        width: 142
+        height: 95
+      alignment: 9
+      pivot: {x: 0.5, y: 0.031578947}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: baf92cbae1d91e8449de4c4d41b86df1
+      internalID: -187344703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_snake_r2_c4
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 117
+        width: 143
+        height: 95
+      alignment: 9
+      pivot: {x: 0.5, y: 0.031578947}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed90e9294adc3e74588680db9ed5ffd8
+      internalID: 175871130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_snake_r1_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 229
+        width: 143
+        height: 73
+      alignment: 9
+      pivot: {x: 0.5, y: 0.04109589}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c1a44e745904ab4d81dcee7bb346e87
+      internalID: -1850433202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_snake_r1_c1
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 229
+        width: 142
+        height: 73
+      alignment: 9
+      pivot: {x: 0.5, y: 0.04109589}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20388485ef9d9d04682bc08740801d0d
+      internalID: -1099491858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_snake_r1_c2
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 229
+        width: 143
+        height: 73
+      alignment: 9
+      pivot: {x: 0.5, y: 0.04109589}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bf988c00fef087499aa2fda4803239e
+      internalID: 273428007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_snake_r1_c3
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 229
+        width: 142
+        height: 73
+      alignment: 9
+      pivot: {x: 0.5, y: 0.04109589}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6badc979737329d4996a07ec8b0181c1
+      internalID: 815102404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_snake_r1_c4
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 229
+        width: 143
+        height: 73
+      alignment: 9
+      pivot: {x: 0.5, y: 0.04109589}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 924e322502d1eb04d88e987de080cd02
+      internalID: -1982495998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_snake_r0_c0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 330
+        width: 143
+        height: 53
+      alignment: 9
+      pivot: {x: 0.5, y: 0.056603774}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bb1876900fe1de4d8ccda793c6518af
+      internalID: -663868454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_snake_r0_c1
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 330
+        width: 142
+        height: 53
+      alignment: 9
+      pivot: {x: 0.5, y: 0.056603774}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 571b2552112e1ce4785218c670af0185
+      internalID: 1864947388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_snake_r0_c2
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 330
+        width: 143
+        height: 53
+      alignment: 9
+      pivot: {x: 0.5, y: 0.056603774}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43bdef059546ad84baad08e7035bbfc2
+      internalID: -941304454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_snake_r0_c3
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 330
+        width: 142
+        height: 53
+      alignment: 9
+      pivot: {x: 0.5, y: 0.056603774}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6568123f8cddee440af6a0e9e8fcd5fd
+      internalID: 1260933800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_snake_r0_c4
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 330
+        width: 143
+        height: 53
+      alignment: 9
+      pivot: {x: 0.5, y: 0.056603774}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab97b8ab2e7c82544b7026e23be6d1fe
+      internalID: 1548626215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: be29706079f84f64c9fa7d018e24873b
     internalID: 0
     vertices: []
     indices: 
@@ -625,26 +1065,46 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-        snake_0: 77629274086378969
-        snake_1: -3371395696663490245
-        snake_10: 5507701332549987816
-        snake_11: -578549508247544149
-        snake_12: 6883220353471580083
-        snake_13: 7244707078923568495
-        snake_14: 6259697171409535501
-        snake_15: -8840547786219479034
-        snake_16: -1926920328613805637
-        snake_17: 4695170241781622224
-        snake_18: -4866233332766450936
-        snake_19: -3978219949022309638
-        snake_2: -6845161473548803723
-        snake_3: 3512846567877281889
-        snake_4: 7670986685051776202
-        snake_5: 5338795838130311986
-        snake_6: 2531390207280848069
-        snake_7: -2059535665568945103
-        snake_8: -6973307564972655077
-        snake_9: -1612381060712740982
+      anim_snake_r0_c0: -663868454
+      anim_snake_r0_c1: 1864947388
+      anim_snake_r0_c2: -941304454
+      anim_snake_r0_c3: 1260933800
+      anim_snake_r0_c4: 1548626215
+      anim_snake_r1_c0: -1850433202
+      anim_snake_r1_c1: -1099491858
+      anim_snake_r1_c2: 273428007
+      anim_snake_r1_c3: 815102404
+      anim_snake_r1_c4: -1982495998
+      anim_snake_r2_c0: 54128927
+      anim_snake_r2_c1: 1667348210
+      anim_snake_r2_c2: 984080319
+      anim_snake_r2_c3: -187344703
+      anim_snake_r2_c4: 175871130
+      anim_snake_r3_c0: -128484256
+      anim_snake_r3_c1: -223861642
+      anim_snake_r3_c2: -1265864870
+      anim_snake_r3_c3: -1572958605
+      anim_snake_r3_c4: -1337542722
+      snake_0: 77629274086378969
+      snake_1: -3371395696663490245
+      snake_10: 5507701332549987816
+      snake_11: -578549508247544149
+      snake_12: 6883220353471580083
+      snake_13: 7244707078923568495
+      snake_14: 6259697171409535501
+      snake_15: -8840547786219479034
+      snake_16: -1926920328613805637
+      snake_17: 4695170241781622224
+      snake_18: -4866233332766450936
+      snake_19: -3978219949022309638
+      snake_2: -6845161473548803723
+      snake_3: 3512846567877281889
+      snake_4: 7670986685051776202
+      snake_5: 5338795838130311986
+      snake_6: 2531390207280848069
+      snake_7: -2059535665568945103
+      snake_8: -6973307564972655077
+      snake_9: -1612381060712740982
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
