@@ -215,6 +215,10 @@ MonoBehaviour:
   frontDetectionRadius: 1.1
   frontDetectionHalfAngle: 75
   closeDetectionSpeed: 2
+  sweepHalfAngle: 0
+  sweepPeriod: 4
+  beamAlpha: 0.4
+  defeatReason: 1
   obstacleMask:
     serializedVersion: 2
     m_Bits: 0
