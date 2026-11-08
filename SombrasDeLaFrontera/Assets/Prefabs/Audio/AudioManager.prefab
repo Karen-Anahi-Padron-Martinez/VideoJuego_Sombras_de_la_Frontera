@@ -384,6 +384,11 @@ MonoBehaviour:
   alarmSirenClip: {fileID: 8300000, guid: d35712b5ee85e934d82b306c533eaddb, type: 3}
   radioStaticClip: {fileID: 8300000, guid: dc7ce4c5dc1539646aaac4b28bf8bc5b, type: 3}
   searchlightHumClip: {fileID: 8300000, guid: 352fde8769752834893b3fac22f2e791, type: 3}
+  safeHavenBGM: {fileID: 8300000, guid: 830a640389f7c86458be3d7d1297d143, type: 3}
+  droneHumClip: {fileID: 8300000, guid: c9502201e9a6d3c46b20129c7bf75acf, type: 3}
+  droneLockClip: {fileID: 8300000, guid: f87bba36bb30ea94dab1cb1b4f8f4b20, type: 3}
+  campfireLoopClip: {fileID: 8300000, guid: ba69e11beac7fb0459f42a4772327461, type: 3}
+  finalVictoryClip: {fileID: 8300000, guid: 5d33db3c82abec544838780e9d0c9468, type: 3}
   riverBGM: {fileID: 8300000, guid: f69dda81fa6aa2e4996f93033a27006a, type: 3}
   swimStrokeClips:
   - {fileID: 8300000, guid: 52e24eae0fe050e41af70c944d6970e6, type: 3}

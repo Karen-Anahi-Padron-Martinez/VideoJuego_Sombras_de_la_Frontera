@@ -20,5 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/04_Level3_BorderWall.unity
     guid: 04ec4048c60aad64d8457bfb27684609
+  - enabled: 1
+    path: Assets/Scenes/05_Level4_SafeHaven.unity
+    guid: 5148bd99dd9adfa4a83652006684b9a4
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

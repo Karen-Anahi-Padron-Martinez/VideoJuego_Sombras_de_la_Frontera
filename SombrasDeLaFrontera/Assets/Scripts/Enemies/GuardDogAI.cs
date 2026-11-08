@@ -15,6 +15,10 @@ using UnityEngine;
 ///    - Durante esos 5 segundos, si cualquier coyote ve a Mateo, lo captura al instante.
 /// 5. Solo deja de ladrar cuando Mateo sale de su medio círculo o se esconde en cobertura.
 /// 6. Solo si Mateo se pega demasiado al perro (casi tocándolo), éste le MUERDE (animación Bite) restándole 1 vida.
+/// 7. Persecución (opcional, Nivel 4): tras ladrar, el perro corre tras Mateo rodeando obstáculos (ChasePath2D).
+///    Si Mateo se esconde tras una cobertura, el perro ya no lo ve ni lo muerde: va a revisar hasta donde lo vio por última
+///    vez, olfatea unos segundos y regresa a patrullar. Solo lo vuelve a perseguir si Mateo sale a la vista.
+///    También se rinde si se aleja demasiado de su ruta.
 /// </summary>
 [RequireComponent(typeof(PatrolAI))]
 public class GuardDogAI : MonoBehaviour
@@ -51,6 +55,40 @@ public class GuardDogAI : MonoBehaviour
     [Tooltip("Distancia a la que el perro dormido escucha a Mateo y despierta ladrando")]
     [SerializeField] private float sleepingHearingRadius = 1.1f;
 
+    [Header("Persecución (Nivel 4)")]
+    [Tooltip("Si está activo, el perro persigue a Mateo en vez de quedarse ladrando en su lugar")]
+    [SerializeField] private bool chasesPlayer = false;
+
+    [Tooltip("Velocidad al perseguir (Mateo camina a 1 unidad por segundo)")]
+    public float chaseSpeed = 0.92f;
+
+    [Tooltip("Segundos que ladra en su lugar antes de arrancar tras Mateo (tiempo para reaccionar)")]
+    [SerializeField] private float chaseReactionDelay = 0.45f;
+
+    [Tooltip("Distancia máxima que se aleja del punto donde dejó su ruta antes de rendirse")]
+    public float maxChaseDistance = 5f;
+
+    [Tooltip("Mientras lo persigue, distancia a la que sigue viendo a Mateo (no necesita tenerlo enfrente)")]
+    [SerializeField] private float chaseSightRadius = 4f;
+
+    [Tooltip("Mientras lo busca, distancia a la que olfatea a Mateo si está al descubierto aunque no lo vea (no si está escondido)")]
+    [SerializeField] private float sniffRadius = 0.4f;
+
+    [Tooltip("Si Mateo está escondido, el perro se detiene a esta distancia del punto donde lo vio por última vez")]
+    [SerializeField] private float hiddenSearchStop = 0.6f;
+
+    [Tooltip("Segundos que olfatea donde lo vio por última vez antes de rendirse")]
+    [SerializeField] private float searchDuration = 2.2f;
+
+    [Tooltip("Al perseguir, distancia entre las patas del perro y los pies de Mateo a la que lo alcanza y muerde")]
+    [SerializeField] private float chaseBiteReach = 0.3f;
+
+    [Tooltip("Segundos que se queda quieto después de morder (ventana para escapar)")]
+    [SerializeField] private float biteRecoverTime = 1.1f;
+
+    [Tooltip("Velocidad de la animación de caminar mientras corre")]
+    [SerializeField] private float chaseAnimationSpeed = 1.7f;
+
     [Header("Máscara de Detección")]
     [SerializeField] private LayerMask obstacleMask;
 
@@ -72,6 +110,20 @@ public class GuardDogAI : MonoBehaviour
     private Collider2D playerCollider;
     private PlayerHealth cachedPlayerHealth;
     private Transform playerTransform;
+
+    // Persecución
+    private enum ChaseState { None, Chasing, Searching, Returning }
+    private ChaseState chaseState = ChaseState.None;
+    private Vector2 chaseOrigin;
+    private Vector2 lastSeenPos;
+    private float chaseStartTime;
+    private float searchEndTime;
+    private float recoverUntil;
+    private float nextRepathTime;
+    private Vector2 pathTarget;
+    private readonly List<Vector2> path = new List<Vector2>();
+    private bool movedThisFrame;
+    public bool IsChasing => chaseState == ChaseState.Chasing;
 
     // Eventos estáticos de alerta global para que otros componentes escuchen
     public static event System.Action<bool, Vector2> OnDogBarkStateChanged;
@@ -139,6 +191,7 @@ public class GuardDogAI : MonoBehaviour
             return;
         }
 
+        movedThisFrame = false;
         Vector2 dogPos = transform.position;
         Vector2 playerPos = playerTransform.position;
         Vector2 toPlayer = (playerPos - dogPos);
@@ -199,6 +252,13 @@ public class GuardDogAI : MonoBehaviour
         // Condición de detección final: Dentro del medio círculo frontal, fuera de cobertura y sin muros
         bool canDetectMateo = playerInDistance && playerInFrontHalfCircle && !isPlayerHiding && !lineOfSightBlocked;
 
+        if (chasesPlayer)
+        {
+            UpdateChase(canDetectMateo, playerPos, distanceToPlayer, isPlayerHiding, effectiveMask);
+            UpdateAnimation();
+            return;
+        }
+
         if (canDetectMateo)
         {
             lostSightTime = -1f;
@@ -248,6 +308,190 @@ public class GuardDogAI : MonoBehaviour
         UpdateAnimation();
     }
 
+    // =========================================================================
+    // PERSECUCIÓN (Nivel 4)
+    // =========================================================================
+
+    private void UpdateChase(bool canDetectMateo, Vector2 playerCenter, float distanceToPlayer, bool isPlayerHiding, LayerMask mask)
+    {
+        // Mientras lo persigue no necesita tenerlo enfrente: basta con verlo (no escondido y sin obstáculos en medio)
+        bool tracking = !isPlayerHiding && distanceToPlayer <= chaseSightRadius && !IsSightBlocked(playerCenter, distanceToPlayer, mask);
+
+        // El perro (pivote en las patas) persigue los PIES de Mateo, no el centro de su sprite
+        Vector2 playerPos = PlayerFeet(playerCenter);
+        float feetDistance = Vector2.Distance(transform.position, playerPos);
+        // Patrullando solo muerde si de verdad lo toca; persiguiéndolo o buscándolo, al alcanzarlo.
+        // Escondido tras una cobertura está a salvo: el perro no lo encuentra ni lo muerde.
+        bool hunting = chaseState == ChaseState.Chasing || chaseState == ChaseState.Searching;
+        bool touching = !isPlayerHiding && (BodyGapToPlayer() <= biteDistance || (hunting && feetDistance <= chaseBiteReach));
+
+        if (touching)
+        {
+            if (chaseState == ChaseState.None || chaseState == ChaseState.Returning) BeginChase(playerPos);
+            if (TryBitePlayer()) recoverUntil = Time.time + biteRecoverTime;
+        }
+
+        switch (chaseState)
+        {
+            case ChaseState.None:
+                if (canDetectMateo) BeginChase(playerPos);
+                else if (canRest && Time.time >= nextRestTime) StartRest();
+                break;
+
+            case ChaseState.Chasing:
+                if (!tracking)
+                {
+                    // Lo perdió de vista: irá olfateando hasta donde lo vio por última vez
+                    chaseState = ChaseState.Searching;
+                    searchEndTime = -1f;
+                    path.Clear();
+                    break;
+                }
+                lastSeenPos = playerPos;
+                if (Time.time >= nextAlertRefreshTime)
+                {
+                    nextAlertRefreshTime = Time.time + 3.0f;
+                    PatrolAI.TriggerDogAlert(coyoteAlertDuration);
+                }
+                if (Vector2.Distance(transform.position, chaseOrigin) > maxChaseDistance) { BeginReturn(); break; }
+
+                bool reacting = Time.time - chaseStartTime < chaseReactionDelay;
+                if (reacting || touching || Time.time < recoverUntil) patrolAI.FaceTowards(playerPos);
+                else MoveAlongPath(playerPos, chaseSpeed);
+                break;
+
+            case ChaseState.Searching:
+                if (tracking || (!isPlayerHiding && feetDistance <= sniffRadius))
+                {
+                    // Lo volvió a ver o lo olfateó al descubierto junto a él
+                    chaseState = ChaseState.Chasing;
+                    lastSeenPos = playerPos;
+                    AudioManager.Instance?.PlayDogBarkAt(transform.position);
+                    PatrolAI.TriggerDogAlert(coyoteAlertDuration);
+                    break;
+                }
+                if (Vector2.Distance(transform.position, chaseOrigin) > maxChaseDistance) { BeginReturn(); break; }
+
+                if (searchEndTime < 0f)
+                {
+                    // Si Mateo se escondió justo ahí, se detiene antes para no toparse con él
+                    float stop = isPlayerHiding ? hiddenSearchStop : 0.1f;
+                    bool arrived = Vector2.Distance(transform.position, lastSeenPos) <= stop;
+                    if (arrived || !MoveAlongPath(lastSeenPos, chaseSpeed)) searchEndTime = Time.time + searchDuration;
+                }
+                else if (Time.time >= searchEndTime)
+                {
+                    BeginReturn();
+                }
+                break;
+
+            case ChaseState.Returning:
+                if (canDetectMateo) { BeginChase(playerPos); break; }
+                if (Vector2.Distance(transform.position, chaseOrigin) > 0.06f && MoveAlongPath(chaseOrigin, patrolAI.moveSpeed)) break;
+
+                // De vuelta en su ruta: retoma la patrulla
+                transform.position = chaseOrigin;
+                chaseState = ChaseState.None;
+                patrolAI.isPaused = false;
+                ScheduleNextRest();
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Un aviso externo (el dron de vigilancia) manda al perro a revisar un punto: despierta, ladra y corre hacia allá olfateando.
+    /// Si en el camino ve a Mateo, lo persigue. Solo responde si está en modo persecución.
+    /// </summary>
+    public void AlertToPosition(Vector2 position)
+    {
+        if (!chasesPlayer || chaseState == ChaseState.Chasing) return;
+        if (isResting) EndRest();
+        if (chaseState == ChaseState.None) chaseOrigin = transform.position;
+        chaseState = ChaseState.Searching;
+        searchEndTime = -1f;
+        lastSeenPos = position;
+        path.Clear();
+        patrolAI.isPaused = false;
+        if (!isBarking) StartBarking();
+    }
+
+    private Vector2 PlayerFeet(Vector2 fallback)
+    {
+        if (playerCollider == null || !playerCollider.enabled) return fallback;
+        Bounds b = playerCollider.bounds;
+        return new Vector2(b.center.x, b.min.y);
+    }
+
+    private void BeginChase(Vector2 playerPos)
+    {
+        if (chaseState == ChaseState.None) chaseOrigin = transform.position;
+        chaseState = ChaseState.Chasing;
+        chaseStartTime = Time.time;
+        lastSeenPos = playerPos;
+        path.Clear();
+        patrolAI.isPaused = false;
+        if (!isBarking) StartBarking();
+    }
+
+    private void BeginReturn()
+    {
+        StopBarking();
+        chaseState = ChaseState.Returning;
+        patrolAI.isPaused = true; // Regresa por su cuenta rodeando obstáculos; luego reanuda la patrulla
+        path.Clear();
+    }
+
+    /// <summary>Avanza hacia el destino rodeando obstáculos. Devuelve falso si no hay camino o ya llegó.</summary>
+    private bool MoveAlongPath(Vector2 target, float speed)
+    {
+        if (path.Count == 0 || Time.time >= nextRepathTime || (target - pathTarget).sqrMagnitude > 0.09f)
+        {
+            nextRepathTime = Time.time + 0.3f;
+            pathTarget = target;
+            if (!ChasePath2D.FindPath(transform.position, target, path))
+            {
+                path.Clear();
+                // Ya casi lo alcanza (p. ej. Mateo pegado a la base de un obstáculo): se lanza directo
+                if (Vector2.Distance(transform.position, target) > 1.2f) return false;
+                path.Add(target);
+            }
+        }
+        if (path.Count == 0) return false;
+
+        Vector2 pos = transform.position;
+        Vector2 next = path[0];
+        Vector2 dir = next - pos;
+        float distance = dir.magnitude;
+        float step = speed * Time.deltaTime;
+        if (distance <= step)
+        {
+            transform.position = next;
+            path.RemoveAt(0);
+        }
+        else
+        {
+            transform.position = pos + dir / distance * step;
+        }
+        patrolAI.FaceTowards(next);
+        movedThisFrame = true;
+        return true;
+    }
+
+    private bool IsSightBlocked(Vector2 playerPos, float distanceToPlayer, LayerMask mask)
+    {
+        Vector2 dogPos = transform.position;
+        Vector2 dir = (playerPos - dogPos).normalized;
+        foreach (RaycastHit2D hit in Physics2D.RaycastAll(dogPos, dir, distanceToPlayer, mask))
+        {
+            Collider2D col = hit.collider;
+            if (col == null || col.isTrigger) continue;
+            if (col.GetComponentInParent<PlayerHealth>() != null || col.CompareTag("Player")) continue;
+            if (col.GetComponentInParent<PatrolAI>() != null || col.GetComponentInParent<HazardFauna>() != null) continue;
+            return true;
+        }
+        return false;
+    }
+
     /// <summary>
     /// Separación real entre los colliders del perro y el collider de los pies de Mateo.
     /// </summary>
@@ -286,14 +530,20 @@ public class GuardDogAI : MonoBehaviour
         if (creatureAnimator != null)
         {
             if (isResting) creatureAnimator.Play("Sleep");
+            else if (movedThisFrame) creatureAnimator.Play("Walk");  // Persiguiendo, buscando o regresando
             else if (isBarking) creatureAnimator.Play("Bark");
             else if (patrolAI != null && patrolAI.IsMoving) creatureAnimator.Play("Walk");
             else creatureAnimator.Play("Idle");
+
+            bool running = movedThisFrame && chaseState != ChaseState.Returning;
+            creatureAnimator.SetSpeed(running ? chaseAnimationSpeed : 1f);
         }
 
         if (alertIndicator != null)
         {
-            alertIndicator.Show(isBarking ? AlertIndicator.Kind.Exclamation : AlertIndicator.Kind.None);
+            AlertIndicator.Kind kind = chaseState == ChaseState.Searching ? AlertIndicator.Kind.Question
+                : isBarking ? AlertIndicator.Kind.Exclamation : AlertIndicator.Kind.None;
+            alertIndicator.Show(kind);
         }
     }
 
@@ -356,9 +606,10 @@ public class GuardDogAI : MonoBehaviour
         OnDogBarkStateChanged?.Invoke(false, transform.position);
     }
 
-    private void TryBitePlayer()
+    /// <summary>Muerde a Mateo si ya pasó el tiempo entre mordidas. Devuelve verdadero si lo mordió.</summary>
+    private bool TryBitePlayer()
     {
-        if (Time.time < nextBiteTime) return;
+        if (Time.time < nextBiteTime) return false;
 
         if (cachedPlayerHealth != null && !cachedPlayerHealth.isDead && !cachedPlayerHealth.isInvulnerable)
         {
@@ -372,7 +623,9 @@ public class GuardDogAI : MonoBehaviour
 
             // Si la mordida fue la última, terminar de verla aunque el juego se congele
             if (cachedPlayerHealth.isDead && creatureAnimator != null) creatureAnimator.UseUnscaledTime();
+            return true;
         }
+        return false;
     }
 
     private void OnDisable()

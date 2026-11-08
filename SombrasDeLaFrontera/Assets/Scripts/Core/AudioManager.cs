@@ -101,6 +101,18 @@ public class AudioManager : MonoBehaviour
     [Tooltip("Zumbido en bucle de los reflectores de las torres")]
     [SerializeField] private AudioClip searchlightHumClip;
 
+    [Header("Nivel 4: Refugio Seguro")]
+    [Tooltip("Música de la última noche en el desierto (bucle)")]
+    [SerializeField] private AudioClip safeHavenBGM;
+    [Tooltip("Zumbido en bucle de las hélices de los drones (lo reproduce cada dron)")]
+    [SerializeField] private AudioClip droneHumClip;
+    [Tooltip("Pitidos del dron al fijar a Mateo")]
+    [SerializeField] private AudioClip droneLockClip;
+    [Tooltip("Crepitar en bucle de la fogata del refugio")]
+    [SerializeField] private AudioClip campfireLoopClip;
+    [Tooltip("Melodía de victoria al llegar al refugio (fin del juego)")]
+    [SerializeField] private AudioClip finalVictoryClip;
+
     [Header("Nivel 2: Río Bravo")]
     [SerializeField] private AudioClip riverBGM;
     [SerializeField] private AudioClip[] swimStrokeClips;
@@ -177,6 +189,7 @@ public class AudioManager : MonoBehaviour
     private int nextWorldSource;
     private readonly Dictionary<string, float> lastPlayTimes = new Dictionary<string, float>();
     private bool isBorderLevel;   // Nivel 3: pasos en grava y música de la frontera
+    private bool isSafeHavenLevel; // Nivel 4: música propia y melodía de fin del juego
 
     private void Awake()
     {
@@ -224,6 +237,8 @@ public class AudioManager : MonoBehaviour
         AudioClip clip = isLevel ? desertNightBGM : menuBGM;
         if (isBorderLevel && borderNightBGM != null) clip = borderNightBGM;
         if (sceneName.Contains("Level2") && riverBGM != null) clip = riverBGM;
+        isSafeHavenLevel = sceneName.Contains("Level4") || sceneName.Contains("SafeHaven");
+        if (isSafeHavenLevel && safeHavenBGM != null) clip = safeHavenBGM;
         if (clip != null) PlayBGM(clip);
         else StopBGM();
     }
@@ -402,8 +417,25 @@ public class AudioManager : MonoBehaviour
         StopBGM();
         SetUnderwater(false, true);
         currentZones = 0;
-        PlayOneShotSFX(victoryClip, 0.9f);
+        // Al llegar al refugio termina el juego: melodía final propia
+        AudioClip clip = isSafeHavenLevel && finalVictoryClip != null ? finalVictoryClip : victoryClip;
+        PlayOneShotSFX(clip, 0.9f);
     }
+
+    // ---------------------------------------------------------------- Nivel 4: drones y fogata
+
+    /// <summary>Pitidos del dron al fijar a Mateo (respeta el volumen de Efectos).</summary>
+    public void PlayDroneLock()
+    {
+        if (!CooldownReady("dronelock", 1.0f)) return;
+        PlayOneShotSFX(droneLockClip != null ? droneLockClip : alertStingClip, 0.7f);
+    }
+
+    /// <summary>Clip del zumbido de los drones (cada dron lo reproduce en su propio bucle con GetWorldMix).</summary>
+    public AudioClip DroneHumClip => droneHumClip;
+
+    /// <summary>Clip del crepitar de la fogata (lo reproduce la fogata en bucle con GetWorldMix).</summary>
+    public AudioClip CampfireLoopClip => campfireLoopClip;
 
     // =========================================================================
     // NIVEL 2: RÍO BRAVO (nado, buceo, corrientes, objetos y lanchas)
