@@ -5,9 +5,9 @@ using UnityEngine;
 /// Dron de vigilancia del Nivel 4. Sobrevuela el desierto siguiendo una ruta en bucle y proyecta un círculo de luz en el suelo.
 /// - El objeto raíz es el punto del suelo que alumbra; el cuerpo del dron vuela por encima (vista 3/4) y su sombra queda abajo.
 /// - Mientras la luz alumbra a Mateo al descubierto, cuenta como zona iluminada (LightZone2D): si un agente lo ve, lo atrapa al instante.
-/// - Si Mateo permanece en la luz al descubierto, el dron lo FIJA: la luz se pone roja, lo sigue unos segundos y llama a los
-///   perros K-9 cercanos (corren hacia donde está) y pone a los agentes en alerta máxima.
-/// - Esconderse tras una cobertura rompe el seguimiento; el dron regresa a su ruta.
+/// - Si Mateo permanece en la luz al descubierto, el dron lo FIJA: la luz se pone roja y lo sigue. Los agentes cercanos
+///   dejan su ruta y van directo al punto que marca el dron (se actualiza mientras lo sigue) y los perros K-9 corren hacia él.
+/// - Esconderse tras una cobertura rompe el seguimiento: el dron regresa a su ruta y los agentes a las suyas.
 /// </summary>
 public class SurveillanceDrone2D : MonoBehaviour
 {
@@ -33,6 +33,10 @@ public class SurveillanceDrone2D : MonoBehaviour
     [SerializeField] private float callRadius = 4.5f;
     [Tooltip("Cada cuántos segundos vuelve a llamar a los perros mientras sigue a Mateo")]
     [SerializeField] private float callInterval = 1.5f;
+    [Tooltip("Radio en el que los agentes acuden al punto que marca el dron")]
+    [SerializeField] private float agentCallRadius = 6f;
+    [Tooltip("Cada cuántos segundos actualiza a los agentes el punto donde está Mateo")]
+    [SerializeField] private float markInterval = 0.3f;
 
     [Header("Partes (las arma el editor del Nivel 4)")]
     [SerializeField] private Transform body;
@@ -49,6 +53,9 @@ public class SurveillanceDrone2D : MonoBehaviour
     private Vector3 bodyBaseLocal;
     private float bobPhase;
     private PlayerController2D player;
+    private AudioSource humSource;
+    private float nextMarkTime;
+    private readonly HashSet<PatrolAI> summonedAgents = new HashSet<PatrolAI>();
 
     public bool IsTracking => state == State.Tracking;
 
@@ -82,40 +89,95 @@ public class SurveillanceDrone2D : MonoBehaviour
                 if (!hidden) lastSeenTime = Time.time; // Lo sigue mientras esté al descubierto
                 if (Time.time - lastSeenTime > loseTrackTime)
                 {
+                    // Mateo se escondió: los agentes que acudieron regresan a sus rutas
                     state = State.Returning;
                     exposure = 0f;
                     routeIndex = NearestRoutePoint();
+                    ReleaseAgents();
                     break;
                 }
                 MoveTowards(feet, trackSpeed);
-                if (exposed && Time.time >= nextCallTime) CallUnits(feet);
+                if (!hidden && Time.time >= nextMarkTime) MarkForAgents(feet);
+                if (exposed && Time.time >= nextCallTime) CallDogs(feet);
                 break;
         }
 
         float lockBlend = state == State.Tracking ? 1f : Mathf.Clamp01(exposure / lockTime) * 0.6f;
         SetColor(Color.Lerp(searchColor, lockColor, lockBlend), lockBlend);
         AnimateBody();
+        UpdateHum();
+    }
+
+    /// <summary>
+    /// Zumbido de las hélices: más fuerte mientras más cerca está la cámara y más agudo al seguir a Mateo.
+    /// Respeta el volumen de Efectos y se pausa con el menú de pausa.
+    /// </summary>
+    private void UpdateHum()
+    {
+        AudioManager audio = AudioManager.Instance;
+        if (audio == null || audio.DroneHumClip == null) return;
+
+        if (humSource == null)
+        {
+            humSource = gameObject.AddComponent<AudioSource>();
+            humSource.clip = audio.DroneHumClip;
+            humSource.loop = true;
+            humSource.playOnAwake = false;
+            humSource.spatialBlend = 0f;
+            humSource.time = Random.Range(0f, humSource.clip.length);
+            humSource.Play();
+        }
+
+        audio.GetWorldMix(transform.position, 0.9f, out float volume, out float pan);
+        humSource.volume = volume * 0.4f;
+        humSource.panStereo = pan;
+        humSource.pitch = Mathf.MoveTowards(humSource.pitch, state == State.Tracking ? 1.15f : 1f, Time.deltaTime * 0.6f);
     }
 
     private void Lock(Vector2 feet)
     {
         state = State.Tracking;
         lastSeenTime = Time.time;
-        AudioManager.Instance?.PlayLightAlert();
-        CallUnits(feet);
+        AudioManager.Instance?.PlayDroneLock();
+        MarkForAgents(feet);
+        CallDogs(feet);
         Debug.Log($"<color=red>[SurveillanceDrone2D] {name} fijó a Mateo y llamó a la patrulla.</color>");
     }
 
-    /// <summary>Avisa a los perros cercanos (corren hacia Mateo) y pone a los agentes en alerta máxima.</summary>
-    private void CallUnits(Vector2 feet)
+    /// <summary>Avisa a los perros cercanos: corren hacia Mateo olfateando.</summary>
+    private void CallDogs(Vector2 feet)
     {
         nextCallTime = Time.time + callInterval;
-        PatrolAI.TriggerDogAlert(5f);
         foreach (GuardDogAI dog in FindObjectsByType<GuardDogAI>())
         {
             if (dog != null && Vector2.Distance(dog.transform.position, feet) <= callRadius) dog.AlertToPosition(feet);
         }
     }
+
+    /// <summary>Los agentes cercanos van directo al punto donde el dron ve a Mateo (se actualiza mientras lo sigue).</summary>
+    private void MarkForAgents(Vector2 feet)
+    {
+        nextMarkTime = Time.time + markInterval;
+        foreach (PatrolAI agent in FindObjectsByType<PatrolAI>())
+        {
+            if (agent == null || agent.GetComponent<GuardDogAI>() != null) continue;
+            bool alreadyComing = summonedAgents.Contains(agent);
+            if (!alreadyComing && Vector2.Distance(agent.transform.position, feet) > agentCallRadius) continue;
+            agent.InvestigatePosition(feet);
+            summonedAgents.Add(agent);
+        }
+    }
+
+    private void ReleaseAgents()
+    {
+        foreach (PatrolAI agent in summonedAgents)
+        {
+            if (agent != null) agent.EndInvestigation();
+        }
+        summonedAgents.Clear();
+    }
+
+    private void OnDisable() => ReleaseAgents();
 
     private void FollowRoute()
     {

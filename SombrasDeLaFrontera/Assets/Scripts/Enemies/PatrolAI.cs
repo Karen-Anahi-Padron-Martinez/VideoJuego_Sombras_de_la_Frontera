@@ -54,7 +54,27 @@ public class PatrolAI : MonoBehaviour
     [Tooltip("Velocidad de giro de la linterna al voltear a los lados (grados por segundo)")]
     [SerializeField] private float lookTurnSpeed = 150f;
 
+    [Header("Acudir al llamado del dron (Nivel 4)")]
+    [Tooltip("Velocidad al ir hacia el punto que marca el dron (Mateo camina a 1 unidad por segundo)")]
+    [SerializeField] private float investigateSpeed = 0.9f;
+
+    [Tooltip("Al llegar a esta distancia del punto marcado, se detiene a alumbrar alrededor")]
+    [SerializeField] private float investigateArriveRadius = 0.45f;
+
     // Estado interno
+    private enum CallState { None, GoingToMark, Returning }
+    private CallState callState = CallState.None;
+    private Vector2 markPosition;
+    private Vector2 callOrigin;
+    private readonly List<Vector2> callPath = new List<Vector2>();
+    private float nextCallRepath;
+    private Vector2 callPathTarget;
+    private VisionCone2D visionCone;
+    private PlayerController2D cachedPlayer;
+
+    /// <summary>Verdadero mientras va al punto que marcó el dron o regresa a su ruta.</summary>
+    public bool IsAnsweringCall => callState != CallState.None;
+
     private int currentWaypointIndex = 0;
     private int patrolDirection = 1; // 1 = adelante, -1 = hacia atrás (en PingPong)
     private bool isWaiting = false;
@@ -111,6 +131,7 @@ public class PatrolAI : MonoBehaviour
     private void Start()
     {
         isDog = GetComponent<GuardDogAI>() != null;
+        visionCone = GetComponentInChildren<VisionCone2D>(true);
 
         // Si los waypoints están como hijos del coyote, desacoplarlos en ejecución
         // para que no se desplacen junto con él (efecto zanahoria)
@@ -156,9 +177,16 @@ public class PatrolAI : MonoBehaviour
         IsMoving = false;
 
         // Durante la alerta del perro: quieto en guardia, volteando a un lado y al otro con la linterna
-        bool shouldLookAround = isAlerted && !isDog && isHighAlertFromDog && Time.time - lastFaceTowardsTime > 0.5f;
+        bool shouldLookAround = isAlerted && !isDog && isHighAlertFromDog && callState == CallState.None && Time.time - lastFaceTowardsTime > 0.5f;
         if (shouldLookAround) LookAround();
         else isLookingAround = false;
+
+        // Llamado del dron: tiene prioridad sobre la patrulla y sobre la guardia por el ladrido de un perro
+        if (callState != CallState.None)
+        {
+            UpdateCall();
+            return;
+        }
 
         if (waypoints == null || waypoints.Count == 0 || isWaiting || isAlerted || isPaused)
         {
@@ -201,6 +229,87 @@ public class PatrolAI : MonoBehaviour
             transform.position = targetPos;
             StartCoroutine(WaitAtWaypointRoutine());
         }
+    }
+
+    // =========================================================================
+    // LLAMADO DEL DRON (Nivel 4)
+    // =========================================================================
+
+    /// <summary>
+    /// El dron marcó a Mateo: el agente deja su ruta y va directo a ese punto rodeando obstáculos.
+    /// Se puede llamar seguido para actualizar el punto mientras el dron lo sigue.
+    /// </summary>
+    public void InvestigatePosition(Vector2 position)
+    {
+        if (isDog) return;
+        if (callState == CallState.None)
+        {
+            callOrigin = transform.position;
+            StopAllCoroutines();   // Interrumpe la espera/vuelta en el waypoint; al regresar sigue hacia el mismo punto
+            isWaiting = false;
+        }
+        callState = CallState.GoingToMark;
+        markPosition = position;
+    }
+
+    /// <summary>Mateo se escondió y el dron lo perdió: el agente regresa a donde dejó su ruta y sigue patrullando.</summary>
+    public void EndInvestigation()
+    {
+        if (callState != CallState.GoingToMark) return;
+        callState = CallState.Returning;
+        callPath.Clear();
+    }
+
+    private void UpdateCall()
+    {
+        // Si su linterna alumbra a Mateo se detiene a mirarlo (VisionCone2D se encarga de atraparlo)
+        if (visionCone != null && visionCone.IsPlayerExposed)
+        {
+            if (cachedPlayer == null) cachedPlayer = FindAnyObjectByType<PlayerController2D>();
+            if (cachedPlayer != null) FaceTowards(cachedPlayer.GetFeetPosition());
+            return;
+        }
+
+        if (callState == CallState.GoingToMark)
+        {
+            if (Vector2.Distance(transform.position, markPosition) > investigateArriveRadius)
+            {
+                if (MoveAlongCallPath(markPosition, investigateSpeed)) return;
+            }
+            // Llegó (o no hay camino): alumbra a un lado y al otro alrededor del punto marcado
+            Vector2 toMark = markPosition - (Vector2)transform.position;
+            float baseAngle = toMark.sqrMagnitude > 0.01f ? Mathf.Atan2(toMark.y, toMark.x) * Mathf.Rad2Deg : Mathf.Atan2(lastMoveDirection.y, lastMoveDirection.x) * Mathf.Rad2Deg;
+            SetFacingAngle(baseAngle + Mathf.Sin(Time.time * 1.6f) * 55f);
+            return;
+        }
+
+        // Regresando a su ruta
+        if (Vector2.Distance(transform.position, callOrigin) > 0.06f && MoveAlongCallPath(callOrigin, moveSpeed)) return;
+        transform.position = callOrigin;
+        callState = CallState.None;
+    }
+
+    /// <summary>Avanza rodeando obstáculos (ChasePath2D). Devuelve falso si no hay camino o ya llegó.</summary>
+    private bool MoveAlongCallPath(Vector2 target, float speed)
+    {
+        if (callPath.Count == 0 || Time.time >= nextCallRepath || (target - callPathTarget).sqrMagnitude > 0.09f)
+        {
+            nextCallRepath = Time.time + 0.4f;
+            callPathTarget = target;
+            if (!ChasePath2D.FindPath(transform.position, target, callPath)) { callPath.Clear(); return false; }
+        }
+        if (callPath.Count == 0) return false;
+
+        Vector2 pos = transform.position;
+        Vector2 next = callPath[0];
+        Vector2 dir = next - pos;
+        float distance = dir.magnitude;
+        float step = speed * Time.deltaTime;
+        if (distance <= step) { transform.position = next; callPath.RemoveAt(0); }
+        else transform.position = pos + dir / distance * step;
+        OrientTowards(next);
+        IsMoving = true;
+        return true;
     }
 
     /// <summary>

@@ -31,7 +31,7 @@ public static class SetupNivel4Editor
     private const string SHEET_1 = "Assets/Sprites/Environment/obstacle_1.png";
     private const string SHEET_2 = "Assets/Sprites/Environment/obstacle_2.png";
     private const string UNLIT_MATERIAL = "Packages/com.unity.render-pipelines.universal/Runtime/Materials/Sprite-Unlit-Default.mat";
-    private const string MAIN_MENU_SCENE = "01_MainMenu";
+    private const string FIRST_LEVEL_SCENE = "02_Level1_Desert";   // "Jugar de nuevo" desde la pantalla final
 
     // Mapa de 572 x 3556 px a 100 px por unidad, centrado en y = 17.71 (igual que los niveles 1 y 3)
     private const float MAP_TOP_Y = 35.49f;
@@ -344,6 +344,7 @@ public static class SetupNivel4Editor
     {
         AssetDatabase.Refresh();
         ConfigureSprite(MAP_SPRITE, 4096);
+        SetupNivel4AudioEditor.SetupAudio();
         ConfigureSprite(THUMBNAIL, 1024);
         Dictionary<string, GameObject> prefabs = BuildPrefabs();
         VolumeProfile profile = BuildPostProcessProfile();
@@ -572,7 +573,8 @@ public static class SetupNivel4Editor
         goalBox.size = GoalSize;
         // Fin del juego: el Issue 4 terminará la pantalla de Victoria final
         var goalSo = new SerializedObject(goal.GetComponent<GoalTrigger>());
-        goalSo.FindProperty("nextLevelIndex").intValue = 5;
+        goalSo.FindProperty("nextLevelIndex").intValue = 5;       // Todos los niveles desbloqueados
+        goalSo.FindProperty("completesGame").boolValue = true;     // Y se guarda que el juego se completó
         goalSo.ApplyModifiedPropertiesWithoutUndo();
 
         Transform goalZone = bounds.Find("GoalZone");
@@ -666,6 +668,9 @@ public static class SetupNivel4Editor
         poolSr.color = new Color(FireColor.r, FireColor.g, FireColor.b, 0.28f);
         poolSr.sortingLayerName = "Background";
         poolSr.sortingOrder = 20;
+
+        // Titileo de la luz y crepitar que se oye más fuerte al acercarse (guía hacia la meta)
+        fire.AddComponent<Campfire2D>().Configure(light, poolSr);
     }
 
     /// <summary>Busca un objeto raíz de la escena ignorando espacios sobrantes en el nombre (p. ej. "LevelBounds ").</summary>
@@ -721,19 +726,25 @@ public static class SetupNivel4Editor
                     "🕹️  <b>Controles:</b> <b>W, A, S, D</b> o las <b>Flechas</b>. Quieto junto a <b>rocas, autos, costales o arbustos</b> te escondes (cercas, yucas y árboles secos no cubren).\n\n" +
                     "🔦 <b>Agentes:</b> su linterna te atrapa si te alumbra al descubierto.\n" +
                     "🐕 <b>Perros:</b> si te ven <b>te persiguen</b>; escóndete tras una cobertura y te perderán el rastro.\n" +
-                    "🛸 <b>Drones:</b> si su luz te alumbra, se pone roja y llama a los perros.\n\n" +
+                    "🛸 <b>Drones:</b> si su luz te alumbra, se pone roja y <b>agentes y perros van hacia ti</b> hasta que te escondas.\n\n" +
                     "🎯 <b>Objetivo:</b> llega al <b>campamento del refugio</b>: busca la luz de la fogata.";
             }
-            else if (text.text.Contains("NIVEL 1 COMPLETADO")) text.text = "¡NIVEL 4 COMPLETADO!";
-            else if (text.text.Contains("orilla del R")) text.text = "¡Llegaste al refugio seguro!\n\nMateo por fin está a salvo.";
+            else if (text.text.Contains("NIVEL 1 COMPLETADO")) text.text = "¡LLEGASTE AL REFUGIO!";
+            else if (text.text.Contains("orilla del R"))
+                text.text = "Después del desierto, el río y el muro, Mateo por fin está a salvo.\n\n🏆 <b>¡Juego completado!</b> Gracias por acompañarlo.";
             EditorUtility.SetDirty(text);
         }
+
+        // Pantalla final: no hay siguiente nivel, el botón principal vuelve a empezar la travesía
+        Text nextLabel = hud.transform.Find("VictoryPanel/Card/NextLevelButton/Text")?.GetComponent<Text>();
+        if (nextLabel != null) { nextLabel.text = "Jugar de nuevo"; EditorUtility.SetDirty(nextLabel); }
+        else Debug.LogWarning("[Nivel4] No se encontró el botón NextLevelButton del panel de Victoria.");
 
         EndGameModalController modal = hud.GetComponent<EndGameModalController>();
         if (modal != null)
         {
             var so = new SerializedObject(modal);
-            so.FindProperty("nextLevelSceneName").stringValue = MAIN_MENU_SCENE; // Último nivel
+            so.FindProperty("nextLevelSceneName").stringValue = FIRST_LEVEL_SCENE; // Último nivel: el botón "Jugar de nuevo"
             so.FindProperty("defeatByFlashlight.description").stringValue =
                 "La linterna de un agente de la redada iluminó tu silueta.\n\n📦 <b>Consejo:</b> Escóndete tras rocas, autos oxidados o costales; las cercas y los árboles secos no te cubren.";
             so.FindProperty("defeatByDog.description").stringValue =
@@ -1167,6 +1178,22 @@ public static class SetupNivel4Editor
         Expect(FindPathLength(start, GoalPos, feetSize, out float length), $"Hay camino del inicio a la meta ({length:F1} unidades)");
 
         Expect(Object.FindAnyObjectByType<GoalTrigger>() != null, "Meta del refugio en la escena");
+
+        // Final del juego (Issue 4): la meta guarda el progreso y marca el juego como completado; pantalla y sonido finales
+        GoalTrigger goalTrigger = Object.FindAnyObjectByType<GoalTrigger>();
+        if (goalTrigger != null)
+        {
+            var gso = new SerializedObject(goalTrigger);
+            Expect(gso.FindProperty("nextLevelIndex").intValue == 5 && gso.FindProperty("completesGame").boolValue,
+                "La meta guarda NivelMaximo = 5 y JuegoCompletado");
+        }
+        GameObject hudRoot = FindRoot("HUD_Canvas");
+        Text finalTitle = hudRoot.transform.Find("VictoryPanel/Card/Title")?.GetComponent<Text>();
+        Text replayLabel = hudRoot.transform.Find("VictoryPanel/Card/NextLevelButton/Text")?.GetComponent<Text>();
+        Expect(finalTitle != null && finalTitle.text.Contains("REFUGIO") && replayLabel != null && replayLabel.text == "Jugar de nuevo",
+            "Pantalla de Victoria final (título del refugio y botón Jugar de nuevo)");
+        Expect(SetupNivel4AudioEditor.IsAssigned(), "Música, drones, fogata y melodía final asignados al AudioManager");
+        Expect(Object.FindAnyObjectByType<Campfire2D>() != null, "Fogata con luz que titila y crepitar");
         Expect(EditorBuildSettings.scenes.Any(s => s.path == SCENE && s.enabled), "Escena registrada en Build Settings");
 
         Debug.Log($"[Nivel4] Verificación terminada con {problems} problemas.");

@@ -17,6 +17,11 @@ public class GoalTrigger : MonoBehaviour
     [Tooltip("Clave guardada en PlayerPrefs para el nivel máximo")]
     [SerializeField] private string levelProgressKey = "NivelMaximo";
 
+    [Tooltip("Meta del último nivel (Nivel 4, el refugio): además guarda que el juego se completó")]
+    [SerializeField] private bool completesGame = false;
+
+    public const string GAME_COMPLETED_KEY = "JuegoCompletado";
+
     private bool hasTriggered = false;
 
     // Evento estático para notificar a la interfaz de usuario sin acoplamiento
@@ -60,6 +65,12 @@ public class GoalTrigger : MonoBehaviour
             PlayerPrefs.SetInt(levelProgressKey, nextLevelIndex);
             PlayerPrefs.Save();
             Debug.Log($"<color=green>[GoalTrigger] ¡PROGRESO GUARDADO! Nivel {nextLevelIndex} desbloqueado en PlayerPrefs.</color>");
+        }
+        if (completesGame)
+        {
+            PlayerPrefs.SetInt(GAME_COMPLETED_KEY, 1);
+            PlayerPrefs.Save();
+            Debug.Log("<color=green>[GoalTrigger] ¡JUEGO COMPLETADO! Mateo llegó al refugio seguro.</color>");
         }
 
         // 2. Detener el juego y reproducir victoria
