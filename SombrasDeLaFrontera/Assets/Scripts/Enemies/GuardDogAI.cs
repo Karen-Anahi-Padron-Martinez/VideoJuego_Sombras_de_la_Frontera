@@ -16,8 +16,9 @@ using UnityEngine;
 /// 5. Solo deja de ladrar cuando Mateo sale de su medio círculo o se esconde en cobertura.
 /// 6. Solo si Mateo se pega demasiado al perro (casi tocándolo), éste le MUERDE (animación Bite) restándole 1 vida.
 /// 7. Persecución (opcional, Nivel 4): tras ladrar, el perro corre tras Mateo rodeando obstáculos (ChasePath2D).
-///    Si Mateo se esconde, va olfateando hasta donde lo vio por última vez y, si lo encuentra pegado a él, lo vuelve a
-///    perseguir. Se rinde si se aleja demasiado de su ruta o si no lo encuentra, y regresa a patrullar.
+///    Si Mateo se esconde tras una cobertura, el perro ya no lo ve ni lo muerde: va a revisar hasta donde lo vio por última
+///    vez, olfatea unos segundos y regresa a patrullar. Solo lo vuelve a perseguir si Mateo sale a la vista.
+///    También se rinde si se aleja demasiado de su ruta.
 /// </summary>
 [RequireComponent(typeof(PatrolAI))]
 public class GuardDogAI : MonoBehaviour
@@ -70,8 +71,11 @@ public class GuardDogAI : MonoBehaviour
     [Tooltip("Mientras lo persigue, distancia a la que sigue viendo a Mateo (no necesita tenerlo enfrente)")]
     [SerializeField] private float chaseSightRadius = 4f;
 
-    [Tooltip("Distancia a la que el perro olfatea a Mateo aunque esté escondido (mientras lo busca)")]
+    [Tooltip("Mientras lo busca, distancia a la que olfatea a Mateo si está al descubierto aunque no lo vea (no si está escondido)")]
     [SerializeField] private float sniffRadius = 0.4f;
+
+    [Tooltip("Si Mateo está escondido, el perro se detiene a esta distancia del punto donde lo vio por última vez")]
+    [SerializeField] private float hiddenSearchStop = 0.6f;
 
     [Tooltip("Segundos que olfatea donde lo vio por última vez antes de rendirse")]
     [SerializeField] private float searchDuration = 2.2f;
@@ -316,9 +320,10 @@ public class GuardDogAI : MonoBehaviour
         // El perro (pivote en las patas) persigue los PIES de Mateo, no el centro de su sprite
         Vector2 playerPos = PlayerFeet(playerCenter);
         float feetDistance = Vector2.Distance(transform.position, playerPos);
-        // Patrullando solo muerde si de verdad lo toca; persiguiéndolo o buscándolo, al alcanzarlo
+        // Patrullando solo muerde si de verdad lo toca; persiguiéndolo o buscándolo, al alcanzarlo.
+        // Escondido tras una cobertura está a salvo: el perro no lo encuentra ni lo muerde.
         bool hunting = chaseState == ChaseState.Chasing || chaseState == ChaseState.Searching;
-        bool touching = BodyGapToPlayer() <= biteDistance || (hunting && feetDistance <= chaseBiteReach);
+        bool touching = !isPlayerHiding && (BodyGapToPlayer() <= biteDistance || (hunting && feetDistance <= chaseBiteReach));
 
         if (touching)
         {
@@ -356,9 +361,9 @@ public class GuardDogAI : MonoBehaviour
                 break;
 
             case ChaseState.Searching:
-                if (tracking || feetDistance <= sniffRadius)
+                if (tracking || (!isPlayerHiding && feetDistance <= sniffRadius))
                 {
-                    // Lo volvió a ver o lo olfateó escondido junto a él
+                    // Lo volvió a ver o lo olfateó al descubierto junto a él
                     chaseState = ChaseState.Chasing;
                     lastSeenPos = playerPos;
                     AudioManager.Instance?.PlayDogBarkAt(transform.position);
@@ -369,7 +374,9 @@ public class GuardDogAI : MonoBehaviour
 
                 if (searchEndTime < 0f)
                 {
-                    bool arrived = Vector2.Distance(transform.position, lastSeenPos) <= 0.1f;
+                    // Si Mateo se escondió justo ahí, se detiene antes para no toparse con él
+                    float stop = isPlayerHiding ? hiddenSearchStop : 0.1f;
+                    bool arrived = Vector2.Distance(transform.position, lastSeenPos) <= stop;
                     if (arrived || !MoveAlongPath(lastSeenPos, chaseSpeed)) searchEndTime = Time.time + searchDuration;
                 }
                 else if (Time.time >= searchEndTime)
@@ -389,6 +396,23 @@ public class GuardDogAI : MonoBehaviour
                 ScheduleNextRest();
                 break;
         }
+    }
+
+    /// <summary>
+    /// Un aviso externo (el dron de vigilancia) manda al perro a revisar un punto: despierta, ladra y corre hacia allá olfateando.
+    /// Si en el camino ve a Mateo, lo persigue. Solo responde si está en modo persecución.
+    /// </summary>
+    public void AlertToPosition(Vector2 position)
+    {
+        if (!chasesPlayer || chaseState == ChaseState.Chasing) return;
+        if (isResting) EndRest();
+        if (chaseState == ChaseState.None) chaseOrigin = transform.position;
+        chaseState = ChaseState.Searching;
+        searchEndTime = -1f;
+        lastSeenPos = position;
+        path.Clear();
+        patrolAI.isPaused = false;
+        if (!isBarking) StartBarking();
     }
 
     private Vector2 PlayerFeet(Vector2 fallback)

@@ -213,6 +213,48 @@ public static class SetupNivel4Editor
     private const float DOG_DETECTION = 2.6f;
     private const float DOG_MAX_CHASE = 5f;
 
+    // =========================================================================
+    // MECÁNICA PROPIA Y RECURSOS (Issue 3): drones de vigilancia, agua y botiquines en puntos de riesgo
+    // =========================================================================
+
+    private const string DRONE_SPRITE = "Assets/Sprites/Level4_SafeHaven/dron_vigilancia.png";
+    private const string SHADOW_SPRITE = "Assets/Sprites/Effects/BlobShadow.png";
+    private const string ITEMS_SHEET = "Assets/Sprites/Items/items.png";
+    private const string MEDKIT_SLICE = "items_12";
+    private const string MEDKIT_PREFAB = "Assets/Prefabs/Items/Pickup_Botiquin.prefab";
+    private const float DRONE_ALTITUDE = 1.0f;     // El cuerpo vuela por encima del círculo de luz (vista 3/4)
+    private const float DRONE_SCALE = 0.45f;       // ~0.9 unidades de ancho
+
+    // De noche y con la última caminata, la sed avanza un poco más rápido que en el Nivel 3 (1.0)
+    private const float WATER_DRAIN = 1.2f;
+
+    // Drones (ruta en bucle): vigilan las zonas entre carriles de patrulla, cerca de un perro al que pueden llamar
+    private static readonly Vector2[][] DroneRoutes =
+    {
+        new[] { new Vector2(-1.5f, 12.4f), new Vector2(1.5f, 12.4f), new Vector2(1.5f, 14.9f), new Vector2(-1.5f, 14.9f) },
+        new[] { new Vector2(1.5f, 20.5f), new Vector2(-1.5f, 20.5f), new Vector2(-1.5f, 23.3f), new Vector2(1.5f, 23.3f) },
+        new[] { new Vector2(-1.5f, 25.0f), new Vector2(1.5f, 25.0f), new Vector2(1.5f, 27.6f), new Vector2(-1.5f, 27.6f) },
+    };
+
+    // 7 botellas (+10), 4 cantimploras (+25) y 3 botiquines (+1 corazón), todos en lugares que obligan a arriesgarse
+    private static readonly (string type, float x, float y)[] ResourceSpots =
+    {
+        ("Botella", 0.0f, 4.2f),         // Justo bajo el carril del agente 1
+        ("Cantimplora", 2.0f, 6.75f),    // Pegada a la orilla, lejos de las coberturas
+        ("Botella", 0.6f, 8.15f),        // En la ruta del Rottweiler
+        ("Botiquin", 0.9f, 9.6f),        // Entre la ruta del Rottweiler y el agente 2
+        ("Cantimplora", -1.3f, 13.0f),   // Bajo el paso del dron 1
+        ("Botella", -0.55f, 13.55f),     // Bajo el paso del dron 1
+        ("Botella", 1.55f, 15.25f),      // Bajo el carril del agente 3
+        ("Botiquin", -0.75f, 19.3f),     // Entre el Pastor Alemán y el agente 4
+        ("Cantimplora", 0.0f, 21.7f),    // Bajo el paso del dron 2
+        ("Botella", -0.8f, 23.7f),       // Bajo el carril del agente 5
+        ("Botella", 1.0f, 26.75f),       // Bajo el paso del dron 3
+        ("Cantimplora", -0.55f, 28.15f), // En la ruta del Doberman
+        ("Botiquin", 0.7f, 31.4f),       // Bajo el carril del último agente
+        ("Botella", -0.5f, 32.95f),      // Antes del campamento
+    };
+
     // Objetos del Nivel 1 que se conservan (todo lo demás se quita)
     private static readonly string[] KeepRoots =
     {
@@ -257,6 +299,17 @@ public static class SetupNivel4Editor
         EditorSceneManager.MarkSceneDirty(scene);
         EditorSceneManager.SaveScene(scene);
         EditorUtility.DisplayDialog("Nivel 4", $"{AgentRoutes.Length} agentes y {DogRoutes.Length} perros K-9 colocados.", "Aceptar");
+    }
+
+    [MenuItem("Sombras de la Frontera/Nivel 4/4. Colocar Drones, Agua y Botiquines")]
+    public static void PlaceDronesAndResourcesMenu()
+    {
+        if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
+        var scene = EditorSceneManager.OpenScene(SCENE, OpenSceneMode.Single);
+        PlaceDronesAndResources();
+        EditorSceneManager.MarkSceneDirty(scene);
+        EditorSceneManager.SaveScene(scene);
+        EditorUtility.DisplayDialog("Nivel 4", $"{DroneRoutes.Length} drones de vigilancia y {ResourceSpots.Length} recursos colocados.", "Aceptar");
     }
 
     /// <summary>Uso por línea de comandos (Unity -batchmode -executeMethod SetupNivel4Editor.BuildFromCommandLine).</summary>
@@ -316,6 +369,7 @@ public static class SetupNivel4Editor
         SetupPostProcess(profile);
         SetupPlayerAndTexts();
         PlaceEnemies();
+        PlaceDronesAndResources();
 
         EditorSceneManager.MarkSceneDirty(scene);
         EditorSceneManager.SaveScene(scene);
@@ -649,12 +703,11 @@ public static class SetupNivel4Editor
         PlayerController2D player = Object.FindAnyObjectByType<PlayerController2D>();
         player.transform.position = new Vector3(SpawnPos.x, SpawnPos.y, player.transform.position.z);
 
-        // De noche la sed avanza más lento que en el desierto de día del Nivel 1 (1.5); se ajusta en el Issue 3
         WaterSystem water = Object.FindAnyObjectByType<WaterSystem>();
         if (water != null)
         {
             var so = new SerializedObject(water);
-            so.FindProperty("waterDrainRate").floatValue = 1.0f;
+            so.FindProperty("waterDrainRate").floatValue = WATER_DRAIN;
             so.ApplyModifiedPropertiesWithoutUndo();
         }
 
@@ -665,11 +718,11 @@ public static class SetupNivel4Editor
             {
                 text.text =
                     "Cruzaste el muro, pero las redadas recorren el desierto del otro lado...\n\n" +
-                    "🕹️  <b>Controles:</b> Usa <b>W, A, S, D</b> o las <b>Flechas</b> para moverte.\n\n" +
-                    "📦 <b>Sigilo:</b> Quédate quieto pegado abajo de <b>rocas, autos, costales y arbustos</b>. Cercas, árboles secos, yucas y ocotillos no te cubren.\n\n" +
-                    "🔦 <b>Agentes:</b> Sus linternas te atrapan si te alumbran al descubierto. Espera agachado a que pasen.\n\n" +
-                    "🐕 <b>Perros K-9:</b> Si te ven, <b>te persiguen</b>. Rompe su línea de vista y escóndete lejos de donde te vieron: te buscan olfateando.\n\n" +
-                    "🎯 <b>Objetivo:</b> Avanza hacia el norte y llega al <b>campamento del refugio</b>: busca la luz de la fogata.";
+                    "🕹️  <b>Controles:</b> <b>W, A, S, D</b> o las <b>Flechas</b>. Quieto junto a <b>rocas, autos, costales o arbustos</b> te escondes (cercas, yucas y árboles secos no cubren).\n\n" +
+                    "🔦 <b>Agentes:</b> su linterna te atrapa si te alumbra al descubierto.\n" +
+                    "🐕 <b>Perros:</b> si te ven <b>te persiguen</b>; escóndete tras una cobertura y te perderán el rastro.\n" +
+                    "🛸 <b>Drones:</b> si su luz te alumbra, se pone roja y llama a los perros.\n\n" +
+                    "🎯 <b>Objetivo:</b> llega al <b>campamento del refugio</b>: busca la luz de la fogata.";
             }
             else if (text.text.Contains("NIVEL 1 COMPLETADO")) text.text = "¡NIVEL 4 COMPLETADO!";
             else if (text.text.Contains("orilla del R")) text.text = "¡Llegaste al refugio seguro!\n\nMateo por fin está a salvo.";
@@ -747,6 +800,138 @@ public static class SetupNivel4Editor
         }
 
         Debug.Log($"[Nivel4] {AgentRoutes.Length} agentes y {DogRoutes.Length} perros K-9 colocados.");
+    }
+
+    public static void PlaceDronesAndResources()
+    {
+        ConfigureSprite(DRONE_SPRITE, 512);
+        foreach (string rootName in new[] { "Drones_Vigilancia", "Pickups" })
+        {
+            GameObject old = FindRoot(rootName);
+            if (old != null) Object.DestroyImmediate(old);
+        }
+
+        Transform drones = new GameObject("Drones_Vigilancia").transform;
+        for (int i = 0; i < DroneRoutes.Length; i++) BuildDrone(drones, $"Dron_{i + 1}", DroneRoutes[i]);
+
+        GameObject medkit = BuildMedkitPrefab();
+        Transform pickups = new GameObject("Pickups").transform;
+        var groups = new Dictionary<string, Transform>
+        {
+            ["Botella"] = CreateGroup("Botellas", pickups),
+            ["Cantimplora"] = CreateGroup("Cantimploras", pickups),
+            ["Botiquin"] = CreateGroup("Botiquines", pickups),
+        };
+        int canteens = 0;
+        foreach (var (type, x, y) in ResourceSpots)
+        {
+            GameObject prefab = type == "Botiquin" ? medkit
+                : AssetDatabase.LoadAssetAtPath<GameObject>(type == "Botella" ? "Assets/Prefabs/Items/Pickup_Botella.prefab"
+                    : $"Assets/Prefabs/Items/Pickup_Cantimplora_{(canteens++ % 2) + 1}.prefab");
+            var item = (GameObject)PrefabUtility.InstantiatePrefab(prefab, groups[type]);
+            item.transform.position = new Vector3(x, y, 0f);
+        }
+
+        Debug.Log($"[Nivel4] {DroneRoutes.Length} drones y {ResourceSpots.Length} recursos colocados.");
+    }
+
+    /// <summary>
+    /// Dron: el objeto raíz es el círculo de luz en el suelo (zona iluminada que se mueve); el cuerpo vuela encima
+    /// con su LED parpadeante y su sombra queda bajo él.
+    /// </summary>
+    private static void BuildDrone(Transform parent, string name, Vector2[] route)
+    {
+        Sprite glow = AssetDatabase.LoadAssetAtPath<Sprite>(GLOW_SPRITE);
+        Sprite shadow = AssetDatabase.LoadAssetAtPath<Sprite>(SHADOW_SPRITE);
+        Sprite droneSprite = AssetDatabase.LoadAssetAtPath<Sprite>(DRONE_SPRITE);
+        Material unlit = AssetDatabase.LoadAssetAtPath<Material>(UNLIT_MATERIAL);
+
+        var root = new GameObject(name);
+        root.transform.SetParent(parent, false);
+        root.transform.position = route[0];
+        SurveillanceDrone2D drone = root.AddComponent<SurveillanceDrone2D>();
+        Vector2 radii = drone.SpotRadii;
+
+        // Para los agentes, estar bajo la luz del dron es como estar bajo una lámpara (captura al instante)
+        LightZone2D zone = root.AddComponent<LightZone2D>();
+        var zoneSo = new SerializedObject(zone);
+        zoneSo.FindProperty("radii").vector2Value = radii;
+        zoneSo.ApplyModifiedPropertiesWithoutUndo();
+
+        var spot = new GameObject("Luz_Suelo");
+        spot.transform.SetParent(root.transform, false);
+        float glowSize = glow != null ? glow.bounds.size.x : 2.56f;
+        spot.transform.localScale = new Vector3(radii.x * 2.6f / glowSize, radii.y * 2.6f / glowSize, 1f);
+        SpriteRenderer spotSr = spot.AddComponent<SpriteRenderer>();
+        spotSr.sprite = glow;
+        if (unlit != null) spotSr.sharedMaterial = unlit;
+        spotSr.sortingLayerName = "Background";
+        spotSr.sortingOrder = 25;
+
+        var lightObj = new GameObject("Luz_Dron");
+        lightObj.transform.SetParent(root.transform, false);
+        Light2D light = lightObj.AddComponent<Light2D>();
+        light.lightType = Light2D.LightType.Point;
+        light.intensity = 1.0f;
+        light.pointLightInnerRadius = 0.15f;
+        light.pointLightOuterRadius = radii.x * 1.4f;
+        light.falloffIntensity = 0.6f;
+        SetTargetLayers(light, SortingLayer.layers.Select(l => l.id));
+
+        var shadowObj = new GameObject("Sombra");
+        shadowObj.transform.SetParent(root.transform, false);
+        shadowObj.transform.localScale = new Vector3(0.35f, 0.25f, 1f);
+        SpriteRenderer shadowSr = shadowObj.AddComponent<SpriteRenderer>();
+        shadowSr.sprite = shadow;
+        shadowSr.color = new Color(0f, 0f, 0f, 0.35f);
+        shadowSr.sortingLayerName = "Background";
+        shadowSr.sortingOrder = 26;
+
+        // Cuerpo del dron: vuela por encima de todo
+        var body = new GameObject("Cuerpo");
+        body.transform.SetParent(root.transform, false);
+        body.transform.localPosition = new Vector3(0f, DRONE_ALTITUDE, 0f);
+        body.transform.localScale = new Vector3(DRONE_SCALE, DRONE_SCALE, 1f);
+        SpriteRenderer bodySr = body.AddComponent<SpriteRenderer>();
+        bodySr.sprite = droneSprite;
+        bodySr.sortingLayerName = "Foreground";
+        bodySr.sortingOrder = 70;
+
+        // LED rojo (en el dibujo está arriba a la derecha del cuerpo)
+        var led = new GameObject("LED");
+        led.transform.SetParent(body.transform, false);
+        led.transform.localPosition = new Vector3(0.35f, 0.17f, 0f);
+        led.transform.localScale = new Vector3(0.12f / DRONE_SCALE, 0.12f / DRONE_SCALE, 1f);
+        SpriteRenderer ledSr = led.AddComponent<SpriteRenderer>();
+        ledSr.sprite = glow;
+        if (unlit != null) ledSr.sharedMaterial = unlit;
+        ledSr.color = new Color(1f, 0.2f, 0.15f, 1f);
+        ledSr.sortingLayerName = "Foreground";
+        ledSr.sortingOrder = 71;
+
+        drone.Configure(route.ToList(), body.transform, spotSr, light, ledSr);
+        EditorUtility.SetDirty(drone);
+    }
+
+    /// <summary>Botiquín (+1 corazón): copia del prefab de la botella con el dibujo del botiquín de la hoja de ítems.</summary>
+    private static GameObject BuildMedkitPrefab()
+    {
+        Sprite sprite = AssetDatabase.LoadAllAssetsAtPath(ITEMS_SHEET).OfType<Sprite>().FirstOrDefault(s => s.name == MEDKIT_SLICE);
+        GameObject contents = PrefabUtility.LoadPrefabContents("Assets/Prefabs/Items/Pickup_Botella.prefab");
+        contents.name = "Pickup_Botiquin";
+        SpriteRenderer sr = contents.GetComponentInChildren<SpriteRenderer>();
+        if (sr != null && sprite != null) sr.sprite = sprite;
+
+        PickupItem item = contents.GetComponent<PickupItem>();
+        var so = new SerializedObject(item);
+        so.FindProperty("itemType").enumValueIndex = (int)PickupItem.ItemType.Botiquin;
+        so.FindProperty("healthAmount").intValue = 1;
+        so.FindProperty("waterAmount").floatValue = 0f;
+        so.ApplyModifiedPropertiesWithoutUndo();
+
+        GameObject prefab = PrefabUtility.SaveAsPrefabAsset(contents, MEDKIT_PREFAB);
+        PrefabUtility.UnloadPrefabContents(contents);
+        return prefab;
     }
 
     private static Transform CreateGroup(string name, Transform parent)
@@ -950,6 +1135,33 @@ public static class SetupNivel4Editor
                 Expect(found, $"Perro {breed}: llega persiguiendo hasta {cover.name} ({hideSpot.x:F2}, {hideSpot.y:F2}) en {waypointsPath.Count} tramos");
             }
         }
+
+        // Drones: completos, con su zona iluminada y ruta dentro del área jugable
+        SurveillanceDrone2D[] droneList = Object.FindObjectsByType<SurveillanceDrone2D>();
+        Expect(droneList.Length == DroneRoutes.Length, $"Drones de vigilancia: {droneList.Length} de {DroneRoutes.Length}");
+        foreach (SurveillanceDrone2D d in droneList)
+        {
+            bool parts = d.GetComponent<LightZone2D>() != null && d.transform.Find("Cuerpo")?.GetComponent<SpriteRenderer>()?.sprite != null;
+            bool inside = d.Route.All(p => Mathf.Abs(p.x) < MAP_HALF_W - 0.4f && p.y > FENCE_TOP_Y + 0.5f && p.y < GoalPos.y - 1f);
+            Expect(parts && inside, $"{d.name}: cuerpo, luz y ruta dentro del mapa");
+            bool dogNearby = DogRoutes.Any(dr => d.Route.Any(p => Mathf.Abs(p.y - dr.a.y) < 4.5f));
+            Expect(dogNearby, $"{d.name}: tiene un perro K-9 cerca al que puede llamar");
+        }
+
+        // Recursos: alcanzables y a la vista (no quedan detrás del dibujo de un obstáculo)
+        Bounds[] obstacleArt = Object.FindObjectsByType<YSort2D>()
+            .Where(o => o.isStatic && o.transform.parent != null && o.transform.parent.name == "Obstaculos_Nivel4")
+            .Select(o => o.GetComponent<SpriteRenderer>().bounds).ToArray();
+        foreach (var (type, x, y) in ResourceSpots)
+        {
+            Vector2 p = new Vector2(x, y);
+            Collider2D inside = Physics2D.OverlapCircleAll(p, 0.15f).FirstOrDefault(IsSolid);
+            bool behindArt = obstacleArt.Any(b => b.Contains(new Vector3(x, y, b.center.z)));
+            Expect(inside == null && !behindArt, $"{type} en ({x:F2}, {y:F2}) alcanzable y visible{(inside != null ? $" (dentro de {inside.name})" : behindArt ? " (tapado por un obstáculo)" : "")}");
+        }
+        float waterTotal = ResourceSpots.Count(r => r.type == "Botella") * 10f + ResourceSpots.Count(r => r.type == "Cantimplora") * 25f;
+        Debug.Log($"[Nivel4] Agua en el nivel: {waterTotal} (más 100 iniciales) a {WATER_DRAIN}/s = {(100f + waterTotal) / WATER_DRAIN:F0} s de recorrido. Botiquines: {ResourceSpots.Count(r => r.type == "Botiquin")}.");
+        Expect(AssetDatabase.LoadAssetAtPath<GameObject>(MEDKIT_PREFAB) != null, "Prefab del botiquín creado");
 
         // Hay camino del inicio a la meta
         Expect(FindPathLength(start, GoalPos, feetSize, out float length), $"Hay camino del inicio a la meta ({length:F1} unidades)");
