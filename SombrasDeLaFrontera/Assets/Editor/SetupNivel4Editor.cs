@@ -136,7 +136,7 @@ public static class SetupNivel4Editor
         ("cactus_organo", 2.0f, 7.3f, false),
         ("arbusto_espinoso", -0.4f, 7.7f, true),
         // Tramo 3
-        ("formacion_rocosa", -0.2f, 9.0f, false),
+        ("formacion_rocosa", -0.2f, 9.3f, false),
         ("cactus", 1.0f, 10.3f, true),
         ("craneo_tronco", -1.0f, 10.6f, false),
         ("arbusto", 0.45f, 10.95f, false),
@@ -155,7 +155,7 @@ public static class SetupNivel4Editor
         ("arbusto", 0.1f, 18.9f, true),
         ("barril_tirado", 1.0f, 18.95f, true),
         // Tramo 6
-        ("tanque_oxidado", 0.8f, 20.4f, false),
+        ("tanque_oxidado", 0.8f, 20.5f, false),
         ("cactus", -1.4f, 20.6f, false),
         ("nopalera", 1.5f, 22.0f, false),
         ("formacion_rocosa", -0.3f, 22.3f, true),
@@ -169,8 +169,8 @@ public static class SetupNivel4Editor
         ("arbol_seco", 1.3f, 27.4f, true),
         ("cerca_alambre", 0.4f, 27.7f, false),
         // Tramo 8
-        ("arbusto", -1.2f, 29.0f, false),
-        ("camioneta_oxidada", 0.9f, 29.2f, true),
+        ("arbusto", -1.2f, 29.3f, false),
+        ("camioneta_oxidada", 0.9f, 29.3f, true),
         ("rodadora", -0.2f, 30.2f, true),
         ("agave", -1.5f, 30.8f, false),
         ("roca_pequena", 1.6f, 30.9f, false),
@@ -179,6 +179,39 @@ public static class SetupNivel4Editor
         ("arbusto_espinoso", -1.4f, 32.5f, false),
         ("matorral_ramas", 1.9f, 32.6f, true),
     };
+
+    // =========================================================================
+    // REDADAS (Issue 2): agentes con linterna y perros K-9 que persiguen a Mateo. Todas las rutas van por los
+    // carriles libres; cada carril tiene coberturas justo abajo para esperar a que pase la patrulla.
+    // =========================================================================
+
+    // Agentes (ida y vuelta entre los puntos; los que empiezan a la derecha van a contratiempo)
+    private static readonly Vector2[][] AgentRoutes =
+    {
+        new[] { new Vector2(-1.8f, 4.6f), new Vector2(1.9f, 4.6f) },
+        new[] { new Vector2(1.8f, 11.4f), new Vector2(-1.8f, 11.4f) },
+        new[] { new Vector2(-1.8f, 15.6f), new Vector2(1.8f, 15.6f) },
+        new[] { new Vector2(1.8f, 19.6f), new Vector2(0.3f, 19.6f) },
+        new[] { new Vector2(1.8f, 24.0f), new Vector2(-1.8f, 24.0f) },
+        new[] { new Vector2(-1.6f, 31.8f), new Vector2(1.7f, 31.8f) },
+    };
+
+    // Perros K-9 (raza, punto A, punto B)
+    private static readonly (string breed, Vector2 a, Vector2 b)[] DogRoutes =
+    {
+        ("Rottweiler", new Vector2(-1.5f, 8.4f), new Vector2(1.2f, 8.4f)),
+        ("Aleman", new Vector2(-1.7f, 19.6f), new Vector2(-0.1f, 19.6f)),
+        ("Doberman", new Vector2(1.6f, 28.4f), new Vector2(-1.2f, 28.4f)),
+    };
+
+    // Más difícil que el Nivel 3 (policías a 0.55 con espera de 3 s y captura en 1.5 s)
+    private const float AGENT_SPEED = 0.62f;
+    private const float AGENT_WAIT = 2.0f;
+    private const float AGENT_CAPTURE_TIME = 1.1f;
+    private const float DOG_PATROL_SPEED = 0.6f;
+    private const float DOG_CHASE_SPEED = 0.92f;   // Mateo camina a 1.0: se le puede escapar, pero por poco
+    private const float DOG_DETECTION = 2.6f;
+    private const float DOG_MAX_CHASE = 5f;
 
     // Objetos del Nivel 1 que se conservan (todo lo demás se quita)
     private static readonly string[] KeepRoots =
@@ -213,6 +246,17 @@ public static class SetupNivel4Editor
         int problems = VerifyLevel4();
         EditorUtility.DisplayDialog("Nivel 4", problems == 0 ? "Todo correcto: colisiones, coberturas, carriles y camino a la meta."
             : $"Se encontraron {problems} problemas. Revisa la consola.", "Aceptar");
+    }
+
+    [MenuItem("Sombras de la Frontera/Nivel 4/3. Colocar Agentes y Perros K-9")]
+    public static void PlaceEnemiesMenu()
+    {
+        if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
+        var scene = EditorSceneManager.OpenScene(SCENE, OpenSceneMode.Single);
+        PlaceEnemies();
+        EditorSceneManager.MarkSceneDirty(scene);
+        EditorSceneManager.SaveScene(scene);
+        EditorUtility.DisplayDialog("Nivel 4", $"{AgentRoutes.Length} agentes y {DogRoutes.Length} perros K-9 colocados.", "Aceptar");
     }
 
     /// <summary>Uso por línea de comandos (Unity -batchmode -executeMethod SetupNivel4Editor.BuildFromCommandLine).</summary>
@@ -271,6 +315,7 @@ public static class SetupNivel4Editor
         SetupLighting();
         SetupPostProcess(profile);
         SetupPlayerAndTexts();
+        PlaceEnemies();
 
         EditorSceneManager.MarkSceneDirty(scene);
         EditorSceneManager.SaveScene(scene);
@@ -621,8 +666,9 @@ public static class SetupNivel4Editor
                 text.text =
                     "Cruzaste el muro, pero las redadas recorren el desierto del otro lado...\n\n" +
                     "🕹️  <b>Controles:</b> Usa <b>W, A, S, D</b> o las <b>Flechas</b> para moverte.\n\n" +
-                    "📦 <b>Sigilo:</b> Quédate quieto pegado a la parte de abajo de <b>rocas, autos oxidados, costales y arbustos</b> para esconderte. " +
-                    "Las cercas, los árboles secos, las yucas y los ocotillos no te cubren: solo estorban el paso.\n\n" +
+                    "📦 <b>Sigilo:</b> Quédate quieto pegado abajo de <b>rocas, autos, costales y arbustos</b>. Cercas, árboles secos, yucas y ocotillos no te cubren.\n\n" +
+                    "🔦 <b>Agentes:</b> Sus linternas te atrapan si te alumbran al descubierto. Espera agachado a que pasen.\n\n" +
+                    "🐕 <b>Perros K-9:</b> Si te ven, <b>te persiguen</b>. Rompe su línea de vista y escóndete lejos de donde te vieron: te buscan olfateando.\n\n" +
                     "🎯 <b>Objetivo:</b> Avanza hacia el norte y llega al <b>campamento del refugio</b>: busca la luz de la fogata.";
             }
             else if (text.text.Contains("NIVEL 1 COMPLETADO")) text.text = "¡NIVEL 4 COMPLETADO!";
@@ -645,6 +691,115 @@ public static class SetupNivel4Editor
                 "Mateo ha perdido sus 3 corazones a unos pasos del refugio.\n\n🛡️ <b>Consejo:</b> Protege tu salud y administra bien tus movimientos.";
             so.ApplyModifiedPropertiesWithoutUndo();
         }
+    }
+
+    public static void PlaceEnemies()
+    {
+        GameObject old = FindRoot("EnemiesAndHazards");
+        if (old != null) Object.DestroyImmediate(old);
+
+        Transform enemies = new GameObject("EnemiesAndHazards").transform;
+        Transform agentGroup = CreateGroup("Agentes", enemies);
+        Transform dogGroup = CreateGroup("Perros_K9", enemies);
+
+        // Agentes de la redada: el policía fronterizo del Nivel 3 (linterna, voces y animaciones de caminar, reposo, alerta y captura)
+        GameObject agentPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(SetupAnimacionesEditor.POLICE_PREFAB);
+        for (int i = 0; i < AgentRoutes.Length; i++)
+        {
+            GameObject agent = SpawnCreature(agentPrefab, agentGroup, $"Agente_{i + 1}", AgentRoutes[i][0]);
+            SetRoute(agent, AgentRoutes[i]);
+            PatrolAI patrol = agent.GetComponent<PatrolAI>();
+            patrol.moveSpeed = AGENT_SPEED;
+            patrol.waitTimeAtWaypoint = AGENT_WAIT;
+            PrefabUtility.RecordPrefabInstancePropertyModifications(patrol);
+
+            VisionCone2D cone = agent.GetComponentInChildren<VisionCone2D>(true);
+            if (cone != null)
+            {
+                var so = new SerializedObject(cone);
+                so.FindProperty("detectionTimeToCapture").floatValue = AGENT_CAPTURE_TIME;
+                so.ApplyModifiedPropertiesWithoutUndo();
+                PrefabUtility.RecordPrefabInstancePropertyModifications(cone);
+            }
+        }
+
+        foreach (var (breed, a, b) in DogRoutes)
+        {
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(SetupAnimacionesEditor.K9Prefab(breed));
+            GameObject dog = SpawnCreature(prefab, dogGroup, $"Perro_K9_{breed}", a);
+            SetRoute(dog, new[] { a, b });
+
+            PatrolAI patrol = dog.GetComponent<PatrolAI>();
+            patrol.moveSpeed = DOG_PATROL_SPEED;
+            PrefabUtility.RecordPrefabInstancePropertyModifications(patrol);
+
+            GuardDogAI dogAI = dog.GetComponent<GuardDogAI>();
+            dogAI.detectionRadius = DOG_DETECTION;
+            dogAI.chaseSpeed = DOG_CHASE_SPEED;
+            dogAI.maxChaseDistance = DOG_MAX_CHASE;
+            dogAI.coyoteAlertDuration = 5.0f;
+            var so = new SerializedObject(dogAI);
+            so.FindProperty("chasesPlayer").boolValue = true;
+            so.FindProperty("patrolTimeBeforeRest").vector2Value = new Vector2(16f, 24f); // Descansa menos que en el Nivel 3
+            so.FindProperty("restDuration").vector2Value = new Vector2(4f, 6f);
+            so.ApplyModifiedPropertiesWithoutUndo();
+            PrefabUtility.RecordPrefabInstancePropertyModifications(dogAI);
+        }
+
+        Debug.Log($"[Nivel4] {AgentRoutes.Length} agentes y {DogRoutes.Length} perros K-9 colocados.");
+    }
+
+    private static Transform CreateGroup(string name, Transform parent)
+    {
+        var group = new GameObject(name).transform;
+        group.SetParent(parent, false);
+        return group;
+    }
+
+    private static GameObject SpawnCreature(GameObject prefab, Transform parent, string name, Vector2 position)
+    {
+        var go = (GameObject)PrefabUtility.InstantiatePrefab(prefab, parent);
+        go.name = name;
+        go.transform.position = new Vector3(position.x, position.y, 0f);
+
+        // Profundidad por los pies, igual que en los niveles anteriores (pasan delante o detrás de los obstáculos)
+        SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
+        sr.sortingLayerName = "Environment";
+        YSort2D ysort = go.GetComponent<YSort2D>();
+        if (ysort == null) ysort = go.AddComponent<YSort2D>();
+        ysort.isStatic = false;
+        ysort.useBottomBounds = false;
+        ysort.yOffset = 0f;
+        ysort.baseOrder = 5000;
+        ysort.UpdateSortingOrder();
+        return go;
+    }
+
+    private static void SetRoute(GameObject creature, Vector2[] route)
+    {
+        Transform wpRoot = creature.transform.Find("Waypoints");
+        if (wpRoot == null)
+        {
+            wpRoot = new GameObject("Waypoints").transform;
+            wpRoot.SetParent(creature.transform, false);
+        }
+
+        var points = new List<Transform>();
+        for (int i = 0; i < route.Length; i++)
+        {
+            Transform wp = wpRoot.Find($"WP_{i}");
+            if (wp == null)
+            {
+                wp = new GameObject($"WP_{i}").transform;
+                wp.SetParent(wpRoot, false);
+            }
+            wp.position = new Vector3(route[i].x, route[i].y, 0f);
+            points.Add(wp);
+        }
+
+        PatrolAI patrol = creature.GetComponent<PatrolAI>();
+        patrol.SetWaypoints(points, PatrolAI.PatrolMode.PingPong);
+        PrefabUtility.RecordPrefabInstancePropertyModifications(patrol);
     }
 
     private static void RegisterInBuildSettings()
@@ -736,6 +891,64 @@ public static class SetupNivel4Editor
             RaycastHit2D[] hits = Physics2D.CircleCastAll(new Vector2(-1.75f, laneY), 0.12f, Vector2.right, 3.6f);
             Collider2D blocker = hits.Select(hh => hh.collider).FirstOrDefault(IsSolid);
             Expect(blocker == null, $"Carril de patrulla y={laneY} libre{(blocker != null ? $" (choca con {blocker.name})" : "")}");
+        }
+
+        // Rutas de agentes y perros libres de obstáculos (con el ancho del cuerpo)
+        var routes = AgentRoutes.Select((r, i) => ($"Agente {i + 1}", r))
+            .Concat(DogRoutes.Select(d => ($"Perro {d.breed}", new[] { d.a, d.b })));
+        foreach (var (who, route) in routes)
+        {
+            for (int i = 0; i < route.Length - 1; i++)
+            {
+                Vector2 dir = route[i + 1] - route[i];
+                Collider2D blocker = Physics2D.CircleCastAll(route[i], 0.12f, dir.normalized, dir.magnitude)
+                    .Select(hh => hh.collider).FirstOrDefault(IsSolid);
+                Expect(blocker == null, $"{who}: ruta libre{(blocker != null ? $" (choca con {blocker.name})" : "")}");
+            }
+        }
+
+        // Enemigos en la escena, perros en modo persecución y escala respecto a Mateo
+        GuardDogAI[] dogs = Object.FindObjectsByType<GuardDogAI>();
+        int chasers = dogs.Count(d => new SerializedObject(d).FindProperty("chasesPlayer").boolValue);
+        int agents = Object.FindObjectsByType<VisionCone2D>().Length;
+        Expect(agents == AgentRoutes.Length, $"Agentes con linterna: {agents} de {AgentRoutes.Length}");
+        Expect(chasers == DogRoutes.Length, $"Perros que persiguen: {chasers} de {DogRoutes.Length}");
+        foreach (PatrolAI enemy in Object.FindObjectsByType<PatrolAI>())
+        {
+            float ratio = enemy.GetComponent<SpriteRenderer>().bounds.size.y / body.size.y;
+            bool isDog = enemy.GetComponent<GuardDogAI>() != null;
+            // Un adulto mide más que Mateo (niño); un perro, menos que un adulto
+            bool ok = isDog ? ratio > 0.5f && ratio < 1.3f : ratio > 1.05f && ratio < 2.0f;
+            Expect(ok, $"{enemy.name}: altura {ratio:F2} veces la de Mateo");
+        }
+
+        // Esconderse es seguro: el cuerpo de un perro que pasa patrullando no alcanza a Mateo agachado tras una cobertura
+        // (la franja para esconderse queda a más de ~0.83 por encima del carril o claramente por debajo)
+        CoverZone2D[] covers = Object.FindObjectsByType<CoverZone2D>();
+        foreach (var (breed, a, b) in DogRoutes)
+        {
+            float minX = Mathf.Min(a.x, b.x) - 0.35f, maxX = Mathf.Max(a.x, b.x) + 0.35f;
+            foreach (CoverZone2D cover in covers)
+            {
+                Rect r = cover.CoverRect;
+                if (r.xMax < minX || r.xMin > maxX) continue;
+                float baseY = cover.BaseY;
+                bool safe = baseY > a.y + 0.83f || baseY < a.y - 0.15f;
+                if (!safe) Expect(false, $"Perro {breed}: su ruta (y={a.y}) roza a Mateo escondido tras {cover.name} (base y={baseY:F2})");
+            }
+        }
+
+        // Persecución: cada perro encuentra camino (rodeando obstáculos) hasta las coberturas cercanas a su carril
+        var waypointsPath = new List<Vector2>();
+        foreach (var (breed, a, b) in DogRoutes)
+        {
+            Vector2 mid = (a + b) * 0.5f;
+            foreach (CoverZone2D cover in covers.Where(c => Mathf.Abs(c.BaseY - a.y) < 2.5f).OrderBy(c => Vector2.Distance(c.CoverRect.center, mid)).Take(3))
+            {
+                Vector2 hideSpot = new Vector2(cover.CoverRect.center.x, cover.BaseY - 0.15f);
+                bool found = ChasePath2D.FindPath(mid, hideSpot, waypointsPath);
+                Expect(found, $"Perro {breed}: llega persiguiendo hasta {cover.name} ({hideSpot.x:F2}, {hideSpot.y:F2}) en {waypointsPath.Count} tramos");
+            }
         }
 
         // Hay camino del inicio a la meta

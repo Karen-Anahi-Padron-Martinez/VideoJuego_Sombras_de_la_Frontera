@@ -88,6 +88,12 @@ public class CreatureAnimator : MonoBehaviour
         oneShotEndTime = Now + length;
     }
 
+    /// <summary>Velocidad de reproducción (por ejemplo, más rápida cuando un perro corre tras Mateo).</summary>
+    public void SetSpeed(float speed)
+    {
+        if (animator != null && !Mathf.Approximately(animator.speed, speed)) animator.speed = speed;
+    }
+
     /// <summary>
     /// Hace que las animaciones sigan corriendo aunque el juego se congele (Time.timeScale = 0),
     /// para que la mordida o captura que derrotó a Mateo se vea completa.
