@@ -9,13 +9,15 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 /// <summary>
-/// Nivel 4 "El Refugio Seguro" (Issue 1: escena, mapa del desierto nocturno, iluminación y obstáculos).
-/// 1. Importa el mapa continuo (Assets/Sprites/Level4_SafeHaven, unido desde Docs/scenery_level4) y usa los obstáculos
-///    del desierto de las hojas del Nivel 1 (cactus, rocas, autos oxidados, combi, costales, cercas...).
-/// 2. Crea los prefabs de obstáculos con colisión en la base y cobertura solo en los que tapan a Mateo.
-/// 3. Construye 05_Level4_SafeHaven a partir del Nivel 1 (HUD, pausa, Victoria/Game Over, cámara y Mateo ya conectados),
+/// Nivel 4 "El Último Cerro" (escena 05_Level4_SafeHaven): la última noche del viaje, subiendo el cerro desde el que
+/// Mateo ve el pueblo al amanecer (final de la historia, otros/HIstoria).
+/// 1. Importa el mapa continuo (Assets/Sprites/Level4_SafeHaven/mapa_nivel4_cerro.png, generado por
+///    otros/nivel4/preparar_mapa_nivel4.py) y usa los obstáculos del desierto de las hojas del Nivel 1.
+/// 2. Crea los prefabs de obstáculos con colisión en la base y cobertura solo en los que tapan a Mateo, escalados
+///    para que guarden la proporción con Mateo de los niveles 1 y 3.
+/// 3. Construye la escena a partir del Nivel 1 (HUD, pausa, Victoria/Game Over, cámara y Mateo ya conectados),
 ///    quita lo propio del Nivel 1 y coloca el mapa, la cerca rota del inicio, las rocas pintadas de las orillas,
-///    el campamento del refugio (meta), los obstáculos y la iluminación de noche.
+///    las rocas de la cresta, la cima (meta) con la luz del amanecer, los obstáculos y la iluminación de noche.
 /// 4. La registra en Build Settings y pone la miniatura en la tarjeta del menú.
 /// </summary>
 public static class SetupNivel4Editor
@@ -23,7 +25,7 @@ public static class SetupNivel4Editor
     private const string SOURCE_SCENE = "Assets/Scenes/02_Level1_Desert.unity";
     public const string SCENE = "Assets/Scenes/05_Level4_SafeHaven.unity";
     private const string MENU_SCENE = "Assets/Scenes/01_MainMenu.unity";
-    private const string MAP_SPRITE = "Assets/Sprites/Level4_SafeHaven/mapa_completo_nivel4_seamless.png";
+    private const string MAP_SPRITE = "Assets/Sprites/Level4_SafeHaven/mapa_nivel4_cerro.png";
     private const string PREFAB_DIR = "Assets/Prefabs/Level4_SafeHaven";
     private const string PROFILE_PATH = "Assets/Settings/Level4_PostProcess.asset";
     private const string THUMBNAIL = "Assets/Sprites/UI/Thumbnail_Level4.jpg";
@@ -41,13 +43,13 @@ public static class SetupNivel4Editor
     // (las partes 2 a 4 se recortaron 60 px abajo y se mezclan 121 px con la siguiente).
     private static readonly int[] PartRowOffset = { 2532, 1688, 844, 0 };
 
-    // Inicio (frente a la cerca rota) y meta (al llegar a la fogata del campamento)
+    // Inicio (frente a la cerca rota) y meta: la cima del cerro, toda la franja de arriba pasando las rocas de la cresta
     private static readonly Vector2 SpawnPos = new Vector2(0.05f, 2.25f);
     private const float FENCE_TOP_Y = 1.72f;
-    private static readonly Vector2 GoalPos = new Vector2(0.12f, 33.45f);
-    private static readonly Vector2 GoalSize = new Vector2(1.7f, 0.5f);
-    private static readonly Vector2 CampfirePos = new Vector2(0.11f, 33.72f);
-    private static readonly Color FireColor = new Color(1f, 0.62f, 0.3f, 1f);
+    private static readonly Vector2 GoalPos = new Vector2(0.12f, 34.55f);
+    private static readonly Vector2 GoalSize = new Vector2(5.0f, 0.6f);
+    private const float CREST_BASE_Y = 33.7f;
+    private static readonly Color DawnColor = new Color(1f, 0.58f, 0.3f, 1f);
 
     /// <summary>Convierte píxeles de una parte del mapa (x, fila desde arriba) a coordenadas del mundo.</summary>
     private static Vector2 PartToWorld(int part, float px, float row) =>
@@ -87,35 +89,38 @@ public static class SetupNivel4Editor
         }
     }
 
-    // Obstáculos del desierto (hojas del Nivel 1, mismo tamaño que allá; Mateo mide ~0.6 unidades).
+    // Obstáculos del desierto (hojas del Nivel 1). Mateo mide 0.28 x 0.59 unidades; las escalas dejan cada objeto
+    // del tamaño que tiene en los niveles 1 y 3: rocas y arbustos ~0.9 Mateos de alto, nopaleras ~1.5, cactus ~1.9,
+    // vehículos ~1.25 de ancho (0.8 como en el Nivel 1) y costales ~0.95 de ancho (como en el Nivel 3).
+    // La hoja 2 viene dibujada más grande que la 1, por eso sus plantas y objetos se reducen más.
     // Solo estorban (no ocultan) los que se ven a través: árbol seco, yuca, ocotillo, matorral de ramas, rodadora,
     // cercas y el barril tirado (demasiado bajo).
     private static readonly ObstacleDef[] Defs =
     {
-        new ObstacleDef("cactus",            1, 0,  1f, 0.30f, 0.14f, true,  0.45f, 0.90f),
-        new ObstacleDef("nopalera",          1, 1,  1f, 0.70f, 0.22f, true,  0.85f, 0.85f),
-        new ObstacleDef("matorral_ramas",    1, 2,  1f, 0.40f, 0.15f, false),
-        new ObstacleDef("arbol_seco",        1, 3,  1f, 0.18f, 0.10f, false),
-        new ObstacleDef("roca_pequena",      1, 4,  1f, 0.85f, 0.30f, true,  0.90f, 0.90f),
-        new ObstacleDef("roca_grande",       1, 5,  1f, 0.85f, 0.30f, true,  0.90f, 0.90f),
-        new ObstacleDef("rodadora",          1, 6,  1f, 0.50f, 0.20f, false),
-        new ObstacleDef("arbusto",           1, 7,  1f, 0.60f, 0.25f, true,  0.85f, 0.85f),
-        new ObstacleDef("camioneta_oxidada", 1, 8,  1f, 0.90f, 0.45f, true,  0.92f, 0.80f),
-        new ObstacleDef("carro_oxidado",     1, 9,  1f, 0.90f, 0.45f, true,  0.92f, 0.80f),
-        new ObstacleDef("barda_rota_a",      1, 10, 1f, 0.95f, 0.12f, false),
-        new ObstacleDef("barda_rota_b",      1, 11, 1f, 0.95f, 0.12f, false),
-        new ObstacleDef("yuca",              2, 0,  1f, 0.22f, 0.10f, false),
-        new ObstacleDef("ocotillo",          2, 1,  1f, 0.35f, 0.10f, false),
-        new ObstacleDef("agave",             2, 2,  1f, 0.60f, 0.18f, true,  0.75f, 0.60f),
-        new ObstacleDef("cactus_organo",     2, 3,  1f, 0.55f, 0.14f, true,  0.70f, 0.90f),
-        new ObstacleDef("craneo_tronco",     2, 4,  1f, 0.85f, 0.32f, true,  0.85f, 0.90f),
-        new ObstacleDef("formacion_rocosa",  2, 5,  1f, 0.90f, 0.38f, true,  0.92f, 0.90f),
-        new ObstacleDef("barril_tirado",     2, 6,  1f, 0.75f, 0.35f, false),
-        new ObstacleDef("arbusto_espinoso",  2, 7,  1f, 0.80f, 0.30f, true,  0.85f, 0.85f),
-        new ObstacleDef("combi_oxidada",     2, 8,  1f, 0.92f, 0.40f, true,  0.92f, 0.80f),
-        new ObstacleDef("tanque_oxidado",    2, 9,  1f, 0.92f, 0.38f, true,  0.92f, 0.80f),
-        new ObstacleDef("costales",          2, 10, 1f, 0.92f, 0.40f, true,  0.92f, 0.90f),
-        new ObstacleDef("cerca_alambre",     2, 11, 1f, 1.00f, 0.12f, false),
+        new ObstacleDef("cactus",            1, 0,  1f,    0.30f, 0.14f, true,  0.45f, 0.90f),
+        new ObstacleDef("nopalera",          1, 1,  1f,    0.70f, 0.22f, true,  0.85f, 0.85f),
+        new ObstacleDef("matorral_ramas",    1, 2,  1f,    0.40f, 0.15f, false),
+        new ObstacleDef("arbol_seco",        1, 3,  1f,    0.18f, 0.10f, false),
+        new ObstacleDef("roca_pequena",      1, 4,  1f,    0.85f, 0.30f, true,  0.90f, 0.90f),
+        new ObstacleDef("roca_grande",       1, 5,  1f,    0.85f, 0.30f, true,  0.90f, 0.90f),
+        new ObstacleDef("rodadora",          1, 6,  1f,    0.50f, 0.20f, false),
+        new ObstacleDef("arbusto",           1, 7,  1f,    0.60f, 0.25f, true,  0.85f, 0.85f),
+        new ObstacleDef("camioneta_oxidada", 1, 8,  0.8f,  0.90f, 0.45f, true,  0.92f, 0.80f),
+        new ObstacleDef("carro_oxidado",     1, 9,  0.8f,  0.90f, 0.45f, true,  0.92f, 0.80f),
+        new ObstacleDef("barda_rota_a",      1, 10, 0.85f, 0.95f, 0.12f, false),
+        new ObstacleDef("barda_rota_b",      1, 11, 0.85f, 0.95f, 0.12f, false),
+        new ObstacleDef("yuca",              2, 0,  0.75f, 0.22f, 0.10f, false),
+        new ObstacleDef("ocotillo",          2, 1,  0.75f, 0.35f, 0.10f, false),
+        new ObstacleDef("agave",             2, 2,  0.7f,  0.60f, 0.18f, true,  0.75f, 0.60f),
+        new ObstacleDef("cactus_organo",     2, 3,  1f,    0.55f, 0.14f, true,  0.70f, 0.90f),
+        new ObstacleDef("craneo_tronco",     2, 4,  0.75f, 0.85f, 0.32f, true,  0.85f, 0.90f),
+        new ObstacleDef("formacion_rocosa",  2, 5,  0.75f, 0.90f, 0.38f, true,  0.92f, 0.90f),
+        new ObstacleDef("barril_tirado",     2, 6,  0.6f,  0.75f, 0.35f, false),
+        new ObstacleDef("arbusto_espinoso",  2, 7,  0.8f,  0.80f, 0.30f, true,  0.85f, 0.85f),
+        new ObstacleDef("combi_oxidada",     2, 8,  0.8f,  0.92f, 0.40f, true,  0.92f, 0.80f),
+        new ObstacleDef("tanque_oxidado",    2, 9,  0.8f,  0.92f, 0.38f, true,  0.92f, 0.80f),
+        new ObstacleDef("costales",          2, 10, 0.6f,  0.92f, 0.40f, true,  0.92f, 0.90f),
+        new ObstacleDef("cerca_alambre",     2, 11, 0.85f, 1.00f, 0.12f, false),
     };
 
     // (prefab, x, base y, voltear). Las bases quedan fuera de los carriles de patrulla y lejos de lo pintado en el mapa.
@@ -175,9 +180,14 @@ public static class SetupNivel4Editor
         ("agave", -1.5f, 30.8f, false),
         ("roca_pequena", 1.6f, 30.9f, false),
         ("cactus", 0.2f, 31.0f, false),
-        // Llegada al campamento
+        // Subida final
         ("arbusto_espinoso", -1.4f, 32.5f, false),
         ("matorral_ramas", 1.9f, 32.6f, true),
+        // Cresta del cerro: rocas a los lados que dejan el paso a la cima por el centro (también sirven de última cobertura)
+        ("formacion_rocosa", -1.65f, CREST_BASE_Y, false),
+        ("roca_grande", -0.8f, CREST_BASE_Y + 0.1f, true),
+        ("roca_grande", 1.0f, CREST_BASE_Y + 0.1f, false),
+        ("formacion_rocosa", 1.85f, CREST_BASE_Y, true),
     };
 
     // =========================================================================
@@ -222,8 +232,11 @@ public static class SetupNivel4Editor
     private const string ITEMS_SHEET = "Assets/Sprites/Items/items.png";
     private const string MEDKIT_SLICE = "items_12";
     private const string MEDKIT_PREFAB = "Assets/Prefabs/Items/Pickup_Botiquin.prefab";
-    private const float DRONE_ALTITUDE = 1.0f;     // El cuerpo vuela por encima del círculo de luz (vista 3/4)
-    private const float DRONE_SCALE = 0.45f;       // ~0.9 unidades de ancho
+    // Un dron pequeño de vigilancia: ~0.44 unidades de ancho (como un perro K-9; antes medía 0.9, más que un agente)
+    private const float DRONE_ALTITUDE = 0.75f;    // El cuerpo vuela por encima del círculo de luz (vista 3/4)
+    private const float DRONE_SCALE = 0.22f;
+    private const float DRONE_LED_SIZE = 0.07f;
+    private static readonly Vector2 DroneShadowScale = new Vector2(0.2f, 0.14f);
 
     // De noche y con la última caminata, la sed avanza un poco más rápido que en el Nivel 3 (1.0)
     private const float WATER_DRAIN = 1.2f;
@@ -252,7 +265,7 @@ public static class SetupNivel4Editor
         ("Botella", 1.0f, 26.75f),       // Bajo el paso del dron 3
         ("Cantimplora", -0.55f, 28.15f), // En la ruta del Doberman
         ("Botiquin", 0.7f, 31.4f),       // Bajo el carril del último agente
-        ("Botella", -0.5f, 32.95f),      // Antes del campamento
+        ("Botella", -0.5f, 32.95f),      // Antes de la cresta
     };
 
     // Objetos del Nivel 1 que se conservan (todo lo demás se quita)
@@ -266,7 +279,7 @@ public static class SetupNivel4Editor
     // MENÚS
     // =========================================================================
 
-    [MenuItem("Sombras de la Frontera/Nivel 4/1. Construir Escena del Refugio Seguro")]
+    [MenuItem("Sombras de la Frontera/Nivel 4/1. Construir Escena del Último Cerro")]
     public static void BuildLevel4Menu()
     {
         if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
@@ -275,7 +288,7 @@ public static class SetupNivel4Editor
             return;
 
         BuildLevel4();
-        EditorUtility.DisplayDialog("Nivel 4", "Escena del Refugio Seguro construida.\n\n" +
+        EditorUtility.DisplayDialog("Nivel 4", "Escena del Último Cerro construida.\n\n" +
             "Se abrió 05_Level4_SafeHaven. Para probarla desde el menú usa:\n" +
             "Sombras de la Frontera → Depuración → Desbloquear todos los niveles.", "Aceptar");
     }
@@ -509,7 +522,7 @@ public static class SetupNivel4Editor
 
     /// <summary>
     /// Colisiones de lo que ya viene pintado en el mapa: la cerca rota del inicio (Mateo no puede regresar),
-    /// las rocas y dunas de las orillas, las rodadoras, el campamento y el borde norte.
+    /// las rocas y dunas de las orillas, las rodadoras y el borde norte.
     /// </summary>
     private static void SetupMapColliders()
     {
@@ -551,14 +564,6 @@ public static class SetupNivel4Editor
             cap.size = new Vector2(w * 0.7f / 100f, 0.14f);
             cap.offset = new Vector2(p.x, p.y + 0.07f);
         }
-
-        // Campamento: la casa de campaña, los bidones de agua y el asta de la bandera
-        Vector2 tentA = PartToWorld(4, 305f, 160f), tentB = PartToWorld(4, 420f, 125f);
-        Box("Campamento_Carpa", tentA.x, tentA.y, tentB.x, tentB.y);
-        Vector2 jugsA = PartToWorld(4, 228f, 152f), jugsB = PartToWorld(4, 266f, 128f);
-        Box("Campamento_Bidones", jugsA.x, jugsA.y, jugsB.x, jugsB.y);
-        Vector2 pole = PartToWorld(4, 287f, 132f);
-        Box("Campamento_Asta", pole.x - 0.04f, pole.y, pole.x + 0.04f, pole.y + 0.06f);
     }
 
     private static void SetupGoal()
@@ -566,7 +571,7 @@ public static class SetupNivel4Editor
         Transform bounds = FindRoot("LevelBounds").transform;
 
         GameObject goal = FindRoot("GoalTrigger_RioBravo");
-        goal.name = "GoalTrigger_Refugio";
+        goal.name = "GoalTrigger_Cima";
         goal.transform.position = GoalPos;
         BoxCollider2D goalBox = goal.GetComponent<BoxCollider2D>();
         goalBox.offset = Vector2.zero;
@@ -634,23 +639,27 @@ public static class SetupNivel4Editor
         haloLight.falloffIntensity = 0.7f;
         SetTargetLayers(haloLight, allLayers);
 
-        SetupCampfire(allLayers);
+        SetupSummit(allLayers);
     }
 
-    /// <summary>Fogata del refugio: luz cálida que se ve desde lejos y guía a Mateo hacia la meta.</summary>
-    private static void SetupCampfire(int[] allLayers)
+    /// <summary>
+    /// La cima del cerro: detrás de la cresta empieza a clarear (el final de la historia ocurre al amanecer).
+    /// Un resplandor naranja en el borde de arriba del mapa y una luz cálida que tiñe a Mateo al acercarse
+    /// marcan hacia dónde subir, como la fogata marcaba antes el campamento.
+    /// </summary>
+    private static void SetupSummit(int[] allLayers)
     {
-        var fire = new GameObject("Fogata_Refugio");
-        fire.transform.position = CampfirePos;
+        var summit = new GameObject("Cima_Amanecer");
+        summit.transform.position = new Vector3(0f, MAP_TOP_Y, 0f);
 
-        var lightObj = new GameObject("Luz_Fogata");
-        lightObj.transform.SetParent(fire.transform, false);
+        var lightObj = new GameObject("Luz_Amanecer");
+        lightObj.transform.SetParent(summit.transform, false);
         Light2D light = lightObj.AddComponent<Light2D>();
         light.lightType = Light2D.LightType.Point;
-        light.color = FireColor;
-        light.intensity = 1.2f;
-        light.pointLightInnerRadius = 0.2f;
-        light.pointLightOuterRadius = 2.2f;
+        light.color = DawnColor;
+        light.intensity = 0.8f;
+        light.pointLightInnerRadius = 0.5f;
+        light.pointLightOuterRadius = 3.2f;
         light.falloffIntensity = 0.6f;
         SetTargetLayers(light, allLayers);
 
@@ -658,19 +667,17 @@ public static class SetupNivel4Editor
         Material unlit = AssetDatabase.LoadAssetAtPath<Material>(UNLIT_MATERIAL);
         if (glow == null) return;
 
-        // Resplandor en el suelo (elipse por la vista 3/4), debajo de personajes y obstáculos
-        var pool = new GameObject("Resplandor_Fogata");
-        pool.transform.SetParent(fire.transform, false);
-        pool.transform.localScale = new Vector3(1.8f, 1.1f, 1f);
-        SpriteRenderer poolSr = pool.AddComponent<SpriteRenderer>();
-        poolSr.sprite = glow;
-        if (unlit != null) poolSr.sharedMaterial = unlit;
-        poolSr.color = new Color(FireColor.r, FireColor.g, FireColor.b, 0.28f);
-        poolSr.sortingLayerName = "Background";
-        poolSr.sortingOrder = 20;
-
-        // Titileo de la luz y crepitar que se oye más fuerte al acercarse (guía hacia la meta)
-        fire.AddComponent<Campfire2D>().Configure(light, poolSr);
+        // Franja del amanecer sobre el borde norte del mapa (elipse aplanada, de orilla a orilla)
+        var sky = new GameObject("Resplandor_Amanecer");
+        sky.transform.SetParent(summit.transform, false);
+        float glowSize = glow.bounds.size.x;
+        sky.transform.localScale = new Vector3(MAP_HALF_W * 2.6f / glowSize, 2.2f / glowSize, 1f);
+        SpriteRenderer skySr = sky.AddComponent<SpriteRenderer>();
+        skySr.sprite = glow;
+        if (unlit != null) skySr.sharedMaterial = unlit;
+        skySr.color = new Color(DawnColor.r, DawnColor.g, DawnColor.b, 0.45f);
+        skySr.sortingLayerName = "Background";
+        skySr.sortingOrder = 20;
     }
 
     /// <summary>Busca un objeto raíz de la escena ignorando espacios sobrantes en el nombre (p. ej. "LevelBounds ").</summary>
@@ -722,16 +729,16 @@ public static class SetupNivel4Editor
             if (text.text.Contains("El sol abrasa"))
             {
                 text.text =
-                    "Cruzaste el muro, pero las redadas recorren el desierto del otro lado...\n\n" +
-                    "🕹️  <b>Controles:</b> <b>W, A, S, D</b> o las <b>Flechas</b>. Quieto junto a <b>rocas, autos, costales o arbustos</b> te escondes (cercas, yucas y árboles secos no cubren).\n\n" +
-                    "🔦 <b>Agentes:</b> su linterna te atrapa si te alumbra al descubierto.\n" +
-                    "🐕 <b>Perros:</b> si te ven <b>te persiguen</b>; escóndete tras una cobertura y te perderán el rastro.\n" +
-                    "🛸 <b>Drones:</b> si su luz te alumbra, se pone roja y <b>agentes y perros van hacia ti</b> hasta que te escondas.\n\n" +
-                    "🎯 <b>Objetivo:</b> llega al <b>campamento del refugio</b>: busca la luz de la fogata.";
+                    "Tercera noche del otro lado. Ya no queda agua y las redadas recorren el desierto...\n\n" +
+                    "<b>Controles:</b> <b>W, A, S, D</b> o las <b>Flechas</b>. Quieto junto a <b>rocas, autos, costales o arbustos</b> te escondes (cercas, yucas y árboles secos no cubren).\n\n" +
+                    "<b>Agentes:</b> su linterna te atrapa si te alumbra al descubierto.\n" +
+                    "<b>Perros:</b> si te ven <b>te persiguen</b>; escóndete tras una cobertura y te perderán el rastro.\n" +
+                    "<b>Drones:</b> si su luz te alumbra, se pone roja y <b>agentes y perros van hacia ti</b> hasta que te escondas.\n\n" +
+                    "<b>Objetivo:</b> sube hasta la <b>cima del último cerro</b>. Camina hacia el norte, siguiendo la estrella que no se mueve.";
             }
-            else if (text.text.Contains("NIVEL 1 COMPLETADO")) text.text = "¡LLEGASTE AL REFUGIO!";
+            else if (text.text.Contains("NIVEL 1 COMPLETADO")) text.text = "¡LLEGASTE A LA CIMA!";
             else if (text.text.Contains("orilla del R"))
-                text.text = "Después del desierto, el río y el muro, Mateo por fin está a salvo.\n\n🏆 <b>¡Juego completado!</b> Gracias por acompañarlo.";
+                text.text = "Ya casi amanece. Desde lo alto del último cerro se ven las luces de un pueblo y una carretera que cruza el desierto.\n\n<b>¡Juego completado!</b> Gracias por acompañar a Mateo.";
             EditorUtility.SetDirty(text);
         }
 
@@ -752,7 +759,7 @@ public static class SetupNivel4Editor
             so.FindProperty("defeatByDehydration.description").stringValue =
                 "La última noche de camino agotó tu última gota de agua.\n\n💧 <b>Consejo:</b> Busca agua en el camino antes de que se acabe.";
             so.FindProperty("defeatGeneric.description").stringValue =
-                "Mateo ha perdido sus 3 corazones a unos pasos del refugio.\n\n🛡️ <b>Consejo:</b> Protege tu salud y administra bien tus movimientos.";
+                "Mateo ha perdido sus 3 corazones a unos pasos de la cima.\n\n🛡️ <b>Consejo:</b> Protege tu salud y administra bien tus movimientos.";
             so.ApplyModifiedPropertiesWithoutUndo();
         }
     }
@@ -891,7 +898,7 @@ public static class SetupNivel4Editor
 
         var shadowObj = new GameObject("Sombra");
         shadowObj.transform.SetParent(root.transform, false);
-        shadowObj.transform.localScale = new Vector3(0.35f, 0.25f, 1f);
+        shadowObj.transform.localScale = new Vector3(DroneShadowScale.x, DroneShadowScale.y, 1f);
         SpriteRenderer shadowSr = shadowObj.AddComponent<SpriteRenderer>();
         shadowSr.sprite = shadow;
         shadowSr.color = new Color(0f, 0f, 0f, 0.35f);
@@ -912,7 +919,7 @@ public static class SetupNivel4Editor
         var led = new GameObject("LED");
         led.transform.SetParent(body.transform, false);
         led.transform.localPosition = new Vector3(0.35f, 0.17f, 0f);
-        led.transform.localScale = new Vector3(0.12f / DRONE_SCALE, 0.12f / DRONE_SCALE, 1f);
+        led.transform.localScale = new Vector3(DRONE_LED_SIZE / DRONE_SCALE, DRONE_LED_SIZE / DRONE_SCALE, 1f);
         SpriteRenderer ledSr = led.AddComponent<SpriteRenderer>();
         ledSr.sprite = glow;
         if (unlit != null) ledSr.sharedMaterial = unlit;
@@ -1177,7 +1184,7 @@ public static class SetupNivel4Editor
         // Hay camino del inicio a la meta
         Expect(FindPathLength(start, GoalPos, feetSize, out float length), $"Hay camino del inicio a la meta ({length:F1} unidades)");
 
-        Expect(Object.FindAnyObjectByType<GoalTrigger>() != null, "Meta del refugio en la escena");
+        Expect(Object.FindAnyObjectByType<GoalTrigger>() != null, "Meta de la cima en la escena");
 
         // Final del juego (Issue 4): la meta guarda el progreso y marca el juego como completado; pantalla y sonido finales
         GoalTrigger goalTrigger = Object.FindAnyObjectByType<GoalTrigger>();
@@ -1190,10 +1197,23 @@ public static class SetupNivel4Editor
         GameObject hudRoot = FindRoot("HUD_Canvas");
         Text finalTitle = hudRoot.transform.Find("VictoryPanel/Card/Title")?.GetComponent<Text>();
         Text replayLabel = hudRoot.transform.Find("VictoryPanel/Card/NextLevelButton/Text")?.GetComponent<Text>();
-        Expect(finalTitle != null && finalTitle.text.Contains("REFUGIO") && replayLabel != null && replayLabel.text == "Jugar de nuevo",
-            "Pantalla de Victoria final (título del refugio y botón Jugar de nuevo)");
-        Expect(SetupNivel4AudioEditor.IsAssigned(), "Música, drones, fogata y melodía final asignados al AudioManager");
-        Expect(Object.FindAnyObjectByType<Campfire2D>() != null, "Fogata con luz que titila y crepitar");
+        Expect(finalTitle != null && finalTitle.text.Contains("CIMA") && replayLabel != null && replayLabel.text == "Jugar de nuevo",
+            "Pantalla de Victoria final (título de la cima y botón Jugar de nuevo)");
+        Expect(SetupNivel4AudioEditor.IsAssigned(), "Música, drones y melodía final asignados al AudioManager");
+        Expect(FindRoot("Cima_Amanecer") != null && Object.FindAnyObjectByType<Campfire2D>() == null, "Cima con la luz del amanecer (sin fogata del campamento)");
+
+        // Proporciones respecto a Mateo (como en los niveles 1 y 3)
+        foreach (YSort2D obstacle in Object.FindObjectsByType<YSort2D>().Where(o => o.isStatic && o.transform.parent != null && o.transform.parent.name == "Obstaculos_Nivel4"))
+        {
+            Bounds b = obstacle.GetComponent<SpriteRenderer>().bounds;
+            float heightRatio = b.size.y / body.size.y;
+            Expect(heightRatio <= 2.0f && b.size.x <= 1.35f, $"{obstacle.name}: {b.size.x:F2} x {b.size.y:F2} ({heightRatio:F2} veces la altura de Mateo)");
+        }
+        foreach (SurveillanceDrone2D d in droneList)
+        {
+            float width = d.transform.Find("Cuerpo").GetComponent<SpriteRenderer>().bounds.size.x;
+            Expect(width <= 0.55f, $"{d.name}: cuerpo de {width:F2} de ancho ({width / body.size.x:F1} veces el ancho de Mateo)");
+        }
         Expect(EditorBuildSettings.scenes.Any(s => s.path == SCENE && s.enabled), "Escena registrada en Build Settings");
 
         Debug.Log($"[Nivel4] Verificación terminada con {problems} problemas.");

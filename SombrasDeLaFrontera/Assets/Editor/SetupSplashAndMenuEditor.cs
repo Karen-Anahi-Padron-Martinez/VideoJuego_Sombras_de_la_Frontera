@@ -320,9 +320,9 @@ public static class SetupSplashAndMenuEditor
         // Cuadro 4: Nivel 4 (Abajo Derecha)
         CreateLevelCard("Card_Level4", gridContainer.transform,
             new Vector2(415f, -170f),
-            "NIVEL 4: EL REFUGIO SEGURO",
-            "TRAMO 4: ZONA URBANA CLANDESTINA",
-            "Evade las redadas urbanas finales y alcanza el santuario seguro al otro lado de la frontera.",
+            "NIVEL 4: EL ÚLTIMO CERRO",
+            "TRAMO 4: LA ÚLTIMA NOCHE",
+            "Sube el último cerro de noche evadiendo redadas, perros K-9 y drones hasta ver el amanecer desde la cima.",
             null,
             false,
             out Button cardLvl4Btn,

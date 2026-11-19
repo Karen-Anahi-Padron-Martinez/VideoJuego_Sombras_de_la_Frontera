@@ -1343,7 +1343,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'NIVEL 4: EL REFUGIO SEGURO'
+  m_Text: "NIVEL 4: EL ÚLTIMO CERRO"
 --- !u!222 &186496585
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5208,7 +5208,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'TRAMO 4: ZONA URBANA CLANDESTINA'
+  m_Text: "TRAMO 4: LA ÚLTIMA NOCHE"
 --- !u!222 &1291756926
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7622,7 +7622,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Evade las redadas urbanas finales y alcanza el santuario seguro al otro lado de la frontera.
+  m_Text: "Sube el último cerro de noche evadiendo redadas, perros K-9 y drones hasta ver el amanecer desde la cima."
 --- !u!222 &1805053813
 CanvasRenderer:
   m_ObjectHideFlags: 0
