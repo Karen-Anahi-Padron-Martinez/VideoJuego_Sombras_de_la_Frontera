@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Trigger de meta ubicado en la ribera del río (Tramo 4 al norte del desierto).
@@ -19,6 +20,9 @@ public class GoalTrigger : MonoBehaviour
 
     [Tooltip("Meta del último nivel (Nivel 4, el refugio): además guarda que el juego se completó")]
     [SerializeField] private bool completesGame = false;
+
+    [Tooltip("Cinemática que se carga al completar el juego (en lugar de la pantalla de Victoria)")]
+    [SerializeField] private string finalSceneName = "Final";
 
     public const string GAME_COMPLETED_KEY = "JuegoCompletado";
 
@@ -76,6 +80,12 @@ public class GoalTrigger : MonoBehaviour
         // 2. Detener el juego y reproducir victoria
         Time.timeScale = 0f;
         AudioManager.Instance?.PlayVictory();
+
+        if (completesGame && Application.CanStreamedLevelBeLoaded(finalSceneName))
+        {
+            SceneManager.LoadScene(finalSceneName);
+            return;
+        }
 
         // 3. Notificar a la interfaz de victoria
         Debug.Log("<color=cyan>[GoalTrigger] ¡VICTORIA! Mateo ha cruzado el desierto y alcanzado la ribera del Río Bravo.</color>");
