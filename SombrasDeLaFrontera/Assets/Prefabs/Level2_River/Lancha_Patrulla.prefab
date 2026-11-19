@@ -152,6 +152,8 @@ MonoBehaviour:
   isPaused: 0
   lookAroundInterval: 1.2
   lookTurnSpeed: 150
+  investigateSpeed: 0.9
+  investigateArriveRadius: 0.45
 --- !u!114 &4376776482023861977
 MonoBehaviour:
   m_ObjectHideFlags: 0
