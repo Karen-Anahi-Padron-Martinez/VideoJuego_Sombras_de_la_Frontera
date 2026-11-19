@@ -515,7 +515,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Equipo de Desarrollo: <b>Juan Loredo</b>  &  <b>Karen Anah\xED Padr\xF3n Mart\xEDnez</b>"
+  m_Text: "Equipo de Desarrollo: <b>Jos\xE9 de Jes\xFAs Loredo Melendez</b>  &  <b>Karen Anah\xED Padr\xF3n Mart\xEDnez</b>"
 --- !u!222 &889186327
 CanvasRenderer:
   m_ObjectHideFlags: 0

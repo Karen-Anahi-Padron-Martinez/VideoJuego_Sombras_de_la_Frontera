@@ -6276,7 +6276,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "<b>UNIVERSIDAD TECNOL\xD3GICA DEL NORTE DE GUANAJUATO (UTNG)</b>\n\xC1rea de Tecnolog\xEDas de la Informaci\xF3n - Ingenieria de Desarrollo de Software Multiplataforma\n\n<b>MATERIA:</b> Creaci\xF3n de Videojuegos\n<b>DOCENTE:</b> Prof. Gabriel Barr\xF3n Rodr\xEDguez\n\n<b>EQUIPO DE DESARROLLO:</b>\n\u2022 Jos\xE9 de Jes\xFAs Loredo Melendez\n\u2022 Karen Anah\xED Padr\xF3n Mart\xEDnez\n\n\u2022 Motor de juego: Unity 6 (6000.x) \u2014 Universal Render Pipeline 2D\n\n<i>Octubre 2026 \u2022 Dolores Hidalgo C.I.N., Gto.</i>"
+  m_Text: "<b>UNIVERSIDAD TECNOL\xD3GICA DEL NORTE DE GUANAJUATO (UTNG)</b>\n\xC1rea de Tecnolog\xEDas de la Informaci\xF3n - Ingenieria de Desarrollo de Software Multiplataforma\n\n<b>MATERIA:</b> Creaci\xF3n de Videojuegos\n<b>DOCENTE:</b> Prof. Gabriel Barr\xF3n Rodr\xEDguez\n\n<b>EQUIPO DE DESARROLLO:</b>\n\u2022 Jos\xE9 de Jes\xFAs Loredo Melendez\n\u2022 Karen Anah\xED Padr\xF3n Mart\xEDnez\n\n<b>RECURSOS:</b>\n\u2022 Arte: ilustraciones generadas con herramientas de inteligencia artificial y editadas por el equipo\n\u2022 Audio: m\xFAsica y efectos producidos para el juego; voces generadas con s\xEDntesis de voz\n\u2022 Motor de juego: Unity 6 (6000.x) \u2014 Universal Render Pipeline 2D\n\n<i>Octubre 2026 \u2022 Dolores Hidalgo C.I.N., Gto.</i>"
 --- !u!222 &1535166400
 CanvasRenderer:
   m_ObjectHideFlags: 0

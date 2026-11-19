@@ -132,7 +132,7 @@ public static class SetupSplashAndMenuEditor
             new Vector2(0f, -130f), new Vector2(1000f, 70f));
 
         CreateText("Team_Info", card.transform,
-            "Equipo de Desarrollo: <b>Juan Loredo</b>  &  <b>Karen Anahí Padrón Martínez</b>",
+            "Equipo de Desarrollo: <b>José de Jesús Loredo Melendez</b>  &  <b>Karen Anahí Padrón Martínez</b>",
             22, FontStyle.Normal, new Color(0.95f, 0.80f, 0.40f, 1f),
             new Vector2(0f, -200f), new Vector2(1000f, 50f));
 
@@ -357,9 +357,9 @@ public static class SetupSplashAndMenuEditor
             "<b>EQUIPO DE DESARROLLO:</b>\n" +
             "• José de Jesús Loredo Melendez\n" +
             "• Karen Anahí Padrón Martínez\n\n" +
-            "<b>ASSETS Y LICENCIAS DE RECURSOS:</b>\n" +
-            "• Sprites ambientales, flora y fauna nociva: Kenney.nl & OpenGameArt (Licencia CC0 / CC-BY)\n" +
-            "• Audio y efectos desérticos: Freesound.org bajo licencia de uso educativo no comercial\n" +
+            "<b>RECURSOS:</b>\n" +
+            "• Arte: ilustraciones generadas con herramientas de inteligencia artificial y editadas por el equipo\n" +
+            "• Audio: música y efectos producidos para el juego; voces generadas con síntesis de voz\n" +
             "• Motor de juego: Unity 6 (6000.x) — Universal Render Pipeline 2D\n\n" +
             "<i>Octubre 2026 • Dolores Hidalgo C.I.N., Gto.</i>";
 
