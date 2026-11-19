@@ -19,6 +19,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private string level2SceneName = "03_Level2_River";
     [SerializeField] private string level3SceneName = "04_Level3_BorderWall";
     [SerializeField] private string level4SceneName = "05_Level4_SafeHaven";
+    [SerializeField] private string introSceneName = "Intro";
 
     [Header("Contenedores de Pantalla")]
     [SerializeField] private GameObject mainMenuButtons;
@@ -254,7 +255,8 @@ public class MainMenuController : MonoBehaviour
         PlayerPrefs.Save();
         UpdateLevelsProgress();
 
-        LaunchLevel(1, level1SceneName);
+        // La cinemática de Intro carga el Nivel 1 al terminar (si no existe, LaunchLevel cae al Nivel 1)
+        LaunchLevel(1, introSceneName);
     }
 
     public void LaunchLevel(int levelNum, string sceneName)

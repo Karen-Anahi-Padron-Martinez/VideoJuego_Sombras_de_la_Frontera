@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f94c52932d2a14c874da6652bccada, type: 3}
+  m_Name: Intro
+  m_EditorClassIdentifier: Assembly-CSharp::CutsceneData
+  siguienteEscena: 02_Level1_Desert
+  pasos:
+  - tipo: 0
+    texto: "En un pueblo seco del norte de M\xE9xico, Mateo, de 19 a\xF1os, cuida a su madre enferma. El campo ya no da para comprar sus medicinas."
+    imagen: {fileID: 0}
+    duracion: 0
+    ambiente: {fileID: 0}
+    velocidadTexto: 1
+    tamanoTexto: 0
+    duracionFade: 0
+  - tipo: 1
+    texto: 
+    imagen: {fileID: 21300000, guid: 3838623fa5748e6459406111a4970464, type: 3}
+    duracion: 0
+    ambiente: {fileID: 0}
+    velocidadTexto: 1
+    tamanoTexto: 0
+    duracionFade: 0
+  - tipo: 0
+    texto: "Mateo llega a un albergue de la frontera norte, lleno de gente que viene de todas partes. Ah\xED aparece El Tej\xF3n, un coyote con diente de oro y una linterna roja en el cintur\xF3n."
+    imagen: {fileID: 0}
+    duracion: 0
+    ambiente: {fileID: 0}
+    velocidadTexto: 1
+    tamanoTexto: 0
+    duracionFade: 0
+  - tipo: 1
+    texto: 
+    imagen: {fileID: 21300000, guid: c07a33fdac0a1ea4aa2183734ac4bf8c, type: 3}
+    duracion: 0
+    ambiente: {fileID: 0}
+    velocidadTexto: 1
+    tamanoTexto: 0
+    duracionFade: 0
+  - tipo: 0
+    texto: Mateo le paga con todo lo que tiene.
+    imagen: {fileID: 0}
+    duracion: 0
+    ambiente: {fileID: 0}
+    velocidadTexto: 1
+    tamanoTexto: 0
+    duracionFade: 0
+  - tipo: 1
+    texto: 
+    imagen: {fileID: 21300000, guid: 963791b9724d83f458f8ac19b64f350c, type: 3}
+    duracion: 0
+    ambiente: {fileID: 0}
+    velocidadTexto: 1
+    tamanoTexto: 0
+    duracionFade: 0
+  - tipo: 0
+    texto: Esa noche, Mateo no puede dormir.
+    imagen: {fileID: 0}
+    duracion: 0
+    ambiente: {fileID: 0}
+    velocidadTexto: 1
+    tamanoTexto: 0
+    duracionFade: 0
+  - tipo: 1
+    texto: 
+    imagen: {fileID: 21300000, guid: 5884c5ed1d212fb4490720f23e540a88, type: 3}
+    duracion: 0
+    ambiente: {fileID: 0}
+    velocidadTexto: 1
+    tamanoTexto: 0
+    duracionFade: 0
+  - tipo: 0
+    texto: "Junto a la fogata, escucha a El Tej\xF3n hablar por tel\xE9fono..."
+    imagen: {fileID: 0}
+    duracion: 0
+    ambiente: {fileID: 0}
+    velocidadTexto: 1
+    tamanoTexto: 0
+    duracionFade: 0
+  - tipo: 1
+    texto: 
+    imagen: {fileID: 21300000, guid: 1476122d11cdae84eb60ae5dea609654, type: 3}
+    duracion: 0
+    ambiente: {fileID: 0}
+    velocidadTexto: 1
+    tamanoTexto: 0
+    duracionFade: 0
+  - tipo: 1
+    texto: 
+    imagen: {fileID: 21300000, guid: 42472fe527fda1346bd9eea597808bb8, type: 3}
+    duracion: 0
+    ambiente: {fileID: 0}
+    velocidadTexto: 1
+    tamanoTexto: 0
+    duracionFade: 0
+  - tipo: 0
+    texto: Mateo se escabulle entre las camionetas mientras un guardia pasa con la linterna. Un perro ladra...
+    imagen: {fileID: 0}
+    duracion: 0
+    ambiente: {fileID: 0}
+    velocidadTexto: 1
+    tamanoTexto: 0
+    duracionFade: 0
+  - tipo: 1
+    texto: 
+    imagen: {fileID: 21300000, guid: a981bbf0a30055b43899ac74c03c5638, type: 3}
+    duracion: 0
+    ambiente: {fileID: 0}
+    velocidadTexto: 1
+    tamanoTexto: 0
+    duracionFade: 0
+  - tipo: 0
+    texto: "Sale el sol, y una sola silueta corre entre las dunas. El desierto es ahora su \xFAnica salida."
+    imagen: {fileID: 0}
+    duracion: 0
+    ambiente: {fileID: 0}
+    velocidadTexto: 1
+    tamanoTexto: 0
+    duracionFade: 0
