@@ -56,6 +56,13 @@ public class CutscenePlayer : MonoBehaviour
     {
         if (terminando) return;
 
+        // En el APK no hay tecla Esc: se oculta el aviso "Mantén Esc para saltar"
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            avisoSaltar.alpha = 0f;
+            return;
+        }
+
         Keyboard kb = Keyboard.current;
         tiempoEsc = kb != null && kb.escapeKey.isPressed ? tiempoEsc + Time.unscaledDeltaTime : 0f;
 
@@ -167,6 +174,7 @@ public class CutscenePlayer : MonoBehaviour
 
         return (kb != null && (kb.spaceKey.wasPressedThisFrame || kb.enterKey.wasPressedThisFrame || kb.numpadEnterKey.wasPressedThisFrame))
             || (mouse != null && mouse.leftButton.wasPressedThisFrame)
-            || (pad != null && pad.buttonSouth.wasPressedThisFrame);
+            || (pad != null && pad.buttonSouth.wasPressedThisFrame)
+            || MobileTouchControls.ToqueNuevo();   // APK de Android: tocar cualquier parte de la pantalla
     }
 }

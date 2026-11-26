@@ -130,6 +130,14 @@ public class PlayerController2D : MonoBehaviour
         }
 #endif
 
+        // Joystick en pantalla (solo en el APK de Android; en PC y Web siempre vale cero)
+        if (moveX == 0f && moveY == 0f && MobileTouchControls.Activos)
+        {
+            Vector2 tactil = MobileTouchControls.Movimiento;
+            moveX = tactil.x;
+            moveY = tactil.y;
+        }
+
         movementInput = new Vector2(moveX, moveY).normalized;
 
         bool isMoving = movementInput.sqrMagnitude > 0.01f;

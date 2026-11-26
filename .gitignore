@@ -12,6 +12,7 @@
 **/[Uu]ser[Ss]ettings/
 **/[Mm]emoryCaptures/
 **/Recordings/
+**/.utmp/
 
 # Archivos de soluciones de Visual Studio / JetBrains Rider / VS Code
 *.csproj
